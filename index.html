@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>الصحة في العراق من الألف إلى الياء</title>
+
+<style>
+body {
+    font-family: "Tahoma", Arial, sans-serif;
+    margin: 0;
+    background-color: #f3f7f9;
+    direction: rtl;
+}
+
+header {
+    background-color: #005eb8;
+    color: white;
+    padding: 25px 20px;
+    text-align: center;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 28px;
+}
+
+header p {
+    margin: 5px 0 0;
+    font-size: 16px;
+}
+
+.search-box {
+    text-align: center;
+    margin: 20px 0;
+}
+
+.search-box input {
+    width: 60%;
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+.alphabet {
+    text-align: center;
+    margin: 15px 0;
+}
+
+.alphabet button {
+    margin: 3px;
+    padding: 8px 12px;
+    border: none;
+    background-color: #e6eef5;
+    cursor: pointer;
+    border-radius: 4px;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.alphabet button:hover {
+    background-color: #005eb8;
+    color: white;
+}
+
+.container {
+    width: 90%;
+    max-width: 1000px;
+    margin: auto;
+}
+
+.condition-card {
+    background: white;
+    padding: 15px;
+    margin: 10px 0;
+    border-radius: 6px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    transition: transform 0.2s;
+}
+
+.condition-card:hover {
+    transform: scale(1.02);
+}
+
+.condition-card h3 {
+    margin: 0;
+    color: #005eb8;
+}
+
+.condition-card p {
+    margin: 5px 0 0;
+    color: #444;
+}
+
+footer {
+    background: #003a6d;
+    color: white;
+    text-align: center;
+    padding: 15px;
+    margin-top: 30px;
+    font-size: 14px;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>الصحة في العراق من الألف إلى الياء</h1>
+    <p>معلومات طبية موثوقة ومبسطة للمواطن العراقي</p>
+</header>
+
+<div class="search-box">
+    <input type="text" id="searchInput" placeholder="ابحث عن حالة مرضية..." onkeyup="searchFunction()">
+</div>
+
+<div class="alphabet">
+    <button onclick="filterLetter('الكل')">الكل</button>
+    <button onclick="filterLetter('ا')">ا</button>
+    <button onclick="filterLetter('ب')">ب</button>
+    <button onclick="filterLetter('ت')">ت</button>
+    <button onclick="filterLetter('ث')">ث</button>
+    <button onclick="filterLetter('ج')">ج</button>
+    <button onclick="filterLetter('ح')">ح</button>
+    <button onclick="filterLetter('خ')">خ</button>
+    <button onclick="filterLetter('د')">د</button>
+    <button onclick="filterLetter('ر')">ر</button>
+    <button onclick="filterLetter('س')">س</button>
+    <button onclick="filterLetter('ش')">ش</button>
+    <button onclick="filterLetter('ص')">ص</button>
+    <button onclick="filterLetter('ض')">ض</button>
+    <button onclick="filterLetter('ط')">ط</button>
+    <button onclick="filterLetter('ع')">ع</button>
+    <button onclick="filterLetter('غ')">غ</button>
+    <button onclick="filterLetter('ف')">ف</button>
+    <button onclick="filterLetter('ق')">ق</button>
+    <button onclick="filterLetter('ك')">ك</button>
+    <button onclick="filterLetter('ل')">ل</button>
+    <button onclick="filterLetter('م')">م</button>
+    <button onclick="filterLetter('ن')">ن</button>
+    <button onclick="filterLetter('ه')">ه</button>
+    <button onclick="filterLetter('و')">و</button>
+    <button onclick="filterLetter('ي')">ي</button>
+</div>
+
+<div class="container" id="conditionsList">
+
+    <div class="condition-card" data-letter="س">
+        <h3>سكري</h3>
+        <p>مرض مزمن يؤثر على مستوى السكر في الدم ويتطلب متابعة مستمرة.</p>
+    </div>
+
+    <div class="condition-card" data-letter="ض">
+        <h3>ضغط الدم المرتفع</h3>
+        <p>حالة طبية شائعة تزيد من خطر الإصابة بأمراض القلب.</p>
+    </div>
+
+    <div class="condition-card" data-letter="ر">
+        <h3>ربو</h3>
+        <p>مرض تنفسي يسبب ضيق في الشعب الهوائية وصعوبة في التنفس.</p>
+    </div>
+
+    <div class="condition-card" data-letter="ف">
+        <h3>فقر الدم</h3>
+        <p>حالة تحدث نتيجة انخفاض عدد خلايا الدم الحمراء.</p>
+    </div>
+
+    <div class="condition-card" data-letter="ق">
+        <h3>قرحة المعدة</h3>
+        <p>تقرحات مؤلمة في بطانة المعدة قد تسبب حرقة وألم.</p>
+    </div>
+
+</div>
+
+<footer>
+    © 2026 موقع الصحة العراقي | جميع الحقوق محفوظة
+</footer>
+
+<script>
+function filterLetter(letter) {
+    var cards = document.getElementsByClassName("condition-card");
+    for (var i = 0; i < cards.length; i++) {
+        if (letter === "الكل" || cards[i].getAttribute("data-letter") === letter) {
+            cards[i].style.display = "block";
+        } else {
+            cards[i].style.display = "none";
+        }
+    }
+}
+
+function searchFunction() {
+    var input = document.getElementById("searchInput");
+    var filter = input.value.toUpperCase();
+    var cards = document.getElementsByClassName("condition-card");
+
+    for (var i = 0; i < cards.length; i++) {
+        var title = cards[i].getElementsByTagName("h3")[0];
+        if (title.innerHTML.toUpperCase().indexOf(filter) > -1) {
+            cards[i].style.display = "";
+        } else {
+            cards[i].style.display = "none";
+        }
+    }
+}
+</script>
+
+</body>
+</html>
