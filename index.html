@@ -1,57 +1,63 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Clinical Support Grid</title>
+    <title>الدعم السريري حسب جهاز الجسم</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 20px;
-            background-color: #f4f4f4;
+            background-color: #f8f9fa;
         }
 
         .header-container {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 20px;
+            margin-bottom: 30px;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 15px;
         }
 
         h1 {
-            font-weight: 400;
-            font-size: 2rem;
+            font-weight: 600;
+            font-size: 1.8rem;
+            color: #333;
             margin: 0;
         }
 
         .search-box {
             display: flex;
-            border: 1px solid #ccc;
             background: white;
-            padding: 5px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            overflow: hidden;
         }
 
         .search-box input {
             border: none;
-            padding: 8px;
+            padding: 10px 15px;
             outline: none;
-            width: 200px;
+            width: 250px;
+            font-family: inherit;
         }
 
         .search-box button {
-            background: none;
+            background: #eee;
             border: none;
+            padding: 0 15px;
             cursor: pointer;
-            font-size: 1.2rem;
+            color: #666;
         }
 
-        /* The Grid Logic */
+        /* Responsive Grid */
         .clinical-grid {
             display: grid;
-            grid-template-columns: repeat(4, 1fr); /* 4 columns */
-            gap: 2px; /* Small white gap between tiles */
-            max-width: 1200px;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 10px;
+            max-width: 1300px;
             margin: 0 auto;
         }
 
@@ -61,109 +67,158 @@
             align-items: center;
             justify-content: center;
             text-align: center;
-            padding: 40px 20px;
+            padding: 30px 15px;
             color: white;
             text-decoration: none;
-            transition: opacity 0.2s;
-            min-height: 180px;
+            border-radius: 4px;
+            transition: transform 0.2s, box-shadow 0.2s;
         }
 
         .tile:hover {
-            opacity: 0.9;
+            transform: translateY(-3px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
         }
 
         .tile i {
-            font-size: 3rem;
+            font-size: 2.5rem;
             margin-bottom: 15px;
         }
 
         .tile span {
-            font-weight: bold;
+            font-weight: 600;
             font-size: 1.1rem;
+            line-height: 1.4;
         }
 
-        /* Specific Colors from Screenshot */
-        .brain        { background-color: #92d050; }
-        .eye          { background-color: #c00000; }
-        .respiratory  { background-color: #31859c; }
-        .cardio       { background-color: #ffff00; color: black; } /* Yellow has dark text */
-        .endocrine    { background-color: #4bacc6; }
-        .gastro       { background-color: #38761d; }
-        .renal        { background-color: #1f4e78; }
-        .women        { background-color: #7030a0; }
-        .paeds        { background-color: #330099; }
-        .derm         { background-color: #0d3b0d; }
-        .cancer       { background-color: #990000; }
-        .lab          { background-color: #38761d; }
+        /* Color Palette */
+        .cardio    { background-color: #e63946; }
+        .derm      { background-color: #a8dadc; color: #1d3557; }
+        .diabetes  { background-color: #457b9d; }
+        .ent       { background-color: #1d3557; }
+        .gastro    { background-color: #2a9d8f; }
+        .gp        { background-color: #7209b7; }
+        .geriatric { background-color: #3a0ca3; }
+        .women     { background-color: #f72585; }
+        .infection { background-color: #606c38; }
+        .mental    { background-color: #72efdd; color: #0077b6; }
+        .msk       { background-color: #bc6c25; }
+        .neuro     { background-color: #4361ee; }
+        .nutrition { background-color: #8ac926; }
+        .obesity   { background-color: #ffca3a; color: #333; }
+        .cancer    { background-color: #6a040f; }
+        .eye       { background-color: #00b4d8; }
+        .paeds     { background-color: #ff9f1c; }
+        .palliative{ background-color: #588157; }
+        .renal     { background-color: #0077b6; }
+        .resp      { background-color: #90e0ef; color: #03045e; }
+        .urology   { background-color: #3c096c; }
 
-        /* Responsive design for tablets and phones */
-        @media (max-width: 900px) {
-            .clinical-grid { grid-template-columns: repeat(2, 1fr); }
-        }
-        @media (max-width: 500px) {
-            .clinical-grid { grid-template-columns: 1fr; }
-            .header-container { flex-direction: column; align-items: flex-start; gap: 10px; }
+        @media (max-width: 600px) {
+            .header-container { flex-direction: column; gap: 15px; text-align: center; }
+            .search-box { width: 100%; }
+            .search-box input { width: 100%; }
         }
     </style>
 </head>
 <body>
 
     <div class="header-container">
-        <h1>Clinical support by body system</h1>
+        <h1>الدليل الطبي للأقسام والأنظمة</h1>
         <div class="search-box">
-            <input type="text" placeholder="Find a resource">
+            <input type="text" placeholder="بحث عن قسم أو مورد...">
             <button><i class="fas fa-search"></i></button>
         </div>
     </div>
 
     <div class="clinical-grid">
-        <a href="#" class="tile brain">
-            <i class="fas fa-brain"></i>
-            <span>Brain and mental health</span>
-        </a>
-        <a href="#" class="tile eye">
-            <i class="fas fa-eye"></i>
-            <span>Ophthalmology and ENT</span>
-        </a>
-        <a href="#" class="tile respiratory">
-            <i class="fas fa-lungs"></i>
-            <span>Respiratory and Smoking</span>
-        </a>
         <a href="#" class="tile cardio">
             <i class="fas fa-heartbeat"></i>
-            <span>Cardiovascular and Lipids</span>
+            <span>أمراض القلب والأوعية الدموية</span>
         </a>
-        <a href="#" class="tile endocrine">
-            <i class="fas fa-hand-holding-medical"></i>
-            <span>Endocrine and Diabetes</span>
+
+        <a href="#" class="tile derm">
+            <i class="fas fa-hand-sparkles"></i>
+            <span>الأمراض الجلدية</span>
         </a>
+
+        <a href="#" class="tile diabetes">
+            <i class="fas fa-syringe"></i>
+            <span>السكري والغدد الصماء</span>
+        </a>
+
+        <a href="#" class="tile ent">
+            <i class="fas fa-ear-listen"></i>
+            <span>الأنف والأذن والحنجرة</span>
+        </a>
+
         <a href="#" class="tile gastro">
-            <i class="fas fa-bacteria"></i>
-            <span>Gastroenterology</span>
-        </a>
-        <a href="#" class="tile renal">
             <i class="fas fa-stomach"></i>
-            <span>Renal, Urology and Men's Health</span>
+            <span>أمراض الجهاز الهضمي</span>
         </a>
+
+        <a href="#" class="tile gp">
+            <i class="fas fa-user-doctor"></i>
+            <span>الطب العام</span>
+        </a>
+
+        <a href="#" class="tile geriatric">
+            <i class="fas fa-person-cane"></i>
+            <span>طب المسنين</span>
+        </a>
+
         <a href="#" class="tile women">
-            <i class="fas fa-venus"></i>
-            <span>Women's and Sexual Health</span>
+            <i class="fas fa-person-pregnant"></i>
+            <span>النساء والتوليد</span>
         </a>
+
+        <a href="#" class="tile mental">
+            <i class="fas fa-brain"></i>
+            <span>الصحة النفسية</span>
+        </a>
+
+        <a href="#" class="tile msk">
+            <i class="fas fa-bone"></i>
+            <span>طب العظام والمفاصل</span>
+        </a>
+
+        <a href="#" class="tile nutrition">
+            <i class="fas fa-apple-whole"></i>
+            <span>التغذية</span>
+        </a>
+
+        <a href="#" class="tile obesity">
+            <i class="fas fa-weight-scale"></i>
+            <span>السمنة وزيادة الوزن</span>
+        </a>
+
+        <a href="#" class="tile cancer">
+            <i class="fas fa-ribbon"></i>
+            <span>أمراض السرطان</span>
+        </a>
+
+        <a href="#" class="tile eye">
+            <i class="fas fa-eye"></i>
+            <span>طب العيون</span>
+        </a>
+
         <a href="#" class="tile paeds">
             <i class="fas fa-baby"></i>
-            <span>Paediatrics</span>
+            <span>طب الأطفال</span>
         </a>
-        <a href="#" class="tile derm">
-            <i class="fas fa-bone"></i>
-            <span>Dermatology, MSK and Rheumatology</span>
+
+        <a href="#" class="tile renal">
+            <i class="fas fa-kidneys"></i>
+            <span>أمراض الكلى</span>
         </a>
-        <a href="#" class="tile cancer">
-            <i class="fas fa-person-cane"></i>
-            <span>Cancer, Palliative Care, Pain and Older People</span>
+
+        <a href="#" class="tile resp">
+            <i class="fas fa-lungs"></i>
+            <span>أمراض الجهاز التنفسي</span>
         </a>
-        <a href="#" class="tile lab">
-            <i class="fas fa-microscope"></i>
-            <span>Laboratory investigations and Infections</span>
+
+        <a href="#" class="tile urology">
+            <i class="fas fa-venus-mars"></i>
+            <span>المسالك البولية</span>
         </a>
     </div>
 
