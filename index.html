@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>دليل الدعم السريري | الصفحة الرئيسية</title>
     
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script src="https://code.iconify.design/iconify-icon/1.0.8/iconify-icon.min.js"></script>
     
     <style>
         :root {
@@ -29,7 +29,7 @@
         .nhs-header {
             background-color: var(--nhs-white);
             border-bottom: 8px solid var(--nhs-blue);
-            padding: 8px 0;
+            padding: 10px 0;
         }
 
         .header-content {
@@ -61,6 +61,7 @@
             top: 0;
             z-index: 1000;
             margin-bottom: 40px; 
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }
 
         .nav-content {
@@ -74,9 +75,12 @@
         .nav-content a {
             color: white;
             text-decoration: none;
-            padding: 12px 20px;
+            padding: 15px 20px;
             font-weight: 600;
             transition: background 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
 
         .nav-content a:hover { background-color: var(--nhs-dark-blue); }
@@ -95,34 +99,40 @@
             margin-bottom: 4px;
         }
 
-        /* التصميم الجديد الخالي من الأيقونات والمقوى بالنص */
+        /* التصميم الأنيق والموحد للمربعات */
         .tile {
             display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
             text-align: center;
-            padding: 15px;
+            padding: 25px 15px; /* مساحة تنفس مريحة للعين */
             color: white;
             cursor: pointer;
-            transition: all 0.3s ease;
-            min-height: 85px; 
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            min-height: 120px; 
             border-radius: 4px; 
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05); /* ظل خفيف جداً للأناقة */
         }
 
         .tile:hover { 
             opacity: 0.95; 
-            transform: translateY(-2px); /* حركة رفع بسيطة عند تمرير الماوس */
-            box-shadow: 0 6px 12px rgba(0,0,0,0.15); /* زيادة الظل لإعطاء عمق */
+            transform: translateY(-2px); /* حركة رفع أنيقة */
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        /* توحيد دقيق لحجم الأيقونات لتكون كلها بمستوى واحد تماماً */
+        .tile iconify-icon { 
+            margin-bottom: 12px; 
         }
 
         .tile span { 
             font-weight: 700; 
-            font-size: 1.15rem; /* تكبير الخط لملء الفراغ بشكل جميل */
-            line-height: 1.4;
-            letter-spacing: 0.5px; /* تباعد الأحرف للمسة عصرية */
+            font-size: 1.05rem; 
+            line-height: 1.3;
+            letter-spacing: 0.2px;
         }
 
+        /* --- Dropdown --- */
         .mega-dropdown {
             display: none;
             grid-template-columns: 1fr 1fr;
@@ -147,7 +157,7 @@
         .drop-section a { color: white; text-decoration: none; display: block; width: 100%; height: 100%; }
         .drop-section:hover { background: rgba(0,0,0,0.1); }
 
-        /* --- الألوان المسطحة (Flat Colors) --- */
+        /* --- الألوان المسطحة الأنيقة (Flat Colors) --- */
         .neuro     { background-color: #7cb342; } 
         .eye       { background-color: #d32f2f; } 
         .ent       { background-color: #d32f2f; } 
@@ -196,8 +206,8 @@
             .grid-row { grid-template-columns: repeat(2, 1fr); } 
             .mega-dropdown { grid-template-columns: 1fr; }
             .site-logo { max-height: 45px; }
-            .tile { min-height: 75px; padding: 12px; }
-            .tile span { font-size: 1rem; }
+            .tile { min-height: 100px; padding: 15px 5px; }
+            .tile span { font-size: 0.95rem; }
         }
     </style>
 </head>
@@ -214,7 +224,7 @@
 
     <nav class="nhs-nav">
         <div class="nav-content">
-            <a href="index.html">الرئيسية</a>
+            <a href="index.html"><iconify-icon icon="mdi:home" width="20"></iconify-icon> الرئيسية</a>
             <a href="#">من نحن</a>
             <a href="#">اتصل بنا</a>
             <a href="#">الأسئلة الشائعة</a>
@@ -224,10 +234,22 @@
     <main class="clinical-grid">
         
         <div class="grid-row">
-            <div class="tile neuro" onclick="toggleDrop('drop1', 'neuro')"><span>أمراض المخ والأعصاب</span></div>
-            <div class="tile ent" onclick="toggleDrop('drop1', 'ent')"><span>الأنف والأذن والحنجرة</span></div>
-            <div class="tile resp" onclick="toggleDrop('drop1', 'resp')"><span>أمراض الجهاز التنفسي</span></div>
-            <div class="tile cardio" onclick="toggleDrop('drop1', 'cardio')"><span>أمراض القلب والأوعية</span></div>
+            <div class="tile neuro" onclick="toggleDrop('drop1', 'neuro')">
+                <iconify-icon icon="mdi:brain" width="42" height="42"></iconify-icon>
+                <span>أمراض المخ والأعصاب</span>
+            </div>
+            <div class="tile ent" onclick="toggleDrop('drop1', 'ent')">
+                <iconify-icon icon="mdi:ear-hearing" width="42" height="42"></iconify-icon>
+                <span>الأنف والأذن والحنجرة</span>
+            </div>
+            <div class="tile resp" onclick="toggleDrop('drop1', 'resp')">
+                <iconify-icon icon="mdi:lungs" width="42" height="42"></iconify-icon>
+                <span>أمراض الجهاز التنفسي</span>
+            </div>
+            <div class="tile cardio" onclick="toggleDrop('drop1', 'cardio')">
+                <iconify-icon icon="mdi:heart-pulse" width="42" height="42"></iconify-icon>
+                <span>أمراض القلب والأوعية</span>
+            </div>
         </div>
         <div id="drop1" class="mega-dropdown">
             <div class="drop-section"><a href="#" class="dynamic-link">الأمراض الشائعة</a></div>
@@ -235,10 +257,22 @@
         </div>
 
         <div class="grid-row">
-            <div class="tile diabetes" onclick="toggleDrop('drop2', 'diabetes')"><span>السكري والغدد الصماء</span></div>
-            <div class="tile gastro" onclick="toggleDrop('drop2', 'gastro')"><span>الجهاز الهضمي والكبد</span></div>
-            <div class="tile renal" onclick="toggleDrop('drop2', 'renal')"><span>أمراض الكلى والمسالك</span></div>
-            <div class="tile women" onclick="toggleDrop('drop2', 'women')"><span>النسائية والتوليد</span></div>
+            <div class="tile diabetes" onclick="toggleDrop('drop2', 'diabetes')">
+                <iconify-icon icon="mdi:needle" width="42" height="42"></iconify-icon>
+                <span>السكري والغدد الصماء</span>
+            </div>
+            <div class="tile gastro" onclick="toggleDrop('drop2', 'gastro')">
+                <iconify-icon icon="mdi:stomach" width="42" height="42"></iconify-icon>
+                <span>الجهاز الهضمي والكبد</span>
+            </div>
+            <div class="tile renal" onclick="toggleDrop('drop2', 'renal')">
+                <iconify-icon icon="mdi:kidney" width="42" height="42"></iconify-icon>
+                <span>أمراض الكلى والمسالك</span>
+            </div>
+            <div class="tile women" onclick="toggleDrop('drop2', 'women')">
+                <iconify-icon icon="mdi:human-pregnant" width="42" height="42"></iconify-icon>
+                <span>النسائية والتوليد</span>
+            </div>
         </div>
         <div id="drop2" class="mega-dropdown">
             <div class="drop-section"><a href="#" class="dynamic-link">الأمراض الشائعة</a></div>
@@ -246,10 +280,22 @@
         </div>
 
         <div class="grid-row">
-            <div class="tile paeds" onclick="toggleDrop('drop3', 'paeds')"><span>طب الأطفال والخدج</span></div>
-            <div class="tile derm" onclick="toggleDrop('drop3', 'derm')"><span>الأمراض الجلدية</span></div>
-            <div class="tile msk" onclick="toggleDrop('drop3', 'msk')"><span>الكسور والعظام والروماتيزم</span></div>
-            <div class="tile cancer" onclick="toggleDrop('drop3', 'cancer')"><span>أمراض الدم والأورام</span></div>
+            <div class="tile paeds" onclick="toggleDrop('drop3', 'paeds')">
+                <iconify-icon icon="mdi:baby-carriage" width="42" height="42"></iconify-icon>
+                <span>طب الأطفال والخدج</span>
+            </div>
+            <div class="tile derm" onclick="toggleDrop('drop3', 'derm')">
+                <iconify-icon icon="mdi:hand-wash" width="42" height="42"></iconify-icon>
+                <span>الأمراض الجلدية</span>
+            </div>
+            <div class="tile msk" onclick="toggleDrop('drop3', 'msk')">
+                <iconify-icon icon="mdi:bone" width="42" height="42"></iconify-icon>
+                <span>الكسور والعظام والروماتيزم</span>
+            </div>
+            <div class="tile cancer" onclick="toggleDrop('drop3', 'cancer')">
+                <iconify-icon icon="mdi:ribbon" width="42" height="42"></iconify-icon>
+                <span>أمراض الدم والأورام</span>
+            </div>
         </div>
         <div id="drop3" class="mega-dropdown">
             <div class="drop-section"><a href="#" class="dynamic-link">الأمراض الشائعة</a></div>
@@ -257,10 +303,22 @@
         </div>
 
         <div class="grid-row">
-            <div class="tile eye" onclick="toggleDrop('drop4', 'eye')"><span>طب وجراحة العيون</span></div>
-            <div class="tile mental" onclick="toggleDrop('drop4', 'mental')"><span>الصحة النفسية</span></div>
-            <div class="tile nutrition" onclick="toggleDrop('drop4', 'nutrition')"><span>التغذية و السمنة</span></div>
-            <div class="tile urology" onclick="toggleDrop('drop4', 'urology')"><span>الذكورة والعقم</span></div>
+            <div class="tile eye" onclick="toggleDrop('drop4', 'eye')">
+                <iconify-icon icon="mdi:eye" width="42" height="42"></iconify-icon>
+                <span>طب وجراحة العيون</span>
+            </div>
+            <div class="tile mental" onclick="toggleDrop('drop4', 'mental')">
+                <iconify-icon icon="mdi:head-heart" width="42" height="42"></iconify-icon>
+                <span>الصحة النفسية</span>
+            </div>
+            <div class="tile nutrition" onclick="toggleDrop('drop4', 'nutrition')">
+                <iconify-icon icon="mdi:food-apple" width="42" height="42"></iconify-icon>
+                <span>التغذية و السمنة</span>
+            </div>
+            <div class="tile urology" onclick="toggleDrop('drop4', 'urology')">
+                <iconify-icon icon="mdi:gender-male" width="42" height="42"></iconify-icon>
+                <span>الذكورة والعقم</span>
+            </div>
         </div>
         <div id="drop4" class="mega-dropdown">
             <div class="drop-section"><a href="#" class="dynamic-link">الأمراض الشائعة</a></div>
@@ -276,7 +334,10 @@
             </div>
             <div class="footer-section">
                 <h4>اتصل بنا</h4>
-                <ul><li>999 000 000</li><li>info@medical.com</li></ul>
+                <ul>
+                    <li><iconify-icon icon="mdi:phone" style="vertical-align: middle; margin-left: 5px;"></iconify-icon> 999 000 000</li>
+                    <li><iconify-icon icon="mdi:email" style="vertical-align: middle; margin-left: 5px;"></iconify-icon> info@medical.com</li>
+                </ul>
             </div>
         </div>
         <div style="text-align: center; margin-top: 20px; border-top: 1px solid #ccc; padding-top: 10px; font-size: 0.85rem;">
