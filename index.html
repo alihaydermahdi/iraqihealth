@@ -27,7 +27,7 @@
         .nhs-header {
             background-color: var(--nhs-white);
             border-bottom: 4px solid var(--nhs-blue);
-            padding: 15px 0; /* تقليل الحشو قليلاً للسماح للشعار بالتمدد */
+            padding: 10px 0; /* تقليل الفراغ العلوي والسفلي */
         }
 
         .header-content {
@@ -46,10 +46,9 @@
         }
 
         .site-logo {
-            max-height: 120px; /* تم التكبير بناءً على طلبك */
+            max-height: 90px; /* تم التصغير من 120 إلى 90 ليكون أكثر تناسقاً */
             width: auto;
             object-fit: contain;
-            transition: transform 0.3s ease;
         }
 
         /* --- Navigation --- */
@@ -229,7 +228,7 @@
             .grid-row { grid-template-columns: 1fr; }
             .mega-dropdown { grid-template-columns: 1fr; }
             .tile { min-height: 120px; padding: 30px 10px; }
-            .site-logo { max-height: 80px; } /* حجم متوازن للجوال */
+            .site-logo { max-height: 60px; } /* تصغير الشعار في الجوال ليكون أنيقاً */
         }
     </style>
 </head>
@@ -264,7 +263,6 @@
     </div>
 
     <main class="clinical-grid">
-        
         <div class="grid-row">
             <div class="tile cardio" onclick="toggleDrop('drop1', 'cardio')"><i class="fas fa-heart-pulse"></i><span>أمراض القلب والأوعية الدموية</span></div>
             <div class="tile neuro" onclick="toggleDrop('drop1', 'neuro')"><i class="fas fa-brain"></i><span>أمراض المخ والأعصاب</span></div>
@@ -346,23 +344,19 @@
             const tile = document.querySelector('.' + colorClass);
             const gradient = window.getComputedStyle(tile).backgroundImage;
             
-            // تحديث الرابط ديناميكياً
             const link = drop.querySelector('.dynamic-link');
             link.href = colorClass + '-diseases.html';
 
-            // نظام ذكي لتموضع القائمة في الجوال تحت المربع المختار مباشرة
             if (window.innerWidth <= 900) {
                 tile.insertAdjacentElement('afterend', drop); 
             } else {
                 tile.closest('.grid-row').insertAdjacentElement('afterend', drop);
             }
 
-            // إغلاق أي قوائم مفتوحة أخرى
             document.querySelectorAll('.mega-dropdown').forEach(d => {
                 if (d.id !== dropId) d.style.display = 'none';
             });
 
-            // فتح أو إغلاق القائمة الحالية
             if (drop.style.display === 'grid' && drop.dataset.active === colorClass) {
                 drop.style.display = 'none';
                 drop.dataset.active = "";
