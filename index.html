@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>الدليل الطبي | الصفحة الرئيسية</title>
+    <title>دليل الدعم السريري | الصفحة الرئيسية</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         :root {
@@ -15,14 +15,15 @@
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
             margin: 0;
             background-color: var(--nhs-light-grey);
             color: var(--nhs-text);
             line-height: 1.5;
+            -webkit-font-smoothing: antialiased;
         }
 
-        /* الهيدر الأصلي */
+        /* Header */
         .nhs-header {
             background-color: var(--nhs-white);
             border-bottom: 4px solid var(--nhs-blue);
@@ -45,7 +46,6 @@
             font-weight: bold;
             font-size: 1.5rem;
             text-decoration: none;
-            display: inline-block;
         }
 
         .nhs-nav {
@@ -68,13 +68,12 @@
             text-decoration: none;
             padding: 12px 20px;
             font-weight: 600;
-            font-size: 1rem;
             transition: background 0.2s;
         }
 
         .nav-content a:hover { background-color: var(--nhs-dark-blue); }
 
-        /* منطقة البحث */
+        /* Hero & Search */
         .hero-section {
             max-width: 1300px;
             margin: 40px auto 20px;
@@ -88,7 +87,7 @@
             margin-bottom: 30px;
         }
 
-        h1 { font-size: 2.2rem; color: var(--nhs-text); margin: 0; }
+        h1 { font-size: 2.2rem; color: var(--nhs-text); margin: 0; font-weight: 800; }
 
         .search-box {
             display: flex;
@@ -114,7 +113,7 @@
             color: white;
         }
 
-        /* الشبكة والقوائم */
+        /* Grid & Dropdowns */
         .clinical-grid {
             max-width: 1300px;
             margin: 0 auto 60px;
@@ -138,13 +137,11 @@
             color: white;
             cursor: pointer;
             transition: opacity 0.2s;
-            position: relative;
-            overflow: hidden;
             min-height: 160px;
         }
 
         .tile:hover { opacity: 0.9; }
-        .tile i { font-size: 3rem; margin-bottom: 20px; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2)); }
+        .tile i { font-size: 3rem; margin-bottom: 20px; }
         .tile span { font-weight: 700; font-size: 1.1rem; }
 
         .mega-dropdown {
@@ -164,13 +161,12 @@
             font-weight: bold;
             font-size: 1.3rem;
             border: 1px solid rgba(255,255,255,0.15);
-            transition: background 0.3s;
         }
 
         .drop-section a { color: white; text-decoration: none; display: block; width: 100%; height: 100%; }
         .drop-section:hover { background: rgba(0,0,0,0.1); }
 
-        /* التدرجات */
+        /* Gradients */
         .cardio    { background: linear-gradient(135deg, #e63946, #9b2226); }
         .neuro     { background: linear-gradient(135deg, #4361ee, #3a0ca3); }
         .derm      { background: linear-gradient(135deg, #2a9d8f, #1a635a); }
@@ -188,7 +184,7 @@
         .resp      { background: linear-gradient(135deg, #90e0ef, #00b4d8); }
         .urology   { background: linear-gradient(135deg, #5a189a, #240046); }
 
-        /* التذييل الأصلي الكامل */
+        /* Footer */
         footer {
             background-color: #e8edee;
             border-top: 4px solid var(--nhs-blue);
@@ -204,13 +200,7 @@
             gap: 30px;
         }
 
-        .footer-section h4 {
-            margin-top: 0;
-            color: var(--nhs-blue);
-            border-bottom: 1px solid #ccc;
-            padding-bottom: 10px;
-        }
-
+        .footer-section h4 { color: var(--nhs-blue); border-bottom: 1px solid #ccc; padding-bottom: 10px; margin-top: 0; }
         .footer-section ul { list-style: none; padding: 0; }
         .footer-section ul li { margin-bottom: 10px; }
         .footer-section ul li a { color: var(--nhs-text); text-decoration: none; }
@@ -227,7 +217,7 @@
     <header class="nhs-header">
         <div class="header-content">
             <a href="#" class="logo-placeholder">LOGO</a>
-            <div style="font-size: 1.2rem; font-weight: bold; color: var(--nhs-blue);">اسم الموقع الطبي</div>
+            <div style="font-weight: 700; color: var(--nhs-blue);">اسم الموقع الطبي</div>
         </div>
     </header>
 
@@ -244,13 +234,14 @@
         <div class="header-container">
             <h1>الدعم السريري حسب جهاز الجسم</h1>
             <div class="search-box">
-                <input type="text" placeholder="بحث عن قسم أو مورد...">
+                <input type="text" placeholder="بحث عن قسم...">
                 <button><i class="fas fa-search"></i></button>
             </div>
         </div>
     </div>
 
     <div class="clinical-grid">
+        
         <div class="grid-row">
             <div class="tile cardio" onclick="toggleDrop('drop1', 'cardio')"><i class="fas fa-heart-pulse"></i><span>أمراض القلب والأوعية الدموية</span></div>
             <div class="tile neuro" onclick="toggleDrop('drop1', 'neuro')"><i class="fas fa-brain"></i><span>أمراض المخ والأعصاب</span></div>
@@ -258,10 +249,10 @@
             <div class="tile diabetes" onclick="toggleDrop('drop1', 'diabetes')"><i class="fas fa-syringe"></i><span>السكري والغدد الصماء</span></div>
         </div>
         <div id="drop1" class="mega-dropdown">
-            <div class="drop-section"><a href="#">الأمراض الشائعة</a></div>
+            <div class="drop-section"><a href="#" class="dynamic-link">الأمراض الشائعة</a></div>
             <div class="drop-section"><a href="#">أطباء الاختصاص</a></div>
         </div>
-        
+
         <div class="grid-row">
             <div class="tile ent" onclick="toggleDrop('drop2', 'ent')"><i class="fas fa-ear-hearing"></i><span>الأنف والأذن والحنجرة</span></div>
             <div class="tile gastro" onclick="toggleDrop('drop2', 'gastro')"><i class="fas fa-stomach"></i><span>أمراض الجهاز الهضمي والكبد</span></div>
@@ -269,7 +260,7 @@
             <div class="tile mental" onclick="toggleDrop('drop2', 'mental')"><i class="fas fa-head-side-mask"></i><span>الصحة النفسية</span></div>
         </div>
         <div id="drop2" class="mega-dropdown">
-            <div class="drop-section"><a href="#">الأمراض الشائعة</a></div>
+            <div class="drop-section"><a href="#" class="dynamic-link">الأمراض الشائعة</a></div>
             <div class="drop-section"><a href="#">أطباء الاختصاص</a></div>
         </div>
 
@@ -280,7 +271,7 @@
             <div class="tile eye" onclick="toggleDrop('drop3', 'eye')"><i class="fas fa-eye"></i><span>طب وجراحة العيون</span></div>
         </div>
         <div id="drop3" class="mega-dropdown">
-            <div class="drop-section"><a href="#">الأمراض الشائعة</a></div>
+            <div class="drop-section"><a href="#" class="dynamic-link">الأمراض الشائعة</a></div>
             <div class="drop-section"><a href="#">أطباء الاختصاص</a></div>
         </div>
 
@@ -291,7 +282,7 @@
             <div class="tile urology" onclick="toggleDrop('drop4', 'urology')"><i class="fas fa-venus-mars"></i><span>المسالك البولية والعقم</span></div>
         </div>
         <div id="drop4" class="mega-dropdown">
-            <div class="drop-section"><a href="#">الأمراض الشائعة</a></div>
+            <div class="drop-section"><a href="#" class="dynamic-link">الأمراض الشائعة</a></div>
             <div class="drop-section"><a href="#">أطباء الاختصاص</a></div>
         </div>
     </div>
@@ -319,7 +310,6 @@
                 <ul>
                     <li><i class="fas fa-phone"></i> 999 000 000</li>
                     <li><i class="fas fa-envelope"></i> info@medical.com</li>
-                    <li><i class="fas fa-map-marker-alt"></i> العنوان، المدينة</li>
                 </ul>
             </div>
         </div>
@@ -334,12 +324,9 @@
             const tile = document.querySelector('.' + colorClass);
             const gradient = window.getComputedStyle(tile).backgroundImage;
             
-            const diseaseLink = drop.querySelector('.drop-section:first-child a');
-            if (colorClass === 'cardio') {
-                diseaseLink.href = 'cardio-diseases.html';
-            } else {
-                diseaseLink.href = '#';
-            }
+            // تحديث الرابط ديناميكياً بناءً على التخصص المختار
+            const link = drop.querySelector('.dynamic-link');
+            link.href = colorClass + '-diseases.html';
 
             document.querySelectorAll('.mega-dropdown').forEach(d => {
                 if (d.id !== dropId) d.style.display = 'none';
