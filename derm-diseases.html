@@ -6,184 +6,175 @@
     <title>الأمراض الجلدية | الدليل الطبي</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
+        /* المتغيرات الأساسية */
         :root {
             --nhs-blue: #005eb8;
             --nhs-dark-blue: #003087;
             --nhs-light-grey: #f0f4f5;
             --nhs-text: #212b32;
             --nhs-white: #ffffff;
-            --nhs-border: #d8dde0;
-            /* التدرج اللوني للأمراض الجلدية */
+            
+            /* ألوان التخصص (الجلدية) */
+            --specialty-color: #2a9d8f;
+            --specialty-light: #e6f5f3;
             --specialty-gradient: linear-gradient(135deg, #2a9d8f, #1a635a);
-            --specialty-color: #1a635a;
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
             margin: 0;
-            background-color: var(--nhs-white);
+            background-color: #f8f9fa;
             color: var(--nhs-text);
             line-height: 1.6;
             -webkit-font-smoothing: antialiased;
         }
 
-        .nhs-header {
-            background-color: var(--nhs-white);
-            border-bottom: 4px solid var(--nhs-blue);
-            padding: 1.5rem 0;
-        }
+        /* الهيدر الأصلي */
+        .nhs-header { background-color: var(--nhs-white); border-bottom: 4px solid var(--nhs-blue); padding: 20px 0; }
+        .header-content { max-width: 1300px; margin: 0 auto; padding: 0 20px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px; }
+        .logo-placeholder { background-color: var(--nhs-blue); color: white; padding: 10px 20px; font-weight: bold; font-size: 1.5rem; text-decoration: none; }
 
-        .header-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 1.25rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
+        .nhs-nav { background-color: var(--nhs-blue); color: white; position: sticky; top: 0; z-index: 1000; }
+        .nav-content { max-width: 1300px; margin: 0 auto; padding: 0 10px; display: flex; flex-wrap: wrap; }
+        .nav-content a { color: white; text-decoration: none; padding: 12px 20px; font-weight: 600; transition: background 0.2s; }
+        .nav-content a:hover { background-color: var(--nhs-dark-blue); }
 
-        .logo-placeholder {
-            background-color: var(--nhs-blue);
-            color: white;
-            padding: 0.6rem 1.2rem;
-            font-weight: 700;
-            font-size: 1.4rem;
-            text-decoration: none;
-        }
-
-        .page-intro {
+        /* مقدمة الصفحة (Hero Section) */
+        .page-hero {
             background: var(--specialty-gradient);
             color: white;
-            padding: 4rem 1.25rem;
+            padding: 4rem 20px 5rem 20px;
             text-align: center;
+            position: relative;
         }
 
-        .container {
-            max-width: 850px;
-            margin: 0 auto;
+        .page-hero::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 40px;
+            background: #f8f9fa;
+            border-radius: 40px 40px 0 0;
         }
+
+        .hero-container { max-width: 800px; margin: 0 auto; }
 
         .back-link {
             display: inline-flex;
             align-items: center;
-            color: white;
+            gap: 8px;
+            color: rgba(255,255,255,0.9);
             text-decoration: none;
-            margin-bottom: 1.5rem;
             font-weight: 600;
-            font-size: 0.95rem;
-            opacity: 0.9;
+            font-size: 1rem;
+            background: rgba(0,0,0,0.15);
+            padding: 8px 16px;
+            border-radius: 20px;
+            margin-bottom: 2rem;
+            transition: all 0.3s ease;
         }
 
-        h1 {
-            font-size: 2.4rem;
-            margin: 0;
-            font-weight: 800;
+        .back-link:hover { background: rgba(0,0,0,0.25); color: white; }
+
+        h1 { font-size: 2.5rem; font-weight: 800; margin: 0; letter-spacing: -0.5px; }
+
+        /* قائمة الأمراض */
+        .content-section {
+            max-width: 850px;
+            margin: -30px auto 60px auto;
+            padding: 0 20px;
+            position: relative;
+            z-index: 10;
         }
 
-        .intro-text {
-            font-size: 1.15rem;
-            margin-top: 1rem;
-            opacity: 0.9;
-        }
-
-        .disease-list {
-            padding: 3rem 1.25rem;
-        }
-
-        .disease-item {
-            background: var(--nhs-white);
-            border: 1px solid var(--nhs-border);
-            border-radius: 10px;
-            margin-bottom: 1.25rem;
-            transition: all 0.25s ease;
-        }
-
-        .disease-item:hover {
-            border-color: var(--specialty-color);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.06);
-            transform: translateY(-2px);
-        }
-
-        .disease-link {
+        .disease-card {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 1.8rem 2.2rem;
+            background: var(--nhs-white);
+            padding: 1.8rem 2rem;
+            border-radius: 16px;
+            margin-bottom: 1.25rem;
             text-decoration: none;
-            color: var(--nhs-text);
+            color: inherit;
+            border: 1px solid #eef0f2;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            position: relative;
+            overflow: hidden;
         }
 
-        .disease-names {
+        .disease-card::before {
+            content: '';
+            position: absolute;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            width: 5px;
+            background: var(--specialty-color);
+            transform: scaleY(0);
+            transition: transform 0.3s ease;
+            transform-origin: bottom;
+        }
+
+        .disease-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 25px rgba(0,0,0,0.08);
+            border-color: transparent;
+        }
+
+        .disease-card:hover::before { transform: scaleY(1); }
+
+        .card-info {
             display: flex;
             flex-direction: column;
-            gap: 0.4rem;
+            gap: 4px;
+            padding-left: 20px;
         }
 
-        .name-ar {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: #1d2327;
-        }
+        .disease-ar { font-size: 1.6rem; font-weight: 700; color: var(--nhs-text); margin: 0; }
+        .disease-en { font-size: 1.1rem; color: #6c757d; font-weight: 500; font-family: Arial, sans-serif; letter-spacing: 0.5px; margin: 0; }
 
-        .name-en {
-            font-size: 1.05rem;
-            color: #505a5f;
-            font-weight: 500;
-            font-family: "Segoe UI", Arial, sans-serif;
-        }
-
-        .arrow-icon {
+        .card-action .icon-circle {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: var(--specialty-light);
             color: var(--specialty-color);
-            font-size: 1.4rem;
-            opacity: 0.7;
-        }
-
-        footer {
-            background-color: #e8edee;
-            border-top: 4px solid var(--nhs-blue);
-            padding: 3.5rem 1.25rem;
-            margin-top: 4rem;
-        }
-
-        .footer-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2.5rem;
-        }
-
-        .footer-section h4 {
-            margin-top: 0;
-            color: var(--nhs-blue);
-            border-bottom: 2px solid #ced4da;
-            padding-bottom: 0.8rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             font-size: 1.2rem;
-            font-weight: 700;
+            transition: all 0.3s ease;
         }
 
-        .footer-section ul {
-            list-style: none;
-            padding: 0;
-            margin-top: 1rem;
+        .disease-card:hover .icon-circle {
+            background: var(--specialty-color);
+            color: white;
+            transform: translateX(-5px);
         }
 
-        .footer-section ul li {
-            margin-bottom: 0.7rem;
-        }
+        /* التذييل الأصلي */
+        footer { background-color: #e8edee; border-top: 4px solid var(--nhs-blue); padding: 40px 20px; margin-top: 60px; }
+        .footer-content { max-width: 1300px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 30px; }
+        .footer-section h4 { color: var(--nhs-blue); border-bottom: 1px solid #ccc; padding-bottom: 10px; margin-top: 0; }
+        .footer-section ul { list-style: none; padding: 0; }
+        .footer-section ul li { margin-bottom: 10px; }
+        .footer-section ul li a { color: var(--nhs-text); text-decoration: none; }
+        .footer-section ul li a:hover { text-decoration: underline; }
 
-        .footer-section ul li a {
-            color: var(--nhs-text);
-            text-decoration: none;
-        }
-
-        .copyright {
-            text-align: center;
-            margin-top: 3rem;
-            border-top: 1px solid #ced4da;
-            padding-top: 1.5rem;
-            font-size: 0.95rem;
-            color: #505a5f;
+        /* توافق الجوال */
+        @media (max-width: 768px) {
+            .header-content { flex-direction: column; text-align: center; }
+            .nav-content { justify-content: center; }
+            .page-hero { padding: 3rem 15px 4rem 15px; }
+            h1 { font-size: 2rem; }
+            .disease-card { padding: 1.5rem; flex-direction: column; align-items: flex-start; gap: 15px; }
+            .card-info { padding-left: 0; }
+            .disease-ar { font-size: 1.4rem; }
+            .card-action { align-self: flex-end; }
         }
     </style>
 </head>
@@ -192,72 +183,78 @@
     <header class="nhs-header">
         <div class="header-content">
             <a href="index.html" class="logo-placeholder">LOGO</a>
-            <div style="font-weight: 700; color: var(--nhs-blue); font-size: 1.1rem;">اسم الموقع الطبي</div>
+            <div style="font-weight: 700; color: var(--nhs-blue);">اسم الموقع الطبي</div>
         </div>
     </header>
 
-    <section class="page-intro">
-        <div class="container">
-            <a href="index.html" class="back-link"><i class="fas fa-arrow-right"></i> &nbsp; الرجوع للرئيسية</a>
+    <nav class="nhs-nav">
+        <div class="nav-content">
+            <a href="index.html"><i class="fas fa-home"></i> الرئيسية</a>
+            <a href="#">من نحن</a>
+            <a href="#">اتصل بنا</a>
+            <a href="#">الأسئلة الشائعة</a>
+        </div>
+    </nav>
+
+    <section class="page-hero">
+        <div class="hero-container">
+            <a href="index.html" class="back-link"><i class="fas fa-arrow-right"></i> العودة للرئيسية</a>
             <h1>الأمراض الجلدية</h1>
-            <p class="intro-text">قائمة بأكثر الحالات الجلدية شيوعاً في العراق باللغتين العربية والإنجليزية.</p>
         </div>
     </section>
 
-    <main class="disease-list">
-        <div class="container">
-            
-            <div class="disease-item">
-                <a href="#" class="disease-link">
-                    <div class="disease-names">
-                        <span class="name-ar">الأكزيما (حساسية الجلد)</span>
-                        <span class="name-en">Eczema</span>
-                    </div>
-                    <i class="fas fa-chevron-left arrow-icon"></i>
-                </a>
+    <main class="content-section">
+        
+        <a href="eczema-details.html" class="disease-card">
+            <div class="card-info">
+                <h2 class="disease-ar">الأكزيما (حساسية الجلد)</h2>
+                <span class="disease-en">Eczema (Dermatitis)</span>
             </div>
-
-            <div class="disease-item">
-                <a href="#" class="disease-link">
-                    <div class="disease-names">
-                        <span class="name-ar">الصدفية</span>
-                        <span class="name-en">Psoriasis</span>
-                    </div>
-                    <i class="fas fa-chevron-left arrow-icon"></i>
-                </a>
+            <div class="card-action">
+                <div class="icon-circle"><i class="fas fa-arrow-left"></i></div>
             </div>
+        </a>
 
-            <div class="disease-item">
-                <a href="#" class="disease-link">
-                    <div class="disease-names">
-                        <span class="name-ar">حب الشباب</span>
-                        <span class="name-en">Acne</span>
-                    </div>
-                    <i class="fas fa-chevron-left arrow-icon"></i>
-                </a>
+        <a href="psoriasis-details.html" class="disease-card">
+            <div class="card-info">
+                <h2 class="disease-ar">الصدفية</h2>
+                <span class="disease-en">Psoriasis</span>
             </div>
-
-            <div class="disease-item">
-                <a href="#" class="disease-link">
-                    <div class="disease-names">
-                        <span class="name-ar">الفطريات الجلدية</span>
-                        <span class="name-en">Fungal Infections</span>
-                    </div>
-                    <i class="fas fa-chevron-left arrow-icon"></i>
-                </a>
+            <div class="card-action">
+                <div class="icon-circle"><i class="fas fa-arrow-left"></i></div>
             </div>
+        </a>
 
-            <div class="disease-item">
-                <a href="#" class="disease-link">
-                    <div class="disease-names">
-                        <span class="name-ar">البهاق</span>
-                        <span class="name-en">Vitiligo</span>
-                    </div>
-                    <i class="fas fa-chevron-left arrow-icon"></i>
-                </a>
+        <a href="acne-details.html" class="disease-card">
+            <div class="card-info">
+                <h2 class="disease-ar">حب الشباب</h2>
+                <span class="disease-en">Acne Vulgaris</span>
             </div>
+            <div class="card-action">
+                <div class="icon-circle"><i class="fas fa-arrow-left"></i></div>
+            </div>
+        </a>
 
-        </div>
+        <a href="fungal-details.html" class="disease-card">
+            <div class="card-info">
+                <h2 class="disease-ar">الفطريات الجلدية</h2>
+                <span class="disease-en">Fungal Infections</span>
+            </div>
+            <div class="card-action">
+                <div class="icon-circle"><i class="fas fa-arrow-left"></i></div>
+            </div>
+        </a>
+
+        <a href="vitiligo-details.html" class="disease-card">
+            <div class="card-info">
+                <h2 class="disease-ar">البهاق</h2>
+                <span class="disease-en">Vitiligo</span>
+            </div>
+            <div class="card-action">
+                <div class="icon-circle"><i class="fas fa-arrow-left"></i></div>
+            </div>
+        </a>
+
     </main>
 
     <footer>
@@ -267,6 +264,15 @@
                 <ul>
                     <li><a href="index.html">الرئيسية</a></li>
                     <li><a href="#">دليل المريض</a></li>
+                    <li><a href="#">المواعيد</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>عن المركز</h4>
+                <ul>
+                    <li><a href="#">من نحن</a></li>
+                    <li><a href="#">فريق العمل</a></li>
+                    <li><a href="#">سياسة الخصوصية</a></li>
                 </ul>
             </div>
             <div class="footer-section">
@@ -277,7 +283,7 @@
                 </ul>
             </div>
         </div>
-        <div class="copyright">
+        <div style="text-align: center; margin-top: 30px; border-top: 1px solid #ccc; padding-top: 20px; font-size: 0.9rem;">
             &copy; 2026 جميع الحقوق محفوظة لاسم الموقع الطبي
         </div>
     </footer>
