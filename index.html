@@ -27,7 +27,7 @@
         .nhs-header {
             background-color: var(--nhs-white);
             border-bottom: 4px solid var(--nhs-blue);
-            padding: 8px 0; /* مساحة صغيرة جداً وأنيقة */
+            padding: 8px 0;
         }
 
         .header-content {
@@ -46,7 +46,7 @@
         }
 
         .site-logo {
-            max-height: 60px; /* الحجم الصغير المطلوب للكمبيوتر */
+            max-height: 60px;
             width: auto;
             object-fit: contain;
         }
@@ -58,6 +58,7 @@
             position: sticky;
             top: 0;
             z-index: 1000;
+            margin-bottom: 40px; /* مسافة للتعويض عن حذف قسم البحث */
         }
 
         .nav-content {
@@ -78,50 +79,6 @@
 
         .nav-content a:hover { background-color: var(--nhs-dark-blue); }
 
-        /* --- Hero & Search --- */
-        .hero-section {
-            max-width: 1300px;
-            margin: 40px auto 20px;
-            padding: 0 20px;
-        }
-
-        .header-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-end;
-            margin-bottom: 30px;
-            flex-wrap: wrap;
-            gap: 20px;
-        }
-
-        h1 { font-size: 2.2rem; color: var(--nhs-text); margin: 0; font-weight: 800; }
-
-        .search-box {
-            display: flex;
-            background: white;
-            border: 2px solid var(--nhs-blue);
-            border-radius: 4px;
-            overflow: hidden;
-            width: 100%;
-            max-width: 400px;
-        }
-
-        .search-box input {
-            border: none;
-            padding: 12px 15px;
-            outline: none;
-            flex-grow: 1;
-            font-family: inherit;
-        }
-
-        .search-box button {
-            background: var(--nhs-blue);
-            border: none;
-            padding: 0 20px;
-            cursor: pointer;
-            color: white;
-        }
-
         /* --- Grid & Interactive Dropdowns --- */
         .clinical-grid {
             max-width: 1300px;
@@ -132,44 +89,64 @@
         .grid-row {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 2px;
-            margin-bottom: 2px;
+            gap: 15px; /* مسافة بين المستطيلات */
+            margin-bottom: 15px;
         }
 
+        /* تصميم المستطيلات الجديد */
         .tile {
             display: flex;
-            flex-direction: column;
+            flex-direction: row; /* ترتيب أفقي (أيقونة ثم نص) */
             align-items: center;
-            justify-content: center;
-            text-align: center;
-            padding: 45px 10px;
+            justify-content: flex-start;
+            text-align: right;
+            padding: 20px; /* تقليل الحجم ليكون مستطيلاً */
             color: white;
             cursor: pointer;
-            transition: opacity 0.2s;
-            min-height: 160px;
+            transition: all 0.2s ease;
+            min-height: 80px; /* ارتفاع مستطيل أنيق */
+            border-radius: 8px; /* حواف ناعمة */
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
         }
 
-        .tile:hover { opacity: 0.9; }
-        .tile i { font-size: 3rem; margin-bottom: 20px; }
-        .tile span { font-weight: 700; font-size: 1.1rem; }
+        .tile:hover { 
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+        }
+
+        .tile i { 
+            font-size: 2rem; /* أيقونة أصغر لتناسب المستطيل */
+            margin-left: 15px; /* مسافة بين الأيقونة والنص */
+            margin-bottom: 0;
+            width: 40px;
+            text-align: center;
+        }
+
+        .tile span { 
+            font-weight: 700; 
+            font-size: 1rem; 
+            line-height: 1.3;
+        }
 
         .mega-dropdown {
             display: none;
             grid-template-columns: 1fr 1fr;
             width: 100%;
-            margin-bottom: 2px;
+            margin-bottom: 15px;
             animation: fadeIn 0.4s ease;
             grid-column: 1 / -1;
+            border-radius: 8px;
+            overflow: hidden;
         }
 
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
         .drop-section {
-            padding: 30px 20px;
+            padding: 25px 20px;
             text-align: center;
             color: white;
             font-weight: bold;
-            font-size: 1.3rem;
+            font-size: 1.2rem;
             border: 1px solid rgba(255,255,255,0.15);
         }
 
@@ -216,19 +193,20 @@
         .footer-section ul li a { color: var(--nhs-text); text-decoration: none; }
 
         /* --- Responsive Queries --- */
-        @media (max-width: 900px) {
-            .grid-row { grid-template-columns: repeat(2, 1fr); }
+        @media (max-width: 1024px) {
+            .grid-row { grid-template-columns: repeat(3, 1fr); }
         }
 
         @media (max-width: 768px) {
             .header-content { flex-direction: column; text-align: center; gap: 8px; }
-            .header-container { flex-direction: column; align-items: stretch; gap: 15px; }
-            h1 { font-size: 1.8rem; text-align: center; }
-            .search-box { max-width: 100%; }
-            .grid-row { grid-template-columns: 1fr; }
+            .grid-row { grid-template-columns: repeat(2, 1fr); }
             .mega-dropdown { grid-template-columns: 1fr; }
-            .tile { min-height: 120px; padding: 30px 10px; }
-            .site-logo { max-height: 45px; } /* الحجم الأصغر للجوال */
+            .site-logo { max-height: 45px; }
+        }
+        
+        @media (max-width: 480px) {
+            .grid-row { grid-template-columns: 1fr; } /* عمود واحد في الجوال الصغير جداً */
+            .tile { padding: 15px; min-height: 70px; }
         }
     </style>
 </head>
@@ -239,7 +217,7 @@
             <a href="index.html" class="logo-link">
                 <img src="logo.png" alt="شعار الموقع الطبي" class="site-logo">
             </a>
-            <div style="font-weight: 700; color: var(--nhs-blue); font-size: 1.1rem;"> كلشي عن صحتك… بلهجتنا العراقية </div>
+            <div style="font-weight: 700; color: var(--nhs-blue); font-size: 1.1rem;">كلشي عن صحتك… بلهجتنا العراقية</div>
         </div>
     </header>
 
@@ -252,17 +230,8 @@
         </div>
     </nav>
 
-    <div class="hero-section">
-        <div class="header-container">
-            <h1>الدعم السريري حسب جهاز الجسم</h1>
-            <div class="search-box">
-                <input type="text" placeholder="بحث عن قسم أو مرض...">
-                <button aria-label="بحث"><i class="fas fa-search"></i></button>
-            </div>
-        </div>
-    </div>
-
     <main class="clinical-grid">
+        
         <div class="grid-row">
             <div class="tile cardio" onclick="toggleDrop('drop1', 'cardio')"><i class="fas fa-heart-pulse"></i><span>أمراض القلب والأوعية الدموية</span></div>
             <div class="tile neuro" onclick="toggleDrop('drop1', 'neuro')"><i class="fas fa-brain"></i><span>أمراض المخ والأعصاب</span></div>
@@ -275,10 +244,10 @@
         </div>
 
         <div class="grid-row">
-            <div class="tile ent" onclick="toggleDrop('drop2', 'ent')"><i class="fas fa-ear-hearing"></i><span>الأنف والأذن والحنجرة</span></div>
+            <div class="tile ent" onclick="toggleDrop('drop2', 'ent')"><i class="fas fa-ear-listen"></i><span>الأنف والأذن والحنجرة</span></div>
             <div class="tile gastro" onclick="toggleDrop('drop2', 'gastro')"><i class="fas fa-stomach"></i><span>أمراض الجهاز الهضمي والكبد</span></div>
-            <div class="tile women" onclick="toggleDrop('drop2', 'women')"><i class="fas fa-venus-double"></i><span>النسائية والتوليد</span></div>
-            <div class="tile mental" onclick="toggleDrop('drop2', 'mental')"><i class="fas fa-head-side-mask"></i><span>الصحة النفسية</span></div>
+            <div class="tile cancer" onclick="toggleDrop('drop2', 'cancer')"><i class="fas fa-droplet"></i><span>أمراض الدم</span></div>
+            <div class="tile renal" onclick="toggleDrop('drop2', 'renal')"><i class="fas fa-kidneys"></i><span>أمراض الكلى</span></div>
         </div>
         <div id="drop2" class="mega-dropdown">
             <div class="drop-section"><a href="#" class="dynamic-link">الأمراض الشائعة</a></div>
@@ -286,9 +255,9 @@
         </div>
 
         <div class="grid-row">
+            <div class="tile paeds" onclick="toggleDrop('drop3', 'paeds')"><i class="fas fa-baby"></i><span>طب الأطفال والخدج</span></div>
             <div class="tile msk" onclick="toggleDrop('drop3', 'msk')"><i class="fas fa-bone"></i><span>الكسور وجراحة العظام والروماتيزم</span></div>
             <div class="tile nutrition" onclick="toggleDrop('drop3', 'nutrition')"><i class="fas fa-weight-scale"></i><span>التغذية و السمنة</span></div>
-            <div class="tile cancer" onclick="toggleDrop('drop3', 'cancer')"><i class="fas fa-vial-virus"></i><span>أمراض الدم</span></div>
             <div class="tile eye" onclick="toggleDrop('drop3', 'eye')"><i class="fas fa-eye"></i><span>طب وجراحة العيون</span></div>
         </div>
         <div id="drop3" class="mega-dropdown">
@@ -297,10 +266,10 @@
         </div>
 
         <div class="grid-row">
-            <div class="tile paeds" onclick="toggleDrop('drop4', 'paeds')"><i class="fas fa-child-reaching"></i><span>طب الأطفال والخدج</span></div>
-            <div class="tile renal" onclick="toggleDrop('drop4', 'renal')"><i class="fas fa-kidneys"></i><span>أمراض الكلى</span></div>
+            <div class="tile women" onclick="toggleDrop('drop4', 'women')"><i class="fas fa-person-pregnant"></i><span>النسائية والتوليد</span></div>
+            <div class="tile mental" onclick="toggleDrop('drop4', 'mental')"><i class="fas fa-head-side-brain"></i><span>الصحة النفسية</span></div>
             <div class="tile resp" onclick="toggleDrop('drop4', 'resp')"><i class="fas fa-lungs"></i><span>أمراض الجهاز التنفسي والصدرية</span></div>
-            <div class="tile urology" onclick="toggleDrop('drop4', 'urology')"><i class="fas fa-venus-mars"></i><span>المسالك البولية والعقم</span></div>
+            <div class="tile urology" onclick="toggleDrop('drop4', 'urology')"><i class="fas fa-mars"></i><span>المسالك البولية والعقم</span></div>
         </div>
         <div id="drop4" class="mega-dropdown">
             <div class="drop-section"><a href="#" class="dynamic-link">الأمراض الشائعة</a></div>
@@ -331,14 +300,23 @@
             const gradient = window.getComputedStyle(tile).backgroundImage;
             const link = drop.querySelector('.dynamic-link');
             link.href = colorClass + '-diseases.html';
-            if (window.innerWidth <= 900) {
+            
+            // الكود المسؤول عن وضع القائمة المنسدلة تحت العنصر المناسب
+            if (window.innerWidth <= 768) {
+                // في الجوال (عمودين أو عمود)، القائمة تفتح تحت المستطيل مباشرة
                 tile.insertAdjacentElement('afterend', drop); 
+            } else if (window.innerWidth <= 1024) {
+                 // في التابلت (3 أعمدة)، القائمة تفتح تحت الصف
+                 tile.closest('.grid-row').insertAdjacentElement('afterend', drop);
             } else {
+                // في الكمبيوتر (4 أعمدة)، القائمة تفتح تحت الصف
                 tile.closest('.grid-row').insertAdjacentElement('afterend', drop);
             }
+
             document.querySelectorAll('.mega-dropdown').forEach(d => {
                 if (d.id !== dropId) d.style.display = 'none';
             });
+
             if (drop.style.display === 'grid' && drop.dataset.active === colorClass) {
                 drop.style.display = 'none';
                 drop.dataset.active = "";
