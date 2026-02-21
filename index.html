@@ -3,16 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>الدليل الطبي الشامل | NHS Style</title>
+    <title>الدليل الطبي | الصفحة الرئيسية</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
+        /* تعريف الألوان الأساسية بنمط NHS */
         :root {
             --nhs-blue: #005eb8;
             --nhs-dark-blue: #003087;
             --nhs-light-grey: #f0f4f5;
             --nhs-text: #212b32;
             --nhs-white: #ffffff;
-            --ad-bg: #f9f9f9;
         }
 
         body {
@@ -20,121 +20,199 @@
             margin: 0;
             background-color: var(--nhs-light-grey);
             color: var(--nhs-text);
+            line-height: 1.5;
         }
 
-        /* Header & Navigation */
-        .nhs-header { background: var(--nhs-white); border-bottom: 4px solid var(--nhs-blue); padding: 15px 0; }
-        .header-content { max-width: 1300px; margin: 0 auto; padding: 0 20px; display: flex; justify-content: space-between; align-items: center; }
-        .logo-box { background: var(--nhs-blue); color: white; padding: 10px 20px; font-weight: bold; text-decoration: none; font-size: 1.2rem; }
-        
-        .nhs-nav { background: var(--nhs-blue); position: sticky; top: 0; z-index: 1000; }
-        .nav-content { max-width: 1300px; margin: 0 auto; display: flex; }
-        .nav-content a { color: white; text-decoration: none; padding: 15px 25px; font-weight: 600; transition: 0.2s; }
-        .nav-content a:hover { background: var(--nhs-dark-blue); }
+        /* 1. الهيدر العلوي (شعار واسم الموقع) */
+        .nhs-header {
+            background-color: var(--nhs-white);
+            border-bottom: 4px solid var(--nhs-blue);
+            padding: 20px 0;
+        }
 
-        /* Main Content Header */
-        .page-intro { max-width: 1300px; margin: 40px auto 20px; padding: 0 20px; }
-        .search-container { display: flex; max-width: 500px; margin-top: 20px; border: 2px solid var(--nhs-blue); border-radius: 4px; overflow: hidden; background: white; }
-        .search-container input { border: none; padding: 12px; flex: 1; outline: none; font-family: inherit; }
-        .search-container button { background: var(--nhs-blue); color: white; border: none; padding: 0 20px; cursor: pointer; }
-
-        /* Grid System */
-        .clinical-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 20px;
+        .header-content {
             max-width: 1300px;
-            margin: 30px auto 60px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-placeholder {
+            background-color: var(--nhs-blue);
+            color: white;
+            padding: 10px 20px;
+            font-weight: bold;
+            font-size: 1.5rem;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        /* 2. شريط التنقل العلوي (About, Contact) */
+        .nhs-nav {
+            background-color: var(--nhs-blue);
+            color: white;
+        }
+
+        .nav-content {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 0 10px;
+            display: flex;
+        }
+
+        .nav-content a {
+            color: white;
+            text-decoration: none;
+            padding: 12px 20px;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: background 0.2s;
+        }
+
+        .nav-content a:hover {
+            background-color: var(--nhs-dark-blue);
+        }
+
+        /* 3. منطقة العنوان والبحث */
+        .hero-section {
+            max-width: 1300px;
+            margin: 40px auto 20px;
             padding: 0 20px;
         }
 
-        .tile-wrapper { position: relative; }
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-bottom: 30px;
+        }
+
+        h1 {
+            font-size: 2.2rem;
+            color: var(--nhs-text);
+            margin: 0;
+        }
+
+        .search-box {
+            display: flex;
+            background: white;
+            border: 2px solid var(--nhs-blue);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .search-box input {
+            border: none;
+            padding: 12px 15px;
+            outline: none;
+            width: 300px;
+            font-family: inherit;
+        }
+
+        .search-box button {
+            background: var(--nhs-blue);
+            border: none;
+            padding: 0 20px;
+            cursor: pointer;
+            color: white;
+        }
+
+        /* 4. شبكة المربعات */
+        .clinical-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 15px;
+            max-width: 1300px;
+            margin: 0 auto 60px;
+            padding: 0 20px;
+        }
 
         .tile {
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
+            text-align: center;
             padding: 40px 20px;
             color: white;
             text-decoration: none;
             border-radius: 4px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-align: center;
-        }
-        .tile:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
-        .tile i { font-size: 3rem; margin-bottom: 15px; }
-        .tile span { font-weight: bold; font-size: 1.2rem; }
-
-        /* Dropdown Menu (The Mega Menu) */
-        .dropdown-menu {
-            display: none;
-            position: absolute;
-            top: 105%;
-            right: 0;
-            width: 100%;
-            min-width: 320px;
-            background: white;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
-            z-index: 500;
-            grid-template-columns: 1fr 1fr;
-            overflow: hidden;
-            animation: fadeIn 0.3s forwards;
+            transition: transform 0.2s, box-shadow 0.2s;
         }
 
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+        .tile:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+        }
 
-        .drop-col { padding: 20px; }
-        .drop-col h4 { margin: 0 0 15px 0; color: var(--nhs-blue); border-bottom: 2px solid var(--nhs-light-grey); padding-bottom: 8px; font-size: 1rem; }
-        .drop-col ul { list-style: none; padding: 0; margin: 0; }
-        .drop-col ul li a { display: block; padding: 8px 0; color: #333; text-decoration: none; font-size: 0.9rem; }
-        .drop-col ul li a:hover { color: var(--nhs-blue); text-decoration: underline; }
+        .tile i { font-size: 2.8rem; margin-bottom: 15px; }
+        .tile span { font-weight: 700; font-size: 1.2rem; }
 
-        /* Ads Section */
-        .ads-col { background: var(--ad-bg); border-right: 1px solid #eee; }
-        .ad-card {
-            display: flex;
-            align-items: center;
-            padding: 10px;
-            background: white;
-            border: 1px solid #ddd;
-            border-radius: 4px;
+        /* الألوان (تم تحديثها لتناسب نمط NHS) */
+        .cardio    { background-color: #005eb8; } /* أزرق NHS */
+        .neuro     { background-color: #003087; } /* أزرق داكن */
+        .derm      { background-color: #00a499; } /* تركوازي */
+        .diabetes  { background-color: #41b6e6; } /* أزرق سماوي */
+        .ent       { background-color: #330072; } /* بنفسجي */
+        .gastro    { background-color: #00703c; } /* أخضر */
+        .women     { background-color: #7c2855; } /* ماروني */
+        .mental    { background-color: #005eb8; }
+        .msk       { background-color: #768692; } /* رمادي */
+        .nutrition { background-color: #00703c; }
+        .cancer    { background-color: #ae2573; }
+        .eye       { background-color: #005eb8; }
+        .paeds     { background-color: #fb8500; }
+        .renal     { background-color: #003087; }
+        .resp      { background-color: #41b6e6; }
+        .urology   { background-color: #330072; }
+
+        /* 5. التذييل (Footer) */
+        footer {
+            background-color: #e8edee;
+            border-top: 4px solid var(--nhs-blue);
+            padding: 40px 20px;
+            margin-top: 60px;
+        }
+
+        .footer-content {
+            max-width: 1300px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+        }
+
+        .footer-section h4 {
+            margin-top: 0;
+            color: var(--nhs-blue);
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 10px;
+        }
+
+        .footer-section ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer-section ul li {
             margin-bottom: 10px;
-            text-decoration: none;
-            color: inherit;
-            transition: 0.2s;
         }
-        .ad-card:hover { border-color: var(--nhs-blue); }
-        .ad-card i { font-size: 1.5rem; color: var(--nhs-blue); margin-left: 10px; }
-        .ad-info .name { font-weight: bold; font-size: 0.85rem; display: block; }
-        .ad-info .sub { font-size: 0.75rem; color: #666; }
 
-        /* System Specific Colors */
-        .c-cardio    { background-color: #005eb8; }
-        .c-neuro     { background-color: #003087; }
-        .c-derm      { background-color: #00a499; }
-        .c-diabetes  { background-color: #41b6e6; }
-        .c-ent       { background-color: #330072; }
-        .c-gastro    { background-color: #00703c; }
-        .c-women     { background-color: #7c2855; }
-        .c-mental    { background-color: #005eb8; }
-        .c-msk       { background-color: #768692; }
-        .c-nutrition { background-color: #00703c; }
-        .c-cancer    { background-color: #ae2573; }
-        .c-eye       { background-color: #005eb8; }
-        .c-paeds     { background-color: #fb8500; }
-        .c-renal     { background-color: #003087; }
-        .c-resp      { background-color: #41b6e6; }
-        .c-urology   { background-color: #330072; }
+        .footer-section ul li a {
+            color: var(--nhs-text);
+            text-decoration: none;
+        }
 
-        footer { background: #e8edee; padding: 40px 20px; border-top: 4px solid var(--nhs-blue); margin-top: 50px; text-align: center; }
+        .footer-section ul li a:hover {
+            text-decoration: underline;
+        }
 
         @media (max-width: 768px) {
-            .dropdown-menu { grid-template-columns: 1fr; position: fixed; top: 20%; left: 5%; right: 5%; width: 90%; }
-            .clinical-grid { grid-template-columns: 1fr 1fr; }
+            .header-container { flex-direction: column; align-items: flex-start; gap: 20px; }
+            .search-box { width: 100%; }
+            .search-box input { width: 100%; }
         }
     </style>
 </head>
@@ -142,443 +220,127 @@
 
     <header class="nhs-header">
         <div class="header-content">
-            <a href="#" class="logo-box">LOGO</a>
-            <div style="font-weight: bold; color: var(--nhs-blue);">مركز الدعم السريري الموحد</div>
+            <a href="#" class="logo-placeholder">LOGO</a> <div style="font-size: 1.2rem; font-weight: bold; color: var(--nhs-blue);">اسم الموقع الطبي</div>
         </div>
     </header>
 
     <nav class="nhs-nav">
         <div class="nav-content">
-            <a href="#">الرئيسية</a>
+            <a href="#"><i class="fas fa-home"></i> الرئيسية</a>
             <a href="#">من نحن</a>
             <a href="#">اتصل بنا</a>
-            <a href="#">دليل المرضى</a>
+            <a href="#">الأسئلة الشائعة</a>
         </div>
     </nav>
 
-    <div class="page-intro">
-        <h1>الدليل الطبي حسب التخصص</h1>
-        <p>اختر التخصص المطلوب للحصول على معلومات عن الأمراض الشائعة والأطباء المختصين.</p>
-        <div class="search-container">
-            <input type="text" placeholder="ابحث عن مرض أو تخصص...">
-            <button><i class="fas fa-search"></i></button>
+    <div class="hero-section">
+        <div class="header-container">
+            <h1>الدعم السريري حسب جهاز الجسم</h1>
+            <div class="search-box">
+                <input type="text" placeholder="بحث عن قسم أو مورد...">
+                <button><i class="fas fa-search"></i></button>
+            </div>
         </div>
     </div>
 
-    <main class="clinical-grid">
-
-        <div class="tile-wrapper">
-            <div class="tile c-cardio" onclick="toggleMenu('m-cardio')">
-                <i class="fas fa-heartbeat"></i>
-                <span>أمراض القلب</span>
-            </div>
-            <div id="m-cardio" class="dropdown-menu">
-                <div class="drop-col">
-                    <h4>الأمراض الشائعة</h4>
-                    <ul>
-                        <li><a href="#">ضغط الدم المرتفع</a></li>
-                        <li><a href="#">قصور القلب</a></li>
-                        <li><a href="#">اضطراب نبضات القلب</a></li>
-                    </ul>
-                </div>
-                <div class="drop-col ads-col">
-                    <h4>أطباء مختصون</h4>
-                    <a href="#" class="ad-card">
-                        <i class="fas fa-user-md"></i>
-                        <div class="ad-info"><span class="name">د. عادل منصور</span><span class="sub">استشاري قلب</span></div>
-                    </a>
-                </div>
-            </div>
-        </div>
-
-        <div class="tile-wrapper">
-            <div class="tile c-neuro" onclick="toggleMenu('m-neuro')">
-                <i class="fas fa-brain"></i>
-                <span>الجهاز العصبي</span>
-            </div>
-            <div id="m-neuro" class="dropdown-menu">
-                <div class="drop-col">
-                    <h4>الأمراض الشائعة</h4>
-                    <ul>
-                        <li><a href="#">الصداع النصفي</a></li>
-                        <li><a href="#">الصرع</a></li>
-                        <li><a href="#">التصلب اللويحي</a></li>
-                    </ul>
-                </div>
-                <div class="drop-col ads-col">
-                    <h4>أطباء مختصون</h4>
-                    <a href="#" class="ad-card">
-                        <i class="fas fa-clinic-medical"></i>
-                        <div class="ad-info"><span class="name">مستشفى الشفاء</span><span class="sub">قسم الأعصاب المتخصص</span></div>
-                    </a>
-                </div>
-            </div>
-        </div>
-
-        <div class="tile-wrapper">
-            <div class="tile c-derm" onclick="toggleMenu('m-derm')">
-                <i class="fas fa-hand-sparkles"></i>
-                <span>الأمراض الجلدية</span>
-            </div>
-            <div id="m-derm" class="dropdown-menu">
-                <div class="drop-col">
-                    <h4>الأمراض الشائعة</h4>
-                    <ul>
-                        <li><a href="#">الأكزيما</a></li>
-                        <li><a href="#">الصدفية</a></li>
-                        <li><a href="#">حب الشباب</a></li>
-                    </ul>
-                </div>
-                <div class="drop-col ads-col">
-                    <h4>أطباء مختصون</h4>
-                    <a href="#" class="ad-card">
-                        <i class="fas fa-user-md"></i>
-                        <div class="ad-info"><span class="name">د. ليلى حسن</span><span class="sub">أخصائية جلدية وتجميل</span></div>
-                    </a>
-                </div>
-            </div>
-        </div>
-
-        <div class="tile-wrapper">
-            <div class="tile c-diabetes" onclick="toggleMenu('m-diab')">
-                <i class="fas fa-syringe"></i>
-                <span>السكري والغدد</span>
-            </div>
-            <div id="m-diab" class="dropdown-menu">
-                <div class="drop-col">
-                    <h4>الأمراض الشائعة</h4>
-                    <ul>
-                        <li><a href="#">السكري النوع الأول والثاني</a></li>
-                        <li><a href="#">خمول الغدة الدرقية</a></li>
-                    </ul>
-                </div>
-                <div class="drop-col ads-col">
-                    <h4>أطباء مختصون</h4>
-                    <a href="#" class="ad-card">
-                        <i class="fas fa-user-md"></i>
-                        <div class="ad-info"><span class="name">د. عمر فاروق</span><span class="sub">استشاري غدد صماء</span></div>
-                    </a>
-                </div>
-            </div>
-        </div>
-
-        <div class="tile-wrapper">
-            <div class="tile c-ent" onclick="toggleMenu('m-ent')">
-                <i class="fas fa-ear-listen"></i>
-                <span>الأنف والأذن</span>
-            </div>
-            <div id="m-ent" class="dropdown-menu">
-                <div class="drop-col">
-                    <h4>الأمراض الشائعة</h4>
-                    <ul>
-                        <li><a href="#">التهاب الجيوب الأنفية</a></li>
-                        <li><a href="#">فقدان السمع</a></li>
-                    </ul>
-                </div>
-                <div class="drop-col ads-col">
-                    <h4>أطباء مختصون</h4>
-                    <a href="#" class="ad-card">
-                        <i class="fas fa-user-md"></i>
-                        <div class="ad-info"><span class="name">مركز السمعيات</span><span class="sub">أفضل التجهيزات الحديثة</span></div>
-                    </a>
-                </div>
-            </div>
-        </div>
-
-        <div class="tile-wrapper">
-            <div class="tile c-gastro" onclick="toggleMenu('m-gastro')">
-                <i class="fas fa-stomach"></i>
-                <span>الجهاز الهضمي</span>
-            </div>
-            <div id="m-gastro" class="dropdown-menu">
-                <div class="drop-col">
-                    <h4>الأمراض الشائعة</h4>
-                    <ul>
-                        <li><a href="#">ارتجاع المريء</a></li>
-                        <li><a href="#">القولون العصبي</a></li>
-                    </ul>
-                </div>
-                <div class="drop-col ads-col">
-                    <h4>أطباء مختصون</h4>
-                    <a href="#" class="ad-card">
-                        <i class="fas fa-user-md"></i>
-                        <div class="ad-info"><span class="name">د. يوسف كمال</span><span class="sub">أخصائي مناظير</span></div>
-                    </a>
-                </div>
-            </div>
-        </div>
-
-        <div class="tile-wrapper">
-            <div class="tile c-women" onclick="toggleMenu('m-women')">
-                <i class="fas fa-person-pregnant"></i>
-                <span>النساء والتوليد</span>
-            </div>
-            <div id="m-women" class="dropdown-menu">
-                <div class="drop-col">
-                    <h4>الأمراض الشائعة</h4>
-                    <ul>
-                        <li><a href="#">متابعة الحمل</a></li>
-                        <li><a href="#">تكيس المبايض</a></li>
-                    </ul>
-                </div>
-                <div class="drop-col ads-col">
-                    <h4>أطباء مختصون</h4>
-                    <a href="#" class="ad-card">
-                        <i class="fas fa-user-md"></i>
-                        <div class="ad-info"><span class="name">د. منى سعيد</span><span class="sub">استشارية توليد</span></div>
-                    </a>
-                </div>
-            </div>
-        </div>
-
-        <div class="tile-wrapper">
-            <div class="tile c-mental" onclick="toggleMenu('m-mental')">
-                <i class="fas fa-head-side-virus"></i>
-                <span>الصحة النفسية</span>
-            </div>
-            <div id="m-mental" class="dropdown-menu">
-                <div class="drop-col">
-                    <h4>الأمراض الشائعة</h4>
-                    <ul>
-                        <li><a href="#">الاكتئاب</a></li>
-                        <li><a href="#">القلق والتوتر</a></li>
-                    </ul>
-                </div>
-                <div class="drop-col ads-col">
-                    <h4>أطباء مختصون</h4>
-                    <a href="#" class="ad-card">
-                        <i class="fas fa-user-md"></i>
-                        <div class="ad-info"><span class="name">عيادة الأمل</span><span class="sub">استشارات نفسية سرية</span></div>
-                    </a>
-                </div>
-            </div>
-        </div>
-
-        <div class="tile-wrapper">
-            <div class="tile c-msk" onclick="toggleMenu('m-msk')">
-                <i class="fas fa-bone"></i>
-                <span>العظام والمفاصل</span>
-            </div>
-            <div id="m-msk" class="dropdown-menu">
-                <div class="drop-col">
-                    <h4>الأمراض الشائعة</h4>
-                    <ul>
-                        <li><a href="#">هشاشة العظام</a></li>
-                        <li><a href="#">الديسك وآلام الظهر</a></li>
-                    </ul>
-                </div>
-                <div class="drop-col ads-col">
-                    <h4>أطباء مختصون</h4>
-                    <a href="#" class="ad-card">
-                        <i class="fas fa-user-md"></i>
-                        <div class="ad-info"><span class="name">د. خالد وليد</span><span class="sub">جراحة العظام والمفاصل</span></div>
-                    </a>
-                </div>
-            </div>
-        </div>
-
-        <div class="tile-wrapper">
-            <div class="tile c-nutrition" onclick="toggleMenu('m-nutri')">
-                <i class="fas fa-apple-whole"></i>
-                <span>التغذية و السمنة</span>
-            </div>
-            <div id="m-nutri" class="dropdown-menu">
-                <div class="drop-col">
-                    <h4>الأمراض الشائعة</h4>
-                    <ul>
-                        <li><a href="#">نقص الفيتامينات</a></li>
-                        <li><a href="#">برامج إنقاص الوزن</a></li>
-                    </ul>
-                </div>
-                <div class="drop-col ads-col">
-                    <h4>أطباء مختصون</h4>
-                    <a href="#" class="ad-card">
-                        <i class="fas fa-user-md"></i>
-                        <div class="ad-info"><span class="name">أخصائية تغذية</span><span class="sub">خطط غذائية مخصصة</span></div>
-                    </a>
-                </div>
-            </div>
-        </div>
-
-        <div class="tile-wrapper">
-            <div class="tile c-cancer" onclick="toggleMenu('m-blood')">
-                <i class="fas fa-ribbon"></i>
-                <span>أمراض الدم</span>
-            </div>
-            <div id="m-blood" class="dropdown-menu">
-                <div class="drop-col">
-                    <h4>الأمراض الشائعة</h4>
-                    <ul>
-                        <li><a href="#">فقر الدم (الأنيميا)</a></li>
-                        <li><a href="#">تخثر الدم</a></li>
-                    </ul>
-                </div>
-                <div class="drop-col ads-col">
-                    <h4>أطباء مختصون</h4>
-                    <a href="#" class="ad-card">
-                        <i class="fas fa-user-md"></i>
-                        <div class="ad-info"><span class="name">مركز الأورام</span><span class="sub">رعاية شاملة</span></div>
-                    </a>
-                </div>
-            </div>
-        </div>
-
-        <div class="tile-wrapper">
-            <div class="tile c-eye" onclick="toggleMenu('m-eye')">
-                <i class="fas fa-eye"></i>
-                <span>طب العيون</span>
-            </div>
-            <div id="m-eye" class="dropdown-menu">
-                <div class="drop-col">
-                    <h4>الأمراض الشائعة</h4>
-                    <ul>
-                        <li><a href="#">إعتام عدسة العين</a></li>
-                        <li><a href="#">جفاف العين</a></li>
-                    </ul>
-                </div>
-                <div class="drop-col ads-col">
-                    <h4>أطباء مختصون</h4>
-                    <a href="#" class="ad-card">
-                        <i class="fas fa-user-md"></i>
-                        <div class="ad-info"><span class="name">د. سمير صبري</span><span class="sub">تصحيح النظر بالليزر</span></div>
-                    </a>
-                </div>
-            </div>
-        </div>
-
-        <div class="tile-wrapper">
-            <div class="tile c-paeds" onclick="toggleMenu('m-paeds')">
-                <i class="fas fa-baby"></i>
-                <span>طب الأطفال</span>
-            </div>
-            <div id="m-paeds" class="dropdown-menu">
-                <div class="drop-col">
-                    <h4>الأمراض الشائعة</h4>
-                    <ul>
-                        <li><a href="#">التطعيمات</a></li>
-                        <li><a href="#">نزلات البرد والربو</a></li>
-                    </ul>
-                </div>
-                <div class="drop-col ads-col">
-                    <h4>أطباء مختصون</h4>
-                    <a href="#" class="ad-card">
-                        <i class="fas fa-user-md"></i>
-                        <div class="ad-info"><span class="name">د. هدى منصور</span><span class="sub">استشارية طب أطفال</span></div>
-                    </a>
-                </div>
-            </div>
-        </div>
-
-        <div class="tile-wrapper">
-            <div class="tile c-renal" onclick="toggleMenu('m-renal')">
-                <i class="fas fa-kidneys"></i>
-                <span>أمراض الكلى</span>
-            </div>
-            <div id="m-renal" class="dropdown-menu">
-                <div class="drop-col">
-                    <h4>الأمراض الشائعة</h4>
-                    <ul>
-                        <li><a href="#">حصى الكلى</a></li>
-                        <li><a href="#">التهابات المسالك</a></li>
-                    </ul>
-                </div>
-                <div class="drop-col ads-col">
-                    <h4>أطباء مختصون</h4>
-                    <a href="#" class="ad-card">
-                        <i class="fas fa-user-md"></i>
-                        <div class="ad-info"><span class="name">د. فهد سليمان</span><span class="sub">أخصائي أمراض كلى</span></div>
-                    </a>
-                </div>
-            </div>
-        </div>
-
-        <div class="tile-wrapper">
-            <div class="tile c-resp" onclick="toggleMenu('m-resp')">
-                <i class="fas fa-lungs"></i>
-                <span>الجهاز التنفسي</span>
-            </div>
-            <div id="m-resp" class="dropdown-menu">
-                <div class="drop-col">
-                    <h4>الأمراض الشائعة</h4>
-                    <ul>
-                        <li><a href="#">الربو</a></li>
-                        <li><a href="#">الحساسية الصدرية</a></li>
-                    </ul>
-                </div>
-                <div class="drop-col ads-col">
-                    <h4>أطباء مختصون</h4>
-                    <a href="#" class="ad-card">
-                        <i class="fas fa-user-md"></i>
-                        <div class="ad-info"><span class="name">مركز التنفس</span><span class="sub">علاج الربو والحساسية</span></div>
-                    </a>
-                </div>
-            </div>
-        </div>
-
-        <div class="tile-wrapper">
-            <div class="tile c-urology" onclick="toggleMenu('m-uro')">
-                <i class="fas fa-venus-mars"></i>
-                <span>المسالك البولية</span>
-            </div>
-            <div id="m-uro" class="dropdown-menu">
-                <div class="drop-col">
-                    <h4>الأمراض الشائعة</h4>
-                    <ul>
-                        <li><a href="#">تضخم البروستاتا</a></li>
-                        <li><a href="#">التهاب المثانة</a></li>
-                    </ul>
-                </div>
-                <div class="drop-col ads-col">
-                    <h4>أطباء مختصون</h4>
-                    <a href="#" class="ad-card">
-                        <i class="fas fa-user-md"></i>
-                        <div class="ad-info"><span class="name">د. سامي عبيد</span><span class="sub">جراحة المسالك</span></div>
-                    </a>
-                </div>
-            </div>
-        </div>
-
-    </main>
-
-    
+    <div class="clinical-grid">
+        <a href="#" class="tile cardio">
+            <i class="fas fa-heartbeat"></i>
+            <span>أمراض القلب والأوعية الدموية</span>
+        </a>
+        <a href="#" class="tile neuro">
+            <i class="fas fa-brain"></i>
+            <span>أمراض الجهاز العصبي</span>
+        </a>
+        <a href="#" class="tile derm">
+            <i class="fas fa-hand-sparkles"></i>
+            <span>الأمراض الجلدية</span>
+        </a>
+        <a href="#" class="tile diabetes">
+            <i class="fas fa-syringe"></i>
+            <span>السكري والغدد الصماء</span>
+        </a>
+        <a href="#" class="tile ent">
+            <i class="fas fa-ear-listen"></i>
+            <span>الأنف والأذن والحنجرة</span>
+        </a>
+        <a href="#" class="tile gastro">
+            <i class="fas fa-stomach"></i>
+            <span>أمراض الجهاز الهضمي</span>
+        </a>
+        <a href="#" class="tile women">
+            <i class="fas fa-person-pregnant"></i>
+            <span>النساء والتوليد</span>
+        </a>
+        <a href="#" class="tile mental">
+            <i class="fas fa-head-side-virus"></i>
+            <span>الصحة النفسية</span>
+        </a>
+        <a href="#" class="tile msk">
+            <i class="fas fa-bone"></i>
+            <span>طب العظام والمفاصل</span>
+        </a>
+        <a href="#" class="tile nutrition">
+            <i class="fas fa-apple-whole"></i>
+            <span>التغذية و السمنة</span>
+        </a>
+        <a href="#" class="tile cancer">
+            <i class="fas fa-ribbon"></i>
+            <span>أمراض الدم</span>
+        </a>
+        <a href="#" class="tile eye">
+            <i class="fas fa-eye"></i>
+            <span>طب العيون</span>
+        </a>
+        <a href="#" class="tile paeds">
+            <i class="fas fa-baby"></i>
+            <span>طب الأطفال</span>
+        </a>
+        <a href="#" class="tile renal">
+            <i class="fas fa-kidneys"></i>
+            <span>أمراض الكلى</span>
+        </a>
+        <a href="#" class="tile resp">
+            <i class="fas fa-lungs"></i>
+            <span>أمراض الجهاز التنفسي</span>
+        </a>
+        <a href="#" class="tile urology">
+            <i class="fas fa-venus-mars"></i>
+            <span>المسالك البولية</span>
+        </a>
+    </div>
 
     <footer>
-        <div style="max-width: 1300px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; text-align: right;">
-            <div>
-                <h4>عن الموقع</h4>
-                <p>دليل طبي تعليمي يهدف لزيادة الوعي الصحي وربط المرضى بالمختصين.</p>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>روابط سريعة</h4>
+                <ul>
+                    <li><a href="#">الرئيسية</a></li>
+                    <li><a href="#">دليل المريض</a></li>
+                    <li><a href="#">المواعيد</a></li>
+                </ul>
             </div>
-            <div>
-                <h4>تواصل معنا</h4>
-                <p>البريد: info@example.com<br>الهاتف: 00966XXXXXXX</p>
+            <div class="footer-section">
+                <h4>عن المركز</h4>
+                <ul>
+                    <li><a href="#">من نحن</a></li>
+                    <li><a href="#">فريق العمل</a></li>
+                    <li><a href="#">سياسة الخصوصية</a></li>
+                </ul>
             </div>
-            <div>
-                <h4>قانوني</h4>
-                <p>سياسة الخصوصية | شروط الاستخدام</p>
+            <div class="footer-section">
+                <h4>اتصل بنا</h4>
+                <ul>
+                    <li><i class="fas fa-phone"></i> 999 000 000</li>
+                    <li><i class="fas fa-envelope"></i> info@medical.com</li>
+                    <li><i class="fas fa-map-marker-alt"></i> العنوان، المدينة</li>
+                </ul>
             </div>
         </div>
-        <div style="margin-top: 20px; font-size: 0.8rem;">&copy; 2026 جميع الحقوق محفوظة لمركز الدعم السريري.</div>
+        <div style="text-align: center; margin-top: 30px; border-top: 1px solid #ccc; padding-top: 20px; font-size: 0.9rem;">
+            &copy; 2026 جميع الحقوق محفوظة لاسم الموقع الطبي
+        </div>
     </footer>
 
-    <script>
-        function toggleMenu(id) {
-            // إخلاق أي قائمة مفتوحة أخرى
-            const allMenus = document.querySelectorAll('.dropdown-menu');
-            allMenus.forEach(menu => {
-                if(menu.id !== id) menu.style.display = 'none';
-            });
-
-            // تبديل حالة القائمة الحالية
-            const current = document.getElementById(id);
-            current.style.display = (current.style.display === 'grid') ? 'none' : 'grid';
-        }
-
-        // إغلاق القائمة عند الضغط خارجها
-        window.onclick = function(event) {
-            if (!event.target.closest('.tile-wrapper')) {
-                document.querySelectorAll('.dropdown-menu').forEach(m => m.style.display = 'none');
-            }
-        }
-    </script>
 </body>
 </html>
