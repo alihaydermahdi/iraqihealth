@@ -46,7 +46,7 @@
         }
 
         .site-logo {
-            max-height: 60px;
+            max-height: 60px; /* حجم الشعار في الكمبيوتر */
             width: auto;
             object-fit: contain;
         }
@@ -93,18 +93,18 @@
             margin-bottom: 4px;
         }
 
-        /* التصميم الجديد للمربعات: ارتفاع أقل وأنحف */
+        /* تصميم المستطيلات الأنحف (أيقونة فوق ونص تحت) */
         .tile {
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
             text-align: center;
-            padding: 15px 10px; /* تقليل الحشو الداخلي */
+            padding: 15px 10px;
             color: white;
             cursor: pointer;
             transition: opacity 0.2s ease;
-            min-height: 90px; /* تم تقليل الارتفاع من 120 إلى 90 */
+            min-height: 85px; /* ارتفاع أنيق ومضغوط يشبه الصورة المرفقة */
             border-radius: 4px; 
         }
 
@@ -113,13 +113,13 @@
         }
 
         .tile i { 
-            font-size: 1.8rem; /* تصغير الأيقونة قليلاً لتناسب الارتفاع الجديد */
-            margin-bottom: 8px; /* تقليل المسافة بين الأيقونة والنص */
+            font-size: 1.8rem; 
+            margin-bottom: 8px; 
         }
 
         .tile span { 
             font-weight: 700; 
-            font-size: 1rem; 
+            font-size: 0.95rem; 
             line-height: 1.2;
         }
 
@@ -147,7 +147,7 @@
         .drop-section a { color: white; text-decoration: none; display: block; width: 100%; height: 100%; }
         .drop-section:hover { background: rgba(0,0,0,0.1); }
 
-        /* --- الألوان المسطحة (Flat Colors) --- */
+        /* --- الألوان المسطحة الثابتة --- */
         .neuro     { background-color: #7cb342; } 
         .eye       { background-color: #d32f2f; } 
         .ent       { background-color: #d32f2f; } 
@@ -195,12 +195,10 @@
             .header-content { flex-direction: column; text-align: center; gap: 8px; }
             .grid-row { grid-template-columns: repeat(2, 1fr); } 
             .mega-dropdown { grid-template-columns: 1fr; }
-            .site-logo { max-height: 45px; }
-            
-            /* تعديل الارتفاع ليكون أنحف في الجوال أيضاً */
-            .tile { min-height: 80px; padding: 12px 5px; }
+            .site-logo { max-height: 45px; } /* شعار أصغر للجوال */
+            .tile { min-height: 75px; padding: 10px 5px; }
             .tile i { font-size: 1.5rem; margin-bottom: 5px; }
-            .tile span { font-size: 0.9rem; }
+            .tile span { font-size: 0.85rem; }
         }
     </style>
 </head>
@@ -261,7 +259,7 @@
 
         <div class="grid-row">
             <div class="tile eye" onclick="toggleDrop('drop4', 'eye')"><i class="fas fa-eye"></i><span>طب وجراحة العيون</span></div>
-            <div class="tile mental" onclick="toggleDrop('drop4', 'mental')"><i class="fas fa-head-side-brain"></i><span>الصحة النفسية</span></div>
+            <div class="tile mental" onclick="toggleDrop('drop4', 'mental')"><i class="fas fa-head-side-mask"></i><span>الصحة النفسية</span></div>
             <div class="tile nutrition" onclick="toggleDrop('drop4', 'nutrition')"><i class="fas fa-weight-scale"></i><span>التغذية و السمنة</span></div>
             <div class="tile urology" onclick="toggleDrop('drop4', 'urology')"><i class="fas fa-mars"></i><span>الذكورة والعقم</span></div>
         </div>
@@ -292,21 +290,24 @@
             const drop = document.getElementById(dropId);
             const tile = document.querySelector('.' + colorClass);
             
+            // سحب لون الخلفية وتطبيقه على القائمة
             const bgColor = window.getComputedStyle(tile).backgroundColor;
             const link = drop.querySelector('.dynamic-link');
-            
             link.href = colorClass + '-diseases.html';
             
+            // تحديد مكان ظهور القائمة المنسدلة
             if (window.innerWidth <= 768) {
                 tile.closest('.grid-row').insertAdjacentElement('afterend', drop);
             } else {
                 tile.closest('.grid-row').insertAdjacentElement('afterend', drop);
             }
 
+            // إغلاق أي قوائم مفتوحة
             document.querySelectorAll('.mega-dropdown').forEach(d => {
                 if (d.id !== dropId) d.style.display = 'none';
             });
 
+            // فتح وإغلاق القائمة المطلوبة
             if (drop.style.display === 'grid' && drop.dataset.active === colorClass) {
                 drop.style.display = 'none';
                 drop.dataset.active = "";
