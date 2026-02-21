@@ -45,6 +45,7 @@
             display: inline-flex;
             align-items: center;
             text-decoration: none;
+            gap: 15px; 
         }
 
         .site-logo {
@@ -107,6 +108,18 @@
             display: flex;
             align-items: center;
             gap: 15px;
+        }
+
+        .nav-search {
+            color: white;
+            text-decoration: none;
+            padding: 8px 12px;
+            border-radius: 4px;
+            transition: 0.2s;
+        }
+
+        .nav-search:hover {
+            background-color: rgba(255,255,255,0.15);
         }
 
         .nav-cta {
@@ -304,8 +317,10 @@
         }
 
         @media (max-width: 768px) {
-            .header-content { flex-direction: column; text-align: center; gap: 8px; }
-            .header-moto { font-size: 1rem; }
+            .header-contact { display: none; } 
+            .logo-link { flex-direction: column; gap: 5px; }
+            .header-moto { border-right: none; padding-right: 0; font-size: 0.9rem; }
+            .header-content { text-align: center; }
             
             .nav-content { flex-direction: column; padding: 0; }
             .main-links { width: 100%; justify-content: center; overflow-x: auto; }
@@ -330,8 +345,8 @@
         <div class="header-content">
             <a href="index.html" class="logo-link">
                 <img src="logo.png" alt="شعار كشفيّة" class="site-logo">
+                <div class="header-moto">كلشي عن صحتك… بلهجتنا العراقية</div>
             </a>
-            <div class="header-moto">كلشي عن صحتك… بلهجتنا العراقية</div>
         </div>
     </header>
 
@@ -469,10 +484,11 @@
             <div class="footer-section">
                 <h4>معلومات التواصل</h4>
                 <ul>
-                    <li><i class="fas fa-headset"></i> الدعم الفني: 999 000 000</li>
-                    <li><i class="fas fa-envelope"></i> info@kashfiya.com</li>
-                    <li><i class="fas fa-clock"></i> ساعات العمل: متواجدون 24/7</li>
-                    <li><i class="fas fa-location-dot"></i> بغداد، العراق</li>
+                    <li><i class="fas fa-bullhorn"></i> للتواصل والإعلان: ads@kashfiya.com</li>
+                    <li><a href="#"><i class="fab fa-facebook"></i> فيسبوك (Facebook)</a></li>
+                    <li><a href="#"><i class="fab fa-instagram"></i> إنستغرام (Instagram)</a></li>
+                    <li><a href="#"><i class="fab fa-whatsapp"></i> واتساب (WhatsApp)</a></li>
+                    <li><a href="#"><i class="fab fa-x-twitter"></i> منصة إكس (X)</a></li>
                 </ul>
             </div>
         </div>
