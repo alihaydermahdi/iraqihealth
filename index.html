@@ -206,9 +206,31 @@
         .footer-section ul li a { color: var(--nhs-text); text-decoration: none; }
         .footer-section ul li a:hover { text-decoration: underline; }
 
-        @media (max-width: 900px) {
+        /* =========================================
+           إعدادات التوافق مع الجوال (تم التحديث هنا فقط)
+           ========================================= */
+        
+        /* للشاشات المتوسطة (التابلت) */
+        @media (max-width: 992px) {
             .grid-row { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        /* للشاشات الصغيرة (الجوال) */
+        @media (max-width: 768px) {
+            .header-content { flex-direction: column; gap: 15px; text-align: center; }
+            .nav-content { justify-content: center; flex-wrap: wrap; }
+            .header-container { flex-direction: column; align-items: stretch; gap: 15px; }
+            h1 { font-size: 1.8rem; text-align: center; }
+            
+            .search-box { width: 100%; }
+            .search-box input { width: 100%; flex-grow: 1; }
+            
+            /* تحويل الشبكة إلى عمود واحد في الجوال لضمان وضوح النصوص الطويلة */
+            .grid-row { grid-template-columns: 1fr; }
             .mega-dropdown { grid-template-columns: 1fr; }
+            
+            .tile { min-height: 120px; padding: 30px 10px; }
+            .tile i { font-size: 2.5rem; margin-bottom: 10px; }
         }
     </style>
 </head>
