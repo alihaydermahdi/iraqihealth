@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>دليل الدعم السريري | الصفحة الرئيسية</title>
+    <title>دليل الدعم السريري الموحد | الصفحة الرئيسية</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         :root {
@@ -23,7 +23,7 @@
             -webkit-font-smoothing: antialiased;
         }
 
-        /* Header */
+        /* 1. الهيدر الأصلي الموحد */
         .nhs-header {
             background-color: var(--nhs-white);
             border-bottom: 4px solid var(--nhs-blue);
@@ -37,6 +37,8 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
         }
 
         .logo-placeholder {
@@ -48,6 +50,7 @@
             text-decoration: none;
         }
 
+        /* 2. شريط التنقل */
         .nhs-nav {
             background-color: var(--nhs-blue);
             color: white;
@@ -59,8 +62,8 @@
         .nav-content {
             max-width: 1300px;
             margin: 0 auto;
-            padding: 0 10px;
             display: flex;
+            flex-wrap: wrap;
         }
 
         .nav-content a {
@@ -68,12 +71,13 @@
             text-decoration: none;
             padding: 12px 20px;
             font-weight: 600;
+            font-size: 1rem;
             transition: background 0.2s;
         }
 
         .nav-content a:hover { background-color: var(--nhs-dark-blue); }
 
-        /* Hero & Search */
+        /* 3. منطقة البحث والعنوان */
         .hero-section {
             max-width: 1300px;
             margin: 40px auto 20px;
@@ -85,6 +89,8 @@
             justify-content: space-between;
             align-items: flex-end;
             margin-bottom: 30px;
+            flex-wrap: wrap;
+            gap: 20px;
         }
 
         h1 { font-size: 2.2rem; color: var(--nhs-text); margin: 0; font-weight: 800; }
@@ -95,13 +101,15 @@
             border: 2px solid var(--nhs-blue);
             border-radius: 4px;
             overflow: hidden;
+            width: 100%;
+            max-width: 400px;
         }
 
         .search-box input {
             border: none;
             padding: 12px 15px;
             outline: none;
-            width: 300px;
+            flex-grow: 1;
             font-family: inherit;
         }
 
@@ -113,7 +121,7 @@
             color: white;
         }
 
-        /* Grid & Dropdowns */
+        /* 4. شبكة المربعات المتجاوبة */
         .clinical-grid {
             max-width: 1300px;
             margin: 0 auto 60px;
@@ -122,7 +130,7 @@
 
         .grid-row {
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
+            grid-template-columns: repeat(4, 1fr); /* الافتراضي للشاشات الكبيرة */
             gap: 2px;
             margin-bottom: 2px;
         }
@@ -133,17 +141,17 @@
             align-items: center;
             justify-content: center;
             text-align: center;
-            padding: 45px 10px;
+            padding: 40px 10px;
             color: white;
             cursor: pointer;
             transition: opacity 0.2s;
-            min-height: 160px;
+            min-height: 180px;
         }
 
-        .tile:hover { opacity: 0.9; }
-        .tile i { font-size: 3rem; margin-bottom: 20px; }
-        .tile span { font-weight: 700; font-size: 1.1rem; }
+        .tile i { font-size: 3rem; margin-bottom: 15px; }
+        .tile span { font-weight: 700; font-size: 1.1rem; padding: 0 5px; }
 
+        /* القائمة المنسدلة المتجاوبة */
         .mega-dropdown {
             display: none;
             grid-template-columns: 1fr 1fr;
@@ -164,9 +172,8 @@
         }
 
         .drop-section a { color: white; text-decoration: none; display: block; width: 100%; height: 100%; }
-        .drop-section:hover { background: rgba(0,0,0,0.1); }
 
-        /* Gradients */
+        /* التدرجات اللونية */
         .cardio    { background: linear-gradient(135deg, #e63946, #9b2226); }
         .neuro     { background: linear-gradient(135deg, #4361ee, #3a0ca3); }
         .derm      { background: linear-gradient(135deg, #2a9d8f, #1a635a); }
@@ -184,7 +191,7 @@
         .resp      { background: linear-gradient(135deg, #90e0ef, #00b4d8); }
         .urology   { background: linear-gradient(135deg, #5a189a, #240046); }
 
-        /* Footer */
+        /* 5. التذييل الأصلي الكامل */
         footer {
             background-color: #e8edee;
             border-top: 4px solid var(--nhs-blue);
@@ -196,19 +203,33 @@
             max-width: 1300px;
             margin: 0 auto;
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 30px;
         }
 
-        .footer-section h4 { color: var(--nhs-blue); border-bottom: 1px solid #ccc; padding-bottom: 10px; margin-top: 0; }
+        .footer-section h4 {
+            margin-top: 0;
+            color: var(--nhs-blue);
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 10px;
+        }
+
         .footer-section ul { list-style: none; padding: 0; }
         .footer-section ul li { margin-bottom: 10px; }
         .footer-section ul li a { color: var(--nhs-text); text-decoration: none; }
-        .footer-section ul li a:hover { text-decoration: underline; }
 
-        @media (max-width: 900px) {
+        /* إعدادات التجاوب مع الجوال والتابلت */
+        @media (max-width: 992px) {
             .grid-row { grid-template-columns: repeat(2, 1fr); }
+            h1 { font-size: 1.8rem; }
+        }
+
+        @media (max-width: 600px) {
+            .grid-row { grid-template-columns: 1fr; }
             .mega-dropdown { grid-template-columns: 1fr; }
+            .tile { min-height: 140px; padding: 30px 10px; }
+            .header-content { justify-content: center; }
+            .search-box { max-width: 100%; }
         }
     </style>
 </head>
@@ -217,7 +238,7 @@
     <header class="nhs-header">
         <div class="header-content">
             <a href="#" class="logo-placeholder">LOGO</a>
-            <div style="font-weight: 700; color: var(--nhs-blue);">اسم الموقع الطبي</div>
+            <div style="font-weight: 700; color: var(--nhs-blue); font-size: 1.1rem;">اسم الموقع الطبي</div>
         </div>
     </header>
 
@@ -226,7 +247,6 @@
             <a href="#"><i class="fas fa-home"></i> الرئيسية</a>
             <a href="#">من نحن</a>
             <a href="#">اتصل بنا</a>
-            <a href="#">الأسئلة الشائعة</a>
         </div>
     </nav>
 
@@ -240,8 +260,7 @@
         </div>
     </div>
 
-    <div class="clinical-grid">
-        
+    <main class="clinical-grid">
         <div class="grid-row">
             <div class="tile cardio" onclick="toggleDrop('drop1', 'cardio')"><i class="fas fa-heart-pulse"></i><span>أمراض القلب والأوعية الدموية</span></div>
             <div class="tile neuro" onclick="toggleDrop('drop1', 'neuro')"><i class="fas fa-brain"></i><span>أمراض المخ والأعصاب</span></div>
@@ -285,7 +304,7 @@
             <div class="drop-section"><a href="#" class="dynamic-link">الأمراض الشائعة</a></div>
             <div class="drop-section"><a href="#">أطباء الاختصاص</a></div>
         </div>
-    </div>
+    </main>
 
     <footer>
         <div class="footer-content">
@@ -294,15 +313,6 @@
                 <ul>
                     <li><a href="#">الرئيسية</a></li>
                     <li><a href="#">دليل المريض</a></li>
-                    <li><a href="#">المواعيد</a></li>
-                </ul>
-            </div>
-            <div class="footer-section">
-                <h4>عن المركز</h4>
-                <ul>
-                    <li><a href="#">من نحن</a></li>
-                    <li><a href="#">فريق العمل</a></li>
-                    <li><a href="#">سياسة الخصوصية</a></li>
                 </ul>
             </div>
             <div class="footer-section">
@@ -313,7 +323,7 @@
                 </ul>
             </div>
         </div>
-        <div style="text-align: center; margin-top: 30px; border-top: 1px solid #ccc; padding-top: 20px; font-size: 0.9rem;">
+        <div style="text-align: center; margin-top: 30px; border-top: 1px solid #ccc; padding-top: 20px; font-size: 0.95rem;">
             &copy; 2026 جميع الحقوق محفوظة لاسم الموقع الطبي
         </div>
     </footer>
@@ -324,7 +334,7 @@
             const tile = document.querySelector('.' + colorClass);
             const gradient = window.getComputedStyle(tile).backgroundImage;
             
-            // تحديث الرابط ديناميكياً بناءً على التخصص المختار
+            // تحديث الرابط ديناميكياً ليكون جاهزاً للملفات المستقبيلة
             const link = drop.querySelector('.dynamic-link');
             link.href = colorClass + '-diseases.html';
 
