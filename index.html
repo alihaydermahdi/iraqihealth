@@ -58,7 +58,6 @@
             position: sticky;
             top: 0;
             z-index: 1000;
-            margin-bottom: 40px; /* مسافة للتعويض عن حذف قسم البحث */
         }
 
         .nav-content {
@@ -82,44 +81,39 @@
         /* --- Grid & Interactive Dropdowns --- */
         .clinical-grid {
             max-width: 1300px;
-            margin: 0 auto 60px;
+            margin: 40px auto 60px auto; /* مسافة من الأعلى بدلاً من قسم البحث */
             padding: 0 20px;
         }
 
         .grid-row {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 15px; /* مسافة بين المستطيلات */
-            margin-bottom: 15px;
+            gap: 4px; /* مسافة رفيعة بين المربعات تشبه الصورة */
+            margin-bottom: 4px;
         }
 
-        /* تصميم المستطيلات الجديد */
+        /* التصميم الجديد للمربعات (أيقونة فوق ونص تحت) */
         .tile {
             display: flex;
-            flex-direction: row; /* ترتيب أفقي (أيقونة ثم نص) */
+            flex-direction: column;
             align-items: center;
-            justify-content: flex-start;
-            text-align: right;
-            padding: 20px; /* تقليل الحجم ليكون مستطيلاً */
+            justify-content: center;
+            text-align: center;
+            padding: 25px 10px;
             color: white;
             cursor: pointer;
-            transition: all 0.2s ease;
-            min-height: 80px; /* ارتفاع مستطيل أنيق */
-            border-radius: 8px; /* حواف ناعمة */
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: opacity 0.2s ease;
+            min-height: 120px; /* مستطيل أنيق وأصغر */
+            border-radius: 4px; /* حواف ناعمة جداً */
         }
 
         .tile:hover { 
-            transform: translateY(-3px);
-            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+            opacity: 0.9; 
         }
 
         .tile i { 
-            font-size: 2rem; /* أيقونة أصغر لتناسب المستطيل */
-            margin-left: 15px; /* مسافة بين الأيقونة والنص */
-            margin-bottom: 0;
-            width: 40px;
-            text-align: center;
+            font-size: 2.2rem; /* حجم الأيقونة */
+            margin-bottom: 12px; /* مسافة بين الأيقونة والنص */
         }
 
         .tile span { 
@@ -132,17 +126,16 @@
             display: none;
             grid-template-columns: 1fr 1fr;
             width: 100%;
-            margin-bottom: 15px;
-            animation: fadeIn 0.4s ease;
+            margin-bottom: 4px;
+            animation: fadeIn 0.3s ease;
             grid-column: 1 / -1;
-            border-radius: 8px;
-            overflow: hidden;
+            border-radius: 4px;
         }
 
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
         .drop-section {
-            padding: 25px 20px;
+            padding: 20px;
             text-align: center;
             color: white;
             font-weight: bold;
@@ -153,23 +146,23 @@
         .drop-section a { color: white; text-decoration: none; display: block; width: 100%; height: 100%; }
         .drop-section:hover { background: rgba(0,0,0,0.1); }
 
-        /* --- Specialties Gradients --- */
-        .cardio    { background: linear-gradient(135deg, #e63946, #9b2226); }
-        .neuro     { background: linear-gradient(135deg, #4361ee, #3a0ca3); }
-        .derm      { background: linear-gradient(135deg, #2a9d8f, #1a635a); }
-        .diabetes  { background: linear-gradient(135deg, #48cae4, #0077b6); }
-        .ent       { background: linear-gradient(135deg, #5a189a, #3c096c); }
-        .gastro    { background: linear-gradient(135deg, #70e000, #38b000); }
-        .women     { background: linear-gradient(135deg, #ff4d6d, #c9184a); }
-        .mental    { background: linear-gradient(135deg, #fb8500, #d62828); }
-        .msk       { background: linear-gradient(135deg, #6c757d, #343a40); }
-        .nutrition { background: linear-gradient(135deg, #ffb703, #fb8500); }
-        .cancer    { background: linear-gradient(135deg, #9d0208, #370617); }
-        .eye       { background: linear-gradient(135deg, #00b4d8, #0077b6); }
-        .paeds     { background: linear-gradient(135deg, #ff9f1c, #ffbf69); }
-        .renal     { background: linear-gradient(135deg, #023e8a, #001233); }
-        .resp      { background: linear-gradient(135deg, #90e0ef, #00b4d8); }
-        .urology   { background: linear-gradient(135deg, #5a189a, #240046); }
+        /* --- الألوان المسطحة الجديدة (مستوحاة من الصورة المرفقة) --- */
+        .neuro     { background-color: #7cb342; } /* أخضر فاتح */
+        .eye       { background-color: #d32f2f; } /* أحمر */
+        .ent       { background-color: #d32f2f; } /* أحمر */
+        .resp      { background-color: #1976d2; } /* أزرق */
+        .cardio    { background-color: #afb42b; } /* أصفر مخضر */
+        .diabetes  { background-color: #0288d1; } /* تركوازي */
+        .gastro    { background-color: #388e3c; } /* أخضر غامق */
+        .renal     { background-color: #1565c0; } /* أزرق غامق */
+        .urology   { background-color: #1565c0; } /* أزرق غامق */
+        .women     { background-color: #8e24aa; } /* بنفسجي */
+        .paeds     { background-color: #4a148c; } /* بنفسجي غامق */
+        .derm      { background-color: #1b5e20; } /* أخضر جيشي */
+        .msk       { background-color: #1b5e20; } /* أخضر جيشي */
+        .cancer    { background-color: #b71c1c; } /* أحمر غامق */
+        .mental    { background-color: #7cb342; } /* أخضر فاتح */
+        .nutrition { background-color: #f57c00; } /* برتقالي */
 
         /* --- Footer --- */
         footer {
@@ -199,14 +192,11 @@
 
         @media (max-width: 768px) {
             .header-content { flex-direction: column; text-align: center; gap: 8px; }
-            .grid-row { grid-template-columns: repeat(2, 1fr); }
+            .grid-row { grid-template-columns: repeat(2, 1fr); } /* عمودين في الجوال لشكل أنيق */
             .mega-dropdown { grid-template-columns: 1fr; }
             .site-logo { max-height: 45px; }
-        }
-        
-        @media (max-width: 480px) {
-            .grid-row { grid-template-columns: 1fr; } /* عمود واحد في الجوال الصغير جداً */
-            .tile { padding: 15px; min-height: 70px; }
+            .tile { min-height: 110px; padding: 20px 10px; }
+            .tile span { font-size: 0.9rem; }
         }
     </style>
 </head>
@@ -233,10 +223,10 @@
     <main class="clinical-grid">
         
         <div class="grid-row">
-            <div class="tile cardio" onclick="toggleDrop('drop1', 'cardio')"><i class="fas fa-heart-pulse"></i><span>أمراض القلب والأوعية الدموية</span></div>
             <div class="tile neuro" onclick="toggleDrop('drop1', 'neuro')"><i class="fas fa-brain"></i><span>أمراض المخ والأعصاب</span></div>
-            <div class="tile derm" onclick="toggleDrop('drop1', 'derm')"><i class="fas fa-hand-sparkles"></i><span>الأمراض الجلدية</span></div>
-            <div class="tile diabetes" onclick="toggleDrop('drop1', 'diabetes')"><i class="fas fa-syringe"></i><span>السكري والغدد الصماء</span></div>
+            <div class="tile ent" onclick="toggleDrop('drop1', 'ent')"><i class="fas fa-ear-listen"></i><span>الأنف والأذن والحنجرة</span></div>
+            <div class="tile resp" onclick="toggleDrop('drop1', 'resp')"><i class="fas fa-lungs"></i><span>أمراض الجهاز التنفسي</span></div>
+            <div class="tile cardio" onclick="toggleDrop('drop1', 'cardio')"><i class="fas fa-heart-pulse"></i><span>أمراض القلب والأوعية</span></div>
         </div>
         <div id="drop1" class="mega-dropdown">
             <div class="drop-section"><a href="#" class="dynamic-link">الأمراض الشائعة</a></div>
@@ -244,10 +234,10 @@
         </div>
 
         <div class="grid-row">
-            <div class="tile ent" onclick="toggleDrop('drop2', 'ent')"><i class="fas fa-ear-listen"></i><span>الأنف والأذن والحنجرة</span></div>
-            <div class="tile gastro" onclick="toggleDrop('drop2', 'gastro')"><i class="fas fa-stomach"></i><span>أمراض الجهاز الهضمي والكبد</span></div>
-            <div class="tile cancer" onclick="toggleDrop('drop2', 'cancer')"><i class="fas fa-droplet"></i><span>أمراض الدم</span></div>
-            <div class="tile renal" onclick="toggleDrop('drop2', 'renal')"><i class="fas fa-kidneys"></i><span>أمراض الكلى</span></div>
+            <div class="tile diabetes" onclick="toggleDrop('drop2', 'diabetes')"><i class="fas fa-syringe"></i><span>السكري والغدد الصماء</span></div>
+            <div class="tile gastro" onclick="toggleDrop('drop2', 'gastro')"><i class="fas fa-stomach"></i><span>الجهاز الهضمي والكبد</span></div>
+            <div class="tile renal" onclick="toggleDrop('drop2', 'renal')"><i class="fas fa-kidneys"></i><span>أمراض الكلى والمسالك</span></div>
+            <div class="tile women" onclick="toggleDrop('drop2', 'women')"><i class="fas fa-person-pregnant"></i><span>النسائية والتوليد</span></div>
         </div>
         <div id="drop2" class="mega-dropdown">
             <div class="drop-section"><a href="#" class="dynamic-link">الأمراض الشائعة</a></div>
@@ -256,9 +246,9 @@
 
         <div class="grid-row">
             <div class="tile paeds" onclick="toggleDrop('drop3', 'paeds')"><i class="fas fa-baby"></i><span>طب الأطفال والخدج</span></div>
-            <div class="tile msk" onclick="toggleDrop('drop3', 'msk')"><i class="fas fa-bone"></i><span>الكسور وجراحة العظام والروماتيزم</span></div>
-            <div class="tile nutrition" onclick="toggleDrop('drop3', 'nutrition')"><i class="fas fa-weight-scale"></i><span>التغذية و السمنة</span></div>
-            <div class="tile eye" onclick="toggleDrop('drop3', 'eye')"><i class="fas fa-eye"></i><span>طب وجراحة العيون</span></div>
+            <div class="tile derm" onclick="toggleDrop('drop3', 'derm')"><i class="fas fa-hand-sparkles"></i><span>الأمراض الجلدية</span></div>
+            <div class="tile msk" onclick="toggleDrop('drop3', 'msk')"><i class="fas fa-bone"></i><span>الكسور والعظام والروماتيزم</span></div>
+            <div class="tile cancer" onclick="toggleDrop('drop3', 'cancer')"><i class="fas fa-droplet"></i><span>أمراض الدم والأورام</span></div>
         </div>
         <div id="drop3" class="mega-dropdown">
             <div class="drop-section"><a href="#" class="dynamic-link">الأمراض الشائعة</a></div>
@@ -266,10 +256,10 @@
         </div>
 
         <div class="grid-row">
-            <div class="tile women" onclick="toggleDrop('drop4', 'women')"><i class="fas fa-person-pregnant"></i><span>النسائية والتوليد</span></div>
+            <div class="tile eye" onclick="toggleDrop('drop4', 'eye')"><i class="fas fa-eye"></i><span>طب وجراحة العيون</span></div>
             <div class="tile mental" onclick="toggleDrop('drop4', 'mental')"><i class="fas fa-head-side-brain"></i><span>الصحة النفسية</span></div>
-            <div class="tile resp" onclick="toggleDrop('drop4', 'resp')"><i class="fas fa-lungs"></i><span>أمراض الجهاز التنفسي والصدرية</span></div>
-            <div class="tile urology" onclick="toggleDrop('drop4', 'urology')"><i class="fas fa-mars"></i><span>المسالك البولية والعقم</span></div>
+            <div class="tile nutrition" onclick="toggleDrop('drop4', 'nutrition')"><i class="fas fa-weight-scale"></i><span>التغذية و السمنة</span></div>
+            <div class="tile urology" onclick="toggleDrop('drop4', 'urology')"><i class="fas fa-mars"></i><span>الذكورة والعقم</span></div>
         </div>
         <div id="drop4" class="mega-dropdown">
             <div class="drop-section"><a href="#" class="dynamic-link">الأمراض الشائعة</a></div>
@@ -297,19 +287,17 @@
         function toggleDrop(dropId, colorClass) {
             const drop = document.getElementById(dropId);
             const tile = document.querySelector('.' + colorClass);
-            const gradient = window.getComputedStyle(tile).backgroundImage;
+            
+            // سحب لون الخلفية لتطبيقه على القائمة المنسدلة
+            const bgColor = window.getComputedStyle(tile).backgroundColor;
             const link = drop.querySelector('.dynamic-link');
+            
             link.href = colorClass + '-diseases.html';
             
-            // الكود المسؤول عن وضع القائمة المنسدلة تحت العنصر المناسب
             if (window.innerWidth <= 768) {
-                // في الجوال (عمودين أو عمود)، القائمة تفتح تحت المستطيل مباشرة
-                tile.insertAdjacentElement('afterend', drop); 
-            } else if (window.innerWidth <= 1024) {
-                 // في التابلت (3 أعمدة)، القائمة تفتح تحت الصف
-                 tile.closest('.grid-row').insertAdjacentElement('afterend', drop);
+                // في الجوال (عمودين)، القائمة تفتح تحت الصف بالكامل لعدم كسر التصميم
+                tile.closest('.grid-row').insertAdjacentElement('afterend', drop);
             } else {
-                // في الكمبيوتر (4 أعمدة)، القائمة تفتح تحت الصف
                 tile.closest('.grid-row').insertAdjacentElement('afterend', drop);
             }
 
@@ -322,7 +310,7 @@
                 drop.dataset.active = "";
             } else {
                 drop.style.display = 'grid';
-                drop.style.background = gradient;
+                drop.style.background = bgColor; // استخدام اللون الثابت
                 drop.dataset.active = colorClass;
             }
         }
