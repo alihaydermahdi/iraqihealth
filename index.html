@@ -1,143 +1,169 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Clinical Support by Body System</title>
-  <style>
-    /* Reset some default styles */
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-      background: #f8f9fa;
-    }
+import Link from "next/link";
+import { diseases } from "@/data/diseases";
 
-    /* Section wrapper */
-    .body-system-section {
-      padding: 2rem;
-      text-align: center;
-    }
+export default function Home() {
+  return (
+    <main className="bg-white text-gray-800" dir="rtl">
 
-    /* Section heading */
-    .body-system-section h2 {
-      font-size: 2rem;
-      margin-bottom: 1.5rem;
-      color: #333;
-    }
+      {/* HERO SECTION */}
+      <section className="bg-gradient-to-l from-green-600 to-emerald-500 text-white py-20 px-6 text-center">
+        <h1 className="text-4xl md:text-5xl font-bold mb-6">
+          Kashfeya – إفهم مرضك ببساطة
+        </h1>
+        <p className="text-lg md:text-xl mb-8 max-w-2xl mx-auto">
+          منصة عراقية للتثقيف الصحي تساعدك تفهم حالتك بطريقة واضحة،
+          وتخلي طبيبك يرسلك التعليمات مباشرة على واتساب.
+        </p>
 
-    /* Card container */
-    .system-cards {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-      gap: 1rem;
-      justify-items: center;
-      max-width: 1000px;
-      margin: 0 auto;
-    }
+        <div className="max-w-xl mx-auto">
+          <input
+            type="text"
+            placeholder="ابحث عن مرض..."
+            className="w-full p-4 rounded-xl text-black shadow"
+          />
+        </div>
+      </section>
 
-    /* Individual card */
-    .system-card {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      text-decoration: none;
-      padding: 1rem;
-      border-radius: 8px;
-      width: 160px;
-      transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
-      color: #fff;
-    }
+      {/* POPULAR DISEASES */}
+      <section className="py-16 px-6 max-w-6xl mx-auto">
+        <h2 className="text-3xl font-bold mb-10 text-center">
+          أشهر الحالات
+        </h2>
 
-    .system-card img {
-      width: 64px;
-      height: 64px;
-      margin-bottom: 0.8rem;
-    }
+        <div className="grid md:grid-cols-3 gap-6">
+          {diseases.map((d) => (
+            <Link
+              key={d.slug}
+              href={`/diseases/${d.slug}`}
+              className="border rounded-2xl p-6 shadow hover:shadow-lg transition bg-white"
+            >
+              <h3 className="text-xl font-semibold mb-2">
+                {d.title}
+              </h3>
+              <p className="text-gray-600 line-clamp-3">
+                {d.description}
+              </p>
+              <span className="text-green-600 mt-4 inline-block">
+                اقرأ المزيد →
+              </span>
+            </Link>
+          ))}
+        </div>
+      </section>
 
-    .system-card span {
-      font-size: 1rem;
-      font-weight: 600;
-      text-align: center;
-    }
+      {/* HOW IT WORKS */}
+      <section className="bg-gray-50 py-16 px-6">
+        <div className="max-w-6xl mx-auto">
+          <h2 className="text-3xl font-bold mb-12 text-center">
+            شلون يشتغل Kashfeya؟
+          </h2>
 
-    /* Colour variations */
-    .system-card.cardio { background: #e74c3c; }
-    .system-card.respiratory { background: #3498db; }
-    .system-card.neuro { background: #9b59b6; }
-    .system-card.gastro { background: #f39c12; }
-    .system-card.derm { background: #27ae60; }
-    .system-card.endocrine { background: #d35400; }
+          <div className="grid md:grid-cols-3 gap-10 text-center">
+            <div>
+              <div className="text-4xl mb-4">🔎</div>
+              <h3 className="font-semibold text-lg mb-2">
+                ابحث عن حالتك
+              </h3>
+              <p className="text-gray-600">
+                اقرأ شرح مبسط وواضح عن المرض والأعراض والعلاج.
+              </p>
+            </div>
 
-    /* Hover effect */
-    .system-card:hover {
-      transform: scale(1.05);
-      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-    }
+            <div>
+              <div className="text-4xl mb-4">👨‍⚕️</div>
+              <h3 className="font-semibold text-lg mb-2">
+                طبيبك يرسلك الرابط
+              </h3>
+              <p className="text-gray-600">
+                بعد الاستشارة، الطبيب يكدر يرسل الصفحة على واتساب.
+              </p>
+            </div>
 
-    /* Optional: small description under label */
-    .system-card p {
-      font-size: 0.85rem;
-      margin: 0.5rem 0 0;
-      color: #fff;
-    }
+            <div>
+              <div className="text-4xl mb-4">📱</div>
+              <h3 className="font-semibold text-lg mb-2">
+                اقرأها بالبيت
+              </h3>
+              <p className="text-gray-600">
+                احتفظ بالمعلومات وراجعها بأي وقت تحتاجه.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
 
-    /* Responsive tweaks */
-    @media (max-width: 500px) {
-      .system-card {
-        width: 140px;
-      }
-      .system-card img {
-        width: 50px;
-        height: 50px;
-      }
-    }
-  </style>
-</head>
-<body>
+      {/* DOCTOR CTA */}
+      <section className="py-16 px-6 text-center">
+        <h2 className="text-3xl font-bold mb-6">
+          هل أنت طبيب؟
+        </h2>
+        <p className="text-gray-600 max-w-2xl mx-auto mb-8">
+          انضم إلى Kashfeya وسهّل تثقيف مرضاك،
+          وأضف عيادتك ضمن دليل الأطباء مستقبلاً.
+        </p>
 
-  <section class="body-system-section">
-    <h2>Clinical Support by Body System</h2>
-    <div class="system-cards">
+        <button className="bg-green-600 text-white px-8 py-3 rounded-2xl shadow hover:bg-green-700 transition">
+          انضم كطبيب
+        </button>
+      </section>
 
-      <a href="#" class="system-card cardio">
-        <img src="images/heart-icon.png" alt="Cardiovascular system icon">
-        <span>Cardiovascular</span>
-        <p>Guidelines & tools</p>
-      </a>
+      {/* ADS SECTION */}
+      <section className="bg-gray-100 py-12 px-6">
+        <div className="max-w-6xl mx-auto text-center">
+          <h3 className="text-xl font-semibold mb-6">
+            إعلانات طبية
+          </h3>
 
-      <a href="#" class="system-card respiratory">
-        <img src="images/lungs-icon.png" alt="Respiratory system icon">
-        <span>Respiratory</span>
-        <p>Guidelines & tools</p>
-      </a>
+          <div className="grid md:grid-cols-3 gap-6">
+            <div className="bg-white p-6 rounded-xl shadow">
+              د. أحمد – جلدية – بغداد
+            </div>
+            <div className="bg-white p-6 rounded-xl shadow">
+              مختبر الحياة – تحاليل طبية
+            </div>
+            <div className="bg-white p-6 rounded-xl shadow">
+              مركز أشعة بغداد
+            </div>
+          </div>
+        </div>
+      </section>
 
-      <a href="#" class="system-card neuro">
-        <img src="images/brain-icon.png" alt="Neurology system icon">
-        <span>Neurology</span>
-        <p>Guidelines & tools</p>
-      </a>
+      {/* FOOTER */}
+      <footer className="bg-gray-900 text-white py-10 px-6">
+        <div className="max-w-6xl mx-auto grid md:grid-cols-3 gap-8">
 
-      <a href="#" class="system-card gastro">
-        <img src="images/stomach-icon.png" alt="Gastrointestinal system icon">
-        <span>Gastro‑intestinal</span>
-        <p>Guidelines & tools</p>
-      </a>
+          <div>
+            <h4 className="font-bold mb-4">Kashfeya</h4>
+            <p className="text-gray-400 text-sm">
+              منصة تثقيف صحي عراقية تهدف لرفع الوعي الطبي
+              وتسهيل التواصل بين الطبيب والمريض.
+            </p>
+          </div>
 
-      <a href="#" class="system-card derm">
-        <img src="images/skin-icon.png" alt="Dermatology system icon">
-        <span>Dermatology</span>
-        <p>Guidelines & tools</p>
-      </a>
+          <div>
+            <h4 className="font-bold mb-4">روابط مهمة</h4>
+            <ul className="text-gray-400 space-y-2 text-sm">
+              <li>سياسة الخصوصية</li>
+              <li>إخلاء المسؤولية</li>
+              <li>تواصل معنا</li>
+            </ul>
+          </div>
 
-      <a href="#" class="system-card endocrine">
-        <img src="images/hormone-icon.png" alt="Endocrine system icon">
-        <span>Endocrine</span>
-        <p>Guidelines & tools</p>
-      </a>
+          <div>
+            <h4 className="font-bold mb-4">تنبيه مهم</h4>
+            <p className="text-gray-400 text-sm">
+              المعلومات في هذا الموقع لأغراض التثقيف فقط
+              ولا تغني عن مراجعة الطبيب المختص.
+            </p>
+          </div>
 
-    </div>
-  </section>
+        </div>
 
-</body>
-</html>
+        <div className="text-center text-gray-500 text-sm mt-8">
+          © {new Date().getFullYear()} Kashfeya.com – جميع الحقوق محفوظة
+        </div>
+      </footer>
+
+    </main>
+  );
+}
