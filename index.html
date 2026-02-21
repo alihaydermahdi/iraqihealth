@@ -45,6 +45,7 @@
             display: inline-flex;
             align-items: center;
             text-decoration: none;
+            gap: 15px; 
         }
 
         .site-logo {
@@ -57,6 +58,39 @@
             font-weight: 700; 
             color: var(--nhs-blue); 
             font-size: 1.1rem;
+            border-right: 2px solid #e2e8f0; 
+            padding-right: 15px;
+        }
+
+        /* قسم الطوارئ والاتصال في الهيدر */
+        .header-contact {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            color: var(--nhs-dark-blue);
+        }
+
+        .contact-icon {
+            font-size: 1.8rem;
+            color: var(--nhs-blue);
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            line-height: 1.2;
+        }
+
+        .contact-info .label {
+            font-size: 0.8rem;
+            color: #718096;
+            font-weight: 600;
+        }
+
+        .contact-info .number {
+            font-size: 1.1rem;
+            font-weight: 800;
+            direction: ltr; 
         }
 
         /* --- Professional Blue Navigation --- */
@@ -107,18 +141,6 @@
             display: flex;
             align-items: center;
             gap: 15px;
-        }
-
-        .nav-search {
-            color: white;
-            text-decoration: none;
-            padding: 8px 12px;
-            border-radius: 4px;
-            transition: 0.2s;
-        }
-
-        .nav-search:hover {
-            background-color: rgba(255,255,255,0.15);
         }
 
         .nav-cta {
@@ -316,8 +338,10 @@
         }
 
         @media (max-width: 768px) {
-            .header-content { flex-direction: column; text-align: center; gap: 8px; }
-            .header-moto { font-size: 1rem; }
+            .header-contact { display: none; } 
+            .logo-link { flex-direction: column; gap: 5px; }
+            .header-moto { border-right: none; padding-right: 0; font-size: 0.9rem; }
+            .header-content { text-align: center; }
             
             .nav-content { flex-direction: column; padding: 0; }
             .main-links { width: 100%; justify-content: center; overflow-x: auto; }
@@ -342,8 +366,16 @@
         <div class="header-content">
             <a href="index.html" class="logo-link">
                 <img src="logo.png" alt="شعار كشفيّة" class="site-logo">
+                <div class="header-moto">كلشي عن صحتك… بلهجتنا العراقية</div>
             </a>
-            <div class="header-moto">كلشي عن صحتك… بلهجتنا العراقية</div>
+            
+            <div class="header-contact">
+                <i class="fas fa-headset contact-icon"></i>
+                <div class="contact-info">
+                    <span class="label">للاستشارات والدعم</span>
+                    <span class="number">999 000 000</span>
+                </div>
+            </div>
         </div>
     </header>
 
@@ -356,7 +388,6 @@
             </div>
             
             <div class="nav-actions">
-                <a href="#" class="nav-search"><i class="fas fa-search"></i></a>
                 <a href="#" class="nav-cta"><i class="fas fa-phone"></i> تواصل معنا</a>
             </div>
         </div>
