@@ -3,62 +3,77 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>الدعم السريري حسب جهاز الجسم</title>
+    <title>مركز الدعم السريري | الواجهة الرئيسية</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            margin: 20px;
-            background-color: #f8f9fa;
+        :root {
+            --bg-color: #f4f7f6;
+            --text-main: #2c3e50;
+            --white: #ffffff;
+            --shadow: 0 4px 6px rgba(0,0,0,0.1);
         }
 
-        .header-container {
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Header Layout */
+        header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 30px;
-            border-bottom: 2px solid #eee;
-            padding-bottom: 15px;
+            margin-bottom: 40px;
+            padding: 15px 0;
+            border-bottom: 3px solid #dee2e6;
         }
 
         h1 {
-            font-weight: 600;
             font-size: 1.8rem;
-            color: #333;
             margin: 0;
+            color: #1a2a3a;
         }
 
-        .search-box {
-            display: flex;
-            background: white;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            overflow: hidden;
+        .search-container {
+            position: relative;
+            width: 320px;
         }
 
-        .search-box input {
-            border: none;
-            padding: 10px 15px;
+        .search-container input {
+            width: 100%;
+            padding: 12px 40px 12px 15px;
+            border: 1px solid #ced4da;
+            border-radius: 25px;
             outline: none;
-            width: 250px;
-            font-family: inherit;
+            transition: all 0.3s;
         }
 
-        .search-box button {
-            background: #eee;
-            border: none;
-            padding: 0 15px;
-            cursor: pointer;
-            color: #666;
+        .search-container input:focus {
+            border-color: #3498db;
+            box-shadow: 0 0 8px rgba(52, 152, 219, 0.2);
         }
 
-        /* Responsive Grid */
+        .search-container i {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #adb5bd;
+        }
+
+        /* Grid System */
         .clinical-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 10px;
-            max-width: 1300px;
-            margin: 0 auto;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 15px;
         }
 
         .tile {
@@ -67,150 +82,162 @@
             align-items: center;
             justify-content: center;
             text-align: center;
-            padding: 30px 15px;
-            color: white;
+            padding: 40px 20px;
+            border-radius: 10px;
             text-decoration: none;
-            border-radius: 4px;
-            transition: transform 0.2s, box-shadow 0.2s;
+            color: var(--white);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            box-shadow: var(--shadow);
+            min-height: 180px;
         }
 
         .tile:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0,0,0,0.15);
         }
 
         .tile i {
-            font-size: 2.5rem;
+            font-size: 3rem;
             margin-bottom: 15px;
         }
 
         .tile span {
-            font-weight: 600;
-            font-size: 1.1rem;
-            line-height: 1.4;
+            font-weight: 700;
+            font-size: 1.2rem;
+            line-height: 1.3;
         }
 
-        /* Color Palette */
-        .cardio    { background-color: #e63946; }
-        .derm      { background-color: #a8dadc; color: #1d3557; }
-        .diabetes  { background-color: #457b9d; }
-        .ent       { background-color: #1d3557; }
-        .gastro    { background-color: #2a9d8f; }
-        .gp        { background-color: #7209b7; }
-        .geriatric { background-color: #3a0ca3; }
-        .women     { background-color: #f72585; }
-        .infection { background-color: #606c38; }
-        .mental    { background-color: #72efdd; color: #0077b6; }
-        .msk       { background-color: #bc6c25; }
-        .neuro     { background-color: #4361ee; }
-        .nutrition { background-color: #8ac926; }
-        .obesity   { background-color: #ffca3a; color: #333; }
-        .cancer    { background-color: #6a040f; }
-        .eye       { background-color: #00b4d8; }
-        .paeds     { background-color: #ff9f1c; }
-        .palliative{ background-color: #588157; }
-        .renal     { background-color: #0077b6; }
+        /* Specialized Palette (Solid & Professional) */
+        .cardio    { background-color: #d90429; }
+        .neuro     { background-color: #3a0ca3; }
+        .derm      { background-color: #2a9d8f; }
+        .diabetes  { background-color: #0077b6; }
+        .ent       { background-color: #2b2d42; }
+        .gastro    { background-color: #52796f; }
+        .women     { background-color: #ff4d6d; }
+        .mental    { background-color: #00b4d8; }
+        .nutrition { background-color: #70e000; color: #004b23; }
+        .msk       { background-color: #8d99ae; }
+        .oncology  { background-color: #6a040f; }
+        .eye       { background-color: #48cae4; color: #023e8a; }
+        .paeds     { background-color: #fb8500; }
+        .renal     { background-color: #4361ee; }
         .resp      { background-color: #90e0ef; color: #03045e; }
-        .urology   { background-color: #3c096c; }
+        .urology   { background-color: #5a189a; }
 
-        @media (max-width: 600px) {
-            .header-container { flex-direction: column; gap: 15px; text-align: center; }
-            .search-box { width: 100%; }
-            .search-box input { width: 100%; }
+        @media (max-width: 768px) {
+            header { flex-direction: column; gap: 20px; text-align: center; }
+            .search-container { width: 100%; }
         }
     </style>
 </head>
 <body>
 
-    <div class="header-container">
-        <h1>الدليل الطبي للأقسام والأنظمة</h1>
-        <div class="search-box">
-            <input type="text" placeholder="بحث عن قسم أو مورد...">
-            <button><i class="fas fa-search"></i></button>
-        </div>
+    <div class="container">
+        <header>
+            <h1>الدعم السريري حسب التخصص</h1>
+            <div class="search-container">
+                <i class="fas fa-search"></i>
+                <input type="text" id="searchInput" placeholder="ابحث عن تخصص...">
+            </div>
+        </header>
+
+        <main class="clinical-grid" id="medicalGrid">
+            <a href="#" class="tile cardio">
+                <i class="fas fa-heart-pulse"></i>
+                <span>أمراض القلب والأوعية الدموية</span>
+            </a>
+
+            <a href="#" class="tile neuro">
+                <i class="fas fa-brain"></i>
+                <span>الجهاز العصبي</span>
+            </a>
+
+            <a href="#" class="tile derm">
+                <i class="fas fa-hand-dots"></i>
+                <span>الأمراض الجلدية</span>
+            </a>
+
+            <a href="#" class="tile diabetes">
+                <i class="fas fa-syringe"></i>
+                <span>السكري والغدد الصماء</span>
+            </a>
+
+            <a href="#" class="tile ent">
+                <i class="fas fa-ear-hearing"></i>
+                <span>الأنف والأذن والحنجرة</span>
+            </a>
+
+            <a href="#" class="tile gastro">
+                <i class="fas fa-stomach"></i>
+                <span>أمراض الجهاز الهضمي</span>
+            </a>
+
+            <a href="#" class="tile women">
+                <i class="fas fa-venus-double"></i>
+                <span>النساء والتوليد</span>
+            </a>
+
+            <a href="#" class="tile mental">
+                <i class="fas fa-smile-beam"></i>
+                <span>الصحة النفسية</span>
+            </a>
+
+            <a href="#" class="tile nutrition">
+                <i class="fas fa-weight-scale"></i>
+                <span>التغذية و السمنة</span>
+            </a>
+
+            <a href="#" class="tile msk">
+                <i class="fas fa-bone"></i>
+                <span>طب العظام والمفاصل</span>
+            </a>
+
+            <a href="#" class="tile oncology">
+                <i class="fas fa-ribbon"></i>
+                <span>أمراض السرطان</span>
+            </a>
+
+            <a href="#" class="tile eye">
+                <i class="fas fa-eye"></i>
+                <span>طب العيون</span>
+            </a>
+
+            <a href="#" class="tile paeds">
+                <i class="fas fa-child"></i>
+                <span>طب الأطفال</span>
+            </a>
+
+            <a href="#" class="tile renal">
+                <i class="fas fa-kidneys"></i>
+                <span>أمراض الكلى</span>
+            </a>
+
+            <a href="#" class="tile resp">
+                <i class="fas fa-lungs"></i>
+                <span>أمراض الجهاز التنفسي</span>
+            </a>
+
+            <a href="#" class="tile urology">
+                <i class="fas fa-venus-mars"></i>
+                <span>المسالك البولية</span>
+            </a>
+        </main>
     </div>
 
-    <div class="clinical-grid">
-        <a href="#" class="tile cardio">
-            <i class="fas fa-heartbeat"></i>
-            <span>أمراض القلب والأوعية الدموية</span>
-        </a>
+    <script>
+        // كود بسيط لتفعيل البحث الفوري
+        const searchInput = document.getElementById('searchInput');
+        const gridItems = document.querySelectorAll('.tile');
 
-        <a href="#" class="tile derm">
-            <i class="fas fa-hand-sparkles"></i>
-            <span>الأمراض الجلدية</span>
-        </a>
-
-        <a href="#" class="tile diabetes">
-            <i class="fas fa-syringe"></i>
-            <span>السكري والغدد الصماء</span>
-        </a>
-
-        <a href="#" class="tile ent">
-            <i class="fas fa-ear-listen"></i>
-            <span>الأنف والأذن والحنجرة</span>
-        </a>
-
-        <a href="#" class="tile gastro">
-            <i class="fas fa-stomach"></i>
-            <span>أمراض الجهاز الهضمي</span>
-        </a>
-
-        <a href="#" class="tile gp">
-            <i class="fas fa-user-doctor"></i>
-            <span>أمراض الحهاز العصبي</span>
-        </a>
-
-        <a href="#" class="tile women">
-            <i class="fas fa-person-pregnant"></i>
-            <span>النساء والتوليد</span>
-        </a>
-
-        <a href="#" class="tile mental">
-            <i class="fas fa-brain"></i>
-            <span>الصحة النفسية</span>
-        </a>
-
-        <a href="#" class="tile msk">
-            <i class="fas fa-bone"></i>
-            <span>طب العظام والمفاصل</span>
-        </a>
-
-        <a href="#" class="tile nutrition">
-            <i class="fas fa-apple-whole"></i>
-            <span>التغذية و السمنة</span>
-        </a>
-
-        <a href="#" class="tile cancer">
-            <i class="fas fa-ribbon"></i>
-            <span>أمراض الدم</span>
-        </a>
-
-        <a href="#" class="tile eye">
-            <i class="fas fa-eye"></i>
-            <span>طب العيون</span>
-        </a>
-
-        <a href="#" class="tile paeds">
-            <i class="fas fa-baby"></i>
-            <span>طب الأطفال</span>
-        </a>
-
-        <a href="#" class="tile renal">
-            <i class="fas fa-kidneys"></i>
-            <span>أمراض الكلى</span>
-        </a>
-
-        <a href="#" class="tile resp">
-            <i class="fas fa-lungs"></i>
-            <span>أمراض الجهاز التنفسي</span>
-        </a>
-
-        <a href="#" class="tile urology">
-            <i class="fas fa-venus-mars"></i>
-            <span>المسالك البولية</span>
-        </a>
-    </div>
+        searchInput.addEventListener('input', (e) => {
+            const term = e.target.value.toLowerCase();
+            gridItems.forEach(item => {
+                const text = item.querySelector('span').innerText.toLowerCase();
+                item.style.display = text.includes(term) ? 'flex' : 'none';
+            });
+        });
+    </script>
 
 </body>
 </html>
