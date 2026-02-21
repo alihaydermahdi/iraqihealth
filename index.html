@@ -1,209 +1,143 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>الصحة في العراق من الألف إلى الياء</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Clinical Support by Body System</title>
+  <style>
+    /* Reset some default styles */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f8f9fa;
+    }
 
-<style>
-body {
-    font-family: "Tahoma", Arial, sans-serif;
-    margin: 0;
-    background-color: #f3f7f9;
-    direction: rtl;
-}
+    /* Section wrapper */
+    .body-system-section {
+      padding: 2rem;
+      text-align: center;
+    }
 
-header {
-    background-color: #005eb8;
-    color: white;
-    padding: 25px 20px;
-    text-align: center;
-}
+    /* Section heading */
+    .body-system-section h2 {
+      font-size: 2rem;
+      margin-bottom: 1.5rem;
+      color: #333;
+    }
 
-header h1 {
-    margin: 0;
-    font-size: 28px;
-}
+    /* Card container */
+    .system-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 1rem;
+      justify-items: center;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
 
-header p {
-    margin: 5px 0 0;
-    font-size: 16px;
-}
+    /* Individual card */
+    .system-card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-decoration: none;
+      padding: 1rem;
+      border-radius: 8px;
+      width: 160px;
+      transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+      color: #fff;
+    }
 
-.search-box {
-    text-align: center;
-    margin: 20px 0;
-}
+    .system-card img {
+      width: 64px;
+      height: 64px;
+      margin-bottom: 0.8rem;
+    }
 
-.search-box input {
-    width: 60%;
-    padding: 10px;
-    font-size: 16px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-}
+    .system-card span {
+      font-size: 1rem;
+      font-weight: 600;
+      text-align: center;
+    }
 
-.alphabet {
-    text-align: center;
-    margin: 15px 0;
-}
+    /* Colour variations */
+    .system-card.cardio { background: #e74c3c; }
+    .system-card.respiratory { background: #3498db; }
+    .system-card.neuro { background: #9b59b6; }
+    .system-card.gastro { background: #f39c12; }
+    .system-card.derm { background: #27ae60; }
+    .system-card.endocrine { background: #d35400; }
 
-.alphabet button {
-    margin: 3px;
-    padding: 8px 12px;
-    border: none;
-    background-color: #e6eef5;
-    cursor: pointer;
-    border-radius: 4px;
-    font-weight: bold;
-    font-size: 14px;
-}
+    /* Hover effect */
+    .system-card:hover {
+      transform: scale(1.05);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    }
 
-.alphabet button:hover {
-    background-color: #005eb8;
-    color: white;
-}
+    /* Optional: small description under label */
+    .system-card p {
+      font-size: 0.85rem;
+      margin: 0.5rem 0 0;
+      color: #fff;
+    }
 
-.container {
-    width: 90%;
-    max-width: 1000px;
-    margin: auto;
-}
-
-.condition-card {
-    background: white;
-    padding: 15px;
-    margin: 10px 0;
-    border-radius: 6px;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-    transition: transform 0.2s;
-}
-
-.condition-card:hover {
-    transform: scale(1.02);
-}
-
-.condition-card h3 {
-    margin: 0;
-    color: #005eb8;
-}
-
-.condition-card p {
-    margin: 5px 0 0;
-    color: #444;
-}
-
-footer {
-    background: #003a6d;
-    color: white;
-    text-align: center;
-    padding: 15px;
-    margin-top: 30px;
-    font-size: 14px;
-}
-</style>
+    /* Responsive tweaks */
+    @media (max-width: 500px) {
+      .system-card {
+        width: 140px;
+      }
+      .system-card img {
+        width: 50px;
+        height: 50px;
+      }
+    }
+  </style>
 </head>
-
 <body>
 
-<header>
-    <h1>الصحة في العراق من الألف إلى الياء</h1>
-    <p>معلومات طبية موثوقة ومبسطة للمواطن العراقي</p>
-</header>
+  <section class="body-system-section">
+    <h2>Clinical Support by Body System</h2>
+    <div class="system-cards">
 
-<div class="search-box">
-    <input type="text" id="searchInput" placeholder="ابحث عن حالة مرضية..." onkeyup="searchFunction()">
-</div>
+      <a href="#" class="system-card cardio">
+        <img src="images/heart-icon.png" alt="Cardiovascular system icon">
+        <span>Cardiovascular</span>
+        <p>Guidelines & tools</p>
+      </a>
 
-<div class="alphabet">
-    <button onclick="filterLetter('الكل')">الكل</button>
-    <button onclick="filterLetter('ا')">ا</button>
-    <button onclick="filterLetter('ب')">ب</button>
-    <button onclick="filterLetter('ت')">ت</button>
-    <button onclick="filterLetter('ث')">ث</button>
-    <button onclick="filterLetter('ج')">ج</button>
-    <button onclick="filterLetter('ح')">ح</button>
-    <button onclick="filterLetter('خ')">خ</button>
-    <button onclick="filterLetter('د')">د</button>
-    <button onclick="filterLetter('ر')">ر</button>
-    <button onclick="filterLetter('س')">س</button>
-    <button onclick="filterLetter('ش')">ش</button>
-    <button onclick="filterLetter('ص')">ص</button>
-    <button onclick="filterLetter('ض')">ض</button>
-    <button onclick="filterLetter('ط')">ط</button>
-    <button onclick="filterLetter('ع')">ع</button>
-    <button onclick="filterLetter('غ')">غ</button>
-    <button onclick="filterLetter('ف')">ف</button>
-    <button onclick="filterLetter('ق')">ق</button>
-    <button onclick="filterLetter('ك')">ك</button>
-    <button onclick="filterLetter('ل')">ل</button>
-    <button onclick="filterLetter('م')">م</button>
-    <button onclick="filterLetter('ن')">ن</button>
-    <button onclick="filterLetter('ه')">ه</button>
-    <button onclick="filterLetter('و')">و</button>
-    <button onclick="filterLetter('ي')">ي</button>
-</div>
+      <a href="#" class="system-card respiratory">
+        <img src="images/lungs-icon.png" alt="Respiratory system icon">
+        <span>Respiratory</span>
+        <p>Guidelines & tools</p>
+      </a>
 
-<div class="container" id="conditionsList">
+      <a href="#" class="system-card neuro">
+        <img src="images/brain-icon.png" alt="Neurology system icon">
+        <span>Neurology</span>
+        <p>Guidelines & tools</p>
+      </a>
 
-    <div class="condition-card" data-letter="س">
-        <h3>سكري</h3>
-        <p>مرض مزمن يؤثر على مستوى السكر في الدم ويتطلب متابعة مستمرة.</p>
+      <a href="#" class="system-card gastro">
+        <img src="images/stomach-icon.png" alt="Gastrointestinal system icon">
+        <span>Gastro‑intestinal</span>
+        <p>Guidelines & tools</p>
+      </a>
+
+      <a href="#" class="system-card derm">
+        <img src="images/skin-icon.png" alt="Dermatology system icon">
+        <span>Dermatology</span>
+        <p>Guidelines & tools</p>
+      </a>
+
+      <a href="#" class="system-card endocrine">
+        <img src="images/hormone-icon.png" alt="Endocrine system icon">
+        <span>Endocrine</span>
+        <p>Guidelines & tools</p>
+      </a>
+
     </div>
-
-    <div class="condition-card" data-letter="ض">
-        <h3>ضغط الدم المرتفع</h3>
-        <p>حالة طبية شائعة تزيد من خطر الإصابة بأمراض القلب.</p>
-    </div>
-
-    <div class="condition-card" data-letter="ر">
-        <h3>ربو</h3>
-        <p>مرض تنفسي يسبب ضيق في الشعب الهوائية وصعوبة في التنفس.</p>
-    </div>
-
-    <div class="condition-card" data-letter="ف">
-        <h3>فقر الدم</h3>
-        <p>حالة تحدث نتيجة انخفاض عدد خلايا الدم الحمراء.</p>
-    </div>
-
-    <div class="condition-card" data-letter="ق">
-        <h3>قرحة المعدة</h3>
-        <p>تقرحات مؤلمة في بطانة المعدة قد تسبب حرقة وألم.</p>
-    </div>
-
-</div>
-
-<footer>
-    © 2026 موقع الصحة العراقي | جميع الحقوق محفوظة
-</footer>
-
-<script>
-function filterLetter(letter) {
-    var cards = document.getElementsByClassName("condition-card");
-    for (var i = 0; i < cards.length; i++) {
-        if (letter === "الكل" || cards[i].getAttribute("data-letter") === letter) {
-            cards[i].style.display = "block";
-        } else {
-            cards[i].style.display = "none";
-        }
-    }
-}
-
-function searchFunction() {
-    var input = document.getElementById("searchInput");
-    var filter = input.value.toUpperCase();
-    var cards = document.getElementsByClassName("condition-card");
-
-    for (var i = 0; i < cards.length; i++) {
-        var title = cards[i].getElementsByTagName("h3")[0];
-        if (title.innerHTML.toUpperCase().indexOf(filter) > -1) {
-            cards[i].style.display = "";
-        } else {
-            cards[i].style.display = "none";
-        }
-    }
-}
-</script>
+  </section>
 
 </body>
 </html>
