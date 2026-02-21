@@ -150,6 +150,8 @@
             width: 100%;
             margin-bottom: 2px;
             animation: fadeIn 0.4s ease;
+            /* الإضافة هنا لضمان أخذ العرض بالكامل عند انتقالها في الجوال */
+            grid-column: 1 / -1; 
         }
 
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
@@ -206,31 +208,20 @@
         .footer-section ul li a { color: var(--nhs-text); text-decoration: none; }
         .footer-section ul li a:hover { text-decoration: underline; }
 
-        /* =========================================
-           إعدادات التوافق مع الجوال (تم التحديث هنا فقط)
-           ========================================= */
-        
-        /* للشاشات المتوسطة (التابلت) */
-        @media (max-width: 992px) {
+        /* إعدادات الجوال المطورة */
+        @media (max-width: 900px) {
             .grid-row { grid-template-columns: repeat(2, 1fr); }
+            .mega-dropdown { grid-template-columns: 1fr; }
         }
 
-        /* للشاشات الصغيرة (الجوال) */
+        /* شاشات الجوال الصغير (مربع واحد لكل سطر كما في صورك) */
         @media (max-width: 768px) {
-            .header-content { flex-direction: column; gap: 15px; text-align: center; }
-            .nav-content { justify-content: center; flex-wrap: wrap; }
             .header-container { flex-direction: column; align-items: stretch; gap: 15px; }
             h1 { font-size: 1.8rem; text-align: center; }
-            
             .search-box { width: 100%; }
-            .search-box input { width: 100%; flex-grow: 1; }
-            
-            /* تحويل الشبكة إلى عمود واحد في الجوال لضمان وضوح النصوص الطويلة */
+            .search-box input { width: 100%; }
             .grid-row { grid-template-columns: 1fr; }
-            .mega-dropdown { grid-template-columns: 1fr; }
-            
             .tile { min-height: 120px; padding: 30px 10px; }
-            .tile i { font-size: 2.5rem; margin-bottom: 10px; }
         }
     </style>
 </head>
@@ -349,6 +340,15 @@
             // تحديث الرابط ديناميكياً بناءً على التخصص المختار
             const link = drop.querySelector('.dynamic-link');
             link.href = colorClass + '-diseases.html';
+
+            // --- التحديث الجديد لحل مشكلة الجوال ---
+            // يقوم هذا الكود بنقل موقع القائمة لتظهر مباشرة تحت المربع في الجوال، وتحت الصف في الكمبيوتر
+            if (window.innerWidth <= 900) {
+                tile.insertAdjacentElement('afterend', drop); 
+            } else {
+                tile.closest('.grid-row').insertAdjacentElement('afterend', drop);
+            }
+            // ----------------------------------------
 
             document.querySelectorAll('.mega-dropdown').forEach(d => {
                 if (d.id !== dropId) d.style.display = 'none';
