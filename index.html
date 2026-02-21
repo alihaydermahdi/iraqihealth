@@ -28,7 +28,7 @@
         /* --- Header & Logo Section --- */
         .nhs-header {
             background-color: var(--nhs-white);
-            border-bottom: 8px solid var(--nhs-blue); /* خط علوي بسماكة 8px */
+            border-bottom: 8px solid var(--nhs-blue); 
             padding: 8px 0;
         }
 
@@ -156,7 +156,7 @@
         .drop-section a { color: white; text-decoration: none; display: block; width: 100%; height: 100%; }
         .drop-section:hover { background: rgba(0,0,0,0.1); }
 
-        /* --- الألوان المسطحة الأنيقة (Flat Colors) --- */
+        /* --- الألوان المسطحة --- */
         .neuro     { background-color: #7cb342; } 
         .eye       { background-color: #d32f2f; } 
         .ent       { background-color: #d32f2f; } 
@@ -174,30 +174,43 @@
         .mental    { background-color: #7cb342; } 
         .nutrition { background-color: #f57c00; } 
 
-        /* --- Footer (القسم الرسمي) --- */
+        /* --- Footer (التصميم الأنيق الجديد) --- */
         footer {
-            background-color: #e8edee;
-            border-top: 8px solid var(--nhs-blue); /* خط سفلي يتطابق تماماً مع العلوي */
-            padding: 50px 20px 20px 20px; /* زيادة المساحة ليعطي انطباعاً رسمياً */
-            margin-top: 60px;
+            background-color: #e8edee; /* لون رمادي فاتح مريح */
+            border-top: 8px solid var(--nhs-blue); 
+            padding: 70px 20px 30px 20px; /* زيادة المساحات العلوية للتنفس */
+            margin-top: 80px; /* مسافة أوسع تفصل الفوتر عن المحتوى */
         }
 
         .footer-content {
             max-width: 1300px;
             margin: 0 auto;
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 40px;
-            margin-bottom: 30px;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* أعمدة أوسع قليلاً */
+            gap: 60px; /* مسافة كبيرة وأنيقة بين الأعمدة */
+            margin-bottom: 50px;
         }
 
         .footer-section h4 { 
-            color: var(--nhs-blue); 
-            border-bottom: 2px solid #ccc; 
-            padding-bottom: 15px; 
-            margin-top: 0; 
-            font-size: 1.1rem;
+            color: var(--nhs-dark-blue); 
+            font-size: 1.25rem;
             font-weight: 800;
+            margin-top: 0;
+            margin-bottom: 25px; /* مساحة أكبر تحت العنوان */
+            position: relative;
+            padding-bottom: 12px;
+        }
+
+        /* خط تصميمي أنيق تحت العنوان بدلاً من الخط الطويل */
+        .footer-section h4::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 0; /* لأن الموقع باللغة العربية RTL */
+            width: 45px;
+            height: 3px;
+            background-color: var(--nhs-blue);
+            border-radius: 2px;
         }
 
         .footer-section ul { 
@@ -207,42 +220,47 @@
         }
 
         .footer-section ul li { 
-            margin-bottom: 12px; 
-            font-size: 0.95rem;
-            color: var(--nhs-text);
+            margin-bottom: 18px; /* مساحة مريحة بين السطور */
+            font-size: 1.05rem;
+            color: #4a5568; /* لون رمادي دافئ وأنيق */
             display: flex;
             align-items: center;
-            gap: 10px;
         }
 
         .footer-section ul li a { 
-            color: var(--nhs-text); 
+            color: #4a5568; 
             text-decoration: none; 
-            transition: color 0.2s;
+            transition: all 0.3s ease;
         }
 
+        /* تأثير حركي فخم عند تمرير الماوس */
         .footer-section ul li a:hover { 
             color: var(--nhs-blue); 
+            padding-right: 8px; /* حركة ناعمة لليسار */
         }
 
         .footer-section i {
             color: var(--nhs-blue);
-            width: 20px;
-            text-align: center;
+            width: 25px; /* توحيد عرض الأيقونات لتصطف النصوص بشكل مثالي */
+            font-size: 1.1rem;
+            margin-left: 10px; /* مساحة بين الأيقونة والنص */
         }
 
+        /* شريط حقوق النشر */
         .copyright-bar {
             text-align: center; 
-            border-top: 1px solid #d1d5d8; 
-            padding-top: 20px; 
-            font-size: 0.9rem;
+            border-top: 1px solid #d1d5d8; /* خط علوي ناعم */
+            padding-top: 25px; 
+            font-size: 0.95rem;
             font-weight: 600;
-            color: #555;
+            color: #718096;
+            letter-spacing: 0.5px;
         }
 
         /* --- Responsive Queries --- */
         @media (max-width: 1024px) {
             .grid-row { grid-template-columns: repeat(3, 1fr); }
+            .footer-content { gap: 40px; }
         }
 
         @media (max-width: 768px) {
@@ -253,6 +271,10 @@
             .tile { min-height: 75px; padding: 10px 5px; }
             .tile i { font-size: 1.4rem; margin-bottom: 4px; }
             .tile span { font-size: 0.85rem; }
+            
+            /* تعديلات الفوتر للموبايل */
+            footer { padding: 50px 20px 20px 20px; }
+            .footer-content { gap: 30px; margin-bottom: 30px; }
         }
     </style>
 </head>
@@ -376,20 +398,20 @@
             <div class="footer-section">
                 <h4>عن منصة كشفيّة</h4>
                 <ul>
-                    <li><i class="fas fa-angle-left"></i> <a href="#">من نحن</a></li>
-                    <li><i class="fas fa-angle-left"></i> <a href="#">رؤيتنا ورسالتنا</a></li>
-                    <li><i class="fas fa-angle-left"></i> <a href="#">سياسة الخصوصية</a></li>
-                    <li><i class="fas fa-angle-left"></i> <a href="#">الشروط والأحكام</a></li>
+                    <li><a href="#"><i class="fas fa-angle-left"></i> من نحن</a></li>
+                    <li><a href="#"><i class="fas fa-angle-left"></i> رؤيتنا ورسالتنا</a></li>
+                    <li><a href="#"><i class="fas fa-angle-left"></i> سياسة الخصوصية</a></li>
+                    <li><a href="#"><i class="fas fa-angle-left"></i> الشروط والأحكام</a></li>
                 </ul>
             </div>
             
             <div class="footer-section">
                 <h4>خدمات المرضى</h4>
                 <ul>
-                    <li><i class="fas fa-angle-left"></i> <a href="index.html">الرئيسية</a></li>
-                    <li><i class="fas fa-angle-left"></i> <a href="#">دليل الأمراض الشائعة</a></li>
-                    <li><i class="fas fa-angle-left"></i> <a href="#">قائمة الأطباء</a></li>
-                    <li><i class="fas fa-angle-left"></i> <a href="#">الأسئلة الشائعة (FAQ)</a></li>
+                    <li><a href="index.html"><i class="fas fa-angle-left"></i> الرئيسية</a></li>
+                    <li><a href="#"><i class="fas fa-angle-left"></i> دليل الأمراض الشائعة</a></li>
+                    <li><a href="#"><i class="fas fa-angle-left"></i> قائمة الأطباء والمراكز</a></li>
+                    <li><a href="#"><i class="fas fa-angle-left"></i> الأسئلة الشائعة (FAQ)</a></li>
                 </ul>
             </div>
             
@@ -399,7 +421,7 @@
                     <li><i class="fas fa-headset"></i> الدعم الفني: 999 000 000</li>
                     <li><i class="fas fa-envelope"></i> info@kashfiya.com</li>
                     <li><i class="fas fa-clock"></i> ساعات العمل: متواجدون 24/7</li>
-                    <li><i class="fas fa-location-dot"></i> العراق</li>
+                    <li><i class="fas fa-location-dot"></i> بغداد، العراق</li>
                 </ul>
             </div>
         </div>
