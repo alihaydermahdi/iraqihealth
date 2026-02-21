@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>أمراض المخ والأعصاب | الدليل الطبي</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* تعريف الألوان والخطوط الاحترافية */
+        :root {
+            --nhs-blue: #005eb8;
+            --nhs-dark-blue: #003087;
+            --nhs-light-grey: #f0f4f5;
+            --nhs-text: #212b32;
+            --nhs-white: #ffffff;
+            --nhs-border: #d8dde0;
+            /* تدرج تخصص الأعصاب */
+            --specialty-gradient: linear-gradient(135deg, #4361ee, #3a0ca3);
+            --specialty-color: #3a0ca3;
+        }
+
+        body {
+            /* استخدام خطوط نظام احترافية ونظيفة */
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+            margin: 0;
+            background-color: var(--nhs-white);
+            color: var(--nhs-text);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* الهيدر الموحد */
+        .nhs-header {
+            background-color: var(--nhs-white);
+            border-bottom: 4px solid var(--nhs-blue);
+            padding: 1.5rem 0;
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.25rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-placeholder {
+            background-color: var(--nhs-blue);
+            color: white;
+            padding: 0.6rem 1.2rem;
+            font-weight: 700;
+            font-size: 1.4rem;
+            text-decoration: none;
+            letter-spacing: 0.5px;
+        }
+
+        /* منطقة العنوان */
+        .page-intro {
+            background: var(--specialty-gradient);
+            color: white;
+            padding: 4rem 1.25rem;
+            text-align: center;
+        }
+
+        .container {
+            max-width: 850px;
+            margin: 0 auto;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            color: white;
+            text-decoration: none;
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+            font-size: 0.95rem;
+            opacity: 0.9;
+            transition: opacity 0.2s;
+        }
+
+        .back-link:hover { opacity: 1; }
+
+        h1 {
+            font-size: 2.4rem;
+            margin: 0;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+        }
+
+        .intro-text {
+            font-size: 1.15rem;
+            margin-top: 1rem;
+            opacity: 0.9;
+        }
+
+        /* قائمة الأمراض */
+        .disease-list {
+            padding: 3rem 1.25rem;
+        }
+
+        .disease-item {
+            background: var(--nhs-white);
+            border: 1px solid var(--nhs-border);
+            border-radius: 10px;
+            margin-bottom: 1.25rem;
+            transition: all 0.25s ease;
+        }
+
+        .disease-item:hover {
+            border-color: var(--specialty-color);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.06);
+            transform: translateY(-2px);
+        }
+
+        .disease-link {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.8rem 2.2rem;
+            text-decoration: none;
+            color: var(--nhs-text);
+        }
+
+        .disease-names {
+            display: flex;
+            flex-direction: column;
+            gap: 0.4rem;
+        }
+
+        .name-ar {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #1d2327;
+        }
+
+        .name-en {
+            font-size: 1.05rem;
+            color: #505a5f;
+            font-weight: 500;
+            font-family: "Segoe UI", Arial, sans-serif;
+            letter-spacing: 0.2px;
+        }
+
+        .arrow-icon {
+            color: var(--specialty-color);
+            font-size: 1.4rem;
+            opacity: 0.7;
+        }
+
+        /* التذييل الموحد */
+        footer {
+            background-color: #e8edee;
+            border-top: 4px solid var(--nhs-blue);
+            padding: 3.5rem 1.25rem;
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2.5rem;
+        }
+
+        .footer-section h4 {
+            margin-top: 0;
+            color: var(--nhs-blue);
+            border-bottom: 2px solid #ced4da;
+            padding-bottom: 0.8rem;
+            font-size: 1.2rem;
+            font-weight: 700;
+        }
+
+        .footer-section ul {
+            list-style: none;
+            padding: 0;
+            margin-top: 1rem;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 0.7rem;
+        }
+
+        .footer-section ul li a {
+            color: var(--nhs-text);
+            text-decoration: none;
+            font-size: 1rem;
+        }
+
+        .footer-section ul li a:hover {
+            text-decoration: underline;
+            color: var(--nhs-dark-blue);
+        }
+
+        .copyright {
+            text-align: center;
+            margin-top: 3rem;
+            border-top: 1px solid #ced4da;
+            padding-top: 1.5rem;
+            font-size: 0.95rem;
+            color: #505a5f;
+        }
+
+        @media (max-width: 600px) {
+            h1 { font-size: 1.8rem; }
+            .disease-link { padding: 1.5rem; }
+            .name-ar { font-size: 1.25rem; }
+            .name-en { font-size: 0.95rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="nhs-header">
+        <div class="header-content">
+            <a href="index.html" class="logo-placeholder">LOGO</a>
+            <div style="font-weight: 700; color: var(--nhs-blue); font-size: 1.1rem;">اسم الموقع الطبي</div>
+        </div>
+    </header>
+
+    <section class="page-intro">
+        <div class="container">
+            <a href="index.html" class="back-link"><i class="fas fa-arrow-right"></i> &nbsp; الرجوع للرئيسية</a>
+            <h1>أمراض المخ والأعصاب</h1>
+            <p class="intro-text">قائمة بأكثر الحالات العصبية شيوعاً في العراق باللغتين العربية والإنجليزية.</p>
+        </div>
+    </section>
+
+    <main class="disease-list">
+        <div class="container">
+            
+            <div class="disease-item">
+                <a href="#" class="disease-link">
+                    <div class="disease-names">
+                        <span class="name-ar">الشقيقة (صداع نصفي)</span>
+                        <span class="name-en">Migraine</span>
+                    </div>
+                    <i class="fas fa-chevron-left arrow-icon"></i>
+                </a>
+            </div>
+
+            <div class="disease-item">
+                <a href="#" class="disease-link">
+                    <div class="disease-names">
+                        <span class="name-ar">الصرع (شمرة)</span>
+                        <span class="name-en">Epilepsy</span>
+                    </div>
+                    <i class="fas fa-chevron-left arrow-icon"></i>
+                </a>
+            </div>
+
+            <div class="disease-item">
+                <a href="#" class="disease-link">
+                    <div class="disease-names">
+                        <span class="name-ar">الخرف / ألزهايمر (نسيان)</span>
+                        <span class="name-en">Dementia / Alzheimer’s</span>
+                    </div>
+                    <i class="fas fa-chevron-left arrow-icon"></i>
+                </a>
+            </div>
+
+            <div class="disease-item">
+                <a href="#" class="disease-link">
+                    <div class="disease-names">
+                        <span class="name-ar">اعتلال الأعصاب الطرفية (خدر وتنميل)</span>
+                        <span class="name-en">Peripheral Neuropathy</span>
+                    </div>
+                    <i class="fas fa-chevron-left arrow-icon"></i>
+                </a>
+            </div>
+
+            <div class="disease-item">
+                <a href="#" class="disease-link">
+                    <div class="disease-names">
+                        <span class="name-ar">مرض باركنسون (الرعاش)</span>
+                        <span class="name-en">Parkinson’s Disease</span>
+                    </div>
+                    <i class="fas fa-chevron-left arrow-icon"></i>
+                </a>
+            </div>
+
+            <div class="disease-item">
+                <a href="#" class="disease-link">
+                    <div class="disease-names">
+                        <span class="name-ar">التصلب المتعدد</span>
+                        <span class="name-en">Multiple Sclerosis (MS)</span>
+                    </div>
+                    <i class="fas fa-chevron-left arrow-icon"></i>
+                </a>
+            </div>
+
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>روابط سريعة</h4>
+                <ul>
+                    <li><a href="index.html">الرئيسية</a></li>
+                    <li><a href="#">دليل المريض</a></li>
+                    <li><a href="#">المواعيد</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>اتصل بنا</h4>
+                <ul>
+                    <li><i class="fas fa-phone"></i> 999 000 000</li>
+                    <li><i class="fas fa-envelope"></i> info@medical.com</li>
+                </ul>
+            </div>
+        </div>
+        <div class="copyright">
+            &copy; 2026 جميع الحقوق محفوظة لاسم الموقع الطبي
+        </div>
+    </footer>
+
+</body>
+</html>
