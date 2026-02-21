@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>دليل الدعم السريري | كشفيّة</title>
+    <title>دليل الدعم السريري | الصفحة الرئيسية</title>
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     
@@ -25,11 +25,11 @@
             -webkit-font-smoothing: antialiased;
         }
 
-        /* --- Header & Logo Section --- */
+        /* --- Professional Header Section --- */
         .nhs-header {
             background-color: var(--nhs-white);
-            border-bottom: 8px solid var(--nhs-blue); 
-            padding: 8px 0;
+            border-bottom: 8px solid var(--nhs-blue); /* الخط السميك للتناسق مع الفوتر */
+            padding: 12px 0;
         }
 
         .header-content {
@@ -53,37 +53,117 @@
             object-fit: contain;
         }
 
-        /* --- Navigation --- */
+        /* قسم الطوارئ والاتصال في الهيدر */
+        .header-contact {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            color: var(--nhs-dark-blue);
+        }
+
+        .contact-icon {
+            font-size: 1.8rem;
+            color: var(--nhs-blue);
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            line-height: 1.2;
+        }
+
+        .contact-info .label {
+            font-size: 0.8rem;
+            color: #718096;
+            font-weight: 600;
+        }
+
+        .contact-info .number {
+            font-size: 1.1rem;
+            font-weight: 800;
+            direction: ltr; /* لضمان ظهور الرقم بشكل صحيح */
+        }
+
+        /* --- Professional Blue Navigation --- */
         .nhs-nav {
             background-color: var(--nhs-blue);
             color: white;
             position: sticky;
             top: 0;
             z-index: 1000;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1); 
             margin-bottom: 30px; 
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }
 
         .nav-content {
             max-width: 1300px;
             margin: 0 auto;
-            padding: 0 10px;
+            padding: 0 20px;
             display: flex;
+            justify-content: space-between;
+            align-items: center;
             flex-wrap: wrap;
         }
 
-        .nav-content a {
+        .main-links {
+            display: flex;
+        }
+
+        .main-links a {
             color: white;
             text-decoration: none;
-            padding: 12px 20px;
+            padding: 15px 20px;
             font-weight: 600;
-            transition: background 0.2s;
+            font-size: 0.95rem;
+            transition: all 0.2s;
             display: flex;
             align-items: center;
             gap: 8px;
+            border-bottom: 3px solid transparent; 
         }
 
-        .nav-content a:hover { background-color: var(--nhs-dark-blue); }
+        .main-links a:hover, .main-links a.active { 
+            background-color: var(--nhs-dark-blue);
+            border-bottom-color: #fb8500; /* خط برتقالي أنيق عند التحديد */
+        }
+
+        /* أزرار الإجراءات (البحث والحجز) */
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .nav-search {
+            color: white;
+            text-decoration: none;
+            padding: 8px 15px;
+            border-radius: 4px;
+            transition: 0.2s;
+        }
+
+        .nav-search:hover {
+            background-color: rgba(255,255,255,0.1);
+        }
+
+        .nav-cta {
+            background-color: var(--nhs-white);
+            color: var(--nhs-blue) !important;
+            padding: 8px 20px;
+            border-radius: 20px; 
+            font-weight: 800;
+            font-size: 0.9rem;
+            text-decoration: none;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .nav-cta:hover {
+            background-color: #f0f4f5;
+            transform: scale(1.05);
+        }
 
         /* --- Grid & Interactive Dropdowns --- */
         .clinical-grid {
@@ -125,14 +205,12 @@
             margin-bottom: 8px; 
         }
 
-        /* تم تكبير الخط هنا ليكون أبرز وأوضح */
         .tile span { 
             font-weight: 700; 
             font-size: 1.15rem; 
             line-height: 1.3;
         }
 
-        /* --- Dropdown --- */
         .mega-dropdown {
             display: none;
             grid-template-columns: 1fr 1fr;
@@ -175,12 +253,12 @@
         .mental    { background-color: #7cb342; } 
         .nutrition { background-color: #f57c00; } 
 
-        /* --- Footer (التصميم الملموم والأصغر) --- */
+        /* --- Elegant Footer --- */
         footer {
             background-color: #e8edee; 
             border-top: 8px solid var(--nhs-blue); 
-            padding: 40px 20px 20px 20px; /* تقليص المساحات العلوية والسفلية */
-            margin-top: 40px; /* تقليص المسافة عن المحتوى */
+            padding: 40px 20px 20px 20px; 
+            margin-top: 40px; 
         }
 
         .footer-content {
@@ -188,16 +266,16 @@
             margin: 0 auto;
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); 
-            gap: 30px; /* تقليص المسافة بين الأعمدة */
-            margin-bottom: 25px; /* تقليص المسافة السفلية */
+            gap: 30px; 
+            margin-bottom: 25px; 
         }
 
         .footer-section h4 { 
             color: var(--nhs-dark-blue); 
-            font-size: 1.05rem; /* تصغير حجم عنوان الفوتر */
+            font-size: 1.05rem; 
             font-weight: 800;
             margin-top: 0;
-            margin-bottom: 15px; /* تقليص المسافة تحت العنوان */
+            margin-bottom: 15px; 
             position: relative;
             padding-bottom: 10px;
         }
@@ -220,8 +298,8 @@
         }
 
         .footer-section ul li { 
-            margin-bottom: 10px; /* تقليص المسافة بين السطور */
-            font-size: 0.85rem; /* تصغير حجم خط الروابط والنصوص ليكون أصغر من الأقسام */
+            margin-bottom: 10px; 
+            font-size: 0.85rem; 
             color: #4a5568; 
             display: flex;
             align-items: center;
@@ -248,8 +326,8 @@
         .copyright-bar {
             text-align: center; 
             border-top: 1px solid #d1d5d8; 
-            padding-top: 15px; /* تقليص المسافة العلوية */
-            font-size: 0.8rem; /* تصغير حجم خط الحقوق */
+            padding-top: 15px; 
+            font-size: 0.8rem; 
             font-weight: 600;
             color: #718096;
             letter-spacing: 0.5px;
@@ -262,15 +340,21 @@
         }
 
         @media (max-width: 768px) {
+            /* تعديلات الهيدر والشريط للموبايل */
+            .header-contact { display: none; } 
+            .nav-content { flex-direction: column; padding: 0; }
+            .main-links { width: 100%; justify-content: center; overflow-x: auto; }
+            .main-links a { padding: 12px 15px; font-size: 0.85rem; border-bottom: none; }
+            .nav-actions { width: 100%; justify-content: center; padding: 10px; background-color: var(--nhs-dark-blue); }
+            
             .header-content { flex-direction: column; text-align: center; gap: 8px; }
             .grid-row { grid-template-columns: repeat(2, 1fr); } 
             .mega-dropdown { grid-template-columns: 1fr; }
             .site-logo { max-height: 45px; }
             .tile { min-height: 85px; padding: 12px 5px; }
             .tile i { font-size: 1.4rem; margin-bottom: 5px; }
-            .tile span { font-size: 0.95rem; } /* تكبير نسبي للخط في الجوال أيضاً */
+            .tile span { font-size: 0.95rem; } 
             
-            /* تعديلات الفوتر للموبايل */
             footer { padding: 30px 20px 15px 20px; }
             .footer-content { gap: 20px; margin-bottom: 20px; }
         }
@@ -283,16 +367,30 @@
             <a href="index.html" class="logo-link">
                 <img src="logo.png" alt="شعار كشفيّة" class="site-logo">
             </a>
-            <div style="font-weight: 700; color: var(--nhs-blue); font-size: 1.1rem;">كلشي عن صحتك… بلهجتنا العراقية</div>
+            
+            <div class="header-contact">
+                <i class="fas fa-headset contact-icon"></i>
+                <div class="contact-info">
+                    <span class="label">للاستشارات والدعم</span>
+                    <span class="number">999 000 000</span>
+                </div>
+            </div>
         </div>
     </header>
 
     <nav class="nhs-nav">
         <div class="nav-content">
-            <a href="index.html"><i class="fas fa-home"></i> الرئيسية</a>
-            <a href="#">الأقسام الطبية</a>
-            <a href="#">عن كشفيّة</a>
-            <a href="#">الأسئلة الشائعة</a>
+            <div class="main-links">
+                <a href="index.html" class="active"><i class="fas fa-home"></i> الرئيسية</a>
+                <a href="#">الأقسام الطبية</a>
+                <a href="#">عن كشفيّة</a>
+                <a href="#">الأسئلة الشائعة</a>
+            </div>
+            
+            <div class="nav-actions">
+                <a href="#" class="nav-search"><i class="fas fa-search"></i> بحث</a>
+                <a href="#" class="nav-cta"><i class="fas fa-calendar-check"></i> احجز موعداً</a>
+            </div>
         </div>
     </nav>
 
@@ -437,6 +535,7 @@
             const bgColor = window.getComputedStyle(tile).backgroundColor;
             const link = drop.querySelector('.dynamic-link');
             
+            // ربط القائمة المنسدلة بصفحة القسم الفرعي المخصصة
             link.href = colorClass + '-diseases.html';
             
             if (window.innerWidth <= 768) {
