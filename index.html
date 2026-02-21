@@ -58,6 +58,7 @@
             position: sticky;
             top: 0;
             z-index: 1000;
+            margin-bottom: 40px; 
         }
 
         .nav-content {
@@ -81,30 +82,30 @@
         /* --- Grid & Interactive Dropdowns --- */
         .clinical-grid {
             max-width: 1300px;
-            margin: 40px auto 60px auto; /* مسافة من الأعلى بدلاً من قسم البحث */
+            margin: 40px auto 60px auto;
             padding: 0 20px;
         }
 
         .grid-row {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 4px; /* مسافة رفيعة بين المربعات تشبه الصورة */
+            gap: 4px; 
             margin-bottom: 4px;
         }
 
-        /* التصميم الجديد للمربعات (أيقونة فوق ونص تحت) */
+        /* التصميم الجديد للمربعات: ارتفاع أقل وأنحف */
         .tile {
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
             text-align: center;
-            padding: 25px 10px;
+            padding: 15px 10px; /* تقليل الحشو الداخلي */
             color: white;
             cursor: pointer;
             transition: opacity 0.2s ease;
-            min-height: 120px; /* مستطيل أنيق وأصغر */
-            border-radius: 4px; /* حواف ناعمة جداً */
+            min-height: 90px; /* تم تقليل الارتفاع من 120 إلى 90 */
+            border-radius: 4px; 
         }
 
         .tile:hover { 
@@ -112,14 +113,14 @@
         }
 
         .tile i { 
-            font-size: 2.2rem; /* حجم الأيقونة */
-            margin-bottom: 12px; /* مسافة بين الأيقونة والنص */
+            font-size: 1.8rem; /* تصغير الأيقونة قليلاً لتناسب الارتفاع الجديد */
+            margin-bottom: 8px; /* تقليل المسافة بين الأيقونة والنص */
         }
 
         .tile span { 
             font-weight: 700; 
             font-size: 1rem; 
-            line-height: 1.3;
+            line-height: 1.2;
         }
 
         .mega-dropdown {
@@ -146,23 +147,23 @@
         .drop-section a { color: white; text-decoration: none; display: block; width: 100%; height: 100%; }
         .drop-section:hover { background: rgba(0,0,0,0.1); }
 
-        /* --- الألوان المسطحة الجديدة (مستوحاة من الصورة المرفقة) --- */
-        .neuro     { background-color: #7cb342; } /* أخضر فاتح */
-        .eye       { background-color: #d32f2f; } /* أحمر */
-        .ent       { background-color: #d32f2f; } /* أحمر */
-        .resp      { background-color: #1976d2; } /* أزرق */
-        .cardio    { background-color: #afb42b; } /* أصفر مخضر */
-        .diabetes  { background-color: #0288d1; } /* تركوازي */
-        .gastro    { background-color: #388e3c; } /* أخضر غامق */
-        .renal     { background-color: #1565c0; } /* أزرق غامق */
-        .urology   { background-color: #1565c0; } /* أزرق غامق */
-        .women     { background-color: #8e24aa; } /* بنفسجي */
-        .paeds     { background-color: #4a148c; } /* بنفسجي غامق */
-        .derm      { background-color: #1b5e20; } /* أخضر جيشي */
-        .msk       { background-color: #1b5e20; } /* أخضر جيشي */
-        .cancer    { background-color: #b71c1c; } /* أحمر غامق */
-        .mental    { background-color: #7cb342; } /* أخضر فاتح */
-        .nutrition { background-color: #f57c00; } /* برتقالي */
+        /* --- الألوان المسطحة (Flat Colors) --- */
+        .neuro     { background-color: #7cb342; } 
+        .eye       { background-color: #d32f2f; } 
+        .ent       { background-color: #d32f2f; } 
+        .resp      { background-color: #1976d2; } 
+        .cardio    { background-color: #afb42b; } 
+        .diabetes  { background-color: #0288d1; } 
+        .gastro    { background-color: #388e3c; } 
+        .renal     { background-color: #1565c0; } 
+        .urology   { background-color: #1565c0; } 
+        .women     { background-color: #8e24aa; } 
+        .paeds     { background-color: #4a148c; } 
+        .derm      { background-color: #1b5e20; } 
+        .msk       { background-color: #1b5e20; } 
+        .cancer    { background-color: #b71c1c; } 
+        .mental    { background-color: #7cb342; } 
+        .nutrition { background-color: #f57c00; } 
 
         /* --- Footer --- */
         footer {
@@ -192,10 +193,13 @@
 
         @media (max-width: 768px) {
             .header-content { flex-direction: column; text-align: center; gap: 8px; }
-            .grid-row { grid-template-columns: repeat(2, 1fr); } /* عمودين في الجوال لشكل أنيق */
+            .grid-row { grid-template-columns: repeat(2, 1fr); } 
             .mega-dropdown { grid-template-columns: 1fr; }
             .site-logo { max-height: 45px; }
-            .tile { min-height: 110px; padding: 20px 10px; }
+            
+            /* تعديل الارتفاع ليكون أنحف في الجوال أيضاً */
+            .tile { min-height: 80px; padding: 12px 5px; }
+            .tile i { font-size: 1.5rem; margin-bottom: 5px; }
             .tile span { font-size: 0.9rem; }
         }
     </style>
@@ -288,14 +292,12 @@
             const drop = document.getElementById(dropId);
             const tile = document.querySelector('.' + colorClass);
             
-            // سحب لون الخلفية لتطبيقه على القائمة المنسدلة
             const bgColor = window.getComputedStyle(tile).backgroundColor;
             const link = drop.querySelector('.dynamic-link');
             
             link.href = colorClass + '-diseases.html';
             
             if (window.innerWidth <= 768) {
-                // في الجوال (عمودين)، القائمة تفتح تحت الصف بالكامل لعدم كسر التصميم
                 tile.closest('.grid-row').insertAdjacentElement('afterend', drop);
             } else {
                 tile.closest('.grid-row').insertAdjacentElement('afterend', drop);
@@ -310,7 +312,7 @@
                 drop.dataset.active = "";
             } else {
                 drop.style.display = 'grid';
-                drop.style.background = bgColor; // استخدام اللون الثابت
+                drop.style.background = bgColor;
                 drop.dataset.active = colorClass;
             }
         }
