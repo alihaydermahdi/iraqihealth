@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>أمراض القلب الشائعة | الدليل الطبي</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --nhs-blue: #005eb8;
+            --nhs-dark-blue: #003087;
+            --nhs-light-grey: #f0f4f5;
+            --nhs-text: #212b32;
+            --nhs-white: #ffffff;
+            --nhs-border: #d8dde0;
+            /* لون التخصص الموحد (القلب) */
+            --specialty-color: #e63946;
+            --specialty-gradient: linear-gradient(135deg, #e63946, #9b2226);
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            background-color: var(--nhs-white);
+            color: var(--nhs-text);
+            line-height: 1.6;
+        }
+
+        /* 1. الهيدر (مطابق للرئيسية) */
+        .nhs-header {
+            background-color: var(--nhs-white);
+            border-bottom: 4px solid var(--nhs-blue);
+            padding: 20px 0;
+        }
+
+        .header-content {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-placeholder {
+            background-color: var(--nhs-blue);
+            color: white;
+            padding: 10px 20px;
+            font-weight: bold;
+            font-size: 1.5rem;
+            text-decoration: none;
+        }
+
+        /* 2. منطقة العنوان (Hero) */
+        .page-intro {
+            background: var(--specialty-gradient);
+            color: white;
+            padding: 60px 20px;
+            text-align: center;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            color: white;
+            text-decoration: none;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+
+        /* 3. قائمة الأمراض */
+        .disease-list {
+            padding: 40px 20px;
+        }
+
+        .disease-item {
+            background: var(--nhs-white);
+            border: 1px solid var(--nhs-border);
+            border-radius: 8px;
+            margin-bottom: 15px;
+            transition: all 0.3s ease;
+        }
+
+        .disease-item:hover {
+            border-color: var(--specialty-color);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            transform: scale(1.01);
+        }
+
+        .disease-link {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 25px;
+            text-decoration: none;
+            color: var(--nhs-text);
+        }
+
+        .disease-names {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .name-ar {
+            font-size: 1.4rem;
+            font-weight: 700;
+        }
+
+        .name-en {
+            font-size: 1.1rem;
+            color: #505a5f;
+            font-family: Arial, sans-serif;
+            font-weight: 500;
+        }
+
+        .arrow-icon {
+            color: var(--specialty-color);
+            font-size: 1.5rem;
+        }
+
+        /* 4. التذييل (مطابق للرئيسية) */
+        footer {
+            background-color: #e8edee;
+            border-top: 4px solid var(--nhs-blue);
+            padding: 40px 20px;
+            margin-top: 60px;
+        }
+
+        .footer-content {
+            max-width: 1300px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+        }
+
+        .footer-section h4 {
+            margin-top: 0;
+            color: var(--nhs-blue);
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 10px;
+        }
+
+        @media (max-width: 600px) {
+            .disease-link { flex-direction: row; text-align: right; }
+            .name-ar { font-size: 1.2rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="nhs-header">
+        <div class="header-content">
+            <a href="index.html" class="logo-placeholder">LOGO</a>
+            <div style="font-size: 1.2rem; font-weight: bold; color: var(--nhs-blue);">مركز الدعم السريري الموحد</div>
+        </div>
+    </header>
+
+    <section class="page-intro">
+        <div class="container">
+            <a href="index.html" class="back-link"><i class="fas fa-arrow-right"></i> &nbsp; الرجوع للرئيسية</a>
+            <h1>أمراض القلب والأوعية الدموية</h1>
+            <p>قائمة بأكثر الحالات الطبية شيوعاً في العراق وطرق التعرف عليها.</p>
+        </div>
+    </section>
+
+    <main class="disease-list">
+        <div class="container">
+            
+            <div class="disease-item">
+                <a href="hypertension-details.html" class="disease-link">
+                    <div class="disease-names">
+                        <span class="name-ar">ارتفاع ضغط الدم (الضغط)</span>
+                        <span class="name-en">High Blood Pressure (Hypertension)</span>
+                    </div>
+                    <i class="fas fa-chevron-left arrow-icon"></i>
+                </a>
+            </div>
+
+            <div class="disease-item">
+                <a href="cad-details.html" class="disease-link">
+                    <div class="disease-names">
+                        <span class="name-ar">مرض الشريان التاجي (انسداد الشرايين)</span>
+                        <span class="name-en">Coronary Heart Disease</span>
+                    </div>
+                    <i class="fas fa-chevron-left arrow-icon"></i>
+                </a>
+            </div>
+
+            <div class="disease-item">
+                <a href="heart-attack-details.html" class="disease-link">
+                    <div class="disease-names">
+                        <span class="name-ar">النوبة القلبية (الجلطة القلبية)</span>
+                        <span class="name-en">Heart Attack</span>
+                    </div>
+                    <i class="fas fa-chevron-left arrow-icon"></i>
+                </a>
+            </div>
+
+            <div class="disease-item">
+                <a href="heart-failure-details.html" class="disease-link">
+                    <div class="disease-names">
+                        <span class="name-ar">فشل القلب (عجز القلب)</span>
+                        <span class="name-en">Heart Failure</span>
+                    </div>
+                    <i class="fas fa-chevron-left arrow-icon"></i>
+                </a>
+            </div>
+
+            <div class="disease-item">
+                <a href="stroke-details.html" class="disease-link">
+                    <div class="disease-names">
+                        <span class="name-ar">السكتة الدماغية (الجلطة الدماغية)</span>
+                        <span class="name-en">Stroke</span>
+                    </div>
+                    <i class="fas fa-chevron-left arrow-icon"></i>
+                </a>
+            </div>
+
+            <div class="disease-item">
+                <a href="cholesterol-details.html" class="disease-link">
+                    <div class="disease-names">
+                        <span class="name-ar">ارتفاع الكوليسترول (الدهون بالدم)</span>
+                        <span class="name-en">High Cholesterol</span>
+                    </div>
+                    <i class="fas fa-chevron-left arrow-icon"></i>
+                </a>
+            </div>
+
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>روابط سريعة</h4>
+                <p>الرئيسية | المواعيد | دليل المريض</p>
+            </div>
+            <div class="footer-section">
+                <h4>اتصل بنا</h4>
+                <p><i class="fas fa-phone"></i> 999 000 000</p>
+                <p><i class="fas fa-envelope"></i> info@medical.com</p>
+            </div>
+        </div>
+        <div style="text-align: center; margin-top: 30px; border-top: 1px solid #ccc; padding-top: 20px; font-size: 0.9rem;">
+            &copy; 2026 جميع الحقوق محفوظة لمركز الدعم السريري
+        </div>
+    </footer>
+
+</body>
+</html>
