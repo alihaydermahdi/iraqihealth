@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>مركز الدعم السريري الموحد | الصفحة الرئيسية</title>
+    <title>الدليل الطبي | الصفحة الرئيسية</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         :root {
@@ -22,7 +22,7 @@
             line-height: 1.5;
         }
 
-        /* 1. الهيدر العلوي */
+        /* الهيدر الأصلي */
         .nhs-header {
             background-color: var(--nhs-white);
             border-bottom: 4px solid var(--nhs-blue);
@@ -48,7 +48,6 @@
             display: inline-block;
         }
 
-        /* 2. شريط التنقل */
         .nhs-nav {
             background-color: var(--nhs-blue);
             color: white;
@@ -75,7 +74,7 @@
 
         .nav-content a:hover { background-color: var(--nhs-dark-blue); }
 
-        /* 3. منطقة العنوان والبحث */
+        /* منطقة البحث */
         .hero-section {
             max-width: 1300px;
             margin: 40px auto 20px;
@@ -115,7 +114,7 @@
             color: white;
         }
 
-        /* 4. شبكة المربعات والقوائم */
+        /* الشبكة والقوائم */
         .clinical-grid {
             max-width: 1300px;
             margin: 0 auto 60px;
@@ -137,7 +136,6 @@
             text-align: center;
             padding: 45px 10px;
             color: white;
-            text-decoration: none;
             cursor: pointer;
             transition: opacity 0.2s;
             position: relative;
@@ -149,7 +147,6 @@
         .tile i { font-size: 3rem; margin-bottom: 20px; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2)); }
         .tile span { font-weight: 700; font-size: 1.1rem; }
 
-        /* القائمة المنسدلة */
         .mega-dropdown {
             display: none;
             grid-template-columns: 1fr 1fr;
@@ -170,17 +167,10 @@
             transition: background 0.3s;
         }
 
-        .drop-section a {
-            color: white;
-            text-decoration: none;
-            display: block;
-            width: 100%;
-            height: 100%;
-        }
-
+        .drop-section a { color: white; text-decoration: none; display: block; width: 100%; height: 100%; }
         .drop-section:hover { background: rgba(0,0,0,0.1); }
 
-        /* التدرجات اللونية */
+        /* التدرجات */
         .cardio    { background: linear-gradient(135deg, #e63946, #9b2226); }
         .neuro     { background: linear-gradient(135deg, #4361ee, #3a0ca3); }
         .derm      { background: linear-gradient(135deg, #2a9d8f, #1a635a); }
@@ -198,6 +188,7 @@
         .resp      { background: linear-gradient(135deg, #90e0ef, #00b4d8); }
         .urology   { background: linear-gradient(135deg, #5a189a, #240046); }
 
+        /* التذييل الأصلي الكامل */
         footer {
             background-color: #e8edee;
             border-top: 4px solid var(--nhs-blue);
@@ -213,7 +204,17 @@
             gap: 30px;
         }
 
-        .footer-section h4 { color: var(--nhs-blue); border-bottom: 1px solid #ccc; padding-bottom: 10px; }
+        .footer-section h4 {
+            margin-top: 0;
+            color: var(--nhs-blue);
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 10px;
+        }
+
+        .footer-section ul { list-style: none; padding: 0; }
+        .footer-section ul li { margin-bottom: 10px; }
+        .footer-section ul li a { color: var(--nhs-text); text-decoration: none; }
+        .footer-section ul li a:hover { text-decoration: underline; }
 
         @media (max-width: 900px) {
             .grid-row { grid-template-columns: repeat(2, 1fr); }
@@ -226,7 +227,7 @@
     <header class="nhs-header">
         <div class="header-content">
             <a href="#" class="logo-placeholder">LOGO</a>
-            <div style="font-size: 1.2rem; font-weight: bold; color: var(--nhs-blue);">مركز الدعم السريري الموحد</div>
+            <div style="font-size: 1.2rem; font-weight: bold; color: var(--nhs-blue);">اسم الموقع الطبي</div>
         </div>
     </header>
 
@@ -235,6 +236,7 @@
             <a href="#"><i class="fas fa-home"></i> الرئيسية</a>
             <a href="#">من نحن</a>
             <a href="#">اتصل بنا</a>
+            <a href="#">الأسئلة الشائعة</a>
         </div>
     </nav>
 
@@ -242,28 +244,24 @@
         <div class="header-container">
             <h1>الدعم السريري حسب جهاز الجسم</h1>
             <div class="search-box">
-                <input type="text" placeholder="بحث عن قسم...">
+                <input type="text" placeholder="بحث عن قسم أو مورد...">
                 <button><i class="fas fa-search"></i></button>
             </div>
         </div>
     </div>
 
     <div class="clinical-grid">
-        
         <div class="grid-row">
-            <div class="tile cardio" onclick="toggleDrop('drop1', 'cardio')">
-                <i class="fas fa-heart-pulse"></i>
-                <span>أمراض القلب والأوعية الدموية</span>
-            </div>
+            <div class="tile cardio" onclick="toggleDrop('drop1', 'cardio')"><i class="fas fa-heart-pulse"></i><span>أمراض القلب والأوعية الدموية</span></div>
             <div class="tile neuro" onclick="toggleDrop('drop1', 'neuro')"><i class="fas fa-brain"></i><span>أمراض المخ والأعصاب</span></div>
             <div class="tile derm" onclick="toggleDrop('drop1', 'derm')"><i class="fas fa-hand-sparkles"></i><span>الأمراض الجلدية</span></div>
             <div class="tile diabetes" onclick="toggleDrop('drop1', 'diabetes')"><i class="fas fa-syringe"></i><span>السكري والغدد الصماء</span></div>
         </div>
         <div id="drop1" class="mega-dropdown">
-            <div class="drop-section" id="drop1-link-diseases"><a href="#">الأمراض الشائعة</a></div>
+            <div class="drop-section"><a href="#">الأمراض الشائعة</a></div>
             <div class="drop-section"><a href="#">أطباء الاختصاص</a></div>
         </div>
-
+        
         <div class="grid-row">
             <div class="tile ent" onclick="toggleDrop('drop2', 'ent')"><i class="fas fa-ear-hearing"></i><span>الأنف والأذن والحنجرة</span></div>
             <div class="tile gastro" onclick="toggleDrop('drop2', 'gastro')"><i class="fas fa-stomach"></i><span>أمراض الجهاز الهضمي والكبد</span></div>
@@ -300,10 +298,34 @@
 
     <footer>
         <div class="footer-content">
-            <div class="footer-section"><h4>روابط سريعة</h4><p>الرئيسية | دليل المريض</p></div>
-            <div class="footer-section"><h4>اتصل بنا</h4><p>info@medical.com</p></div>
+            <div class="footer-section">
+                <h4>روابط سريعة</h4>
+                <ul>
+                    <li><a href="#">الرئيسية</a></li>
+                    <li><a href="#">دليل المريض</a></li>
+                    <li><a href="#">المواعيد</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>عن المركز</h4>
+                <ul>
+                    <li><a href="#">من نحن</a></li>
+                    <li><a href="#">فريق العمل</a></li>
+                    <li><a href="#">سياسة الخصوصية</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>اتصل بنا</h4>
+                <ul>
+                    <li><i class="fas fa-phone"></i> 999 000 000</li>
+                    <li><i class="fas fa-envelope"></i> info@medical.com</li>
+                    <li><i class="fas fa-map-marker-alt"></i> العنوان، المدينة</li>
+                </ul>
+            </div>
         </div>
-        <div style="text-align: center; margin-top: 20px; font-size: 0.9rem;">&copy; 2026 جميع الحقوق محفوظة</div>
+        <div style="text-align: center; margin-top: 30px; border-top: 1px solid #ccc; padding-top: 20px; font-size: 0.9rem;">
+            &copy; 2026 جميع الحقوق محفوظة لاسم الموقع الطبي
+        </div>
     </footer>
 
     <script>
@@ -312,12 +334,11 @@
             const tile = document.querySelector('.' + colorClass);
             const gradient = window.getComputedStyle(tile).backgroundImage;
             
-            // تحديث رابط "الأمراض الشائعة" بناءً على المربع المنقور
-            const diseaseLinkBox = drop.querySelector('.drop-section:first-child a');
+            const diseaseLink = drop.querySelector('.drop-section:first-child a');
             if (colorClass === 'cardio') {
-                diseaseLinkBox.href = 'cardio-diseases.html'; // الربط بالصفحة الجديدة
+                diseaseLink.href = 'cardio-diseases.html';
             } else {
-                diseaseLinkBox.href = '#'; // روابط بقية الأقسام للمستقبل
+                diseaseLink.href = '#';
             }
 
             document.querySelectorAll('.mega-dropdown').forEach(d => {
