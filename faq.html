@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الأطباء والمراكز | كشفيّة</title>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <style>
+        :root { --nhs-blue: #005eb8; --nhs-dark-blue: #003087; --nhs-light-grey: #f0f4f5; --nhs-text: #212b32; --nhs-white: #ffffff; }
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; margin: 0; background-color: var(--nhs-light-grey); color: var(--nhs-text); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+        
+        /* الهيدر والشريط */
+        .nhs-header { background-color: var(--nhs-white); border-bottom: 8px solid var(--nhs-blue); padding: 12px 0; }
+        .header-content { max-width: 1300px; margin: 0 auto; padding: 0 20px; display: flex; justify-content: space-between; align-items: center; }
+        .logo-link { display: inline-flex; align-items: center; text-decoration: none; gap: 15px; }
+        .site-logo { max-height: 55px; width: auto; object-fit: contain; }
+        .header-moto { font-weight: 700; color: var(--nhs-blue); font-size: 1.1rem; }
+
+        .nhs-nav { background-color: var(--nhs-blue); color: white; position: sticky; top: 0; z-index: 1000; box-shadow: 0 4px 6px rgba(0,0,0,0.1); margin-bottom: 30px; }
+        .nav-content { max-width: 1300px; margin: 0 auto; padding: 0 20px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; }
+        .main-links { display: flex; }
+        .main-links a { color: white; text-decoration: none; padding: 15px 20px; font-weight: 600; font-size: 0.95rem; transition: all 0.2s; display: flex; align-items: center; gap: 8px; border-bottom: 3px solid transparent; }
+        .main-links a:hover, .main-links a.active { background-color: var(--nhs-dark-blue); border-bottom-color: #fb8500; }
+        .nav-actions { display: flex; align-items: center; gap: 15px; }
+        .nav-cta { background-color: var(--nhs-white); color: var(--nhs-blue) !important; padding: 8px 20px; border-radius: 20px; font-weight: 800; font-size: 0.9rem; text-decoration: none; transition: all 0.2s; display: flex; align-items: center; gap: 6px; }
+
+        /* تنسيق شبكة الأطباء */
+        .page-container { max-width: 1300px; margin: 0 auto 50px auto; padding: 0 20px; min-height: 50vh; }
+        .page-title { text-align: center; color: var(--nhs-dark-blue); font-size: 2rem; font-weight: 800; margin-bottom: 40px; position: relative; padding-bottom: 15px; }
+        .page-title::after { content: ''; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: 60px; height: 4px; background-color: var(--nhs-blue); border-radius: 2px; }
+
+        .doctors-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; }
+        
+        .doctor-card { background: var(--nhs-white); border-radius: 8px; border: 1px solid #e2e8f0; overflow: hidden; box-shadow: 0 2px 5px rgba(0,0,0,0.05); transition: transform 0.2s, box-shadow 0.2s; }
+        .doctor-card:hover { transform: translateY(-5px); box-shadow: 0 8px 15px rgba(0,0,0,0.1); }
+        
+        .doctor-header { background-color: var(--nhs-blue); color: white; padding: 20px; text-align: center; }
+        .doctor-icon { font-size: 3rem; margin-bottom: 10px; color: #f0f4f5; }
+        .doctor-name { font-size: 1.25rem; font-weight: 800; margin: 0; }
+        .doctor-specialty { font-size: 0.9rem; color: #e2e8f0; margin-top: 5px; }
+        
+        .doctor-body { padding: 20px; }
+        .doctor-info { display: flex; align-items: flex-start; gap: 10px; margin-bottom: 12px; font-size: 0.95rem; color: #4a5568; }
+        .doctor-info i { color: var(--nhs-blue); font-size: 1.1rem; width: 20px; text-align: center; margin-top: 3px; }
+        
+        .book-btn { display: block; width: 100%; text-align: center; background-color: #fb8500; color: white; padding: 10px; border-radius: 4px; text-decoration: none; font-weight: 700; margin-top: 15px; transition: background 0.2s; }
+        .book-btn:hover { background-color: #e07600; }
+
+        /* الفوتر */
+        footer { background-color: #e8edee; border-top: 8px solid var(--nhs-blue); padding: 40px 20px 20px 20px; margin-top: 40px; }
+        .footer-content { max-width: 1300px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; margin-bottom: 25px; }
+        .footer-section h4 { color: var(--nhs-dark-blue); font-size: 1.05rem; font-weight: 800; margin-bottom: 15px; padding-bottom: 10px; position: relative; }
+        .footer-section h4::after { content: ''; position: absolute; bottom: 0; right: 0; width: 40px; height: 3px; background-color: var(--nhs-blue); border-radius: 2px; }
+        .footer-section ul { list-style: none; padding: 0; margin: 0; }
+        .footer-section ul li { margin-bottom: 10px; font-size: 0.85rem; }
+        .footer-section ul li a { color: #4a5568; text-decoration: none; transition: 0.3s; display: flex; align-items: center; }
+        .footer-section ul li a:hover { color: var(--nhs-blue); padding-right: 6px; }
+        .footer-section i { color: var(--nhs-blue); width: 20px; font-size: 0.95rem; margin-left: 8px; }
+        .copyright-bar { text-align: center; border-top: 1px solid #d1d5d8; padding-top: 15px; font-size: 0.8rem; font-weight: 600; color: #718096; }
+        
+        @media (max-width: 768px) {
+            .header-content { flex-direction: column; text-align: center; gap: 8px; }
+            .nav-content { flex-direction: column; padding: 0; }
+            .main-links { width: 100%; justify-content: center; overflow-x: auto; }
+            .main-links a { padding: 12px 10px; font-size: 0.85rem; border-bottom: none; }
+            .nav-actions { width: 100%; justify-content: center; padding: 10px; background-color: var(--nhs-dark-blue); }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="nhs-header">
+        <div class="header-content">
+            <a href="index.html" class="logo-link"><img src="logo.png" alt="كشفيّة" class="site-logo"><div class="header-moto">كلشي عن صحتك… بلهجتنا العراقية</div></a>
+        </div>
+    </header>
+
+    <nav class="nhs-nav">
+        <div class="nav-content">
+            <div class="main-links">
+                <a href="index.html"><i class="fas fa-home"></i> الرئيسية</a>
+                <a href="index.html"><i class="fas fa-stethoscope"></i> دليل الأمراض</a>
+                <a href="doctors.html" class="active"><i class="fas fa-user-doctor"></i> الأطباء والمراكز</a>
+            </div>
+            <div class="nav-actions"><a href="contact.html" class="nav-cta"><i class="fas fa-phone"></i> تواصل معنا</a></div>
+        </div>
+    </nav>
+
+    <div class="page-container">
+        <h1 class="page-title">دليل الأطباء والمراكز</h1>
+
+        <div class="doctors-grid">
+            
+            <div class="doctor-card">
+                <div class="doctor-header">
+                    <i class="fas fa-user-md doctor-icon"></i>
+                    <h3 class="doctor-name">د. أحمد العراقي</h3>
+                    <div class="doctor-specialty">استشاري أمراض القلب والأوعية</div>
+                </div>
+                <div class="doctor-body">
+                    <div class="doctor-info"><i class="fas fa-location-dot"></i> بغداد - الحارثية - شارع الكندي</div>
+                    <div class="doctor-info"><i class="fas fa-clock"></i> 4:00 عصراً - 9:00 مساءً</div>
+                    <div class="doctor-info"><i class="fas fa-money-bill-wave"></i> الكشفية: 40,000 دينار</div>
+                    <a href="tel:0700000000" class="book-btn"><i class="fas fa-phone"></i> احجز الآن</a>
+                </div>
+            </div>
+
+            <div class="doctor-card">
+                <div class="doctor-header">
+                    <i class="fas fa-user-nurse doctor-icon"></i>
+                    <h3 class="doctor-name">د. سارة محمود</h3>
+                    <div class="doctor-specialty">أخصائية النسائية والتوليد</div>
+                </div>
+                <div class="doctor-body">
+                    <div class="doctor-info"><i class="fas fa-location-dot"></i> البصرة - شارع الاستقلال - مجمع الشفاء</div>
+                    <div class="doctor-info"><i class="fas fa-clock"></i> 3:00 عصراً - 8:00 مساءً</div>
+                    <div class="doctor-info"><i class="fas fa-money-bill-wave"></i> الكشفية: 30,000 دينار</div>
+                    <a href="tel:0700000000" class="book-btn"><i class="fas fa-phone"></i> احجز الآن</a>
+                </div>
+            </div>
+
+            <div class="doctor-card">
+                <div class="doctor-header">
+                    <i class="fas fa-hospital doctor-icon"></i>
+                    <h3 class="doctor-name">مركز النور الطبي</h3>
+                    <div class="doctor-specialty">مجمع طبي متكامل - كافة التخصصات</div>
+                </div>
+                <div class="doctor-body">
+                    <div class="doctor-info"><i class="fas fa-location-dot"></i> أربيل - شارع 100 - قرب المطار</div>
+                    <div class="doctor-info"><i class="fas fa-clock"></i> مفتوح 24 ساعة (طوارئ)</div>
+                    <div class="doctor-info"><i class="fas fa-microscope"></i> مختبرات، أشعة، سونار</div>
+                    <a href="tel:0700000000" class="book-btn"><i class="fas fa-phone"></i> اتصل بالمركز</a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>عن منصة كشفيّة</h4>
+                <ul>
+                    <li><a href="about.html"><i class="fas fa-angle-left"></i> من نحن</a></li>
+                    <li><a href="about.html#vision"><i class="fas fa-angle-left"></i> رؤيتنا ورسالتنا</a></li>
+                    <li><a href="about.html#privacy"><i class="fas fa-angle-left"></i> سياسة الخصوصية</a></li>
+                    <li><a href="about.html#terms"><i class="fas fa-angle-left"></i> الشروط والأحكام</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>خدمات المرضى</h4>
+                <ul>
+                    <li><a href="index.html"><i class="fas fa-angle-left"></i> الرئيسية</a></li>
+                    <li><a href="index.html"><i class="fas fa-angle-left"></i> دليل الأمراض الشائعة</a></li>
+                    <li><a href="doctors.html"><i class="fas fa-angle-left"></i> قائمة الأطباء والمراكز</a></li>
+                    <li><a href="faq.html"><i class="fas fa-angle-left"></i> الأسئلة الشائعة</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>معلومات التواصل</h4>
+                <ul>
+                    <li><a href="mailto:ads@kashfiya.com"><i class="fas fa-bullhorn"></i> للتواصل والإعلان: اضغط هنا</a></li>
+                    <li><a href="#"><i class="fab fa-facebook"></i> فيسبوك (Facebook)</a></li>
+                    <li><a href="#"><i class="fab fa-instagram"></i> إنستغرام (Instagram)</a></li>
+                    <li><a href="#"><i class="fab fa-tiktok"></i> تيكتوك (TikTok)</a></li>
+                </ul>
+            </div>
+        </div> 
+        <div class="copyright-bar">&copy; 2026 جميع الحقوق محفوظة لـ كشفيّة</div>
+    </footer>
+
+</body>
+</html>
