@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> كشفيّة </title>
+    <title>كشفيّة | دليلك الطبي</title>
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     
@@ -110,18 +110,6 @@
             gap: 15px;
         }
 
-        .nav-search {
-            color: white;
-            text-decoration: none;
-            padding: 8px 12px;
-            border-radius: 4px;
-            transition: 0.2s;
-        }
-
-        .nav-search:hover {
-            background-color: rgba(255,255,255,0.15);
-        }
-
         .nav-cta {
             background-color: var(--nhs-white);
             color: var(--nhs-blue) !important;
@@ -154,6 +142,7 @@
             grid-template-columns: repeat(4, 1fr);
             gap: 6px; 
             margin-bottom: 6px;
+            position: relative;
         }
 
         .tile {
@@ -194,7 +183,7 @@
             width: 100%;
             margin-bottom: 6px;
             animation: fadeIn 0.2s ease;
-            grid-column: 1 / -1;
+            grid-column: 1 / -1; /* يضمن تمدد القائمة بعرض الصفحة بالكامل */
             border-radius: 6px;
         }
 
@@ -317,10 +306,8 @@
         }
 
         @media (max-width: 768px) {
-            .header-contact { display: none; } 
-            .logo-link { flex-direction: column; gap: 5px; }
-            .header-moto { border-right: none; padding-right: 0; font-size: 0.9rem; }
-            .header-content { text-align: center; }
+            .header-content { flex-direction: column; text-align: center; gap: 8px; }
+            .header-moto { font-size: 1rem; }
             
             .nav-content { flex-direction: column; padding: 0; }
             .main-links { width: 100%; justify-content: center; overflow-x: auto; }
@@ -383,10 +370,10 @@
                 <i class="fas fa-heart-pulse"></i>
                 <span>أمراض القلب والأوعية</span>
             </div>
-        </div>
-        <div id="drop1" class="mega-dropdown">
-            <div class="drop-section"><a href="#" class="dynamic-link">الأمراض الشائعة</a></div>
-            <div class="drop-section"><a href="#">أطباء الاختصاص</a></div>
+            <div id="drop1" class="mega-dropdown">
+                <div class="drop-section"><a href="#" class="dynamic-link">الأمراض الشائعة</a></div>
+                <div class="drop-section"><a href="#">أطباء الاختصاص</a></div>
+            </div>
         </div>
 
         <div class="grid-row">
@@ -406,10 +393,10 @@
                 <i class="fas fa-person-pregnant"></i>
                 <span>النسائية والتوليد</span>
             </div>
-        </div>
-        <div id="drop2" class="mega-dropdown">
-            <div class="drop-section"><a href="#" class="dynamic-link">الأمراض الشائعة</a></div>
-            <div class="drop-section"><a href="#">أطباء الاختصاص</a></div>
+            <div id="drop2" class="mega-dropdown">
+                <div class="drop-section"><a href="#" class="dynamic-link">الأمراض الشائعة</a></div>
+                <div class="drop-section"><a href="#">أطباء الاختصاص</a></div>
+            </div>
         </div>
 
         <div class="grid-row">
@@ -429,10 +416,10 @@
                 <i class="fas fa-ribbon"></i>
                 <span>أمراض الدم والأورام</span>
             </div>
-        </div>
-        <div id="drop3" class="mega-dropdown">
-            <div class="drop-section"><a href="#" class="dynamic-link">الأمراض الشائعة</a></div>
-            <div class="drop-section"><a href="#">أطباء الاختصاص</a></div>
+            <div id="drop3" class="mega-dropdown">
+                <div class="drop-section"><a href="#" class="dynamic-link">الأمراض الشائعة</a></div>
+                <div class="drop-section"><a href="#">أطباء الاختصاص</a></div>
+            </div>
         </div>
 
         <div class="grid-row">
@@ -452,11 +439,12 @@
                 <i class="fas fa-mars"></i>
                 <span>الذكورة والعقم</span>
             </div>
+            <div id="drop4" class="mega-dropdown">
+                <div class="drop-section"><a href="#" class="dynamic-link">الأمراض الشائعة</a></div>
+                <div class="drop-section"><a href="#">أطباء الاختصاص</a></div>
+            </div>
         </div>
-        <div id="drop4" class="mega-dropdown">
-            <div class="drop-section"><a href="#" class="dynamic-link">الأمراض الشائعة</a></div>
-            <div class="drop-section"><a href="#">أطباء الاختصاص</a></div>
-        </div>
+
     </main>
 
     <footer>
@@ -464,10 +452,10 @@
             <div class="footer-section">
                 <h4>عن منصة كشفيّة</h4>
                 <ul>
-                    <li><a href="#"><i class="fas fa-angle-left"></i> من نحن</a></li>
-                    <li><a href="#"><i class="fas fa-angle-left"></i> رؤيتنا ورسالتنا</a></li>
-                    <li><a href="#"><i class="fas fa-angle-left"></i> سياسة الخصوصية</a></li>
-                    <li><a href="#"><i class="fas fa-angle-left"></i> الشروط والأحكام</a></li>
+                    <li><a href="about.html"><i class="fas fa-angle-left"></i> من نحن</a></li>
+                    <li><a href="about.html#vision"><i class="fas fa-angle-left"></i> رؤيتنا ورسالتنا</a></li>
+                    <li><a href="about.html#privacy"><i class="fas fa-angle-left"></i> سياسة الخصوصية</a></li>
+                    <li><a href="about.html#terms"><i class="fas fa-angle-left"></i> الشروط والأحكام</a></li>
                 </ul>
             </div>
             
@@ -490,7 +478,9 @@
                     <li><a href="#"><i class="fab fa-tiktok"></i> تيكتوك (TikTok)</a></li>
                 </ul>
             </div>
-        </div> <div class="copyright-bar">
+        </div> 
+        
+        <div class="copyright-bar">
             &copy; 2026 جميع الحقوق محفوظة لـ كشفيّة
         </div>
     </footer>
@@ -506,11 +496,31 @@
             // ربط القائمة المنسدلة بصفحة القسم الفرعي المخصصة
             link.href = colorClass + '-diseases.html';
             
+            // --- التعديل الذكي لضبط مكان القائمة في الموبايل والكمبيوتر ---
+            const gridRow = tile.closest('.grid-row');
+            
+            // نحصل على جميع المربعات داخل هذا الصف
+            const tiles = Array.from(gridRow.children).filter(c => c.classList.contains('tile'));
+            const index = tiles.indexOf(tile);
+            
+            // تحديد عدد الأعمدة الفعلي بناءً على حجم الشاشة
+            let columns = 4; // الافتراضي للكمبيوتر
             if (window.innerWidth <= 768) {
-                tile.closest('.grid-row').insertAdjacentElement('afterend', drop);
-            } else {
-                tile.closest('.grid-row').insertAdjacentElement('afterend', drop);
+                columns = 2; // للموبايل
+            } else if (window.innerWidth <= 1024) {
+                columns = 3; // للتابلت
             }
+            
+            // حساب السطر الذي يقع فيه القسم المضغوط
+            const rowIndex = Math.floor(index / columns);
+            
+            // إيجاد آخر قسم موجود في نفس هذا السطر لإدراج القائمة بعده
+            const lastIndexInRow = Math.min((rowIndex + 1) * columns - 1, tiles.length - 1);
+            const insertAfterNode = tiles[lastIndexInRow];
+            
+            // إدخال القائمة المنسدلة مباشرة بعد آخر قسم في هذا السطر
+            insertAfterNode.insertAdjacentElement('afterend', drop);
+            // -------------------------------------------------------------
 
             document.querySelectorAll('.mega-dropdown').forEach(d => {
                 if (d.id !== dropId) d.style.display = 'none';
