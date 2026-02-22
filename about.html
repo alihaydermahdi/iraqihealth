@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>عن كشفيّة | السياسات والشروط</title>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <style>
+        :root { --nhs-blue: #005eb8; --nhs-dark-blue: #003087; --nhs-light-grey: #f0f4f5; --nhs-text: #212b32; --nhs-white: #ffffff; }
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; margin: 0; background-color: var(--nhs-light-grey); color: var(--nhs-text); line-height: 1.8; -webkit-font-smoothing: antialiased; }
+        
+        /* --- Professional Header Section --- */
+        .nhs-header { background-color: var(--nhs-white); border-bottom: 8px solid var(--nhs-blue); padding: 12px 0; }
+        .header-content { max-width: 1300px; margin: 0 auto; padding: 0 20px; display: flex; justify-content: space-between; align-items: center; }
+        .logo-link { display: inline-flex; align-items: center; text-decoration: none; gap: 15px; }
+        .site-logo { max-height: 55px; width: auto; object-fit: contain; }
+        .header-moto { font-weight: 700; color: var(--nhs-blue); font-size: 1.1rem; }
+
+        /* --- Professional Blue Navigation --- */
+        .nhs-nav { background-color: var(--nhs-blue); color: white; position: sticky; top: 0; z-index: 1000; box-shadow: 0 4px 6px rgba(0,0,0,0.1); margin-bottom: 30px; }
+        .nav-content { max-width: 1300px; margin: 0 auto; padding: 0 20px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; }
+        .main-links { display: flex; }
+        .main-links a { color: white; text-decoration: none; padding: 15px 20px; font-weight: 600; font-size: 0.95rem; transition: all 0.2s; display: flex; align-items: center; gap: 8px; border-bottom: 3px solid transparent; }
+        .main-links a:hover { background-color: var(--nhs-dark-blue); border-bottom-color: #fb8500; }
+        .nav-actions { display: flex; align-items: center; gap: 15px; }
+        .nav-cta { background-color: var(--nhs-white); color: var(--nhs-blue) !important; padding: 8px 20px; border-radius: 20px; font-weight: 800; font-size: 0.9rem; text-decoration: none; transition: all 0.2s; display: flex; align-items: center; gap: 6px; }
+        .nav-cta:hover { background-color: #f0f4f5; transform: translateY(-1px); box-shadow: 0 2px 5px rgba(0,0,0,0.2); }
+        
+        /* --- تنسيق صفحة المحتوى (عن كشفيّة) --- */
+        .page-container { max-width: 900px; margin: 0 auto 50px auto; padding: 0 20px; }
+        .page-title { text-align: center; color: var(--nhs-dark-blue); font-size: 2rem; font-weight: 800; margin-bottom: 40px; position: relative; padding-bottom: 15px; }
+        .page-title::after { content: ''; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: 60px; height: 4px; background-color: var(--nhs-blue); border-radius: 2px; }
+        
+        .content-card { background: var(--nhs-white); border-radius: 8px; padding: 35px; margin-bottom: 30px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); border-right: 5px solid var(--nhs-blue); scroll-margin-top: 100px; }
+        .card-header { display: flex; align-items: center; gap: 15px; margin-bottom: 20px; color: var(--nhs-blue); }
+        .card-header i { font-size: 1.8rem; }
+        .card-header h2 { margin: 0; font-size: 1.4rem; font-weight: 800; color: var(--nhs-dark-blue); }
+        .content-card p, .content-card li { font-size: 1.05rem; color: #4a5568; margin-bottom: 15px; }
+        .content-card ul { padding-right: 25px; }
+        .content-card li { margin-bottom: 10px; }
+        .important-note { background-color: #fff3cd; border-right: 4px solid #f6ad55; padding: 15px; margin-top: 20px; border-radius: 4px; font-weight: 600; color: #9c4221; }
+
+        /* --- Elegant Footer --- */
+        footer { background-color: #e8edee; border-top: 8px solid var(--nhs-blue); padding: 40px 20px 20px 20px; margin-top: 40px; }
+        .footer-content { max-width: 1300px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; margin-bottom: 25px; }
+        .footer-section h4 { color: var(--nhs-dark-blue); font-size: 1.05rem; font-weight: 800; margin-top: 0; margin-bottom: 15px; position: relative; padding-bottom: 10px; }
+        .footer-section h4::after { content: ''; position: absolute; bottom: 0; right: 0; width: 40px; height: 3px; background-color: var(--nhs-blue); border-radius: 2px; }
+        .footer-section ul { list-style: none; padding: 0; margin: 0; }
+        .footer-section ul li { margin-bottom: 10px; font-size: 0.85rem; color: #4a5568; display: flex; align-items: center; }
+        .footer-section ul li a { color: #4a5568; text-decoration: none; transition: all 0.3s ease; }
+        .footer-section ul li a:hover { color: var(--nhs-blue); padding-right: 6px; }
+        .footer-section i { color: var(--nhs-blue); width: 20px; font-size: 0.95rem; margin-left: 8px; }
+        .copyright-bar { text-align: center; border-top: 1px solid #d1d5d8; padding-top: 15px; font-size: 0.8rem; font-weight: 600; color: #718096; letter-spacing: 0.5px; }
+        
+        @media (max-width: 768px) {
+            .header-content { flex-direction: column; text-align: center; gap: 8px; }
+            .nav-content { flex-direction: column; padding: 0; }
+            .main-links { width: 100%; justify-content: center; overflow-x: auto; }
+            .main-links a { padding: 12px 10px; font-size: 0.85rem; border-bottom: none; }
+            .nav-actions { width: 100%; justify-content: center; padding: 10px; background-color: var(--nhs-dark-blue); }
+            .content-card { padding: 20px; }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="nhs-header">
+        <div class="header-content">
+            <a href="index.html" class="logo-link">
+                <img src="logo.png" alt="شعار كشفيّة" class="site-logo">
+                <div class="header-moto">كلشي عن صحتك… بلهجتنا العراقية</div>
+            </a>
+        </div>
+    </header>
+
+    <nav class="nhs-nav">
+        <div class="nav-content">
+            <div class="main-links">
+                <a href="index.html"><i class="fas fa-home"></i> الرئيسية</a>
+                <a href="#"><i class="fas fa-stethoscope"></i> دليل الأمراض</a>
+                <a href="#"><i class="fas fa-user-doctor"></i> الأطباء والمراكز</a>
+            </div>
+            <div class="nav-actions">
+                <a href="contact.html" class="nav-cta"><i class="fas fa-phone"></i> تواصل معنا</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="page-container">
+        <h1 class="page-title">عن منصة كشفيّة</h1>
+
+        <div id="about" class="content-card">
+            <div class="card-header">
+                <i class="fas fa-users"></i>
+                <h2>من نحن؟</h2>
+            </div>
+            <p>يا هلا بيكم بمنصة <strong>كشفيّة</strong>، دليلك الطبي الأول اللي يحجي وياك بلهجتنا العراقية.</p>
+            <p>إحنا سوينا هذي المنصة حتى نكسر الحاجز بين المصطلحات الطبية المعقدة والفهم البسيط للمريض. نأمن إنو من حق كل عراقي يفهم مرضه، علاجه، وشلون يقي نفسه بكل وضوح وبدون دوخة راس.</p>
+            <p>فريقنا متكون من أطباء ومختصين هدفهم يوصلولك المعلومة الطبية المضبوطة والمبنية على أحدث المصادر العلمية، حتى نكون سندك ورفيقك لصحة أحسن.</p>
+        </div>
+
+        <div id="vision" class="content-card">
+            <div class="card-header">
+                <i class="fas fa-eye"></i>
+                <h2>رؤيتنا ورسالتنا</h2>
+            </div>
+            <ul>
+                <li><strong>رؤيتنا:</strong> نطمح نكون المنصة الطبية الرقمية الأولى والأكثر ثقة بالعراق، والمكان الأول اللي يقصده المريض من يدور على معلومة صحية مضبوطة.</li>
+                <li><strong>رسالتنا:</strong> توعية مجتمعنا صحياً من خلال توفير معلومات طبية دقيقة، سهلة، ومجانية للكل، ونسهل طريق المريض حتى يوصل لأحسن الأطباء ومراكز الرعاية، علمود نرفع مستوى الوعي ونقلل من الأخطاء الطبية.</li>
+            </ul>
+        </div>
+
+        <div id="privacy" class="content-card">
+            <div class="card-header">
+                <i class="fas fa-shield-halved"></i>
+                <h2>سياسة الخصوصية</h2>
+            </div>
+            <p>بـ <strong>كشفيّة</strong>، خصوصيتكم وأمان بياناتكم هي أهم شي عندنا.</p>
+            <ul>
+                <li><strong>جمع المعلومات:</strong> إحنا ما نجمع أي معلومات طبية شخصية أو حساسة عن زوارنا. بس ممكن نستخدم أدوات تحليل (مثل Google Analytics) حتى نعرف يا صفحات عليها تفاعل أكثر علمود نحسن تجربتكم بالموقع.</li>
+                <li><strong>الكوكيز (Cookies):</strong> نستخدم ملفات الكوكيز حتى نخلي تصفحكم للموقع أسرع وأسهل.</li>
+                <li><strong>حماية بياناتكم:</strong> مستحيل نبيع، أو نأجر، أو نشارك أي معلومة تخص زوارنا ويا أي جهة خارجية، سركم ببير.</li>
+            </ul>
+        </div>
+
+        <div id="terms" class="content-card">
+            <div class="card-header">
+                <i class="fas fa-file-contract"></i>
+                <h2>الشروط والأحكام (إخلاء المسؤولية)</h2>
+            </div>
+            <p>من تستخدم منصة <strong>كشفيّة</strong>، هذا يعني إنك موافق على هذي الشروط البسيطة:</p>
+            <div class="important-note">
+                <i class="fas fa-triangle-exclamation"></i> إخلاء المسؤولية الطبية (كلش مهم): كل المقالات والمعلومات اللي تقراها هنا هي لغرض التوعية والتثقيف الصحي بس، وما تعوض أبد عن زيارتك للطبيب المختص، ولا تعتبر تشخيص أو وصفة علاج. أمانة، لا تترك نصيحة طبيبك بسبب شي قريته بالإنترنت.
+            </div>
+            <ul>
+                <li><strong>حقوق النشر:</strong> كل الكتابات، التصاميم، والشعارات اللي بالموقع هي ملكية خاصة لمنصة كشفيّة، وما مسموح لأي شخص ينسخها أو يعيد نشرها بدون ما ياخذ إذن من عندنا.</li>
+                <li><strong>استخدام الموقع:</strong> نطلب من كل الزوار يستخدمون الموقع لأغراض زينة ومفيدة وما تضر بحقوق الناس الباقين.</li>
+            </ul>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>عن منصة كشفيّة</h4>
+                <ul>
+                    <li><a href="about.html"><i class="fas fa-angle-left"></i> من نحن</a></li>
+                    <li><a href="about.html#vision"><i class="fas fa-angle-left"></i> رؤيتنا ورسالتنا</a></li>
+                    <li><a href="about.html#privacy"><i class="fas fa-angle-left"></i> سياسة الخصوصية</a></li>
+                    <li><a href="about.html#terms"><i class="fas fa-angle-left"></i> الشروط والأحكام</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h4>خدمات المرضى</h4>
+                <ul>
+                    <li><a href="index.html"><i class="fas fa-angle-left"></i> الرئيسية</a></li>
+                    <li><a href="#"><i class="fas fa-angle-left"></i> دليل الأمراض الشائعة</a></li>
+                    <li><a href="#"><i class="fas fa-angle-left"></i> قائمة الأطباء والمراكز</a></li>
+                    <li><a href="#"><i class="fas fa-angle-left"></i> الأسئلة الشائعة</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h4>معلومات التواصل</h4>
+                <ul>
+                    <li><a href="mailto:ads@kashfiya.com"><i class="fas fa-bullhorn"></i> للتواصل والإعلان: اضغط هنا</a></li>
+                    <li><a href="#"><i class="fab fa-facebook"></i> فيسبوك (Facebook)</a></li>
+                    <li><a href="#"><i class="fab fa-instagram"></i> إنستغرام (Instagram)</a></li>
+                    <li><a href="#"><i class="fab fa-tiktok"></i> تيكتوك (TikTok)</a></li>
+                </ul>
+            </div>
+        </div> 
+        
+        <div class="copyright-bar">
+            &copy; 2026 جميع الحقوق محفوظة لـ كشفيّة
+        </div>
+    </footer>
+
+</body>
+</html>
