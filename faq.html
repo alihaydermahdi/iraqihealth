@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الأسئلة الشائعة | كشفيّة</title>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <style>
+        :root {
+            --nhs-blue: #005eb8;
+            --nhs-dark-blue: #003087;
+            --nhs-light-grey: #f0f4f5;
+            --nhs-text: #212b32;
+            --nhs-white: #ffffff;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            margin: 0;
+            background-color: var(--nhs-light-grey);
+            color: var(--nhs-text);
+            line-height: 1.8;
+            -webkit-font-smoothing: antialiased;
+        }
+        
+        /* --- الهيدر --- */
+        .nhs-header { background-color: var(--nhs-white); border-bottom: 8px solid var(--nhs-blue); padding: 12px 0; }
+        .header-content { max-width: 1300px; margin: 0 auto; padding: 0 20px; display: flex; justify-content: space-between; align-items: center; }
+        .logo-link { display: inline-flex; align-items: center; text-decoration: none; gap: 15px; }
+        .site-logo { max-height: 55px; width: auto; object-fit: contain; }
+        .header-moto { font-weight: 700; color: var(--nhs-blue); font-size: 1.1rem; }
+
+        /* --- الشريط الأزرق العلوي --- */
+        .nhs-nav { background-color: var(--nhs-blue); color: white; position: sticky; top: 0; z-index: 1000; box-shadow: 0 4px 6px rgba(0,0,0,0.1); margin-bottom: 30px; }
+        .nav-content { max-width: 1300px; margin: 0 auto; padding: 0 20px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; }
+        .main-links { display: flex; }
+        .main-links a { color: white; text-decoration: none; padding: 15px 20px; font-weight: 600; font-size: 0.95rem; transition: all 0.2s; display: flex; align-items: center; gap: 8px; border-bottom: 3px solid transparent; }
+        .main-links a:hover, .main-links a.active { background-color: var(--nhs-dark-blue); border-bottom-color: #fb8500; }
+        .nav-actions { display: flex; align-items: center; gap: 15px; }
+        .nav-cta { background-color: var(--nhs-white); color: var(--nhs-blue) !important; padding: 8px 20px; border-radius: 20px; font-weight: 800; font-size: 0.9rem; text-decoration: none; transition: all 0.2s; display: flex; align-items: center; gap: 6px; }
+
+        /* --- تنسيق صفحة الأسئلة الشائعة (الأكورديون) --- */
+        .page-container { max-width: 800px; margin: 0 auto 50px auto; padding: 0 20px; min-height: 50vh; }
+        .page-title { text-align: center; color: var(--nhs-dark-blue); font-size: 2rem; font-weight: 800; margin-bottom: 40px; position: relative; padding-bottom: 15px; }
+        .page-title::after { content: ''; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: 60px; height: 4px; background-color: var(--nhs-blue); border-radius: 2px; }
+
+        .faq-item { background: var(--nhs-white); border-radius: 8px; margin-bottom: 15px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); overflow: hidden; border: 1px solid #e2e8f0; }
+        .faq-question { width: 100%; text-align: right; background: none; border: none; padding: 20px; font-size: 1.1rem; font-weight: 700; color: var(--nhs-dark-blue); cursor: pointer; display: flex; justify-content: space-between; align-items: center; transition: background 0.2s; font-family: inherit; }
+        .faq-question:hover { background-color: #f8fafc; }
+        .faq-question i { color: var(--nhs-blue); transition: transform 0.3s ease; }
+        .faq-question.active i { transform: rotate(180deg); } /* دوران السهم عند الفتح */
+        
+        .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out; background-color: #fafbfc; }
+        .faq-answer-content { padding: 0 20px 20px 20px; color: #4a5568; font-size: 1.05rem; border-top: 1px solid #e2e8f0; margin-top: 10px; padding-top: 15px; line-height: 1.7; }
+
+        /* --- الفوتر --- */
+        footer { background-color: #e8edee; border-top: 8px solid var(--nhs-blue); padding: 40px 20px 20px 20px; margin-top: 40px; }
+        .footer-content { max-width: 1300px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; margin-bottom: 25px; }
+        .footer-section h4 { color: var(--nhs-dark-blue); font-size: 1.05rem; font-weight: 800; margin-bottom: 15px; padding-bottom: 10px; position: relative; }
+        .footer-section h4::after { content: ''; position: absolute; bottom: 0; right: 0; width: 40px; height: 3px; background-color: var(--nhs-blue); border-radius: 2px; }
+        .footer-section ul { list-style: none; padding: 0; margin: 0; }
+        .footer-section ul li { margin-bottom: 10px; font-size: 0.85rem; }
+        .footer-section ul li a { color: #4a5568; text-decoration: none; transition: 0.3s; display: flex; align-items: center; }
+        .footer-section ul li a:hover { color: var(--nhs-blue); padding-right: 6px; }
+        .footer-section i { color: var(--nhs-blue); width: 20px; font-size: 0.95rem; margin-left: 8px; }
+        .copyright-bar { text-align: center; border-top: 1px solid #d1d5d8; padding-top: 15px; font-size: 0.8rem; font-weight: 600; color: #718096; }
+        
+        @media (max-width: 768px) {
+            .header-content { flex-direction: column; text-align: center; gap: 8px; }
+            .header-moto { font-size: 1rem; }
+            .nav-content { flex-direction: column; padding: 0; }
+            .main-links { width: 100%; justify-content: center; overflow-x: auto; }
+            .main-links a { padding: 12px 10px; font-size: 0.85rem; border-bottom: none; }
+            .nav-actions { width: 100%; justify-content: center; padding: 10px; background-color: var(--nhs-dark-blue); }
+            .faq-question { font-size: 1rem; padding: 15px; }
+            .faq-answer-content { font-size: 0.95rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="nhs-header">
+        <div class="header-content">
+            <a href="index.html" class="logo-link">
+                <img src="logo.png" alt="كشفيّة" class="site-logo">
+                <div class="header-moto">كلشي عن صحتك… بلهجتنا العراقية</div>
+            </a>
+        </div>
+    </header>
+
+    <nav class="nhs-nav">
+        <div class="nav-content">
+            <div class="main-links">
+                <a href="index.html"><i class="fas fa-home"></i> الرئيسية</a>
+                <a href="index.html"><i class="fas fa-stethoscope"></i> دليل الأمراض</a>
+                <a href="doctors.html"><i class="fas fa-user-doctor"></i> الأطباء والمراكز</a>
+            </div>
+            <div class="nav-actions">
+                <a href="contact.html" class="nav-cta"><i class="fas fa-phone"></i> تواصل معنا</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="page-container">
+        <h1 class="page-title">الأسئلة الشائعة</h1>
+
+        <div class="faq-item">
+            <button class="faq-question">هل المعلومات بموقع كشفيّة تغني عن زيارة الدكتور؟ <i class="fas fa-chevron-down"></i></button>
+            <div class="faq-answer">
+                <div class="faq-answer-content">
+                    أكيد لا. كل المعلومات والمقالات الموجودة بالموقع هي للتوعية والتثقيف الطبي بس، وتساعدك تفهم حالتك أو مرضك بصورة أحسن. لكنها أبداً ما تعوض عن زيارتك للطبيب المختص حتى يشخصك بدقة ويكتبلك العلاج المناسب.
+                </div>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <button class="faq-question">شلون أگدر أحجز موعد وي طبيب أو مركز طبي؟ <i class="fas fa-chevron-down"></i></button>
+            <div class="faq-answer">
+                <div class="faq-answer-content">
+                    تگدر تدخل على قسم "الأطباء والمراكز" من القائمة الفوك، وتختار التخصص اللي تريده. راح تطلعلك لستة بأسماء الدكاترة الموثوقين، أرقام عياداتهم، عناوينهم وأوقات الدوام، حتى تتصل بيهم وتحجز مباشرة.
+                </div>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <button class="faq-question">هل استخدام منصة كشفيّة مجاني؟ <i class="fas fa-chevron-down"></i></button>
+            <div class="faq-answer">
+                <div class="faq-answer-content">
+                    إي نعم! تصفح الموقع وقراءة كل المقالات والمعلومات الطبية ودليل الأطباء هي خدمات مجانية 100% لكل العراقيين وما بيها أي رسوم.
+                </div>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <button class="faq-question">شلون أگدر أضيف عيادتي أو مركزي الطبي للمنصة؟ <i class="fas fa-chevron-down"></i></button>
+            <div class="faq-answer">
+                <div class="faq-answer-content">
+                    نتشرف بيكم! تگدرون تتواصلون ويانا عن طريق زر "تواصل معنا" الموجود فوك، أو تراسلونا على الإيميل المذكور بالفوتر جوه (ads@kashfiya.com)، وفريقنا راح يجاوبكم بأسرع وقت لترتيب الإضافة وتوثيق العيادة.
+                </div>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <button class="faq-question">هل المعلومات الطبية بالموقع موثوقة؟ <i class="fas fa-chevron-down"></i></button>
+            <div class="faq-answer">
+                <div class="faq-answer-content">
+                    نعم، فريق كشفيّة يعتمد على مصادر طبية عالمية معتمدة وموثوقة، وتتم مراجعة المعلومات وصياغتها بلهجتنا العراقية البسيطة حتى توصل الفكرة للكل بدون تعقيد أو مصطلحات صعبة.
+                </div>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <button class="faq-question">إذا عندي سؤال طبي، أگدر أستشيركم أونلاين؟ <i class="fas fa-chevron-down"></i></button>
+            <div class="faq-answer">
+                <div class="faq-answer-content">
+                    حالياً المنصة تقدم معلومات ومقالات طبية جاهزة وما نقدم استشارات طبية مباشرة (أونلاين) لحماية سلامتكم. ننصحك دائماً بمراجعة طبيبك الخاص لأي استشارة أو تشخيص يخص حالتك الصحية.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>عن منصة كشفيّة</h4>
+                <ul>
+                    <li><a href="about.html"><i class="fas fa-angle-left"></i> من نحن</a></li>
+                    <li><a href="about.html#vision"><i class="fas fa-angle-left"></i> رؤيتنا ورسالتنا</a></li>
+                    <li><a href="about.html#privacy"><i class="fas fa-angle-left"></i> سياسة الخصوصية</a></li>
+                    <li><a href="about.html#terms"><i class="fas fa-angle-left"></i> الشروط والأحكام</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>خدمات المرضى</h4>
+                <ul>
+                    <li><a href="index.html"><i class="fas fa-angle-left"></i> الرئيسية</a></li>
+                    <li><a href="index.html"><i class="fas fa-angle-left"></i> دليل الأمراض الشائعة</a></li>
+                    <li><a href="doctors.html"><i class="fas fa-angle-left"></i> قائمة الأطباء والمراكز</a></li>
+                    <li><a href="faq.html"><i class="fas fa-angle-left"></i> الأسئلة الشائعة</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>معلومات التواصل</h4>
+                <ul>
+                    <li><a href="mailto:ads@kashfiya.com"><i class="fas fa-bullhorn"></i> للتواصل والإعلان: اضغط هنا</a></li>
+                    <li><a href="#"><i class="fab fa-facebook"></i> فيسبوك (Facebook)</a></li>
+                    <li><a href="#"><i class="fab fa-instagram"></i> إنستغرام (Instagram)</a></li>
+                    <li><a href="#"><i class="fab fa-tiktok"></i> تيكتوك (TikTok)</a></li>
+                </ul>
+            </div>
+        </div> 
+        <div class="copyright-bar">&copy; 2026 جميع الحقوق محفوظة لـ كشفيّة</div>
+    </footer>
+
+    <script>
+        document.querySelectorAll('.faq-question').forEach(button => {
+            button.addEventListener('click', () => {
+                // إغلاق كل الأسئلة الأخرى إذا أردت فتح سؤال واحد فقط في كل مرة
+                /* document.querySelectorAll('.faq-question').forEach(otherBtn => {
+                    if (otherBtn !== button && otherBtn.classList.contains('active')) {
+                        otherBtn.classList.remove('active');
+                        otherBtn.nextElementSibling.style.maxHeight = 0;
+                    }
+                }); 
+                */
+
+                const answer = button.nextElementSibling;
+                button.classList.toggle('active');
+                
+                if (button.classList.contains('active')) {
+                    answer.style.maxHeight = answer.scrollHeight + "px";
+                } else {
+                    answer.style.maxHeight = 0;
+                }
+            });
+        });
+    </script>
+</body>
+</html>
