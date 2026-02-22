@@ -26,14 +26,12 @@
             -webkit-font-smoothing: antialiased;
         }
 
-        /* --- الهيدر --- */
         .nhs-header { background-color: var(--nhs-white); border-bottom: 8px solid var(--nhs-blue); padding: 12px 0; }
         .header-content { max-width: 1300px; margin: 0 auto; padding: 0 20px; display: flex; justify-content: space-between; align-items: center; }
         .logo-link { display: inline-flex; align-items: center; text-decoration: none; gap: 15px; }
         .site-logo { max-height: 55px; width: auto; object-fit: contain; }
         .header-moto { font-weight: 700; color: var(--nhs-blue); font-size: 1.1rem; }
 
-        /* --- الشريط الأزرق --- */
         .nhs-nav { background-color: var(--nhs-blue); color: white; position: sticky; top: 0; z-index: 1000; box-shadow: 0 4px 6px rgba(0,0,0,0.1); margin-bottom: 20px; }
         .nav-content { max-width: 1300px; margin: 0 auto; padding: 0 20px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; }
         .main-links { display: flex; }
@@ -43,7 +41,6 @@
         .nav-cta { background-color: var(--nhs-white); color: var(--nhs-blue) !important; padding: 8px 20px; border-radius: 20px; font-weight: 800; font-size: 0.9rem; text-decoration: none; transition: all 0.2s; display: flex; align-items: center; gap: 6px; }
         .nav-cta:hover { background-color: #f0f4f5; transform: translateY(-1px); box-shadow: 0 2px 5px rgba(0,0,0,0.2); }
 
-        /* --- تصميم صفحة المقالة الطبية --- */
         .article-wrapper { max-width: 900px; margin: 0 auto 50px auto; padding: 0 20px; }
         
         .breadcrumb { font-size: 0.9rem; color: #718096; margin-bottom: 20px; display: flex; align-items: center; gap: 8px; }
@@ -63,22 +60,23 @@
         .article-content h2 { color: var(--nhs-blue); font-size: 1.5rem; font-weight: 800; margin-top: 40px; margin-bottom: 15px; display: flex; align-items: center; gap: 10px; }
         .article-content h2 i { font-size: 1.3rem; color: #fb8500; }
         
+        .article-content h3 { color: var(--nhs-dark-blue); font-size: 1.2rem; font-weight: 700; margin-top: 25px; margin-bottom: 10px; }
+        
         .article-content p { font-size: 1.1rem; color: #2d3748; margin-bottom: 20px; }
         
         .article-content ul { padding-right: 20px; margin-bottom: 25px; }
         .article-content ul li { font-size: 1.1rem; color: #2d3748; margin-bottom: 10px; position: relative; list-style-type: none; }
         .article-content ul li::before { content: "\f058"; font-family: "Font Awesome 6 Free"; font-weight: 900; position: absolute; right: -25px; color: var(--nhs-green); font-size: 1.1rem; }
         
-        .article-content .warning-list li::before { content: "\f071"; color: #e53e3e; } /* قائمة التحذيرات بلون أحمر */
+        .article-content .warning-list li::before { content: "\f071"; color: #e53e3e; }
+        .article-content .advice-list li::before { content: "\f0eb"; color: #fb8500; }
 
-        /* مربع الحجز في نهاية المقالة */
         .cta-box { background-color: var(--nhs-light-grey); border: 1px solid #cbd5e0; border-radius: 8px; padding: 30px; text-align: center; margin-top: 50px; }
         .cta-box h3 { color: var(--nhs-dark-blue); margin-top: 0; margin-bottom: 15px; font-size: 1.3rem; font-weight: 800; }
         .cta-box p { color: #4a5568; margin-bottom: 20px; font-size: 1rem; }
         .cta-btn { display: inline-block; background-color: var(--nhs-blue); color: white; padding: 12px 30px; border-radius: 25px; font-weight: 700; text-decoration: none; transition: background 0.2s; }
         .cta-btn:hover { background-color: var(--nhs-dark-blue); }
 
-        /* --- الفوتر --- */
         footer { background-color: #e8edee; border-top: 8px solid var(--nhs-blue); padding: 40px 20px 20px 20px; margin-top: 40px; }
         .footer-content { max-width: 1300px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; margin-bottom: 25px; }
         .footer-section h4 { color: var(--nhs-dark-blue); font-size: 1.05rem; font-weight: 800; margin-top: 0; margin-bottom: 15px; position: relative; padding-bottom: 10px; }
@@ -90,7 +88,6 @@
         .footer-section i { color: var(--nhs-blue); width: 20px; font-size: 0.95rem; margin-left: 8px; }
         .copyright-bar { text-align: center; border-top: 1px solid #d1d5d8; padding-top: 15px; font-size: 0.8rem; font-weight: 600; color: #718096; letter-spacing: 0.5px; }
 
-        /* --- Responsive Queries --- */
         @media (max-width: 768px) {
             .header-content { flex-direction: column; text-align: center; gap: 8px; }
             .header-moto { font-size: 1rem; }
@@ -102,7 +99,6 @@
             .article-card { padding: 20px; }
             .article-title { font-size: 1.8rem; }
             .article-content p, .article-content ul li { font-size: 1rem; }
-            .article-meta { flex-direction: column; align-items: flex-start; gap: 10px; }
         }
     </style>
 </head>
@@ -142,63 +138,81 @@
             <h1 class="article-title">الصداع النصفي (الشقيقة)</h1>
             
             <div class="article-meta">
-                <span><i class="fas fa-calendar-check"></i> آخر تحديث: 22 فبراير 2026</span>
                 <span><i class="fas fa-user-md"></i> مراجعة: فريق كشفيّة الطبي</span>
             </div>
 
             <div class="medical-disclaimer">
                 <i class="fas fa-circle-info"></i>
                 <div>
-                    <strong>ملاحظة مهمة:</strong> هذي المعلومات هي للتوعية بس، وما تعتبر بديل عن زيارتك للطبيب. إذا چان الصداع مالتك كلش قوي أو يجي فجأة، لازم تراجع أقرب طوارئ أو طبيب مختص فوراً.
+                    هذي المعلومات مخصصة للتوعية والتثقيف الصحي فقط، وما تعوض أبد عن استشارة الطبيب المختص أو الفحص السريري.
                 </div>
             </div>
 
             <div class="article-content">
-                <h2><i class="fas fa-circle-question"></i> شنو هو الصداع النصفي؟</h2>
-                <p>الصداع النصفي (الشقيقة) هو مو مجرد وجع راس عادي، هو عبارة عن ألم ينبض (مثل الدگ) وعادةً يصير بجهة وحدة من الراس. مرات هذا الوجع يخليك تحس بلعيان نفس (غثيان) وتصير ما تتحمل لا الضوء القوي ولا الصوت العالي، وممكن يستمر من كم ساعة لحد كم يوم.</p>
+                <p>الصداع النصفي (أو الشقيقة) هو مو مجرد وجع راس عادي، هو عبارة عن ألم ينبض بقوة وعادةً يصير بجهة وحدة من الراس. نوبة الشقيقة ممكن تستمر من 4 ساعات لحد 72 ساعة إذا ما تعالجت، وتأثر حيل على نشاطك اليومي.</p>
 
-                <h2><i class="fas fa-head-side-virus"></i> شنو أهم الأعراض؟</h2>
-                <p>الأعراض تختلف من شخص للثاني، بس أغلب الناس اللي عدهم شقيقة يحسون بـ:</p>
+                <h2><i class="fas fa-head-side-virus"></i> مراحل وأعراض الشقيقة</h2>
+                <p>نوبة الشقيقة غالباً تمر بعدة مراحل، ومو شرط كل شخص يمر بيها كلها:</p>
+                
+                <h3>مرحلة ما قبل الصداع (البادرة)</h3>
+                <p>تصير قبل يوم أو يومين من الوجع، وممكن تحس بيها بتغيير بالمزاج، كآبة، تعب، تثاؤب مستمر، أو رغبة قوية بأكل الحلويات.</p>
+
+                <h3>مرحلة الأورة أو النسمة (Aura)</h3>
+                <p>تصير عند بعض الناس قبل الصداع مباشرة أو وياه. عبارة عن علامات تحذيرية مثل إنك تشوف خطوط متعرجة تلمع، أو تحس بخدر وتنميل بوجهك أو إيدك، ومرات صعوبة بالكلام.</p>
+
+                <h3>مرحلة الصداع</h3>
                 <ul>
-                    <li>ألم ينبض أو يضرب بقوة بجهة وحدة من الراس (ومرات بالجهتين).</li>
-                    <li>حساسية قوية للضوء، الصوت، ومرات حتى للروايح.</li>
-                    <li>لعيان نفس (غثيان) وممكن يوصل للتقيؤ.</li>
-                    <li>دوخة وتعب عام بالجسم.</li>
-                    <li>تشوش بالرؤية أو تشوف مثل الخطوط المضيئة قبل لا يبدي الوجع (يسموها الأورة أو النسمة).</li>
+                    <li>وجع قوي ينبض بجهة وحدة من الراس (ومرات ينتقل للجهتين).</li>
+                    <li>لعيان نفس (غثيان) وتقيؤ.</li>
+                    <li>انزعاج شديد من الضوى العالي والصوت العالي.</li>
+                    <li>الوجع يزيد مع الحركة العادية مثل المشي أو صعود الدرج.</li>
                 </ul>
 
                 <h2><i class="fas fa-bolt"></i> شنو الأشياء اللي تهيّج الصداع؟ (المحفزات)</h2>
-                <p>أكو شغلات معينة ممكن تفتح باب الشقيقة وتخلي الوجع يبدي، منها:</p>
+                <p>أكو شغلات معينة تزيد احتمالية النوبة، منها:</p>
                 <ul>
-                    <li><strong>التوتر والضغط النفسي:</strong> من أكثر الأسباب اللي تهيّج الوجع.</li>
-                    <li><strong>تغيير أوقات النوم:</strong> السهر الطويل أو النوم الزايد عن اللزوم.</li>
-                    <li><strong>بعض الأكل والشرب:</strong> مثل الأجبان القديمة، الجوكليت (الشوكولاتة)، الكافيين (القهوة)، والأكل المالح.</li>
-                    <li><strong>تغييرات الجو:</strong> من يتغير الجو فجأة من بارد لحار أو العكس.</li>
-                    <li><strong>الهرمونات:</strong> خصوصاً عند النساء قبل أو خلال فترة الدورة الشهرية.</li>
+                    <li>التوتر والضغط النفسي أو القلق.</li>
+                    <li>قلة شرب المي (الجفاف).</li>
+                    <li>تخطي الوجبات أو الجوع لفترة طويلة.</li>
+                    <li>قلة النوم أو النوم أكثر من اللازم.</li>
+                    <li>بعض الأكل مثل الأجبان القديمة، الشوكولاتة، واللحوم المصنعة.</li>
+                    <li>شرب الكافيين (القهوة والشاي) بكثرة أو تركه فجأة.</li>
+                    <li>تغيرات الهرمونات عند النساء (مثل فترة الدورة الشهرية).</li>
                 </ul>
 
-                <h2><i class="fas fa-pills"></i> شلون نكدر نعالجه؟</h2>
-                <p>طبعاً العلاج يعتمد على شدة الألم، والطبيب هو اللي يحدد الأنسب الك، بس بصورة عامة يشمل:</p>
+                <h2><i class="fas fa-pills"></i> طرق العلاج والوقاية</h2>
+                <p>العلاج يختلف حسب شدة الحالة وتكرارها، ويقسم إلى قسمين:</p>
+                
+                <h3>وقت نوبة الصداع</h3>
                 <ul>
-                    <li><strong>مسكنات الألم:</strong> مثل الباراسيتامول أو الإيبوبروفين (تفيد إذا تاخذها أول ما يبدي الوجع).</li>
-                    <li><strong>أدوية خاصة بالشقيقة:</strong> أدوية يكتبها الطبيب توكف الوجع مثل أدوية (التريبتان).</li>
-                    <li><strong>أدوية وقائية:</strong> إذا چان الصداع يجيك هواي (أكثر من 4 مرات بالشهر)، الطبيب ممكن يعطيك حباية يومية حتى تمنع الصداع قبل لا يصير.</li>
-                    <li><strong>الراحة:</strong> الكعدة بغرفة هدوء وظلمة، وتخلي كمادات باردة على راسك كلش تفيد.</li>
+                    <li>أخذ مسكنات الألم البسيطة مثل الباراسيتامول أو الإيبوبروفين بأسرع وقت أول ما يبدي الوجع.</li>
+                    <li>إذا المسكنات العادية ما فادت، الطبيب ممكن يوصفلك أدوية خاصة بالشقيقة اسمها التريبتان (Triptans).</li>
+                    <li>أدوية مضادة للغثيان (لعيان النفس).</li>
+                    <li>الكعدة بغرفة هادية ومظلمة تساعد حيل بالراحة.</li>
                 </ul>
 
-                <h2><i class="fas fa-triangle-exclamation" style="color: #e53e3e;"></i> شوكت لازم تراجع طوارئ أو طبيب؟</h2>
-                <p>لازم ما تسكت عن وجع الراس وتراجع طبيب فوراً إذا حسيت بواحد من هذي الأعراض:</p>
+                <h3>نصائح وقائية مهمة لحياتك اليومية</h3>
+                <ul class="advice-list">
+                    <li>سجل "يوميات الصداع": اكتب شوكت إجاك الوجع وشنو أكلت أو سويت قبله، حتى تكتشف شنو اللي يهيج الشقيقة عندك وتبتعد عنه.</li>
+                    <li>حافظ على أوقات نوم منتظمة كل يوم.</li>
+                    <li>اشرب كميات مي زينة طول اليوم.</li>
+                    <li>لا تاخذ مسكنات ألم لأكثر من 10 إلى 15 يوم بالشهر! كثرة المسكنات تسوي حالة اسمها (الصداع الارتدادي أو الصداع الناتج عن كثرة الأدوية) وتخلي حالتك أسوأ.</li>
+                </ul>
+
+                <h2><i class="fas fa-triangle-exclamation"></i> شوكت لازم تراجع طوارئ أو طبيب؟</h2>
+                <p>لازم تستشير دكتور فوراً إذا حسيت بواحد من هذي الأعراض:</p>
                 <ul class="warning-list">
-                    <li>وجع راس مفاجئ مثل الضربة وكأنه "أسوأ وجع بحياتك".</li>
-                    <li>صداع يجي وياه سخونة (حمى)، أو تصلب بالرگبة.</li>
-                    <li>إذا صار عندك ضعف بإيدك أو رجلك، أو ثگل باللسان وصعوبة بالحجي.</li>
-                    <li>إذا الوجع زاد بعد ما انضربت على راسك.</li>
+                    <li>وجع راس مفاجئ كلش قوي وكأنه ضربة على الراس.</li>
+                    <li>صداع يجي وياه سخونة (حمى)، تصلب بالرگبة، أو تخربط بالوعي.</li>
+                    <li>إذا صار عندك ضعف بإيدك أو رجلك، أو ثگل باللسان.</li>
+                    <li>إذا الوجع زاد عليك بعد ما انضربت على راسك.</li>
+                    <li>إذا تغيرت طبيعة الصداع اللي متعود عليه وصار أسوأ بهواي.</li>
                 </ul>
             </div>
 
             <div class="cta-box">
                 <h3>تحتاج استشارة طبية؟</h3>
-                <p>لا تخلي وجع الراس يأثر على حياتك ويومك. احجز موعد هسه وي أفضل أطباء الجملة العصبية.</p>
+                <p>لا تخلي الصداع يأثر على يومك وعملك. احجز موعد هسه وي أفضل أطباء الجملة العصبية للفحص والتشخيص الصحيح.</p>
                 <a href="doctors.html" class="cta-btn"><i class="fas fa-calendar-check"></i> عرض قائمة الأطباء</a>
             </div>
 
