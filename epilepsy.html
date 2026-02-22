@@ -14,7 +14,6 @@
             --nhs-light-grey: #f0f4f5;
             --nhs-text: #212b32;
             --nhs-white: #ffffff;
-            --nhs-green: #007f3b;
         }
 
         body {
@@ -26,12 +25,14 @@
             -webkit-font-smoothing: antialiased;
         }
 
+        /* --- الهيدر --- */
         .nhs-header { background-color: var(--nhs-white); border-bottom: 8px solid var(--nhs-blue); padding: 12px 0; }
         .header-content { max-width: 1300px; margin: 0 auto; padding: 0 20px; display: flex; justify-content: space-between; align-items: center; }
         .logo-link { display: inline-flex; align-items: center; text-decoration: none; gap: 15px; }
         .site-logo { max-height: 55px; width: auto; object-fit: contain; }
         .header-moto { font-weight: 700; color: var(--nhs-blue); font-size: 1.1rem; }
 
+        /* --- الشريط الأزرق --- */
         .nhs-nav { background-color: var(--nhs-blue); color: white; position: sticky; top: 0; z-index: 1000; box-shadow: 0 4px 6px rgba(0,0,0,0.1); margin-bottom: 20px; }
         .nav-content { max-width: 1300px; margin: 0 auto; padding: 0 20px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; }
         .main-links { display: flex; }
@@ -41,6 +42,7 @@
         .nav-cta { background-color: var(--nhs-white); color: var(--nhs-blue) !important; padding: 8px 20px; border-radius: 20px; font-weight: 800; font-size: 0.9rem; text-decoration: none; transition: all 0.2s; display: flex; align-items: center; gap: 6px; }
         .nav-cta:hover { background-color: #f0f4f5; transform: translateY(-1px); box-shadow: 0 2px 5px rgba(0,0,0,0.2); }
 
+        /* --- تصميم صفحة المقالة الطبية (رسمي) --- */
         .article-wrapper { max-width: 900px; margin: 0 auto 50px auto; padding: 0 20px; }
         
         .breadcrumb { font-size: 0.9rem; color: #718096; margin-bottom: 20px; display: flex; align-items: center; gap: 8px; }
@@ -54,29 +56,32 @@
         .article-meta { display: flex; align-items: center; gap: 20px; font-size: 0.9rem; color: #718096; margin-bottom: 30px; padding-bottom: 20px; border-bottom: 1px solid #e2e8f0; }
         .article-meta span { display: flex; align-items: center; gap: 6px; }
 
-        .medical-disclaimer { background-color: #fff3cd; border-right: 4px solid #f6ad55; padding: 15px 20px; border-radius: 4px; font-weight: 600; color: #9c4221; margin-bottom: 30px; font-size: 0.95rem; display: flex; gap: 15px; align-items: flex-start; }
-        .medical-disclaimer i { font-size: 1.4rem; margin-top: 2px; }
+        /* إخلاء المسؤولية */
+        .medical-disclaimer { background-color: #f8fafc; border-right: 4px solid #cbd5e0; padding: 15px 20px; border-radius: 4px; font-weight: 600; color: #4a5568; margin-bottom: 30px; font-size: 0.95rem; display: flex; gap: 15px; align-items: flex-start; }
 
-        .article-content h2 { color: var(--nhs-blue); font-size: 1.5rem; font-weight: 800; margin-top: 40px; margin-bottom: 15px; display: flex; align-items: center; gap: 10px; }
-        .article-content h2 i { font-size: 1.3rem; color: #fb8500; }
-        
-        .article-content h3 { color: var(--nhs-dark-blue); font-size: 1.2rem; font-weight: 700; margin-top: 25px; margin-bottom: 10px; }
-        
+        /* النصوص والعناوين الرسمية */
+        .article-content h2 { color: var(--nhs-blue); font-size: 1.6rem; font-weight: 800; margin-top: 40px; margin-bottom: 15px; padding-bottom: 8px; border-bottom: 2px solid #e2e8f0; }
+        .article-content h3 { color: var(--nhs-dark-blue); font-size: 1.25rem; font-weight: 700; margin-top: 25px; margin-bottom: 10px; }
         .article-content p { font-size: 1.1rem; color: #2d3748; margin-bottom: 20px; }
         
-        .article-content ul { padding-right: 20px; margin-bottom: 25px; }
-        .article-content ul li { font-size: 1.1rem; color: #2d3748; margin-bottom: 10px; position: relative; list-style-type: none; }
-        .article-content ul li::before { content: "\f058"; font-family: "Font Awesome 6 Free"; font-weight: 900; position: absolute; right: -25px; color: var(--nhs-green); font-size: 1.1rem; }
-        
-        .article-content .warning-list li::before { content: "\f071"; color: #e53e3e; }
-        .article-content .advice-list li::before { content: "\f0eb"; color: #fb8500; }
+        .article-content ul { padding-right: 25px; margin-bottom: 25px; list-style-type: disc; }
+        .article-content ul li { font-size: 1.1rem; color: #2d3748; margin-bottom: 8px; }
 
+        /* --- صندوق الطوارئ المميز --- */
+        .emergency-box { background-color: #fff5f5; border: 1px solid #fed7d7; border-right: 5px solid #e53e3e; border-radius: 8px; padding: 30px; margin-top: 40px; margin-bottom: 20px; }
+        .emergency-box h2 { color: #c53030 !important; border-bottom: 2px solid #feb2b2 !important; margin-top: 0 !important; padding-bottom: 10px; font-size: 1.5rem; }
+        .emergency-box p { color: #742a2a; margin-bottom: 15px; font-weight: 600; }
+        .emergency-box ul { margin-bottom: 0; color: #742a2a; }
+        .emergency-box ul li { color: #742a2a; margin-bottom: 8px; font-weight: 600; }
+
+        /* مربع الحجز في نهاية المقالة */
         .cta-box { background-color: var(--nhs-light-grey); border: 1px solid #cbd5e0; border-radius: 8px; padding: 30px; text-align: center; margin-top: 50px; }
         .cta-box h3 { color: var(--nhs-dark-blue); margin-top: 0; margin-bottom: 15px; font-size: 1.3rem; font-weight: 800; }
         .cta-box p { color: #4a5568; margin-bottom: 20px; font-size: 1rem; }
         .cta-btn { display: inline-block; background-color: var(--nhs-blue); color: white; padding: 12px 30px; border-radius: 25px; font-weight: 700; text-decoration: none; transition: background 0.2s; }
         .cta-btn:hover { background-color: var(--nhs-dark-blue); }
 
+        /* --- الفوتر --- */
         footer { background-color: #e8edee; border-top: 8px solid var(--nhs-blue); padding: 40px 20px 20px 20px; margin-top: 40px; }
         .footer-content { max-width: 1300px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; margin-bottom: 25px; }
         .footer-section h4 { color: var(--nhs-dark-blue); font-size: 1.05rem; font-weight: 800; margin-top: 0; margin-bottom: 15px; position: relative; padding-bottom: 10px; }
@@ -88,6 +93,7 @@
         .footer-section i { color: var(--nhs-blue); width: 20px; font-size: 0.95rem; margin-left: 8px; }
         .copyright-bar { text-align: center; border-top: 1px solid #d1d5d8; padding-top: 15px; font-size: 0.8rem; font-weight: 600; color: #718096; letter-spacing: 0.5px; }
 
+        /* --- Responsive Queries --- */
         @media (max-width: 768px) {
             .header-content { flex-direction: column; text-align: center; gap: 8px; }
             .header-moto { font-size: 1rem; }
@@ -99,6 +105,7 @@
             .article-card { padding: 20px; }
             .article-title { font-size: 1.8rem; }
             .article-content p, .article-content ul li { font-size: 1rem; }
+            .emergency-box { padding: 20px; }
         }
     </style>
 </head>
@@ -142,81 +149,82 @@
             </div>
 
             <div class="medical-disclaimer">
-                <i class="fas fa-circle-info"></i>
                 <div>
-                    هذي المعلومات مخصصة للتوعية والتثقيف الصحي فقط، وما تعوض أبد عن استشارة الطبيب المختص أو الفحص السريري.
+                    هذه المعلومات مخصصة للتوعية والتثقيف الصحي فقط، ولا تعتبر بديلاً عن استشارة الطبيب المختص أو الفحص السريري الدقيق.
                 </div>
             </div>
 
             <div class="article-content">
-                <p>الصرع هو حالة تأثر على الدماغ وتسبب نوبات متكررة (تشنجات). النوبة ببساطة تصير بسبب خربطة أو شحنات كهربائية زايدة ومفاجئة بخلايا الدماغ. مو كل شخص تصير عنده نوبة تشنج معناها عنده صرع، الطبيب يشخص الصرع إذا تكررت النوبات أكثر من مرة بدون سبب واضح.</p>
+                <p>الصرع هو حالة تؤثر على الدماغ وتسبب نوبات متكررة (تشنجات). النوبة تحدث نتيجة خلل أو شحنات كهربائية زائدة ومفاجئة في خلايا الدماغ. ليس كل شخص يتعرض لنوبة تشنج يعتبر مصاباً بالصرع؛ فالطبيب يشخص حالة الصرع فقط عندما تتكرر النوبات أكثر من مرة بدون سبب مؤقت وواضح.</p>
 
-                <h2><i class="fas fa-head-side-virus"></i> أنواع النوبات وشلون تصير؟</h2>
-                <p>الأعراض تختلف حيل حسب الجزء اللي تأثر بالدماغ. تنقسم النوبات بشكل رئيسي إلى نوعين:</p>
+                <h2>أنواع نوبات الصرع وأعراضها</h2>
+                <p>تختلف الأعراض بشكل كبير حسب الجزء المتأثر من الدماغ، وتنقسم النوبات بشكل رئيسي إلى نوعين:</p>
                 
                 <h3>النوبات العامة (Generalised Seizures)</h3>
-                <p>هاي تأثر على الدماغ كله بمرة وحدة. والمريض بيها يفقد الوعي تماماً، وأشهر أعراضها:</p>
+                <p>تؤثر هذه النوبات على الدماغ بالكامل في وقت واحد، ويفقد فيها المريض الوعي تماماً، ومن أبرز أعراضها:</p>
                 <ul>
-                    <li>يصير تصلب قوي بكل عضلات الجسم والمريض يوكع بالكاع.</li>
-                    <li>تبدي رجفة أو نفضة قوية وسريعة بالأيدين والرجلين.</li>
-                    <li>ممكن يعض لسانه بالغلط، أو يطلع زبد من حلكه.</li>
-                    <li>ممكن يفقد السيطرة على الإدرار (التبول اللاإرادي).</li>
-                    <li>بعد ما تخلص النوبة، المريض يحس بتعب شديد، دايخ، وممكن ينام لفترة.</li>
+                    <li>تصلب قوي في جميع عضلات الجسم وسقوط المريض على الأرض.</li>
+                    <li>رجفة أو نفضة قوية وسريعة في اليدين والقدمين.</li>
+                    <li>احتمالية عض اللسان بالخطأ، أو خروج زبد من الفم.</li>
+                    <li>فقدان السيطرة على الإدرار (التبول اللاإرادي).</li>
+                    <li>الشعور بتعب شديد ودوخة بعد انتهاء النوبة، وغالباً ما يدخل المريض في نوم عميق لفترة.</li>
                 </ul>
 
                 <h3>النوبات البؤرية أو الجزئية (Focal Seizures)</h3>
-                <p>هاي تأثر على جزء واحد بس من الدماغ، ومرات المريض يبقى واعي بيها:</p>
+                <p>تؤثر هذه النوبات على جزء واحد فقط من الدماغ، وقد يبقى المريض واعياً خلالها:</p>
                 <ul>
-                    <li>يحس بشعور غريب مثل طعم أو ريحة مو موجودة، أو شعور بالخوف فجأة.</li>
-                    <li>تصير رجفة أو نفضة بجزء واحد من الجسم (مثل إيده أو رجله بس).</li>
-                    <li>مرات المريض يصفن ويركز بنقطة وحدة وما يجاوب من تحاجيه.</li>
-                    <li>يقوم بحركات متكررة بدون وعي، مثل يفرك إيديه أو يبلع ريگه باستمرار.</li>
+                    <li>الشعور بإحساس غريب مثل تذوق طعم أو شم رائحة غير موجودة، أو الشعور بخوف مفاجئ.</li>
+                    <li>رجفة أو نفضة في جزء معين من الجسم (مثل اليد أو القدم فقط).</li>
+                    <li>التحديق في نقطة معينة (الصفنة) وعدم الاستجابة لمن يتحدث معه.</li>
+                    <li>القيام بحركات متكررة لاإرادية، مثل فرك اليدين أو البلع المستمر.</li>
                 </ul>
 
-                <h2><i class="fas fa-bolt"></i> شنو الأشياء اللي تهيّج نوبات الصرع؟ (المحفزات)</h2>
-                <p>عند بعض مرضى الصرع، اكو شغلات ممكن تزيد من احتمالية حدوث النوبة، مثل:</p>
+                <h2>محفزات نوبات الصرع</h2>
+                <p>بالنسبة لبعض مرضى الصرع، توجد عوامل معينة قد تزيد من احتمالية حدوث النوبة، منها:</p>
                 <ul>
-                    <li>نسيان أخذ علاج الصرع بالوقت المحدد.</li>
-                    <li>قلة النوم والتعب الشديد والإرهاق.</li>
-                    <li>التوتر والضغط النفسي العالي.</li>
-                    <li>تفويت وجبات الأكل (هبوط السكر بالدم).</li>
-                    <li>السخونة (الحمى) والالتهابات، خصوصاً عند الأطفال.</li>
-                    <li>الأضوية اللي ترمش بسرعة (الفلاشر) أو ألعاب الفيديو (هذي تأثر على نسبة قليلة جداً من المرضى).</li>
+                    <li>نسيان أخذ العلاج في الوقت المحدد.</li>
+                    <li>قلة النوم والإرهاق الجسدي الشديد.</li>
+                    <li>التوتر المستمر والضغوط النفسية.</li>
+                    <li>إهمال وجبات الطعام مما يؤدي إلى هبوط السكر في الدم.</li>
+                    <li>ارتفاع درجة الحرارة (الحمى) والالتهابات، وتكثر هذه الحالة عند الأطفال.</li>
+                    <li>الأضواء الوامضة بسرعة أو ألعاب الفيديو (تؤثر على نسبة قليلة جداً من المرضى).</li>
                 </ul>
 
-                <h2><i class="fas fa-pills"></i> طرق العلاج والتعامل وي المرض</h2>
-                <p>الصرع مرض ممكن السيطرة عليه بشكل ممتاز، بحيث المريض يعيش حياة طبيعية جداً:</p>
+                <h2>طرق العلاج والإسعافات الأولية</h2>
+                <p>الصرع حالة طبية يمكن السيطرة عليها بشكل ممتاز، مما يتيح للمريض ممارسة حياته بشكل طبيعي تماماً:</p>
                 
                 <h3>العلاج الدوائي</h3>
                 <ul>
-                    <li><strong>الأدوية المضادة للصرع (AEDs):</strong> هي العلاج الأساسي. هاي الأدوية ما تعالج الصرع نهائياً، بس تمنع النوبات لا تصير.</li>
-                    <li>أهم نقطة بالعلاج: لازم تاخذ الدوة يومياً بنفس الوقت، وأبد لا تكطعه بكيفك حتى لو حسيت نفسك صرت زين، لأن الكطعة المفاجئة ممكن ترجع النوبات بشكل أقوى.</li>
+                    <li>تعتبر الأدوية المضادة للصرع (AEDs) هي العلاج الأساسي. هذه الأدوية تعمل على منع حدوث النوبات وتقليل تكرارها.</li>
+                    <li>الالتزام التام بأخذ الدواء يومياً في نفس الوقت هو أهم خطوة في العلاج. يمنع إيقاف الدواء فجأة دون استشارة الطبيب حتى وإن تحسنت الحالة، لأن الانقطاع المفاجئ قد يؤدي لنوبات أشد.</li>
                 </ul>
 
-                <h3>الإسعافات الأولية (إذا شفت شخص كدامج صارت عنده نوبة)</h3>
-                <ul class="advice-list">
-                    <li>ابقى هادئ، وابعد أي شي خطر أو حاد من يمه حتى لا ينجرح.</li>
-                    <li>خلي مخدة أو ملابس طرية جوه راسه حتى لا ينضرب بالكاع.</li>
-                    <li><strong>أبد لا تلزمه حيل</strong> أو تحاول توكف حركته ورجفته.</li>
-                    <li><strong>أبد لا تخلي أي شي بحلكه</strong> (لا خاشوكة ولا اصبعك ولا مي)، ما راح يبلع لسانه، لتخاف.</li>
-                    <li>من تخلص النوبة وتروح الرجفة، كلبه على صفحته (وضعية الإفاقة) حتى يتنفس براحته وميختنك باللعاب.</li>
+                <h3>الإسعافات الأولية (كيف تتصرف إذا شخصت نوبة أمامك؟)</h3>
+                <ul>
+                    <li>حافظ على هدوئك، وأبعد أي أدوات حادة أو خطيرة من حول المريض لتجنب إصابته.</li>
+                    <li>ضع وسادة أو قطعة قماش ناعمة تحت رأسه لحمايته من الارتطام بالأرض.</li>
+                    <li>لا تحاول تقييد حركته أو إيقاف الرجفة بالقوة.</li>
+                    <li>يمنع منعاً باتاً وضع أي شيء داخل فم المريض (كالملعقة أو الماء)؛ لا يوجد خطر من "بلع اللسان".</li>
+                    <li>بعد انتهاء النوبة وتوقف الرجفة، قم بقلب المريض بلطف على جانبه (وضعية الإفاقة) ليتمكن من التنفس براحة ولتجنب الاختناق باللعاب.</li>
                 </ul>
+            </div>
 
-                <h2><i class="fas fa-triangle-exclamation"></i> شوكت لازم تتصل بالإسعاف أو تروح للطوارئ؟</h2>
-                <p>أغلب النوبات تخلص وحدها ومتحتاج طوارئ، بس لازم تطلب الإسعاف فوراً بهذي الحالات:</p>
-                <ul class="warning-list">
-                    <li>إذا هاي أول نوبة صرع تصير بحياة الشخص.</li>
-                    <li>إذا النوبة طولت أكثر من 5 دقايق متواصلة.</li>
-                    <li>إذا تكررت النوبات وحدة ورا اللخ، والمريض ما رجع لوعيه بين النوبات.</li>
-                    <li>إذا المريض تأذى أو انجرح جرح قوي خلال وكعته.</li>
-                    <li>إذا صار عنده صعوبة مستمرة بالتنفس بعد ما خلصت النوبة.</li>
+            <div class="emergency-box">
+                <h2>حالات الطوارئ (متى يجب الاتصال بالإسعاف فوراً؟)</h2>
+                <p>معظم نوبات الصرع تنتهي وحدها ولا تستدعي الذهاب للطوارئ، لكن يجب طلب المساعدة الطبية الفورية في الحالات التالية:</p>
+                <ul>
+                    <li>إذا كانت هذه هي أول نوبة صرع تحدث للشخص في حياته.</li>
+                    <li>إذا استمرت النوبة لأكثر من 5 دقائق متواصلة.</li>
+                    <li>إذا تكررت النوبات واحدة تلو الأخرى دون أن يستعيد المريض وعيه بينها.</li>
+                    <li>إذا تعرض المريض لإصابة جسدية أو جرح بليغ أثناء سقوطه.</li>
+                    <li>إذا عانى المريض من صعوبة مستمرة في التنفس بعد انتهاء النوبة.</li>
                 </ul>
             </div>
 
             <div class="cta-box">
                 <h3>تحتاج متابعة أو استشارة طبية؟</h3>
-                <p>السيطرة على الصرع تحتاج طبيب مختص ومتابعة مستمرة. احجز موعد هسه وي أفضل أطباء الجملة العصبية للفحص والتشخيص الصحيح.</p>
-                <a href="doctors.html" class="cta-btn"><i class="fas fa-calendar-check"></i> عرض قائمة الأطباء</a>
+                <p>السيطرة على الصرع تتطلب متابعة مستمرة مع طبيب مختص. احجز موعدك الآن مع أفضل أطباء الجملة العصبية لضمان الخطة العلاجية الصحيحة.</p>
+                <a href="doctors.html" class="cta-btn">عرض قائمة الأطباء</a>
             </div>
 
         </div>
@@ -227,30 +235,30 @@
             <div class="footer-section">
                 <h4>عن منصة كشفيّة</h4>
                 <ul>
-                    <li><a href="about.html"><i class="fas fa-angle-left"></i> من نحن</a></li>
-                    <li><a href="about.html#vision"><i class="fas fa-angle-left"></i> رؤيتنا ورسالتنا</a></li>
-                    <li><a href="about.html#privacy"><i class="fas fa-angle-left"></i> سياسة الخصوصية</a></li>
-                    <li><a href="about.html#terms"><i class="fas fa-angle-left"></i> الشروط والأحكام</a></li>
+                    <li><a href="about.html">من نحن</a></li>
+                    <li><a href="about.html#vision">رؤيتنا ورسالتنا</a></li>
+                    <li><a href="about.html#privacy">سياسة الخصوصية</a></li>
+                    <li><a href="about.html#terms">الشروط والأحكام</a></li>
                 </ul>
             </div>
             
             <div class="footer-section">
                 <h4>خدمات المرضى</h4>
                 <ul>
-                    <li><a href="index.html"><i class="fas fa-angle-left"></i> الرئيسية</a></li>
-                    <li><a href="index.html"><i class="fas fa-angle-left"></i> دليل الأمراض الشائعة</a></li>
-                    <li><a href="doctors.html"><i class="fas fa-angle-left"></i> قائمة الأطباء والمراكز</a></li>
-                    <li><a href="faq.html"><i class="fas fa-angle-left"></i> الأسئلة الشائعة</a></li>
+                    <li><a href="index.html">الرئيسية</a></li>
+                    <li><a href="index.html">دليل الأمراض الشائعة</a></li>
+                    <li><a href="doctors.html">قائمة الأطباء والمراكز</a></li>
+                    <li><a href="faq.html">الأسئلة الشائعة</a></li>
                 </ul>
             </div>
             
             <div class="footer-section">
                 <h4>معلومات التواصل</h4>
                 <ul>
-                    <li><a href="contact.html"><i class="fas fa-bullhorn"></i> للتواصل والإعلان: اضغط هنا</a></li>
-                    <li><a href="https://www.facebook.com/kashfeyacom" target="_blank" rel="noopener noreferrer"><i class="fab fa-facebook"></i> فيسبوك (Facebook)</a></li>
-                    <li><a href="https://www.instagram.com/kashfeyacom" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram"></i> إنستغرام (Instagram)</a></li>
-                    <li><a href="https://www.tiktok.com/@kashfeya.com" target="_blank" rel="noopener noreferrer"><i class="fab fa-tiktok"></i> تيكتوك (TikTok)</a></li>
+                    <li><a href="contact.html">للتواصل والإعلان: اضغط هنا</a></li>
+                    <li><a href="https://www.facebook.com/kashfeyacom" target="_blank" rel="noopener noreferrer">فيسبوك (Facebook)</a></li>
+                    <li><a href="https://www.instagram.com/kashfeyacom" target="_blank" rel="noopener noreferrer">إنستغرام (Instagram)</a></li>
+                    <li><a href="https://www.tiktok.com/@kashfeya.com" target="_blank" rel="noopener noreferrer">تيكتوك (TikTok)</a></li>
                 </ul>
             </div>
         </div> 
