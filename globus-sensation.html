@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> كشفيّـة </title>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <style>
+        :root {
+            --nhs-blue: #005eb8;
+            --nhs-dark-blue: #003087;
+            --nhs-light-grey: #f0f4f5;
+            --nhs-text: #212b32;
+            --nhs-white: #ffffff;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            margin: 0;
+            background-color: var(--nhs-light-grey);
+            color: var(--nhs-text);
+            line-height: 1.8;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* --- الهيدر --- */
+        .nhs-header { background-color: var(--nhs-white); border-bottom: 8px solid var(--nhs-blue); padding: 12px 0; }
+        .header-content { max-width: 1300px; margin: 0 auto; padding: 0 20px; display: flex; justify-content: space-between; align-items: center; }
+        .logo-link { display: inline-flex; align-items: center; text-decoration: none; gap: 15px; }
+        .site-logo { max-height: 55px; width: auto; object-fit: contain; }
+        .header-moto { font-weight: 700; color: var(--nhs-blue); font-size: 1.1rem; }
+
+        /* --- الشريط الأزرق --- */
+        .nhs-nav { background-color: var(--nhs-blue); color: white; position: sticky; top: 0; z-index: 1000; box-shadow: 0 4px 6px rgba(0,0,0,0.1); margin-bottom: 20px; }
+        .nav-content { max-width: 1300px; margin: 0 auto; padding: 0 20px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; }
+        .main-links { display: flex; }
+        .main-links a { color: white; text-decoration: none; padding: 15px 20px; font-weight: 600; font-size: 0.95rem; transition: all 0.2s; display: flex; align-items: center; gap: 8px; border-bottom: 3px solid transparent; }
+        .main-links a:hover, .main-links a.active { background-color: var(--nhs-dark-blue); border-bottom-color: #fb8500; }
+        .nav-actions { display: flex; align-items: center; gap: 15px; }
+        .nav-cta { background-color: var(--nhs-white); color: var(--nhs-blue) !important; padding: 8px 20px; border-radius: 20px; font-weight: 800; font-size: 0.9rem; text-decoration: none; transition: all 0.2s; display: flex; align-items: center; gap: 6px; }
+        .nav-cta:hover { background-color: #f0f4f5; transform: translateY(-1px); box-shadow: 0 2px 5px rgba(0,0,0,0.2); }
+
+        /* --- تصميم صفحة المقالة الطبية (رسمي) --- */
+        .article-wrapper { max-width: 900px; margin: 0 auto 50px auto; padding: 0 20px; }
+        
+        .breadcrumb { font-size: 0.9rem; color: #718096; margin-bottom: 20px; display: flex; align-items: center; gap: 8px; }
+        .breadcrumb a { color: var(--nhs-blue); text-decoration: none; font-weight: 600; }
+        .breadcrumb a:hover { text-decoration: underline; }
+
+        .article-card { background: var(--nhs-white); border-radius: 8px; padding: 40px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
+        
+        .article-title { color: var(--nhs-dark-blue); font-size: 2.2rem; font-weight: 800; margin-top: 0; margin-bottom: 10px; line-height: 1.3; }
+        
+        .article-meta { display: flex; align-items: center; gap: 20px; font-size: 0.9rem; color: #718096; margin-bottom: 30px; padding-bottom: 20px; border-bottom: 1px solid #e2e8f0; }
+        .article-meta span { display: flex; align-items: center; gap: 6px; }
+
+        /* إخلاء المسؤولية العلوي الموحد */
+        .medical-disclaimer { background-color: #fff3cd; border-right: 4px solid #f6ad55; padding: 15px 20px; border-radius: 4px; font-weight: 600; color: #9c4221; margin-bottom: 30px; font-size: 0.95rem; display: flex; gap: 15px; align-items: flex-start; }
+        .medical-disclaimer i { font-size: 1.4rem; margin-top: 2px; }
+
+        /* النصوص والعناوين الرسمية (بدون أيقونات) */
+        .article-content h2 { color: var(--nhs-blue); font-size: 1.6rem; font-weight: 800; margin-top: 40px; margin-bottom: 15px; padding-bottom: 8px; border-bottom: 2px solid #e2e8f0; }
+        .article-content h3 { color: var(--nhs-dark-blue); font-size: 1.25rem; font-weight: 700; margin-top: 25px; margin-bottom: 10px; }
+        .article-content p { font-size: 1.1rem; color: #2d3748; margin-bottom: 20px; }
+        
+        .article-content ul { padding-right: 25px; margin-bottom: 25px; list-style-type: disc; }
+        .article-content ul li { font-size: 1.1rem; color: #2d3748; margin-bottom: 8px; }
+
+        /* --- صندوق الطوارئ المميز --- */
+        .emergency-box { background-color: #fff5f5; border: 1px solid #fed7d7; border-right: 5px solid #e53e3e; border-radius: 8px; padding: 30px; margin-top: 40px; margin-bottom: 20px; }
+        .emergency-box h2 { color: #c53030 !important; border-bottom: 2px solid #feb2b2 !important; margin-top: 0 !important; padding-bottom: 10px; font-size: 1.5rem; }
+        .emergency-box p { color: #742a2a; margin-bottom: 15px; font-weight: 600; }
+        .emergency-box ul { margin-bottom: 0; color: #742a2a; }
+        .emergency-box ul li { color: #742a2a; margin-bottom: 8px; font-weight: 600; }
+
+        /* مربع الحجز في نهاية المقالة */
+        .cta-box { background-color: var(--nhs-light-grey); border: 1px solid #cbd5e0; border-radius: 8px; padding: 30px; text-align: center; margin-top: 50px; }
+        .cta-box h3 { color: var(--nhs-dark-blue); margin-top: 0; margin-bottom: 15px; font-size: 1.3rem; font-weight: 800; }
+        .cta-box p { color: #4a5568; margin-bottom: 20px; font-size: 1rem; }
+        .cta-btn { display: inline-block; background-color: var(--nhs-blue); color: white; padding: 12px 30px; border-radius: 25px; font-weight: 700; text-decoration: none; transition: background 0.2s; }
+        .cta-btn:hover { background-color: var(--nhs-dark-blue); }
+
+        /* --- الفوتر --- */
+        footer { background-color: #e8edee; border-top: 8px solid var(--nhs-blue); padding: 40px 20px 20px 20px; margin-top: 40px; }
+        .footer-content { max-width: 1300px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; margin-bottom: 25px; }
+        .footer-section h4 { color: var(--nhs-dark-blue); font-size: 1.05rem; font-weight: 800; margin-top: 0; margin-bottom: 15px; position: relative; padding-bottom: 10px; }
+        .footer-section h4::after { content: ''; position: absolute; bottom: 0; right: 0; width: 40px; height: 3px; background-color: var(--nhs-blue); border-radius: 2px; }
+        .footer-section ul { list-style: none; padding: 0; margin: 0; }
+        .footer-section ul li { margin-bottom: 10px; font-size: 0.85rem; color: #4a5568; display: flex; align-items: center; }
+        .footer-section ul li a { color: #4a5568; text-decoration: none; transition: all 0.3s ease; }
+        .footer-section ul li a:hover { color: var(--nhs-blue); padding-right: 6px; }
+        .footer-section i { color: var(--nhs-blue); width: 20px; font-size: 0.95rem; margin-left: 8px; }
+        .copyright-bar { text-align: center; border-top: 1px solid #d1d5d8; padding-top: 15px; font-size: 0.8rem; font-weight: 600; color: #718096; letter-spacing: 0.5px; }
+
+        /* --- Responsive Queries --- */
+        @media (max-width: 768px) {
+            .header-content { flex-direction: column; text-align: center; gap: 8px; }
+            .header-moto { font-size: 1rem; }
+            .nav-content { flex-direction: column; padding: 0; }
+            .main-links { width: 100%; justify-content: center; overflow-x: auto; }
+            .main-links a { padding: 12px 10px; font-size: 0.85rem; border-bottom: none; }
+            .nav-actions { width: 100%; justify-content: center; padding: 10px; background-color: var(--nhs-dark-blue); }
+            
+            .article-card { padding: 20px; }
+            .article-title { font-size: 1.8rem; }
+            .article-content p, .article-content ul li { font-size: 1rem; }
+            .emergency-box { padding: 20px; }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="nhs-header">
+        <div class="header-content">
+            <a href="index.html" class="logo-link">
+                <img src="logo.png" alt="شعار كشفيّة" class="site-logo">
+                <div class="header-moto">كلشي عن صحتك… بلهجتنا العراقية</div>
+            </a>
+        </div>
+    </header>
+
+    <nav class="nhs-nav">
+        <div class="nav-content">
+            <div class="main-links">
+                <a href="index.html"><i class="fas fa-home"></i> الرئيسية</a>
+                <a href="index.html" class="active"><i class="fas fa-stethoscope"></i> دليل الأمراض</a>
+                <a href="doctors.html"><i class="fas fa-user-doctor"></i> الأطباء والمراكز</a>
+            </div>
+            <div class="nav-actions">
+                <a href="contact.html" class="nav-cta"><i class="fas fa-phone"></i> تواصل معنا</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="article-wrapper">
+        
+        <div class="breadcrumb">
+            <a href="index.html">الرئيسية</a> <i class="fas fa-chevron-left" style="font-size: 0.7rem;"></i> 
+            <a href="ent-diseases.html">أمراض الأنف والأذن والحنجرة</a> <i class="fas fa-chevron-left" style="font-size: 0.7rem;"></i> 
+            <span>غصة البلعوم</span>
+        </div>
+
+        <div class="article-card">
+            <h1 class="article-title">غصة البلعوم (إحساس اللقمة أو Globus Sensation)</h1>
+            
+            <div class="article-meta">
+                <span><i class="fas fa-user-md"></i> مراجعة: فريق كشفيّة الطبي</span>
+            </div>
+
+            <div class="medical-disclaimer">
+                <i class="fas fa-circle-info"></i>
+                <div>
+                    هاي المعلومات مخصصة للتوعية والتثقيف الصحي فقط، وما تعوض أبد عن استشارة الطبيب المختص أو الفحص السريري.
+                </div>
+            </div>
+
+            <div class="article-content">
+                <p>هواي ناس يراجعون الطبيب وهمه خايفين وقلقين، يشتكون من شعور مزعج كأنو اكو "لگمة"، "حباية دُوة"، أو "غصة" واگفة ببلعومهم ومدا تنزل، رغم إنو بالحقيقة ماكو أي شي ساد البلعوم. هاي الحالة طبياً نسميها (Globus sensation)، وهي حالة جداً شائعة. أول وأهم معلومة لازم تعرفها حتى ترتاح نفسياً: <strong>هاي الحالة مجرد "إحساس" مزعج، وهي مو خطيرة أبداً ومالها أي علاقة بالسرطان.</strong></p>
+
+                <h2>أهم الأعراض (شلون تميزها؟)</h2>
+                <p>الأعراض تكون مميزة جداً، وتختلف عن أمراض المريء الحقيقية:</p>
+                <ul>
+                    <li>تحس اكو تكتل أو شد مستمر بمنطقة الرگبة والبلعوم.</li>
+                    <li><strong>الميزة الأهم:</strong> هذا الشعور يقل أو يختفي تماماً من تاكل وتشرب! يعني الأكل ينزل طبيعي بدون أي مشكلة، بس من تبلع ريگك (تبلع على الخالي) تحس بالغصة تصير قوية.</li>
+                    <li>تضطر "تتنحنح" أو تحاول تنظف بلعومك باستمرار.</li>
+                    <li>الأعراض تجي وتروح، وتزيد بشكل واضح وقت الزعل، التفكير، أو الضغط النفسي.</li>
+                </ul>
+
+                <h2>شنو الأسباب اللي تخليك تحس بهاي الغصة؟</h2>
+                <p>رغم إنه ماكو شي حقيقي واگف ببلعومك، بس اكو عوامل تخلي عضلات وأغشية الحنجرة تتشنج أو تتحسس، وتلعب دور أساسي بظهور هذا الإحساس:</p>
+                <ul>
+                    <li><strong>التوتر والقلق النفسي:</strong> هو السبب الأول والأكثر شيوعاً. التوتر يخلي عضلات البلعوم تشنج وتشد (مثل ما تتشنج عضلات رگبتك أو چتفك من تعصب)، وهذا الشد يترجمه الدماغ على شكل غصة.</li>
+                    <li><strong>ارتجاع المريء (الجالي):</strong> حموضة المعدة اللي تصعد ليگدام تأذي وتهيج الأغشية الرقيقة للبلعوم، وتخليك تحس بهذا الانزعاج.</li>
+                    <li><strong>إفرازات الجيوب الأنفية (Post-nasal drip):</strong> البلغم والمخاط اللي ينزل من وره الخشم على البلعوم يخليه يتحسس ويخليك تتنحنح طول الوقت.</li>
+                    <li><strong>إجهاد الصوت:</strong> كثرة الصياح، أو الحچي بصوت عالي لفترات طويلة يرهق عضلات الحنجرة.</li>
+                    <li><strong>التدخين:</strong> يسبب جفاف وتهيج دائم للبلعوم.</li>
+                </ul>
+
+                <h2>شنو الحل وعلاج الغصة؟</h2>
+                <p>العلاج يعتمد بالدرجة الأساس على تشخيص المسبب وطمأنة المريض:</p>
+                
+                <h3>1. الاطمئنان النفسي (نصف العلاج)</h3>
+                <ul>
+                    <li>أغلب المرضى يختفي عدهم هذا الشعور بمجرد ما يفحصهم الطبيب ويأكدلهم إنو بلعومهم سليم وماكو أي أورام. من يروح الخوف، ترتخي العضلات وتختفي الغصة.</li>
+                </ul>
+
+                <h3>2. علاج المسببات</h3>
+                <ul>
+                    <li>إذا چان عندك "جالي"، الطبيب راح يوصفلك أدوية تقلل حموضة المعدة (مثل الأوميبرازول).</li>
+                    <li>إذا چان عندك جيوب أنفية، استخدام بخاخات الكورتيزون يقلل الإفرازات اللي تنزل على بلعومك.</li>
+                </ul>
+
+                <h3>3. نصائح يومية مريحة</h3>
+                <ul>
+                    <li><strong>بطل "نحنحة":</strong> حاول گد ما تكدر ما تتنحنح أو تكح بقوة لتنظيف بلعومك، لأن هذا يجرح الأغشية ويزيد الطين بلة.</li>
+                    <li>بدل النحنحة، خلي بطل مي يمك واشرب رشفات صغيرة من المي الدافي كلما حسيت بالغصة.</li>
+                    <li>قلل الچاي والگهوة والتدخين لأنها تزيد الجفاف.</li>
+                    <li>الاسترخاء والابتعاد عن الضغوطات النفسية.</li>
+                </ul>
+            </div>
+
+            <div class="emergency-box">
+                <h2>احذر: متى تكون صعوبة البلع مرضاً حقيقياً؟</h2>
+                <p>الغصة الوهمية (الكلوبس) ما تمنعك من الأكل. بس اكو حالة ثانية اسمها "عسر البلع" (Dysphagia) تعتبر مشكلة حقيقية وتحتاج فحص سريع وناظور للمريء. راجع طبيبك فوراً إذا لاحظت:</p>
+                <ul>
+                    <li><strong>الأكل يوكف ببلعومك:</strong> صعوبة حقيقية ببلع الأكل الصلب أو الشرب، وتحس اللقمة توگف وما تنزل إلا بصعوبة أو شرب مي.</li>
+                    <li>ألم حقيقي وقوي وقت البلع.</li>
+                    <li>نزول سريع وغير مبرر بوزن الجسم.</li>
+                    <li>تغير وبحة بالصوت تستمر لأكثر من 3 أسابيع بدون نشلة.</li>
+                    <li>ظهور عقدة أو ورم واضح تقدر تلزمه بإيدك بالرگبة من برة.</li>
+                    <li>خروج دم ويه الگحة أو من تزوع.</li>
+                </ul>
+            </div>
+
+            <div class="cta-box">
+                <h3>الغصة قالقتك ومخليتك تفكر بأمراض خطيرة؟</h3>
+                <p>الفحص السريري أو الناظور البسيط للحنجرة بالعيادة يكدر ينهي كل شكوكك، يتأكد من سلامتك، ويوصفلك العلاج المناسب لارتجاع المعدة أو التحسس. احجز موعدك هسه وي أطباء الأنف والأذن والحنجرة أو الباطنية.</p>
+                <a href="doctors.html" class="cta-btn">عرض قائمة الأطباء</a>
+            </div>
+
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>عن منصة كشفيّة</h4>
+                <ul>
+                    <li><a href="about.html">من نحن</a></li>
+                    <li><a href="about.html#vision">رؤيتنا ورسالتنا</a></li>
+                    <li><a href="about.html#privacy">سياسة الخصوصية</a></li>
+                    <li><a href="about.html#terms">الشروط والأحكام</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h4>خدمات المرضى</h4>
+                <ul>
+                    <li><a href="index.html">الرئيسية</a></li>
+                    <li><a href="index.html">دليل الأمراض الشائعة</a></li>
+                    <li><a href="doctors.html">قائمة الأطباء والمراكز</a></li>
+                    <li><a href="faq.html">الأسئلة الشائعة</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h4>معلومات التواصل</h4>
+                <ul>
+                    <li><a href="contact.html">للتواصل والإعلان: اضغط هنا</a></li>
+                    <li><a href="https://www.facebook.com/kashfeyacom" target="_blank" rel="noopener noreferrer">فيسبوك (Facebook)</a></li>
+                    <li><a href="https://www.instagram.com/kashfeyacom" target="_blank" rel="noopener noreferrer">إنستغرام (Instagram)</a></li>
+                    <li><a href="https://www.tiktok.com/@kashfeya.com" target="_blank" rel="noopener noreferrer">تيكتوك (TikTok)</a></li>
+                </ul>
+            </div>
+        </div> 
+        
+        <div class="copyright-bar">
+            &copy; 2026 جميع الحقوق محفوظة لـ كشفيّة
+        </div>
+    </footer>
+
+</body>
+</html>
