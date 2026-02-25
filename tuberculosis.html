@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> كشفيّـة </title>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <style>
+        :root {
+            --nhs-blue: #005eb8;
+            --nhs-dark-blue: #003087;
+            --nhs-light-grey: #f0f4f5;
+            --nhs-text: #212b32;
+            --nhs-white: #ffffff;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            margin: 0;
+            background-color: var(--nhs-light-grey);
+            color: var(--nhs-text);
+            line-height: 1.8;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .nhs-header { background-color: var(--nhs-white); border-bottom: 8px solid var(--nhs-blue); padding: 12px 0; }
+        .header-content { max-width: 1300px; margin: 0 auto; padding: 0 20px; display: flex; justify-content: space-between; align-items: center; }
+        .logo-link { display: inline-flex; align-items: center; text-decoration: none; gap: 15px; }
+        .site-logo { max-height: 55px; width: auto; object-fit: contain; }
+        .header-moto { font-weight: 700; color: var(--nhs-blue); font-size: 1.1rem; }
+
+        .nhs-nav { background-color: var(--nhs-blue); color: white; position: sticky; top: 0; z-index: 1000; box-shadow: 0 4px 6px rgba(0,0,0,0.1); margin-bottom: 20px; }
+        .nav-content { max-width: 1300px; margin: 0 auto; padding: 0 20px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; }
+        .main-links { display: flex; }
+        .main-links a { color: white; text-decoration: none; padding: 15px 20px; font-weight: 600; font-size: 0.95rem; transition: all 0.2s; display: flex; align-items: center; gap: 8px; border-bottom: 3px solid transparent; }
+        .main-links a:hover, .main-links a.active { background-color: var(--nhs-dark-blue); border-bottom-color: #fb8500; }
+        .nav-actions { display: flex; align-items: center; gap: 15px; }
+        .nav-cta { background-color: var(--nhs-white); color: var(--nhs-blue) !important; padding: 8px 20px; border-radius: 20px; font-weight: 800; font-size: 0.9rem; text-decoration: none; transition: all 0.2s; display: flex; align-items: center; gap: 6px; }
+
+        .article-wrapper { max-width: 900px; margin: 0 auto 50px auto; padding: 0 20px; }
+        .breadcrumb { font-size: 0.9rem; color: #718096; margin-bottom: 20px; display: flex; align-items: center; gap: 8px; }
+        .breadcrumb a { color: var(--nhs-blue); text-decoration: none; font-weight: 600; }
+
+        .article-card { background: var(--nhs-white); border-radius: 8px; padding: 40px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
+        .article-title { color: var(--nhs-dark-blue); font-size: 2.2rem; font-weight: 800; margin-top: 0; margin-bottom: 10px; line-height: 1.3; }
+        .article-meta { display: flex; align-items: center; gap: 20px; font-size: 0.9rem; color: #718096; margin-bottom: 30px; padding-bottom: 20px; border-bottom: 1px solid #e2e8f0; }
+
+        .medical-disclaimer { background-color: #fff3cd; border-right: 4px solid #f6ad55; padding: 15px 20px; border-radius: 4px; font-weight: 600; color: #9c4221; margin-bottom: 30px; font-size: 0.95rem; display: flex; gap: 15px; align-items: flex-start; }
+        .medical-disclaimer i { font-size: 1.4rem; margin-top: 2px; }
+
+        .article-content h2 { color: var(--nhs-blue); font-size: 1.6rem; font-weight: 800; margin-top: 40px; margin-bottom: 15px; padding-bottom: 8px; border-bottom: 2px solid #e2e8f0; }
+        .article-content h3 { color: var(--nhs-dark-blue); font-size: 1.25rem; font-weight: 700; margin-top: 25px; margin-bottom: 10px; }
+        .article-content p { font-size: 1.1rem; color: #2d3748; margin-bottom: 20px; }
+        .article-content ul { padding-right: 25px; margin-bottom: 25px; list-style-type: disc; }
+        .article-content ul li { font-size: 1.1rem; color: #2d3748; margin-bottom: 8px; }
+
+        .emergency-box { background-color: #fff5f5; border: 1px solid #fed7d7; border-right: 5px solid #e53e3e; border-radius: 8px; padding: 30px; margin-top: 40px; margin-bottom: 20px; }
+        .emergency-box h2 { color: #c53030 !important; border-bottom: 2px solid #feb2b2 !important; margin-top: 0 !important; padding-bottom: 10px; font-size: 1.5rem; }
+        .emergency-box p { color: #742a2a; margin-bottom: 15px; font-weight: 600; }
+        .emergency-box ul { margin-bottom: 0; color: #742a2a; }
+        .emergency-box ul li { color: #742a2a; margin-bottom: 8px; font-weight: 600; }
+
+        .cta-box { background-color: var(--nhs-light-grey); border: 1px solid #cbd5e0; border-radius: 8px; padding: 30px; text-align: center; margin-top: 50px; }
+        .cta-box h3 { color: var(--nhs-dark-blue); margin-top: 0; margin-bottom: 15px; font-size: 1.3rem; font-weight: 800; }
+        .cta-box p { color: #4a5568; margin-bottom: 20px; font-size: 1rem; }
+        .cta-btn { display: inline-block; background-color: var(--nhs-blue); color: white; padding: 12px 30px; border-radius: 25px; font-weight: 700; text-decoration: none; transition: background 0.2s; }
+
+        footer { background-color: #e8edee; border-top: 8px solid var(--nhs-blue); padding: 40px 20px 20px 20px; margin-top: 40px; }
+        .copyright-bar { text-align: center; border-top: 1px solid #d1d5d8; padding-top: 15px; font-size: 0.8rem; font-weight: 600; color: #718096; }
+
+        @media (max-width: 768px) {
+            .header-content { flex-direction: column; text-align: center; gap: 8px; }
+            .nav-content { flex-direction: column; padding: 0; }
+            .main-links { width: 100%; justify-content: center; overflow-x: auto; }
+            .main-links a { padding: 12px 10px; font-size: 0.85rem; border-bottom: none; }
+            .article-card { padding: 20px; }
+            .article-title { font-size: 1.8rem; }
+            .emergency-box { padding: 20px; }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="nhs-header">
+        <div class="header-content">
+            <a href="index.html" class="logo-link">
+                <img src="logo.png" alt="شعار كشفيّة" class="site-logo">
+                <div class="header-moto">كلشي عن صحتك… بلهجتنا العراقية</div>
+            </a>
+        </div>
+    </header>
+
+    <nav class="nhs-nav">
+        <div class="nav-content">
+            <div class="main-links">
+                <a href="index.html"><i class="fas fa-home"></i> الرئيسية</a>
+                <a href="index.html" class="active"><i class="fas fa-stethoscope"></i> دليل الأمراض</a>
+                <a href="doctors.html"><i class="fas fa-user-doctor"></i> الأطباء والمراكز</a>
+            </div>
+            <div class="nav-actions">
+                <a href="contact.html" class="nav-cta"><i class="fas fa-phone"></i> تواصل معنا</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="article-wrapper">
+        
+        <div class="breadcrumb">
+            <a href="index.html">الرئيسية</a> <i class="fas fa-chevron-left" style="font-size: 0.7rem;"></i> 
+            <a href="chest-diseases.html">أمراض الصدر والتنفس</a> <i class="fas fa-chevron-left" style="font-size: 0.7rem;"></i> 
+            <span>التدرن (السل)</span>
+        </div>
+
+        <div class="article-card">
+            <h1 class="article-title">التدرن الرئوي (السل أو TB)</h1>
+            
+            <div class="article-meta">
+                <span><i class="fas fa-user-md"></i> مراجعة: فريق كشفيّة الطبي</span>
+            </div>
+
+            <div class="medical-disclaimer">
+                <i class="fas fa-circle-info"></i>
+                <div>
+                    هاي المعلومات مخصصة للتوعية والتثقيف الصحي فقط، وما تعوض أبد عن استشارة الطبيب المختص أو الفحص السريري.
+                </div>
+            </div>
+
+            <div class="article-content">
+                <p>التدرن (السل أو TB) هو مرض بكتيري معدٍ، يهاجم الرئتين بالدرجة الأساس، بس ممكن ينتقل لأجزاء ثانية بالجسم (مثل الغدد، العظام، أو الجهاز العصبي). المرض ينتقل عن طريق الهوى من المريض يگح أو يعطس. رغم إنو التدرن مرض قديم وخطير، بس الحلو بيه إنه <strong>قابل للشفاء تماماً</strong> إذا المريض التزم بالعلاج.</p>
+
+                <h2>أهم الأعراض والعلامات (شلون تشك بيه؟)</h2>
+                <p>أعراض التدرن تتطور ببطء على مدى أسابيع أو أشهر، وأهم علاماته هي:</p>
+                <ul>
+                    <li><strong>گحة (سعال) مزمنة:</strong> گحة تستمر لأكثر من 3 أسابيع، ومرات تطلع وياها كميات من البلغم.</li>
+                    <li><strong>التعرق الليلي:</strong> المريض يگعد بالليل يلكه نفسه مبلل من العرق بشكل مو طبيعي.</li>
+                    <li><strong>نزول الوزن السريع:</strong> تضعف وتفقد وزنك وشهيتك للأكل بدون ما تسوي ريجيم.</li>
+                    <li><strong>سخونة خفيفة:</strong> غالباً تصعد العصر أو بالليل.</li>
+                    <li>تعب وإرهاق دائم، ووجع بالصدر من تتنفس أو تگح.</li>
+                </ul>
+
+                <h2>أنواع التدرن (الكامن والنشط)</h2>
+                <p>مو كل واحد تدخل البكتيريا لجسمه يمرض! جسمنا ذكي، وممكن يصير بيه وحدة من الحالتين:</p>
+                <ul>
+                    <li><strong>التدرن الكامن (Latent TB):</strong> المناعة تحاصر البكتيريا وتخليها نايمة. المريض ما تطلع عليه أي أعراض <strong>وما يعدي غيره أبد</strong>. بس البكتيريا ممكن تصحى بعدين إذا ضعفت مناعته.</li>
+                    <li><strong>التدرن النشط (Active TB):</strong> البكتيريا تگدر تتغلب على المناعة وتهاجم الرئة، وهنا تطلع الأعراض والمريض يصير معدي.</li>
+                </ul>
+
+                <h2>طرق العلاج (الالتزام هو السر)</h2>
+                <p>علاج التدرن يحتاج صبر، لأنه ياخذ وقت طويل (من 6 أشهر إلى سنة)، ويتكون من كورس منة عدة أنواع من المضادات الحيوية الخاصة:</p>
+                <ul>
+                    <li><strong>أهم قاعدة بالعلاج:</strong> لازم، ولازم، ولازم <strong>تكمل كورس الدوة للآخر</strong>! إذا وگفت الدوة من گيفك بس لأن حسيت نفسك صرت زين، البكتيريا راح ترجع وتصير أقوى وتكتسب مناعة ضد الدوة (MDR-TB)، ووقتها علاجها يصير كلش صعب وخطير.</li>
+                    <li>بعد مرور أول أسبوعين إلى 3 أسابيع من الالتزام بالعلاج، المريض غالباً يصير <strong>غير معدي</strong> ويگدر يرجع يختلط بالناس ويمارس حياته الطبيعية.</li>
+                </ul>
+            </div>
+
+            <div class="emergency-box">
+                <h2>حالات خطرة وملاحظات للوقاية</h2>
+                <p>التدرن مرض يهدد حياة المريض والمجتمع إذا انهمل. راجع الطوارئ أو المراكز التخصصية للأمراض الصدرية فوراً إذا:</p>
+                <ul>
+                    <li><strong>گحة بيها دم (نفث الدم):</strong> إذا گمت تگح ويطلع دم صافي من صدرك (علامة على إنو البكتيريا دمرت جزء من الرئة).</li>
+                    <li>خنگة قوية ووجع حاد بالصدر.</li>
+                    <li><strong>نصيحة للمخالطين:</strong> إذا شخص بالبيت طلع عنده تدرن نشط، <strong>كل أفراد العائلة</strong> لازم يروحون يسوون فحص (أشعة صدر واختبار الجلد) حتى يتأكدون إنهم ما انعدوا.</li>
+                </ul>
+            </div>
+
+            <div class="cta-box">
+                <h3>گحتك طولت أكثر من 3 أسابيع وديطلع دم وي البلغم؟</h3>
+                <p>فحص بسيط لبلغم الصدر وأشعة للرئة يكدر يأكد أو يستبعد الإصابة بالتدرن ويبدي خطة العلاج المضمونة. احجز موعدك هسه وي أطباء الأمراض الصدرية أو راجع العيادات الاستشارية المتخصصة.</p>
+                <a href="doctors.html" class="cta-btn">عرض قائمة الأطباء</a>
+            </div>
+
+        </div>
+    </main>
+
+    <footer>
+        <div class="copyright-bar">
+            &copy; 2026 جميع الحقوق محفوظة لـ كشفيّة
+        </div>
+    </footer>
+
+</body>
+</html>
