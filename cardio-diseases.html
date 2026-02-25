@@ -3,178 +3,121 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>أمراض القلب الشائعة | الدليل الطبي</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <title> كشفيّـة | أمراض القلب والأوعية الدموية </title>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
     <style>
-        /* المتغيرات الأساسية */
         :root {
             --nhs-blue: #005eb8;
             --nhs-dark-blue: #003087;
             --nhs-light-grey: #f0f4f5;
             --nhs-text: #212b32;
             --nhs-white: #ffffff;
-            
-            /* ألوان التخصص (القلب) */
-            --specialty-color: #e63946;
-            --specialty-light: #fdedee;
-            --specialty-gradient: linear-gradient(135deg, #e63946, #b91d2c);
         }
 
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
             margin: 0;
-            background-color: #f8f9fa;
+            background-color: var(--nhs-light-grey);
             color: var(--nhs-text);
             line-height: 1.6;
             -webkit-font-smoothing: antialiased;
         }
 
-        /* الهيدر الأصلي */
-        .nhs-header { background-color: var(--nhs-white); border-bottom: 4px solid var(--nhs-blue); padding: 20px 0; }
-        .header-content { max-width: 1300px; margin: 0 auto; padding: 0 20px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px; }
-        .logo-placeholder { background-color: var(--nhs-blue); color: white; padding: 10px 20px; font-weight: bold; font-size: 1.5rem; text-decoration: none; }
+        /* --- الهيدر --- */
+        .nhs-header { background-color: var(--nhs-white); border-bottom: 8px solid var(--nhs-blue); padding: 12px 0; }
+        .header-content { max-width: 1300px; margin: 0 auto; padding: 0 20px; display: flex; justify-content: space-between; align-items: center; }
+        .logo-link { display: inline-flex; align-items: center; text-decoration: none; gap: 15px; }
+        .site-logo { max-height: 55px; width: auto; object-fit: contain; }
+        .header-moto { font-weight: 700; color: var(--nhs-blue); font-size: 1.1rem; }
 
-        .nhs-nav { background-color: var(--nhs-blue); color: white; position: sticky; top: 0; z-index: 1000; }
-        .nav-content { max-width: 1300px; margin: 0 auto; padding: 0 10px; display: flex; flex-wrap: wrap; }
-        .nav-content a { color: white; text-decoration: none; padding: 12px 20px; font-weight: 600; transition: background 0.2s; }
-        .nav-content a:hover { background-color: var(--nhs-dark-blue); }
+        /* --- الشريط الأزرق --- */
+        .nhs-nav { background-color: var(--nhs-blue); color: white; position: sticky; top: 0; z-index: 1000; box-shadow: 0 4px 6px rgba(0,0,0,0.1); margin-bottom: 15px; }
+        .nav-content { max-width: 1300px; margin: 0 auto; padding: 0 20px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; }
+        .main-links { display: flex; }
+        .main-links a { color: white; text-decoration: none; padding: 15px 20px; font-weight: 600; font-size: 0.95rem; transition: all 0.2s; display: flex; align-items: center; gap: 8px; border-bottom: 3px solid transparent; }
+        .main-links a:hover, .main-links a.active { background-color: var(--nhs-dark-blue); border-bottom-color: #fb8500; }
+        .nav-actions { display: flex; align-items: center; gap: 15px; }
+        .nav-cta { background-color: var(--nhs-white); color: var(--nhs-blue) !important; padding: 8px 20px; border-radius: 20px; font-weight: 800; font-size: 0.9rem; text-decoration: none; transition: all 0.2s; display: flex; align-items: center; gap: 6px; }
+        .nav-cta:hover { background-color: #f0f4f5; transform: translateY(-1px); box-shadow: 0 2px 5px rgba(0,0,0,0.2); }
 
-        /* مقدمة الصفحة (Hero Section) */
-        .page-hero {
-            background: var(--specialty-gradient);
-            color: white;
-            padding: 4rem 20px 5rem 20px;
-            text-align: center;
-            position: relative;
-        }
+        /* --- شريط العنوان الداخلي --- */
+        .page-header { max-width: 1300px; margin: 15px auto 20px auto; padding: 0 20px; display: flex; align-items: center; gap: 15px; }
+        .back-btn { display: inline-flex; align-items: center; gap: 6px; background-color: var(--nhs-white); color: var(--nhs-text); padding: 6px 12px; border-radius: 4px; text-decoration: none; font-size: 0.9rem; font-weight: 600; border: 1px solid #d1d5d8; transition: all 0.2s; }
+        .back-btn:hover { background-color: var(--nhs-blue); color: var(--nhs-white); border-color: var(--nhs-blue); }
+        .page-header h1 { margin: 0; font-size: 1.5rem; color: var(--nhs-blue); font-weight: 800; }
 
-        .page-hero::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            height: 40px;
-            background: #f8f9fa;
-            border-radius: 40px 40px 0 0;
-        }
-
-        .hero-container { max-width: 800px; margin: 0 auto; }
-
-        .back-link {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            color: rgba(255,255,255,0.9);
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 1rem;
-            background: rgba(0,0,0,0.15);
-            padding: 8px 16px;
-            border-radius: 20px;
-            margin-bottom: 2rem;
-            transition: all 0.3s ease;
-        }
-
-        .back-link:hover { background: rgba(0,0,0,0.25); color: white; }
-
-        h1 { font-size: 2.5rem; font-weight: 800; margin: 0; letter-spacing: -0.5px; }
-
-        /* قائمة الأمراض (بطاقات أنيقة بدون تفاصيل) */
-        .content-section {
-            max-width: 850px;
-            margin: -30px auto 60px auto;
-            padding: 0 20px;
-            position: relative;
-            z-index: 10;
-        }
-
-        .disease-card {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: var(--nhs-white);
-            padding: 1.8rem 2rem;
-            border-radius: 16px;
-            margin-bottom: 1.25rem;
-            text-decoration: none;
-            color: inherit;
-            border: 1px solid #eef0f2;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.03);
-            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .disease-card::before {
-            content: '';
-            position: absolute;
-            right: 0;
-            top: 0;
-            bottom: 0;
-            width: 5px;
-            background: var(--specialty-color);
-            transform: scaleY(0);
-            transition: transform 0.3s ease;
-            transform-origin: bottom;
-        }
-
-        .disease-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 12px 25px rgba(0,0,0,0.08);
-            border-color: transparent;
-        }
-
-        .disease-card:hover::before { transform: scaleY(1); }
-
-        .card-info {
-            display: flex;
+        /* --- شبكة الأمراض --- */
+        .disease-grid { max-width: 1300px; margin: 0 auto 50px auto; padding: 0 20px; display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 12px; }
+        
+        .disease-card { 
+            background-color: var(--nhs-white); 
+            border: 1px solid #e2e8f0; 
+            border-radius: 6px; 
+            padding: 15px 10px; 
+            text-align: center; 
+            color: var(--nhs-text); 
+            text-decoration: none; 
+            font-weight: 700; 
+            font-size: 0.95rem; 
+            transition: all 0.2s ease; 
+            display: flex; 
             flex-direction: column;
-            gap: 4px;
-            padding-left: 20px;
+            align-items: center; 
+            justify-content: center; 
+            min-height: 75px; 
+            box-shadow: 0 1px 3px rgba(0,0,0,0.04); 
+            gap: 5px;
+        }
+        
+        .disease-card:hover { 
+            background-color: var(--nhs-blue); 
+            color: var(--nhs-white); 
+            border-color: var(--nhs-blue); 
+            transform: translateY(-2px); 
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1); 
+        }
+        
+        .disease-card span {
+            font-size: 0.75rem;
+            color: #718096;
+            font-weight: 600;
+        }
+        
+        .disease-card:hover span {
+            color: #e2e8f0;
         }
 
-        .disease-ar { font-size: 1.6rem; font-weight: 700; color: var(--nhs-text); margin: 0; }
-        .disease-en { font-size: 1.1rem; color: #6c757d; font-weight: 500; font-family: Arial, sans-serif; letter-spacing: 0.5px; margin: 0; }
+        /* --- الفوتر --- */
+        footer { background-color: #e8edee; border-top: 8px solid var(--nhs-blue); padding: 40px 20px 20px 20px; margin-top: 40px; }
+        .footer-content { max-width: 1300px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; margin-bottom: 25px; }
+        .footer-section h4 { color: var(--nhs-dark-blue); font-size: 1.05rem; font-weight: 800; margin-top: 0; margin-bottom: 15px; position: relative; padding-bottom: 10px; }
+        .footer-section h4::after { content: ''; position: absolute; bottom: 0; right: 0; width: 40px; height: 3px; background-color: var(--nhs-blue); border-radius: 2px; }
+        .footer-section ul { list-style: none; padding: 0; margin: 0; }
+        .footer-section ul li { margin-bottom: 10px; font-size: 0.85rem; color: #4a5568; display: flex; align-items: center; }
+        .footer-section ul li a { color: #4a5568; text-decoration: none; transition: all 0.3s ease; }
+        .footer-section ul li a:hover { color: var(--nhs-blue); padding-right: 6px; }
+        .footer-section i { color: var(--nhs-blue); width: 20px; font-size: 0.95rem; margin-left: 8px; }
+        .copyright-bar { text-align: center; border-top: 1px solid #d1d5d8; padding-top: 15px; font-size: 0.8rem; font-weight: 600; color: #718096; letter-spacing: 0.5px; }
 
-        .card-action .icon-circle {
-            width: 48px;
-            height: 48px;
-            border-radius: 50%;
-            background: var(--specialty-light);
-            color: var(--specialty-color);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.2rem;
-            transition: all 0.3s ease;
-        }
-
-        .disease-card:hover .icon-circle {
-            background: var(--specialty-color);
-            color: white;
-            transform: translateX(-5px);
-        }
-
-        /* التذييل الأصلي */
-        footer { background-color: #e8edee; border-top: 4px solid var(--nhs-blue); padding: 40px 20px; margin-top: 60px; }
-        .footer-content { max-width: 1300px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 30px; }
-        .footer-section h4 { color: var(--nhs-blue); border-bottom: 1px solid #ccc; padding-bottom: 10px; margin-top: 0; }
-        .footer-section ul { list-style: none; padding: 0; }
-        .footer-section ul li { margin-bottom: 10px; }
-        .footer-section ul li a { color: var(--nhs-text); text-decoration: none; }
-        .footer-section ul li a:hover { text-decoration: underline; }
-
-        /* توافق الجوال */
-        @media (max-width: 768px) {
-            .header-content { flex-direction: column; text-align: center; }
-            .nav-content { justify-content: center; }
-            .page-hero { padding: 3rem 15px 4rem 15px; }
-            h1 { font-size: 2rem; }
-            .disease-card { padding: 1.5rem; flex-direction: column; align-items: flex-start; gap: 15px; }
-            .card-info { padding-left: 0; }
-            .disease-ar { font-size: 1.4rem; }
-            .card-action { align-self: flex-end; }
+        /* --- Responsive Queries --- */
+        @media (max-width: 1024px) { .footer-content { gap: 25px; } }
+        @media (max-width: 768px) { 
+            .header-content { flex-direction: column; text-align: center; gap: 8px; }
+            .header-moto { font-size: 1rem; }
+            .nav-content { flex-direction: column; padding: 0; }
+            .main-links { width: 100%; justify-content: center; overflow-x: auto; }
+            .main-links a { padding: 12px 10px; font-size: 0.85rem; border-bottom: none; }
+            .nav-actions { width: 100%; justify-content: center; padding: 10px; background-color: var(--nhs-dark-blue); }
+            .site-logo { max-height: 45px; }
+            .page-header { flex-direction: column; align-items: flex-start; gap: 12px; margin-top: 10px; margin-bottom: 15px; }
+            .page-header h1 { font-size: 1.3rem; }
+            .disease-grid { grid-template-columns: repeat(2, 1fr); gap: 8px; }
+            .disease-card { min-height: 65px; font-size: 0.85rem; padding: 10px 5px; }
+            .disease-card span { font-size: 0.7rem; }
+            footer { padding: 30px 20px 15px 20px; }
+            .footer-content { gap: 20px; margin-bottom: 20px; }
         }
     </style>
 </head>
@@ -182,119 +125,99 @@
 
     <header class="nhs-header">
         <div class="header-content">
-            <a href="#" class="logo-placeholder">LOGO</a>
-            <div style="font-weight: 700; color: var(--nhs-blue);">اسم الموقع الطبي</div>
+            <a href="index.html" class="logo-link">
+                <img src="logo.png" alt="شعار كشفيّة" class="site-logo">
+                <div class="header-moto">كلشي عن صحتك… بلهجتنا العراقية</div>
+            </a>
         </div>
     </header>
 
     <nav class="nhs-nav">
         <div class="nav-content">
-            <a href="index.html"><i class="fas fa-home"></i> الرئيسية</a>
-            <a href="#">من نحن</a>
-            <a href="#">اتصل بنا</a>
-            <a href="#">الأسئلة الشائعة</a>
+            <div class="main-links">
+                <a href="index.html"><i class="fas fa-home"></i> الرئيسية</a>
+                <a href="index.html" class="active"><i class="fas fa-stethoscope"></i> دليل الأمراض</a>
+                <a href="doctors.html"><i class="fas fa-user-doctor"></i> الأطباء والمراكز</a>
+            </div>
+            <div class="nav-actions">
+                <a href="contact.html" class="nav-cta"><i class="fas fa-phone"></i> تواصل معنا</a>
+            </div>
         </div>
     </nav>
 
-    <section class="page-hero">
-        <div class="hero-container">
-            <a href="index.html" class="back-link"><i class="fas fa-arrow-right"></i> العودة للرئيسية</a>
-            <h1>أمراض القلب والأوعية الدموية</h1>
-        </div>
-    </section>
+    <div class="page-header">
+        <a href="index.html" class="back-btn"><i class="fas fa-arrow-right"></i> العودة للرئيسية</a>
+        <h1>أمراض القلب والأوعية الدموية</h1>
+    </div>
 
-    <main class="content-section">
+    <main class="disease-grid">
+        <a href="low-blood-pressure.html" class="disease-card">هبوط ضغط الدم <span>(Hypotension)</span></a>
+        <a href="high-blood-pressure.html" class="disease-card">ارتفاع ضغط الدم <span>(Hypertension)</span></a>
+        <a href="pregnancy-high-blood-pressure.html" class="disease-card">ضغط وتسمم الحمل <span>(Pre-eclampsia)</span></a>
+        <a href="high-cholesterol.html" class="disease-card">ارتفاع الكوليسترول <span>(Hypercholesterolemia)</span></a>
+
+        <a href="aortic-coarctation.html" class="disease-card">تضيق الشريان الأبهر <span>(Aortic Coarctation)</span></a>
+        <a href="abdominal-aortic-aneurysm.html" class="disease-card">تمدد الأبهر البطني <span>(AAA)</span></a>
+        <a href="aortic-dissection.html" class="disease-card">تسلخ الشريان الأبهر <span>(Aortic Dissection)</span></a>
+        <a href="temporal-arteritis.html" class="disease-card">التهاب الشريان الصدغي <span>(Giant Cell Arteritis)</span></a>
+        <a href="peripheral-arterial-disease.html" class="disease-card">تصلب شرايين الأطراف <span>(PAD)</span></a>
+        <a href="raynauds-phenomenon.html" class="disease-card">ظاهرة رينود <span>(Raynaud's Phenomenon)</span></a>
+        <a href="deep-vein-thrombosis.html" class="disease-card">جلطة الساق <span>(DVT)</span></a>
+        <a href="superficial-thrombophlebitis.html" class="disease-card">التهاب الوريد السطحي <span>(Thrombophlebitis)</span></a>
+        <a href="varicose-veins.html" class="disease-card">دوالي الساقين <span>(Varicose Veins)</span></a>
+        <a href="varicose-eczema.html" class="disease-card">إكزيما الدوالي <span>(Varicose Eczema)</span></a>
+        <a href="venous-leg-ulcers.html" class="disease-card">قرحة الساق الوريدية <span>(Venous Leg Ulcers)</span></a>
+
+        <a href="heart-attack-acs.html" class="disease-card">الجلطة القلبية <span>(Heart Attack / ACS)</span></a>
+        <a href="angina.html" class="disease-card">الذبحة الصدرية <span>(Angina)</span></a>
+        <a href="heart-failure.html" class="disease-card">عجز القلب <span>(Heart Failure)</span></a>
+        <a href="aortic-valve-disease.html" class="disease-card">أمراض الصمام الأبهر <span>(Aortic Valve Disease)</span></a>
+        <a href="mitral-valve-disease.html" class="disease-card">أمراض الصمام الميترالي <span>(Mitral Valve Disease)</span></a>
+        <a href="dilated-cardiomyopathy.html" class="disease-card">اعتلال القلب التوسعي <span>(Dilated Cardiomyopathy)</span></a>
+        <a href="hypertrophic-cardiomyopathy.html" class="disease-card">اعتلال القلب التضخمي <span>(HCM)</span></a>
         
-        <a href="hypertension-details.html" class="disease-card">
-            <div class="card-info">
-                <h2 class="disease-ar">ارتفاع ضغط الدم (الضغط)</h2>
-                <span class="disease-en">Hypertension (High Blood Pressure)</span>
-            </div>
-            <div class="card-action">
-                <div class="icon-circle"><i class="fas fa-arrow-left"></i></div>
-            </div>
-        </a>
-
-        <a href="cad-details.html" class="disease-card">
-            <div class="card-info">
-                <h2 class="disease-ar">مرض الشرايين التاجية</h2>
-                <span class="disease-en">Coronary Heart Disease</span>
-            </div>
-            <div class="card-action">
-                <div class="icon-circle"><i class="fas fa-arrow-left"></i></div>
-            </div>
-        </a>
-
-        <a href="heart-attack-details.html" class="disease-card">
-            <div class="card-info">
-                <h2 class="disease-ar">النوبة القلبية (جلطة قلبية)</h2>
-                <span class="disease-en">Heart Attack (Myocardial Infarction)</span>
-            </div>
-            <div class="card-action">
-                <div class="icon-circle"><i class="fas fa-arrow-left"></i></div>
-            </div>
-        </a>
-
-        <a href="heart-failure-details.html" class="disease-card">
-            <div class="card-info">
-                <h2 class="disease-ar">فشل القلب (عجز القلب)</h2>
-                <span class="disease-en">Heart Failure</span>
-            </div>
-            <div class="card-action">
-                <div class="icon-circle"><i class="fas fa-arrow-left"></i></div>
-            </div>
-        </a>
-
-        <a href="stroke-details.html" class="disease-card">
-            <div class="card-info">
-                <h2 class="disease-ar">السكتة الدماغية (الجلطة)</h2>
-                <span class="disease-en">Stroke</span>
-            </div>
-            <div class="card-action">
-                <div class="icon-circle"><i class="fas fa-arrow-left"></i></div>
-            </div>
-        </a>
-
-        <a href="cholesterol-details.html" class="disease-card">
-            <div class="card-info">
-                <h2 class="disease-ar">ارتفاع الكوليسترول</h2>
-                <span class="disease-en">High Cholesterol (Hyperlipidemia)</span>
-            </div>
-            <div class="card-action">
-                <div class="icon-circle"><i class="fas fa-arrow-left"></i></div>
-            </div>
-        </a>
-
+        <a href="infective-endocarditis.html" class="disease-card">التهاب شغاف القلب <span>(Endocarditis)</span></a>
+        <a href="myocarditis.html" class="disease-card">التهاب عضلة القلب <span>(Myocarditis)</span></a>
+        <a href="pericarditis.html" class="disease-card">التهاب غشاء القلب <span>(Pericarditis)</span></a>
+        <a href="atrial-fibrillation.html" class="disease-card">الرجفان الأذيني <span>(Atrial Fibrillation)</span></a>
+        <a href="palpitations-arrhythmias.html" class="disease-card">الخفقان واضطراب النبض <span>(Arrhythmias)</span></a>
     </main>
 
     <footer>
         <div class="footer-content">
             <div class="footer-section">
-                <h4>روابط سريعة</h4>
+                <h4>عن منصة كشفيّة</h4>
                 <ul>
-                    <li><a href="index.html">الرئيسية</a></li>
-                    <li><a href="#">دليل المريض</a></li>
-                    <li><a href="#">المواعيد</a></li>
+                    <li><a href="about.html"><i class="fas fa-angle-left"></i> من نحن</a></li>
+                    <li><a href="about.html#vision"><i class="fas fa-angle-left"></i> رؤيتنا ورسالتنا</a></li>
+                    <li><a href="about.html#privacy"><i class="fas fa-angle-left"></i> سياسة الخصوصية</a></li>
+                    <li><a href="about.html#terms"><i class="fas fa-angle-left"></i> الشروط والأحكام</a></li>
                 </ul>
             </div>
+            
             <div class="footer-section">
-                <h4>عن المركز</h4>
+                <h4>خدمات المرضى</h4>
                 <ul>
-                    <li><a href="#">من نحن</a></li>
-                    <li><a href="#">فريق العمل</a></li>
-                    <li><a href="#">سياسة الخصوصية</a></li>
+                    <li><a href="index.html"><i class="fas fa-angle-left"></i> الرئيسية</a></li>
+                    <li><a href="index.html"><i class="fas fa-angle-left"></i> دليل الأمراض الشائعة</a></li>
+                    <li><a href="doctors.html"><i class="fas fa-angle-left"></i> قائمة الأطباء والمراكز</a></li>
+                    <li><a href="faq.html"><i class="fas fa-angle-left"></i> الأسئلة الشائعة</a></li>
                 </ul>
             </div>
+            
             <div class="footer-section">
-                <h4>اتصل بنا</h4>
+                <h4>معلومات التواصل</h4>
                 <ul>
-                    <li><i class="fas fa-phone"></i> 999 000 000</li>
-                    <li><i class="fas fa-envelope"></i> info@medical.com</li>
+                    <li><a href="contact.html"><i class="fas fa-bullhorn"></i> للتواصل والإعلان: اضغط هنا</a></li>
+                    <li><a href="https://www.facebook.com/kashfeyacom" target="_blank" rel="noopener noreferrer"><i class="fab fa-facebook"></i> فيسبوك (Facebook)</a></li>
+                    <li><a href="https://www.instagram.com/kashfeyacom" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram"></i> إنستغرام (Instagram)</a></li>
+                    <li><a href="https://www.tiktok.com/@kashfeya.com" target="_blank" rel="noopener noreferrer"><i class="fab fa-tiktok"></i> تيكتوك (TikTok)</a></li>
                 </ul>
             </div>
-        </div>
-        <div style="text-align: center; margin-top: 30px; border-top: 1px solid #ccc; padding-top: 20px; font-size: 0.9rem;">
-            &copy; 2026 جميع الحقوق محفوظة لاسم الموقع الطبي
+        </div> 
+        
+        <div class="copyright-bar">
+            &copy; 2026 جميع الحقوق محفوظة لـ كشفيّة
         </div>
     </footer>
 
