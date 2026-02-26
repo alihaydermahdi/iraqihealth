@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> كشفيّـة </title>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <style>
+        :root {
+            --nhs-blue: #005eb8;
+            --nhs-dark-blue: #003087;
+            --nhs-light-grey: #f0f4f5;
+            --nhs-text: #212b32;
+            --nhs-white: #ffffff;
+        }
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; margin: 0; background-color: var(--nhs-light-grey); color: var(--nhs-text); line-height: 1.8; -webkit-font-smoothing: antialiased; }
+        .nhs-header { background-color: var(--nhs-white); border-bottom: 8px solid var(--nhs-blue); padding: 12px 0; }
+        .header-content { max-width: 1300px; margin: 0 auto; padding: 0 20px; display: flex; justify-content: space-between; align-items: center; }
+        .logo-link { display: inline-flex; align-items: center; text-decoration: none; gap: 15px; }
+        .site-logo { max-height: 55px; width: auto; object-fit: contain; }
+        .header-moto { font-weight: 700; color: var(--nhs-blue); font-size: 1.1rem; }
+        .nhs-nav { background-color: var(--nhs-blue); color: white; position: sticky; top: 0; z-index: 1000; box-shadow: 0 4px 6px rgba(0,0,0,0.1); margin-bottom: 20px; }
+        .nav-content { max-width: 1300px; margin: 0 auto; padding: 0 20px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; }
+        .main-links { display: flex; }
+        .main-links a { color: white; text-decoration: none; padding: 15px 20px; font-weight: 600; font-size: 0.95rem; transition: all 0.2s; display: flex; align-items: center; gap: 8px; border-bottom: 3px solid transparent; }
+        .main-links a:hover, .main-links a.active { background-color: var(--nhs-dark-blue); border-bottom-color: #fb8500; }
+        .nav-actions { display: flex; align-items: center; gap: 15px; }
+        .nav-cta { background-color: var(--nhs-white); color: var(--nhs-blue) !important; padding: 8px 20px; border-radius: 20px; font-weight: 800; font-size: 0.9rem; text-decoration: none; transition: all 0.2s; display: flex; align-items: center; gap: 6px; }
+        .article-wrapper { max-width: 900px; margin: 0 auto 50px auto; padding: 0 20px; }
+        .breadcrumb { font-size: 0.9rem; color: #718096; margin-bottom: 20px; display: flex; align-items: center; gap: 8px; }
+        .breadcrumb a { color: var(--nhs-blue); text-decoration: none; font-weight: 600; }
+        .article-card { background: var(--nhs-white); border-radius: 8px; padding: 40px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
+        .article-title { color: var(--nhs-dark-blue); font-size: 2.2rem; font-weight: 800; margin-top: 0; margin-bottom: 10px; line-height: 1.3; }
+        .article-meta { display: flex; align-items: center; gap: 20px; font-size: 0.9rem; color: #718096; margin-bottom: 30px; padding-bottom: 20px; border-bottom: 1px solid #e2e8f0; }
+        .medical-disclaimer { background-color: #fff3cd; border-right: 4px solid #f6ad55; padding: 15px 20px; border-radius: 4px; font-weight: 600; color: #9c4221; margin-bottom: 30px; font-size: 0.95rem; display: flex; gap: 15px; align-items: flex-start; }
+        .medical-disclaimer i { font-size: 1.4rem; margin-top: 2px; }
+        .article-content h2 { color: var(--nhs-blue); font-size: 1.6rem; font-weight: 800; margin-top: 40px; margin-bottom: 15px; padding-bottom: 8px; border-bottom: 2px solid #e2e8f0; }
+        .article-content h3 { color: var(--nhs-dark-blue); font-size: 1.25rem; font-weight: 700; margin-top: 25px; margin-bottom: 10px; }
+        .article-content p { font-size: 1.1rem; color: #2d3748; margin-bottom: 20px; }
+        .article-content ul { padding-right: 25px; margin-bottom: 25px; list-style-type: disc; }
+        .article-content ul li { font-size: 1.1rem; color: #2d3748; margin-bottom: 8px; }
+        .emergency-box { background-color: #fff5f5; border: 1px solid #fed7d7; border-right: 5px solid #e53e3e; border-radius: 8px; padding: 30px; margin-top: 40px; margin-bottom: 20px; }
+        .emergency-box h2 { color: #c53030 !important; border-bottom: 2px solid #feb2b2 !important; margin-top: 0 !important; padding-bottom: 10px; font-size: 1.5rem; }
+        .emergency-box p { color: #742a2a; margin-bottom: 15px; font-weight: 600; }
+        .emergency-box ul { margin-bottom: 0; color: #742a2a; }
+        .emergency-box ul li { color: #742a2a; margin-bottom: 8px; font-weight: 600; }
+        .cta-box { background-color: var(--nhs-light-grey); border: 1px solid #cbd5e0; border-radius: 8px; padding: 30px; text-align: center; margin-top: 50px; }
+        .cta-box h3 { color: var(--nhs-dark-blue); margin-top: 0; margin-bottom: 15px; font-size: 1.3rem; font-weight: 800; }
+        .cta-box p { color: #4a5568; margin-bottom: 20px; font-size: 1rem; }
+        .cta-btn { display: inline-block; background-color: var(--nhs-blue); color: white; padding: 12px 30px; border-radius: 25px; font-weight: 700; text-decoration: none; transition: background 0.2s; }
+        footer { background-color: #e8edee; border-top: 8px solid var(--nhs-blue); padding: 40px 20px 20px 20px; margin-top: 40px; }
+        .copyright-bar { text-align: center; border-top: 1px solid #d1d5d8; padding-top: 15px; font-size: 0.8rem; font-weight: 600; color: #718096; }
+        @media (max-width: 768px) { .header-content { flex-direction: column; text-align: center; gap: 8px; } .nav-content { flex-direction: column; padding: 0; } .main-links { width: 100%; justify-content: center; overflow-x: auto; } .main-links a { padding: 12px 10px; font-size: 0.85rem; border-bottom: none; } .article-card { padding: 20px; } .article-title { font-size: 1.8rem; } .emergency-box { padding: 20px; } }
+    </style>
+</head>
+<body>
+
+    <header class="nhs-header">
+        <div class="header-content">
+            <a href="index.html" class="logo-link"><img src="logo.png" alt="شعار كشفيّة" class="site-logo"><div class="header-moto">كلشي عن صحتك… بلهجتنا العراقية</div></a>
+        </div>
+    </header>
+
+    <nav class="nhs-nav">
+        <div class="nav-content">
+            <div class="main-links"><a href="index.html"><i class="fas fa-home"></i> الرئيسية</a><a href="index.html" class="active"><i class="fas fa-stethoscope"></i> دليل الأمراض</a><a href="doctors.html"><i class="fas fa-user-doctor"></i> الأطباء والمراكز</a></div>
+            <div class="nav-actions"><a href="contact.html" class="nav-cta"><i class="fas fa-phone"></i> تواصل معنا</a></div>
+        </div>
+    </nav>
+
+    <main class="article-wrapper">
+        <div class="breadcrumb"><a href="index.html">الرئيسية</a> <i class="fas fa-chevron-left" style="font-size: 0.7rem;"></i> <a href="cardio-diseases.html">أمراض القلب والأوعية</a> <i class="fas fa-chevron-left" style="font-size: 0.7rem;"></i> <span>اعتلال عضلة القلب التوسعي</span></div>
+
+        <div class="article-card">
+            <h1 class="article-title">اعتلال عضلة القلب التوسعي (Dilated Cardiomyopathy)</h1>
+            <div class="article-meta"><span><i class="fas fa-user-md"></i> مراجعة: فريق كشفيّة الطبي</span></div>
+
+            <div class="medical-disclaimer">
+                <i class="fas fa-circle-info"></i>
+                <div>هاي المعلومات مخصصة للتوعية والتثقيف الصحي فقط، وما تعوض أبد عن استشارة الطبيب المختص أو الفحص السريري.</div>
+            </div>
+
+            <div class="article-content">
+                <p>اعتلال عضلة الگلب التوسعي هو مرض يخلي حجرات الگلب (خصوصاً البطين الأيسر) <strong>تتوسع، تترهل، وتصير ضعيفة</strong>. بدل ما يكون الگلب عضلة قوية تضخ الدم بقوة، يصير مثل "النفاخة القديمة المرتخية". هذا الضعف يخلي الدم يتراكم بالرئتين والجسم ويسبب حالة نسميها "عجز القلب" (Heart Failure).</p>
+
+                <h2>أهم الأعراض والعلامات</h2>
+                <p>بالبداية المرض ممكن يكون بدون أعراض، بس من يضعف الگلب حيل، تظهر علامات عجز الگلب واضحة:</p>
+                <ul>
+                    <li><strong>ضيق تنفس (خنگة):</strong> تحس بخنگة وي أبسط مجهود، وتتخنگ بالليل من تنام وتضطر تخلي مخدات عالية.</li>
+                    <li><strong>تورم (نفخة) بالجسم:</strong> رجليك، كواحلك، ومرات بطنك تورم بسبب تجمع السوائل.</li>
+                    <li><strong>تعب وإرهاق شديد:</strong> مابيك حيل تسوي أي شي لأن الدم اللي يوصل لعضلاتك قليل.</li>
+                    <li>خفقان ودگات گلب سريعة ومخربطة.</li>
+                </ul>
+
+                <h2>شنو أسباب ترهل عضلة الگلب؟</h2>
+                <p>مرات السبب يكون مجهول، بس اكو عوامل تدمر العضلة بمرور الوقت:</p>
+                <ul>
+                    <li><strong>الجلطات القلبية السابقة:</strong> أو انسداد شرايين الگلب هو أشهر سبب لضعف العضلة.</li>
+                    <li><strong>الفايروسات:</strong> بعض الفايروسات (حتى فايروسات النشلة القوية) ممكن تضرب عضلة الگلب وتضعفها (Myocarditis).</li>
+                    <li><strong>الكحول:</strong> شرب الكحول بكثرة يعتبر سم مباشر لعضلة الگلب.</li>
+                    <li><strong>الحمل:</strong> اكو نوع نادر يصير عند النساء بأواخر الحمل أو بعد الولادة مباشرة.</li>
+                    <li>أسباب وراثية.</li>
+                </ul>
+
+                <h2>طرق العلاج (شلون نقوي الگلب؟)</h2>
+                <p>العلاج ما يرجع الگلب لحجمه الطبيعي 100%، بس يمنع المرض يتقدم ويخفف الأعراض بشكل ممتاز:</p>
+                <ul>
+                    <li><strong>الأدوية (الأساس):</strong> أدوية تنزل الضغط وتريح الگلب (ACE inhibitors)، أدوية تنظم النبض (Beta-blockers)، وحبوب مدررة (لازكس) تسحب المي الزايد من الجسم وتريح تنفسك.</li>
+                    <li><strong>الأجهزة المنظمة للنبض (Pacemakers/ICD):</strong> تنزرع تحت الجلد حتى تنظم دگات الگلب وتمنع التوقف المفاجئ.</li>
+                    <li>تغيير نمط الحياة: تقليل الملح بالأكل (حتى لا ينحبس المي)، والامتناع التام عن الكحول والتدخين.</li>
+                </ul>
+            </div>
+
+            <div class="emergency-box">
+                <h2>علامات طوارئ: متى تراجع المستشفى؟</h2>
+                <p>مرضى ضعف العضلة معرضين لانتكاسات وتجمع سريع للسوائل. توجه للطوارئ فوراً إذا:</p>
+                <ul>
+                    <li>حسيت بخنگة شديدة ومفاجئة وأنت گاعد ومرتاح.</li>
+                    <li>گمت تگح بلغم رغوي (لونه وردي أو أبيض).</li>
+                    <li>وزنك زاد كيلوين بيومين! (هذا مي محتبس بجسمك مو شحم، ويحتاج إبرة مدرر).</li>
+                    <li>دوخة قوية أو إغماء.</li>
+                </ul>
+            </div>
+
+            <div class="cta-box">
+                <h3>تتخنگ من تنام ورجليك مورمة؟</h3>
+                <p>فحص الإيكو (Echocardiogram) هو الفحص الوحيد اللي يعطيك نسبة كفاءة الگلب (EF%) بدقة ويشخص الترهل. التزامك بالأدوية يخليك تعيش حياة شبه طبيعية. احجز موعدك هسه وي أطباء القلبية.</p>
+                <a href="doctors.html" class="cta-btn">عرض قائمة أطباء القلبية</a>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="copyright-bar">&copy; 2026 جميع الحقوق محفوظة لـ كشفيّة</div>
+    </footer>
+</body>
+</html>
