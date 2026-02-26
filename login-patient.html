@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>دخول الأطباء | كشفيّة</title>
+    <title>دخول المرضى | كشفيّة</title>
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     
@@ -14,8 +14,6 @@
             --nhs-light-grey: #f0f4f5;
             --nhs-text: #212b32;
             --nhs-white: #ffffff;
-            --doctor-orange: #fb8500;
-            --doctor-orange-hover: #e07700;
         }
 
         body {
@@ -41,15 +39,16 @@
         .nav-content { max-width: 1300px; margin: 0 auto; padding: 0 20px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; }
         .main-links { display: flex; }
         .main-links a { color: white; text-decoration: none; padding: 15px 20px; font-weight: 600; font-size: 0.95rem; transition: all 0.2s; display: flex; align-items: center; gap: 8px; border-bottom: 3px solid transparent; }
-        .main-links a:hover { background-color: var(--nhs-dark-blue); border-bottom-color: var(--doctor-orange); }
+        .main-links a:hover { background-color: var(--nhs-dark-blue); border-bottom-color: #fb8500; }
         .nav-actions { display: flex; align-items: center; gap: 15px; }
         .nav-cta { background-color: var(--nhs-white); color: var(--nhs-blue) !important; padding: 8px 20px; border-radius: 20px; font-weight: 800; font-size: 0.9rem; text-decoration: none; transition: all 0.2s; display: flex; align-items: center; gap: 6px; }
         .nav-cta:hover { background-color: #f0f4f5; transform: translateY(-1px); box-shadow: 0 2px 5px rgba(0,0,0,0.2); }
         
-        .login-patient-btn { background-color: var(--nhs-light-grey); color: var(--nhs-dark-blue) !important; border: 1px solid var(--nhs-blue); }
-        .login-doctor-btn { background-color: var(--doctor-orange-hover); color: white !important; border: none; box-shadow: inset 0 0 0 2px white; } /* Highlighted */
+        .login-patient-btn { background-color: var(--nhs-dark-blue); color: white !important; border: 1px solid var(--nhs-blue); }
+        .login-doctor-btn { background-color: #fb8500; color: white !important; border: none; }
+        .login-doctor-btn:hover { background-color: #e07700; color: white !important; }
 
-        /* --- Login Form Styles (Doctor Specific) --- */
+        /* --- Login Form Styles --- */
         main { flex: 1; display: flex; align-items: center; justify-content: center; padding: 40px 20px; }
         
         .login-container {
@@ -59,22 +58,22 @@
             padding: 40px;
             border-radius: 8px;
             box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-            border-top: 5px solid var(--doctor-orange); /* Orange border for doctors */
+            border-top: 5px solid var(--nhs-blue);
         }
 
         .login-header { text-align: center; margin-bottom: 30px; }
-        .login-header i { font-size: 2.5rem; color: var(--doctor-orange); margin-bottom: 15px; }
+        .login-header i { font-size: 2.5rem; color: var(--nhs-blue); margin-bottom: 15px; }
         .login-header h1 { font-size: 1.5rem; color: var(--nhs-dark-blue); margin: 0 0 10px 0; }
         .login-header p { color: #4a5568; font-size: 0.95rem; margin: 0; }
 
         .form-group { margin-bottom: 20px; }
         .form-group label { display: block; font-weight: 600; margin-bottom: 8px; color: var(--nhs-text); font-size: 0.95rem; }
         .form-group input { width: 100%; padding: 12px; border: 1px solid #cbd5e0; border-radius: 6px; font-size: 1rem; font-family: inherit; box-sizing: border-box; transition: border-color 0.2s; }
-        .form-group input:focus { outline: none; border-color: var(--doctor-orange); box-shadow: 0 0 0 3px rgba(251, 133, 0, 0.1); }
+        .form-group input:focus { outline: none; border-color: var(--nhs-blue); box-shadow: 0 0 0 3px rgba(0, 94, 184, 0.1); }
 
         .submit-btn {
             width: 100%;
-            background-color: var(--doctor-orange);
+            background-color: var(--nhs-blue);
             color: white;
             border: none;
             padding: 14px;
@@ -85,10 +84,10 @@
             transition: background-color 0.2s;
             margin-top: 10px;
         }
-        .submit-btn:hover { background-color: var(--doctor-orange-hover); }
+        .submit-btn:hover { background-color: var(--nhs-dark-blue); }
 
         .auth-links { text-align: center; margin-top: 25px; font-size: 0.9rem; }
-        .auth-links a { color: var(--doctor-orange); text-decoration: none; font-weight: 600; }
+        .auth-links a { color: var(--nhs-blue); text-decoration: none; font-weight: 600; }
         .auth-links a:hover { text-decoration: underline; }
 
         /* --- Footer (Reused) --- */
@@ -149,20 +148,20 @@
     <main>
         <div class="login-container">
             <div class="login-header">
-                <i class="fas fa-user-md"></i>
-                <h1>بوابة الأطباء والمراكز</h1>
-                <p>قم بتسجيل الدخول لإدارة حجوزاتك وملفك الطبي.</p>
+                <i class="fas fa-user-circle"></i>
+                <h1>تسجيل دخول المرضى</h1>
+                <p>أهلاً بك في منصة كشفيّة، يرجى إدخال بياناتك للمتابعة.</p>
             </div>
 
-            <form id="doctor-login-form">
+            <form id="patient-login-form">
                 <div class="form-group">
-                    <label for="doctor-email">البريد الإلكتروني للعيادة</label>
-                    <input type="email" id="doctor-email" placeholder="أدخل البريد الإلكتروني" required>
+                    <label for="email">البريد الإلكتروني أو رقم الهاتف</label>
+                    <input type="email" id="email" placeholder="أدخل بريدك الإلكتروني" required>
                 </div>
                 
                 <div class="form-group">
-                    <label for="doctor-password">كلمة المرور</label>
-                    <input type="password" id="doctor-password" placeholder="أدخل كلمة المرور" required>
+                    <label for="password">كلمة المرور</label>
+                    <input type="password" id="password" placeholder="أدخل كلمة المرور" required>
                 </div>
 
                 <button type="submit" class="submit-btn">تسجيل الدخول <i class="fas fa-sign-in-alt"></i></button>
@@ -170,7 +169,7 @@
 
             <div class="auth-links">
                 <p><a href="#">هل نسيت كلمة المرور؟</a></p>
-                <p>ترغب بالانضمام إلى الدليل؟ <a href="#">سجل كطبيب جديد</a></p>
+                <p>ليس لديك حساب؟ <a href="#">إنشاء حساب جديد</a></p>
             </div>
         </div>
     </main>
