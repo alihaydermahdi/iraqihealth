@@ -130,6 +130,24 @@
             box-shadow: 0 2px 5px rgba(0,0,0,0.2);
         }
 
+        /* --- أزرار تسجيل الدخول --- */
+        .login-patient-btn {
+            background-color: var(--nhs-light-grey);
+            color: var(--nhs-dark-blue) !important;
+            border: 1px solid var(--nhs-blue);
+        }
+
+        .login-doctor-btn {
+            background-color: #fb8500; /* Distinct orange for doctors */
+            color: white !important;
+            border: none;
+        }
+
+        .login-doctor-btn:hover {
+            background-color: #e07700;
+            color: white !important;
+        }
+
         /* --- Grid & Interactive Dropdowns --- */
         .clinical-grid {
             max-width: 1300px;
@@ -312,7 +330,7 @@
             .nav-content { flex-direction: column; padding: 0; }
             .main-links { width: 100%; justify-content: center; overflow-x: auto; }
             .main-links a { padding: 12px 10px; font-size: 0.85rem; border-bottom: none; }
-            .nav-actions { width: 100%; justify-content: center; padding: 10px; background-color: var(--nhs-dark-blue); }
+            .nav-actions { width: 100%; justify-content: center; padding: 10px; background-color: var(--nhs-dark-blue); flex-wrap: wrap; }
             
             .grid-row { grid-template-columns: repeat(2, 1fr); } 
             .mega-dropdown { grid-template-columns: 1fr; }
@@ -346,7 +364,15 @@
             </div>
             
             <div class="nav-actions">
-                <a href="contact.html" class="nav-cta"><i class="fas fa-phone"></i> تواصل معنا</a>
+                <a href="login-patient.html" class="nav-cta login-patient-btn">
+                    <i class="fas fa-user"></i> دخول المرضى
+                </a>
+                <a href="login-doctor.html" class="nav-cta login-doctor-btn">
+                    <i class="fas fa-user-doctor"></i> دخول الأطباء
+                </a>
+                <a href="contact.html" class="nav-cta">
+                    <i class="fas fa-phone"></i> تواصل معنا
+                </a>
             </div>
         </div>
     </nav>
