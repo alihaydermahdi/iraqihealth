@@ -221,10 +221,10 @@
     </footer>
 
     <script>
-        // 1. Initialize Supabase
+        // 1. Initialize Supabase (Fixed naming collision here)
         const supabaseUrl = 'https://anptpomhhuxsxaeonhca.supabase.co';
-        const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFucHRwb21oaHV4c3hhZW9uaGNhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzIxMzU4OTYsImV4cCI6MjA4NzcxMTg5Nn0.7KGLqjcLRA2xzfOXdiDzINCVNhaOLBlj3sjJLBmYDiU';
-        const supabase = supabase.createClient(supabaseUrl, supabaseKey);
+        const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFucHRwb21oaHV4c3hhZW9uaGNhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzIxMzU4OTYsImV4cCI6MjA4NzcxMTg5Nn0.7KGLqjcLRA2xzfOXdiDzINCVN';
+        const supabaseClient = window.supabase.createClient(supabaseUrl, supabaseKey);
 
         // 2. Handle Form Submission
         const signupForm = document.getElementById('patient-signup-form');
@@ -244,8 +244,8 @@
             const phone = document.getElementById('phone').value;
 
             try {
-                // Register the user with Supabase Auth
-                const { data, error } = await supabase.auth.signUp({
+                // Register the user with Supabase Auth using the renamed client
+                const { data, error } = await supabaseClient.auth.signUp({
                     email: email,
                     password: password,
                     options: {
