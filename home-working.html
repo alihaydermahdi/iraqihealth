@@ -70,7 +70,7 @@
             top: 0;
             z-index: 1000;
             box-shadow: 0 4px 6px rgba(0,0,0,0.1); 
-            margin-bottom: 0; /* Changed to 0 to connect seamlessly with the search hero */
+            margin-bottom: 0; 
         }
 
         .nav-content {
@@ -140,13 +140,13 @@
         }
 
         .login-doctor-btn {
-            background-color: var(--nhs-dark-blue); /* Updated to NHS Dark Blue */
+            background-color: var(--nhs-dark-blue); 
             color: white !important;
             border: 1px solid rgba(255,255,255,0.2);
         }
 
         .login-doctor-btn:hover {
-            background-color: #00225e; /* Slightly darker blue on hover */
+            background-color: #00225e; 
             color: white !important;
         }
 
@@ -249,7 +249,7 @@
         }
 
         .search-btn {
-            background-color: var(--nhs-dark-blue); /* Updated to NHS theme */
+            background-color: var(--nhs-dark-blue); 
             color: white;
             border: none;
             border-radius: 8px;
@@ -264,7 +264,7 @@
         }
 
         .search-btn:hover {
-            background-color: #00225e; /* Darker blue on hover */
+            background-color: #00225e; 
         }
 
         /* --- Grid & Interactive Dropdowns --- */
@@ -515,13 +515,35 @@
             <div class="search-field">
                 <i class="fas fa-stethoscope"></i>
                 <select id="search-specialty">
-                    <option value="" disabled selected>اختار التخصص الطبي...</option>
-                    <option value="neuro">أمراض المخ والأعصاب</option>
-                    <option value="cardio">أمراض القلب والأوعية</option>
-                    <option value="eye">طب وجراحة العيون</option>
-                    <option value="paeds">طب الأطفال</option>
-                    <option value="dentist">طب وتجميل الأسنان</option>
-                    <option value="derm">الأمراض الجلدية</option>
+                    <option value="" disabled selected>اختر التخصص الطبي...</option>
+                    <option value="general_surgery">جراحة عامة وجراحة المناظير</option>
+                    <option value="bariatric_surgery">جراحة السمنة</option>
+                    <option value="neurosurgery">جراحة المخ والأعصاب</option>
+                    <option value="cardiothoracic_surgery">جراحة القلب والصدر</option>
+                    <option value="pediatric_surgery">جراحة الأطفال</option>
+                    <option value="plastic_surgery">جراحة التجميل</option>
+                    <option value="family_medicine">طب الأسرة</option>
+                    <option value="dentistry">طب الأسنان</option>
+                    <option value="neurology">أمراض المخ والأعصاب</option>
+                    <option value="ent">الأنف والأذن والحنجرة</option>
+                    <option value="pulmonology">أمراض الجهاز التنفسي</option>
+                    <option value="cardiology">أمراض القلب والأوعية الدموية</option>
+                    <option value="endocrinology">السكري والغدد الصماء</option>
+                    <option value="gastroenterology">أمراض الجهاز الهضمي والكبد</option>
+                    <option value="nephrology_urology">أمراض الكلى والمسالك البولية</option>
+                    <option value="obstetrics_gynecology">النسائية والتوليد</option>
+                    <option value="pediatrics">طب الأطفال والخدج</option>
+                    <option value="dermatology">الأمراض الجلدية</option>
+                    <option value="orthopedics_rheumatology">العظام والمفاصل والروماتيزم</option>
+                    <option value="hematology_oncology">أمراض الدم والأورام</option>
+                    <option value="ophthalmology">طب وجراحة العيون</option>
+                    <option value="psychiatry">الطب النفسي والصحة النفسية</option>
+                    <option value="nutrition">التغذية العلاجية وعلاج السمنة</option>
+                    <option value="andrology_infertility">الذكورة والعقم</option>
+                    <option value="radiology">الأشعة</option>
+                    <option value="laboratory">التحاليل الطبية</option>
+                    <option value="physiotherapy">العلاج الطبيعي</option>
+                    <option value="allergy_immunology">الحساسية والمناعة</option>
                 </select>
             </div>
 
@@ -530,10 +552,24 @@
                 <select id="search-city">
                     <option value="" disabled selected>اختار المحافظة...</option>
                     <option value="baghdad">بغداد</option>
+                    <option value="nineveh">نينوى</option>
                     <option value="basra">البصرة</option>
+                    <option value="salah_al_din">صلاح الدين</option>
+                    <option value="duhok">دهوك</option>
                     <option value="erbil">أربيل</option>
-                    <option value="najaf">النجف</option>
+                    <option value="sulaymaniyah">السليمانية</option>
+                    <option value="diyala">ديالى</option>
+                    <option value="wasit">واسط</option>
+                    <option value="maysan">ميسان</option>
+                    <option value="dhi_qar">ذي قار</option>
+                    <option value="muthanna">المثنى</option>
                     <option value="babil">بابل</option>
+                    <option value="karbala">كربلاء</option>
+                    <option value="najaf">النجف</option>
+                    <option value="anbar">الانبار</option>
+                    <option value="diwaniya">الديوانية</option>
+                    <option value="kirkuk">كركوك</option>
+                    <option value="halabja">حلبجة</option>
                 </select>
             </div>
 
@@ -721,7 +757,8 @@
             const city = document.getElementById('search-city').value;
             const docName = document.getElementById('search-name').value;
 
-            alert("سيتم نقلك إلى صفحة نتائج البحث الخاصة بـ " + (specialty || "كافة التخصصات") + " في " + (city || "كل المحافظات") + " قريباً!");
+            // Logic to handle search routing will go here
+            alert("سيتم نقلك إلى صفحة نتائج البحث الخاصة بك قريباً!");
         });
 
         // 5. Original Dropdown Logic
