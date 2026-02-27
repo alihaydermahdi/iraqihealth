@@ -1,3 +1,4 @@
+its this 
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
@@ -23,58 +24,6 @@
             color: var(--nhs-text);
             line-height: 1.6;
             -webkit-font-smoothing: antialiased;
-        }
-
-        /* ===== Kashfeya AI Search ===== */
-        .ai-search-section {
-            max-width: 900px;
-            margin: 20px auto 10px auto;
-            padding: 0 20px;
-        }
-
-        .ai-search-box {
-            background: white;
-            border-radius: 50px;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.12);
-            display: flex;
-            align-items: center;
-            padding: 8px 15px;
-            transition: all 0.3s ease;
-        }
-
-        .ai-search-box:focus-within {
-            box-shadow: 0 10px 30px rgba(0,94,184,0.25);
-        }
-
-        .ai-search-box input {
-            border: none;
-            outline: none;
-            flex: 1;
-            font-size: 1rem;
-            padding: 12px;
-            background: transparent;
-        }
-
-        .ai-search-btn {
-            background: var(--nhs-blue);
-            border: none;
-            color: white;
-            padding: 12px 22px;
-            border-radius: 30px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: 0.2s;
-        }
-
-        .ai-search-btn:hover {
-            background: var(--nhs-dark-blue);
-        }
-
-        .ai-disclaimer {
-            text-align: center;
-            font-size: 0.75rem;
-            margin-top: 8px;
-            color: #6b7280;
         }
 
         /* --- Professional Header Section --- */
@@ -429,26 +378,138 @@
         </div>
     </nav>
 
-    <!-- AI Search Bar -->
-    <section class="ai-search-section">
-        <div class="ai-search-box">
-            <i class="fas fa-robot" style="color:#005eb8; margin-left:10px;"></i>
-            <input type="text" id="aiInput" placeholder="اكتب أعراضك هنا... مثلاً: عندي ألم صدر وضيق نفس">
-            <button class="ai-search-btn" onclick="runAISearch()">بحث</button>
-        </div>
-        <div class="ai-disclaimer">
-            هذا المساعد إرشادي فقط ولا يغني عن مراجعة الطبيب أو الطوارئ
-        </div>
-    </section>
-
     <main class="clinical-grid">
-        <!-- Original tiles here unchanged -->
-        <!-- ... Paste all your existing tiles and mega-dropdowns ... -->
+        
+        <div class="grid-row">
+            <div class="tile neuro" onclick="toggleDrop('drop1', 'neuro')">
+                <i class="fas fa-brain"></i>
+                <span>أمراض المخ والأعصاب</span>
+            </div>
+            <div class="tile ent" onclick="toggleDrop('drop1', 'ent')">
+                <i class="fas fa-ear-listen"></i>
+                <span>الأنف والأذن والحنجرة</span>
+            </div>
+            <div class="tile resp" onclick="toggleDrop('drop1', 'resp')">
+                <i class="fas fa-lungs"></i>
+                <span>أمراض الجهاز التنفسي</span>
+            </div>
+            <div class="tile cardio" onclick="toggleDrop('drop1', 'cardio')">
+                <i class="fas fa-heart-pulse"></i>
+                <span>أمراض القلب والأوعية</span>
+            </div>
+            <div id="drop1" class="mega-dropdown">
+                <div class="drop-section"><a href="#" class="dynamic-link">الأمراض الشائعة</a></div>
+                <div class="drop-section"><a href="#">أطباء الاختصاص</a></div>
+            </div>
+        </div>
+
+        <div class="grid-row">
+            <div class="tile diabetes" onclick="toggleDrop('drop2', 'diabetes')">
+                <i class="fas fa-syringe"></i>
+                <span>السكري والغدد الصماء</span>
+            </div>
+            <div class="tile gastro" onclick="toggleDrop('drop2', 'gastro')">
+                <i class="fas fa-pills"></i>
+                <span>الجهاز الهضمي والكبد</span>
+            </div>
+            <div class="tile renal" onclick="toggleDrop('drop2', 'renal')">
+                <i class="fas fa-droplet"></i>
+                <span>أمراض الكلى والمسالك</span>
+            </div>
+            <div class="tile women" onclick="toggleDrop('drop2', 'women')">
+                <i class="fas fa-person-pregnant"></i>
+                <span>النسائية والتوليد</span>
+            </div>
+            <div id="drop2" class="mega-dropdown">
+                <div class="drop-section"><a href="#" class="dynamic-link">الأمراض الشائعة</a></div>
+                <div class="drop-section"><a href="#">أطباء الاختصاص</a></div>
+            </div>
+        </div>
+
+        <div class="grid-row">
+            <div class="tile paeds" onclick="toggleDrop('drop3', 'paeds')">
+                <i class="fas fa-child-reaching"></i>
+                <span>طب الأطفال والخدج</span>
+            </div>
+            <div class="tile derm" onclick="toggleDrop('drop3', 'derm')">
+                <i class="fas fa-hand-sparkles"></i>
+                <span>الأمراض الجلدية</span>
+            </div>
+            <div class="tile msk" onclick="toggleDrop('drop3', 'msk')">
+                <i class="fas fa-bone"></i>
+                <span>الكسور والعظام والروماتيزم</span>
+            </div>
+            <div class="tile cancer" onclick="toggleDrop('drop3', 'cancer')">
+                <i class="fas fa-ribbon"></i>
+                <span>أمراض الدم والأورام</span>
+            </div>
+            <div id="drop3" class="mega-dropdown">
+                <div class="drop-section"><a href="#" class="dynamic-link">الأمراض الشائعة</a></div>
+                <div class="drop-section"><a href="#">أطباء الاختصاص</a></div>
+            </div>
+        </div>
+
+        <div class="grid-row">
+            <div class="tile eye" onclick="toggleDrop('drop4', 'eye')">
+                <i class="fas fa-eye"></i>
+                <span>طب وجراحة العيون</span>
+            </div>
+            <div class="tile mental" onclick="toggleDrop('drop4', 'mental')">
+                <i class="fas fa-hand-holding-heart"></i>
+                <span>الصحة النفسية</span>
+            </div>
+            <div class="tile nutrition" onclick="toggleDrop('drop4', 'nutrition')">
+                <i class="fas fa-weight-scale"></i>
+                <span>التغذية و السمنة</span>
+            </div>
+            <div class="tile urology" onclick="toggleDrop('drop4', 'urology')">
+                <i class="fas fa-mars"></i>
+                <span>الذكورة والعقم</span>
+            </div>
+            <div id="drop4" class="mega-dropdown">
+                <div class="drop-section"><a href="#" class="dynamic-link">الأمراض الشائعة</a></div>
+                <div class="drop-section"><a href="#">أطباء الاختصاص</a></div>
+            </div>
+        </div>
+
     </main>
 
     <footer>
-        <!-- Original footer here unchanged -->
-        <!-- ... -->
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>عن منصة كشفيّة</h4>
+                <ul>
+                    <li><a href="about.html"><i class="fas fa-angle-left"></i> من نحن</a></li>
+                    <li><a href="about.html#vision"><i class="fas fa-angle-left"></i> رؤيتنا ورسالتنا</a></li>
+                    <li><a href="about.html#privacy"><i class="fas fa-angle-left"></i> سياسة الخصوصية</a></li>
+                    <li><a href="about.html#terms"><i class="fas fa-angle-left"></i> الشروط والأحكام</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h4>خدمات المرضى</h4>
+                <ul>
+                    <li><a href="index.html"><i class="fas fa-angle-left"></i> الرئيسية</a></li>
+                    <li><a href="index.html"><i class="fas fa-angle-left"></i> دليل الأمراض الشائعة</a></li>
+                    <li><a href="doctors.html"><i class="fas fa-angle-left"></i> قائمة الأطباء والمراكز</a></li>
+                    <li><a href="faq.html"><i class="fas fa-angle-left"></i> الأسئلة الشائعة</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h4>معلومات التواصل</h4>
+                <ul>
+                    <li><a href="contact.html"><i class="fas fa-bullhorn"></i> للتواصل والإعلان: اضغط هنا</a></li>
+                    <li><a href="https://www.facebook.com/kashfeyacom" target="_blank" rel="noopener noreferrer"><i class="fab fa-facebook"></i> فيسبوك (Facebook)</a></li>
+                    <li><a href="https://www.instagram.com/kashfeyacom" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram"></i> إنستغرام (Instagram)</a></li>
+                    <li><a href="https://www.tiktok.com/@kashfeya.com" target="_blank" rel="noopener noreferrer"><i class="fab fa-tiktok"></i> تيكتوك (TikTok)</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="copyright-bar">
+            &copy; 2026 جميع الحقوق محفوظة لـ كشفيّة
+        </div>
     </footer>
 
     <script>
@@ -459,21 +520,34 @@
             const bgColor = window.getComputedStyle(tile).backgroundColor;
             const link = drop.querySelector('.dynamic-link');
             
+            // ربط القائمة المنسدلة بصفحة القسم الفرعي المخصصة
             link.href = colorClass + '-diseases.html';
             
+            // --- التعديل الذكي لضبط مكان القائمة في الموبايل والكمبيوتر ---
             const gridRow = tile.closest('.grid-row');
+            
+            // نحصل على جميع المربعات داخل هذا الصف
             const tiles = Array.from(gridRow.children).filter(c => c.classList.contains('tile'));
             const index = tiles.indexOf(tile);
             
-            let columns = 4;
-            if (window.innerWidth <= 768) columns = 2;
-            else if (window.innerWidth <= 1024) columns = 3;
+            // تحديد عدد الأعمدة الفعلي بناءً على حجم الشاشة
+            let columns = 4; // الافتراضي للكمبيوتر
+            if (window.innerWidth <= 768) {
+                columns = 2; // للموبايل
+            } else if (window.innerWidth <= 1024) {
+                columns = 3; // للتابلت
+            }
             
+            // حساب السطر الذي يقع فيه القسم المضغوط
             const rowIndex = Math.floor(index / columns);
+            
+            // إيجاد آخر قسم موجود في نفس هذا السطر لإدراج القائمة بعده
             const lastIndexInRow = Math.min((rowIndex + 1) * columns - 1, tiles.length - 1);
             const insertAfterNode = tiles[lastIndexInRow];
             
+            // إدخال القائمة المنسدلة مباشرة بعد آخر قسم في هذا السطر
             insertAfterNode.insertAdjacentElement('afterend', drop);
+            // -------------------------------------------------------------
 
             document.querySelectorAll('.mega-dropdown').forEach(d => {
                 if (d.id !== dropId) d.style.display = 'none';
@@ -486,52 +560,6 @@
                 drop.style.display = 'grid';
                 drop.style.background = bgColor;
                 drop.dataset.active = colorClass;
-            }
-        }
-
-        function runAISearch() {
-            const input = document.getElementById("aiInput").value.trim().toLowerCase();
-            if (!input) { alert("يرجى كتابة الأعراض أولاً"); return; }
-
-            const redFlags = ["ألم صدر شديد","ضيق نفس شديد","فاقد وعي","تشنج","نزيف شديد","شلل مفاجئ","يبس رقبة"];
-            for (let flag of redFlags) {
-                if (input.includes(flag)) {
-                    alert("⚠️ أعراض خطيرة! يرجى مراجعة الطوارئ فوراً.");
-                    return;
-                }
-            }
-
-            const routes = {
-                "neuro": ["صداع","دوخة","تشنج","صرع","جلطة","رعشة"],
-                "cardio": ["ألم صدر","خفقان","ضغط","ذبحة","قلب"],
-                "resp": ["سعال","كحة","ضيق نفس","ربو","بلغم"],
-                "gastro": ["ألم بطن","إسهال","إمساك","معدة","قيء","استفراغ"],
-                "renal": ["حرقة بول","ألم خاصرة","حصى","بول"],
-                "paeds": ["طفلي","طفل","حرارة طفل","تأخر كلام","ما يحجي"],
-                "derm": ["حكة","طفح","جلد","حبوب"],
-                "mental": ["قلق","اكتئاب","توتر","أرق"],
-                "women": ["حمل","دورة","نزيف رحمي"],
-                "eye": ["نظر","احمرار عين","زغللة"],
-                "ent": ["أذن","حلق","جيوب"],
-                "msk": ["ألم مفصل","ركبة","ظهر","عضلات"],
-                "diabetes": ["سكر","غدة","هرمون"],
-                "cancer": ["ورم","كتلة","سرطان"],
-                "nutrition": ["سمنة","وزن","حمية"],
-                "urology": ["ضعف انتصاب","عقم","بروستات"]
-            };
-
-            let bestMatch = null;
-            let highestScore = 0;
-            for (let specialty in routes) {
-                let score = 0;
-                routes[specialty].forEach(keyword => { if(input.includes(keyword)) score++; });
-                if (score > highestScore) { highestScore = score; bestMatch = specialty; }
-            }
-
-            if (bestMatch && highestScore > 0) {
-                window.location.href = bestMatch + "-diseases.html";
-            } else {
-                alert("لم أتمكن من تحديد القسم بدقة. حاول كتابة الأعراض بشكل أوضح.");
             }
         }
     </script>
