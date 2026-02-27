@@ -32,19 +32,19 @@
             min-height: 100vh;
         }
 
-        /* --- Professional Header Section --- */
+        /* --- Professional Header & Nav --- */
         .nhs-header { background-color: var(--nhs-white); border-bottom: 8px solid var(--nhs-blue); padding: 12px 0; }
         .header-content { max-width: 1300px; margin: 0 auto; padding: 0 20px; display: flex; justify-content: space-between; align-items: center; }
         .logo-link { display: inline-flex; align-items: center; text-decoration: none; gap: 15px; }
         .site-logo { max-height: 55px; width: auto; object-fit: contain; }
         .header-moto { font-weight: 700; color: var(--nhs-blue); font-size: 1.1rem; }
 
-        /* --- Professional Blue Navigation --- */
         .nhs-nav { background-color: var(--nhs-blue); color: white; position: sticky; top: 0; z-index: 1000; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
         .nav-content { max-width: 1300px; margin: 0 auto; padding: 0 20px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; }
         .main-links { display: flex; }
         .main-links a { color: white; text-decoration: none; padding: 15px 20px; font-weight: 600; font-size: 0.95rem; transition: all 0.2s; display: flex; align-items: center; gap: 8px; border-bottom: 3px solid transparent; }
         .main-links a:hover, .main-links a.active { background-color: var(--nhs-dark-blue); border-bottom-color: var(--nhs-white); }
+        
         .nav-actions { display: flex; align-items: center; gap: 15px; }
         .nav-cta { background-color: var(--nhs-white); color: var(--nhs-blue) !important; padding: 8px 20px; border-radius: 20px; font-weight: 800; font-size: 0.9rem; text-decoration: none; transition: all 0.2s; display: flex; align-items: center; gap: 6px; }
         .nav-cta:hover { background-color: #f0f4f5; transform: translateY(-1px); box-shadow: 0 2px 5px rgba(0,0,0,0.2); }
@@ -53,7 +53,6 @@
         .login-doctor-btn { background-color: var(--nhs-dark-blue); color: white !important; border: 1px solid rgba(255,255,255,0.2); }
         .login-doctor-btn:hover { background-color: #00225e; color: white !important; }
 
-        /* User Profile UI in Nav */
         .user-profile-info { display: none; align-items: center; gap: 10px; color: white; font-weight: bold; }
         .user-profile-info i { font-size: 1.2rem; color: var(--nhs-white); }
         .logout-btn { background-color: #d32f2f; color: white !important; padding: 6px 15px; border-radius: 20px; font-size: 0.85rem; cursor: pointer; text-decoration: none; border: none; font-weight: bold; transition: background-color 0.2s; }
@@ -73,16 +72,12 @@
         .filter-group:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
         .filter-title { font-weight: bold; color: var(--nhs-dark-blue); margin-bottom: 15px; display: flex; align-items: center; gap: 8px; }
         .filter-option { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; cursor: pointer; color: #4a5568; font-size: 0.95rem; }
-        .filter-option input[type="checkbox"], .filter-option input[type="radio"] { cursor: pointer; accent-color: var(--nhs-blue); width: 16px; height: 16px; }
-
-        /* Results Area */
-        .results-container { display: flex; flex-direction: column; gap: 20px; }
 
         /* Doctor Card */
-        .doctor-card { background: var(--nhs-white); border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); display: flex; overflow: hidden; transition: transform 0.2s, box-shadow 0.2s; border: 1px solid #edf2f7; }
+        .results-container { display: flex; flex-direction: column; gap: 20px; }
+        .doctor-card { background: var(--nhs-white); border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); display: flex; overflow: hidden; transition: transform 0.2s; border: 1px solid #edf2f7; }
         .doctor-card:hover { transform: translateY(-2px); box-shadow: 0 8px 15px rgba(0,0,0,0.08); }
         
-        /* Card Sections */
         .doc-profile { padding: 25px; display: flex; gap: 20px; flex: 2; border-left: 1px solid #edf2f7; }
         .doc-img-wrapper { width: 90px; height: 90px; border-radius: 50%; overflow: hidden; border: 3px solid var(--nhs-light-grey); flex-shrink: 0; }
         .doc-img-wrapper img { width: 100%; height: 100%; object-fit: cover; }
@@ -96,13 +91,56 @@
         .doc-details-list li { display: flex; align-items: flex-start; gap: 10px; margin-bottom: 8px; font-size: 0.9rem; color: #4a5568; }
         .doc-details-list i { color: var(--nhs-blue); margin-top: 4px; width: 16px; text-align: center; }
 
-        /* Booking Section */
         .doc-booking { padding: 25px; flex: 1; display: flex; flex-direction: column; justify-content: center; align-items: center; background-color: #f8fafc; }
         .availability-badge { background-color: #e6f2ec; color: var(--success-green); padding: 5px 12px; border-radius: 4px; font-size: 0.85rem; font-weight: bold; margin-bottom: 15px; display: flex; align-items: center; gap: 6px; }
-        
-        .book-btn { background-color: var(--nhs-dark-blue); color: white; border: none; padding: 12px 30px; border-radius: 6px; font-size: 1rem; font-weight: bold; cursor: pointer; transition: background-color 0.2s; width: 100%; display: flex; align-items: center; justify-content: center; gap: 8px; }
+        .book-btn { background-color: var(--nhs-dark-blue); color: white; border: none; padding: 12px 30px; border-radius: 6px; font-size: 1rem; font-weight: bold; cursor: pointer; transition: 0.2s; width: 100%; }
         .book-btn:hover { background-color: var(--nhs-blue); }
-        .wait-time { font-size: 0.8rem; color: #718096; margin-top: 10px; text-align: center; }
+        .wait-time { font-size: 0.8rem; color: #718096; margin-top: 10px; }
+
+        /* --- BOOKING MODAL (POPUP) STYLES --- */
+        .modal-overlay {
+            display: none; /* Hidden by default */
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background-color: rgba(0, 0, 0, 0.6);
+            z-index: 2000; justify-content: center; align-items: center;
+        }
+
+        .modal-content {
+            background-color: white; padding: 30px; border-radius: 12px;
+            max-width: 500px; width: 90%; position: relative;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            animation: slideDown 0.3s ease-out;
+        }
+
+        @keyframes slideDown { from { transform: translateY(-20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+
+        .close-modal {
+            position: absolute; top: 15px; left: 20px; font-size: 1.5rem;
+            color: #a0aec0; cursor: pointer; transition: 0.2s; background: none; border: none;
+        }
+        .close-modal:hover { color: #e53e3e; }
+
+        .modal-header { border-bottom: 2px solid var(--nhs-light-grey); padding-bottom: 15px; margin-bottom: 20px; text-align: center; }
+        .modal-header h3 { margin: 0; color: var(--nhs-dark-blue); font-size: 1.4rem; }
+        .modal-header p { margin: 5px 0 0 0; color: #718096; font-size: 0.95rem; }
+
+        .time-slots { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 20px; }
+        .time-slot-btn {
+            background: var(--nhs-light-grey); border: 1px solid #cbd5e0; padding: 10px;
+            border-radius: 6px; cursor: pointer; font-family: inherit; font-size: 0.95rem; transition: 0.2s;
+        }
+        .time-slot-btn:hover { border-color: var(--nhs-blue); background: #e6f0fa; }
+        .time-slot-btn.selected { background: var(--nhs-blue); color: white; border-color: var(--nhs-blue); font-weight: bold; }
+
+        .booking-form-group { margin-bottom: 15px; }
+        .booking-form-group label { display: block; font-weight: bold; margin-bottom: 5px; font-size: 0.9rem; color: var(--nhs-text); }
+        .booking-form-group input { width: 100%; padding: 10px; border: 1px solid #cbd5e0; border-radius: 6px; box-sizing: border-box; font-family: inherit; }
+
+        .confirm-booking-btn {
+            background-color: var(--success-green); color: white; border: none; width: 100%;
+            padding: 14px; border-radius: 6px; font-size: 1.1rem; font-weight: bold; cursor: pointer; margin-top: 10px;
+        }
+        .confirm-booking-btn:hover { background-color: #00602b; }
 
         /* --- Footer --- */
         footer { background-color: #e8edee; border-top: 8px solid var(--nhs-blue); padding: 40px 20px 20px 20px; margin-top: auto; }
@@ -122,13 +160,11 @@
             .doctor-card { flex-direction: column; }
             .doc-profile { border-left: none; border-bottom: 1px solid #edf2f7; }
         }
-
         @media (max-width: 768px) {
             .header-content { flex-direction: column; text-align: center; gap: 8px; }
             .nav-content { flex-direction: column; padding: 0; }
             .main-links { width: 100%; justify-content: center; overflow-x: auto; }
-            .nav-actions { width: 100%; justify-content: center; padding: 10px; background-color: var(--nhs-dark-blue); flex-wrap: wrap; }
-            .user-profile-info { width: 100%; justify-content: center; padding: 10px; background-color: var(--nhs-dark-blue); flex-wrap: wrap; }
+            .time-slots { grid-template-columns: repeat(2, 1fr); }
         }
     </style>
 </head>
@@ -158,9 +194,6 @@
                 <a href="login-doctor.html" class="nav-cta login-doctor-btn">
                     <i class="fas fa-user-doctor"></i> دخول الأطباء
                 </a>
-                <a href="contact.html" class="nav-cta">
-                    <i class="fas fa-phone"></i> تواصل معنا
-                </a>
             </div>
 
             <div class="user-profile-info" id="user-info">
@@ -182,38 +215,14 @@
         <aside class="filters-sidebar">
             <div class="filter-group">
                 <div class="filter-title"><i class="fas fa-mars-and-venus"></i> جنس الطبيب</div>
-                <label class="filter-option">
-                    <input type="radio" name="gender" checked> الكل
-                </label>
-                <label class="filter-option">
-                    <input type="radio" name="gender"> طبيب (ذكر)
-                </label>
-                <label class="filter-option">
-                    <input type="radio" name="gender"> طبيبة (أنثى)
-                </label>
+                <label class="filter-option"><input type="radio" name="gender" checked> الكل</label>
+                <label class="filter-option"><input type="radio" name="gender"> طبيب (ذكر)</label>
+                <label class="filter-option"><input type="radio" name="gender"> طبيبة (أنثى)</label>
             </div>
-
-            <div class="filter-group">
-                <div class="filter-title"><i class="fas fa-calendar-check"></i> المواعيد المتاحة</div>
-                <label class="filter-option">
-                    <input type="checkbox"> متاح اليوم
-                </label>
-                <label class="filter-option">
-                    <input type="checkbox"> متاح غداً
-                </label>
-            </div>
-
             <div class="filter-group">
                 <div class="filter-title"><i class="fas fa-money-bill-wave"></i> سعر الكشفية</div>
-                <label class="filter-option">
-                    <input type="radio" name="price" checked> أي سعر
-                </label>
-                <label class="filter-option">
-                    <input type="radio" name="price"> أقل من 25,000 دينار
-                </label>
-                <label class="filter-option">
-                    <input type="radio" name="price"> 25,000 - 50,000 دينار
-                </label>
+                <label class="filter-option"><input type="radio" name="price" checked> أي سعر</label>
+                <label class="filter-option"><input type="radio" name="price"> أقل من 25,000 دينار</label>
             </div>
         </aside>
 
@@ -234,15 +243,12 @@
                         <ul class="doc-details-list">
                             <li><i class="fas fa-map-marker-alt"></i> بغداد - المنصور - شارع 14 رمضان</li>
                             <li><i class="fas fa-money-bill-alt"></i> سعر الكشفية: 40,000 دينار</li>
-                            <li><i class="fas fa-phone-alt"></i> 07700000000</li>
                         </ul>
                     </div>
                 </div>
                 <div class="doc-booking">
-                    <div class="availability-badge">
-                        <i class="fas fa-clock"></i> متاح اليوم
-                    </div>
-                    <button class="book-btn" onclick="alert('سيتم فتح نافذة تأكيد الحجز!')">
+                    <div class="availability-badge"><i class="fas fa-clock"></i> متاح اليوم</div>
+                    <button class="book-btn" onclick="openBookingModal('د. أحمد محمود')">
                         احجز الآن
                     </button>
                     <div class="wait-time">مدة الانتظار التقريبية: 30 دقيقة</div>
@@ -264,15 +270,12 @@
                         <ul class="doc-details-list">
                             <li><i class="fas fa-map-marker-alt"></i> بغداد - الحارثية - شارع الكندي</li>
                             <li><i class="fas fa-money-bill-alt"></i> سعر الكشفية: 35,000 دينار</li>
-                            <li><i class="fas fa-phone-alt"></i> 07800000000</li>
                         </ul>
                     </div>
                 </div>
                 <div class="doc-booking">
-                    <div class="availability-badge">
-                        <i class="fas fa-calendar-check"></i> متاح غداً
-                    </div>
-                    <button class="book-btn" onclick="alert('سيتم فتح نافذة تأكيد الحجز!')">
+                    <div class="availability-badge"><i class="fas fa-calendar-check"></i> متاح غداً</div>
+                    <button class="book-btn" onclick="openBookingModal('د. سارة علي')">
                         احجز الآن
                     </button>
                     <div class="wait-time">مدة الانتظار التقريبية: 15 دقيقة</div>
@@ -282,29 +285,40 @@
         </div>
     </div>
 
-    <footer>
-        <div class="footer-content">
-            <div class="footer-section">
-                <h4>عن منصة كشفيّة</h4>
-                <ul>
-                    <li><a href="about.html"><i class="fas fa-angle-left"></i> من نحن</a></li>
-                    <li><a href="about.html#privacy"><i class="fas fa-angle-left"></i> سياسة الخصوصية</a></li>
-                </ul>
+    <div id="booking-modal" class="modal-overlay">
+        <div class="modal-content">
+            <button class="close-modal" onclick="closeBookingModal()"><i class="fas fa-times"></i></button>
+            
+            <div class="modal-header">
+                <h3>تأكيد حجز موعد</h3>
+                <p>العيادة: <strong id="modal-doc-name">د. اسم الطبيب</strong></p>
             </div>
-            <div class="footer-section">
-                <h4>خدمات المرضى</h4>
-                <ul>
-                    <li><a href="index.html"><i class="fas fa-angle-left"></i> الرئيسية</a></li>
-                    <li><a href="doctors.html"><i class="fas fa-angle-left"></i> قائمة الأطباء</a></li>
-                </ul>
+
+            <p style="font-weight: bold; font-size: 0.95rem; margin-bottom: 10px;">اختر وقت الحجز المفضل:</p>
+            <div class="time-slots" id="time-slots-container">
+                <button class="time-slot-btn" onclick="selectSlot(this)">04:00 م</button>
+                <button class="time-slot-btn" onclick="selectSlot(this)">04:30 م</button>
+                <button class="time-slot-btn" onclick="selectSlot(this)">05:00 م</button>
+                <button class="time-slot-btn" onclick="selectSlot(this)">06:00 م</button>
+                <button class="time-slot-btn" onclick="selectSlot(this)">07:30 م</button>
+                <button class="time-slot-btn" onclick="selectSlot(this)">08:00 م</button>
             </div>
-            <div class="footer-section">
-                <h4>معلومات التواصل</h4>
-                <ul>
-                    <li><a href="contact.html"><i class="fas fa-bullhorn"></i> للتواصل والإعلان</a></li>
-                </ul>
-            </div>
+
+            <form id="confirm-booking-form">
+                <div class="booking-form-group">
+                    <label for="patient-name">اسم المريض</label>
+                    <input type="text" id="patient-name" placeholder="الاسم الكامل" required>
+                </div>
+                <div class="booking-form-group">
+                    <label for="patient-phone">رقم الهاتف</label>
+                    <input type="tel" id="patient-phone" placeholder="07XXXXXXXXX" required>
+                </div>
+
+                <button type="submit" class="confirm-booking-btn">تأكيد الحجز <i class="fas fa-check"></i></button>
+            </form>
         </div>
+    </div>
+    <footer>
         <div class="copyright-bar">&copy; 2026 جميع الحقوق محفوظة لـ كشفيّة</div>
     </footer>
 
@@ -314,32 +328,95 @@
         const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFucHRwb21oaHV4c3hhZW9uaGNhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzIxMzU4OTYsImV4cCI6MjA4NzcxMTg5Nn0.7KGLqjcLRA2xzfOXdiDzINCVN';
         const supabaseClient = window.supabase.createClient(supabaseUrl, supabaseKey);
 
-        // 2. Check User Status
+        // Global variable to store logged-in user data
+        let currentLoggedInUser = null;
+
+        // 2. Check User Status & Autofill Details
         async function checkUserStatus() {
             try {
                 const { data: { user } } = await supabaseClient.auth.getUser();
 
                 if (user) {
-                    // Hide Login buttons, Show Profile
+                    currentLoggedInUser = user;
+
+                    // Update Navigation UI
                     document.getElementById('nav-auth-section').style.display = 'none';
                     document.getElementById('user-info').style.display = 'flex';
-                    
                     const name = user.user_metadata.full_name || "مريضنا العزيز";
                     document.getElementById('user-display-name').innerText = name;
+
+                    // Autofill the booking form popup if the user is logged in!
+                    document.getElementById('patient-name').value = name;
+                    if(user.user_metadata.phone_number) {
+                        document.getElementById('patient-phone').value = user.user_metadata.phone_number;
+                    }
                 }
             } catch (error) {
                 console.error("Error checking auth status:", error);
             }
         }
 
-        // 3. Handle Logout
         async function handleLogout() {
             await supabaseClient.auth.signOut();
             window.location.reload(); 
         }
 
-        // Run the auth check as soon as the page loads
         document.addEventListener('DOMContentLoaded', checkUserStatus);
+
+        // --- MODAL LOGIC --- //
+
+        const bookingModal = document.getElementById('booking-modal');
+        let selectedTime = null;
+
+        function openBookingModal(doctorName) {
+            // Set the doctor's name in the modal header
+            document.getElementById('modal-doc-name').innerText = doctorName;
+            
+            // Show the modal
+            bookingModal.style.display = 'flex';
+            
+            // Reset selected time
+            selectedTime = null;
+            document.querySelectorAll('.time-slot-btn').forEach(btn => btn.classList.remove('selected'));
+        }
+
+        function closeBookingModal() {
+            bookingModal.style.display = 'none';
+        }
+
+        // Highlight selected time slot
+        function selectSlot(buttonElement) {
+            // Remove 'selected' class from all buttons
+            document.querySelectorAll('.time-slot-btn').forEach(btn => btn.classList.remove('selected'));
+            
+            // Add 'selected' class to the clicked button
+            buttonElement.classList.add('selected');
+            selectedTime = buttonElement.innerText;
+        }
+
+        // Handle actual booking submission
+        document.getElementById('confirm-booking-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            if (!selectedTime) {
+                alert("يرجى اختيار وقت الحجز من القائمة المتاحة.");
+                return;
+            }
+
+            // In a real app, you would save this data to Supabase database here.
+            const pName = document.getElementById('patient-name').value;
+            const docName = document.getElementById('modal-doc-name').innerText;
+
+            alert(`نجاح! تم تأكيد حجزك باسم ${pName} مع العيادة (${docName}) في الساعة ${selectedTime}.`);
+            closeBookingModal();
+        });
+
+        // Close modal if user clicks outside of the white box
+        window.onclick = function(event) {
+            if (event.target == bookingModal) {
+                closeBookingModal();
+            }
+        }
     </script>
 </body>
 </html>
