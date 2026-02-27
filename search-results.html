@@ -33,7 +33,7 @@
             min-height: 100vh;
         }
 
-        /* --- Standard Header --- */
+        /* --- Header & Nav --- */
         .nhs-header { background-color: var(--nhs-white); border-bottom: 8px solid var(--nhs-blue); padding: 12px 0; }
         .header-content { max-width: 1300px; margin: 0 auto; padding: 0 20px; display: flex; justify-content: space-between; align-items: center; }
         .logo-link { display: inline-flex; align-items: center; text-decoration: none; gap: 15px; }
@@ -88,23 +88,66 @@
         .doc-details-list li { display: flex; align-items: flex-start; gap: 10px; margin-bottom: 8px; font-size: 0.9rem; color: #4a5568; }
         .doc-details-list i { color: var(--nhs-blue); margin-top: 4px; }
 
-        /* Booking Slots */
+        /* --- NEW BOOKING LAYOUT (Days & Timeframes) --- */
         .booking-slots-container { flex: 1; padding: 20px; background-color: #fbfbfb; display: flex; flex-direction: column; justify-content: center; }
         .booking-header { text-align: center; font-weight: bold; color: var(--nhs-dark-blue); margin-bottom: 15px; font-size: 0.95rem; }
-        .slots-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
         
-        .slot-btn { 
-            background-color: var(--nhs-blue); color: white; border: none; padding: 8px; 
-            border-radius: 4px; font-size: 0.9rem; cursor: pointer; transition: 0.2s; text-align: center;
+        .booking-row { display: flex; flex-direction: column; gap: 12px; }
+        
+        .day-block {
+            display: flex;
+            align-items: center;
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 6px;
+            overflow: hidden;
         }
-        .slot-btn:hover { background-color: var(--nhs-dark-blue); }
-        .slot-btn.disabled { background-color: #e2e8f0; color: #a0aec0; cursor: not-allowed; text-decoration: line-through; }
-
-        .date-label { 
-            grid-column: 1 / -1; text-align: center; font-size: 0.85rem; color: #718096; 
-            margin: 10px 0 5px 0; font-weight: bold; border-top: 1px solid #e2e8f0; padding-top: 10px;
+        
+        .day-label {
+            background-color: var(--nhs-light-grey);
+            color: var(--nhs-dark-blue);
+            font-weight: bold;
+            padding: 10px 10px;
+            font-size: 0.85rem;
+            min-width: 85px;
+            text-align: center;
+            border-left: 1px solid #e2e8f0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            line-height: 1.3;
         }
-        .date-label:first-child { border-top: none; padding-top: 0; margin-top: 0; }
+        
+        .day-label span {
+            font-weight: normal;
+            font-size: 0.75rem;
+            color: #718096;
+        }
+        
+        .time-frame-btn {
+            flex: 1;
+            background: none;
+            border: none;
+            padding: 10px 15px;
+            text-align: right;
+            cursor: pointer;
+            color: var(--nhs-blue);
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .time-frame-btn:hover { background-color: #e6f0fa; }
+        .time-frame-btn i { font-size: 0.8rem; }
+        
+        .time-frame-btn.disabled {
+            color: #a0aec0;
+            cursor: not-allowed;
+            background-color: #f7fafc;
+        }
 
         /* --- MODAL --- */
         .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.6); z-index: 2000; justify-content: center; align-items: center; }
@@ -114,13 +157,14 @@
         
         .modal-header { text-align: center; border-bottom: 2px solid var(--nhs-light-grey); padding-bottom: 15px; margin-bottom: 20px; }
         .modal-header h3 { margin: 0; color: var(--nhs-dark-blue); }
+        
         .booking-summary { background: #e6f0fa; padding: 15px; border-radius: 6px; margin-bottom: 20px; color: var(--nhs-dark-blue); font-size: 0.95rem; }
-        .booking-summary strong { display: block; margin-bottom: 5px; }
+        .booking-summary strong { display: block; margin-bottom: 8px; }
+        .confirmation-note { font-size: 0.85rem; color: #718096; margin-top: 10px; border-top: 1px solid #cbd5e0; padding-top: 8px; }
 
         .form-group { margin-bottom: 15px; }
         .form-group label { display: block; font-weight: bold; margin-bottom: 5px; font-size: 0.9rem; }
         .form-group input { width: 100%; padding: 10px; border: 1px solid #cbd5e0; border-radius: 6px; box-sizing: border-box; background-color: #f7fafc; color: #4a5568; }
-        /* Readonly inputs look slightly different to indicate they are auto-filled */
         .form-group input[readonly] { background-color: #edf2f7; cursor: not-allowed; border-color: #e2e8f0; }
 
         .confirm-btn { background-color: var(--success-green); color: white; border: none; width: 100%; padding: 14px; border-radius: 6px; font-size: 1.1rem; font-weight: bold; cursor: pointer; }
@@ -216,24 +260,30 @@
                                 <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
                             </div>
                             <ul class="doc-details-list">
-                                <li><i class="fas fa-map-marker-alt"></i> ستانلي، الإسكندرية (على البحر)</li>
-                                <li><i class="fas fa-clock"></i> مدة الانتظار: 15 دقيقة</li>
+                                <li><i class="fas fa-map-marker-alt"></i> ستانلي، الإسكندرية</li>
+                                <li><i class="fas fa-clock"></i> الانتظار: 15 دقيقة</li>
                             </ul>
                         </div>
                     </div>
                     
                     <div class="booking-slots-container">
-                        <div class="booking-header">المواعيد المتاحة (احجز الآن)</div>
-                        <div class="slots-grid">
-                            <div class="date-label">اليوم</div>
-                            <button class="slot-btn" onclick="openBookingModal('دكتورة لمياء حسن', 'اليوم', '06:00 م', this)">06:00 م</button>
-                            <button class="slot-btn" onclick="openBookingModal('دكتورة لمياء حسن', 'اليوم', '06:30 م', this)">06:30 م</button>
-                            <button class="slot-btn disabled">07:00 م</button>
+                        <div class="booking-header">احجز موعد العيادة</div>
+                        <div class="booking-row">
+                            <div class="day-block">
+                                <div class="day-label" id="date-today-1">اليوم</div>
+                                <button class="time-frame-btn" onclick="openBookingModal('دكتورة لمياء حسن', document.getElementById('date-today-1').dataset.fullDate, 'العيادة المسائية: 04:00 م - 09:00 م', this)">
+                                    <span>العيادة المسائية (04:00 م - 09:00 م)</span>
+                                    <i class="fas fa-chevron-left"></i>
+                                </button>
+                            </div>
                             
-                            <div class="date-label">غداً</div>
-                            <button class="slot-btn" onclick="openBookingModal('دكتورة لمياء حسن', 'غداً', '02:00 م', this)">02:00 م</button>
-                            <button class="slot-btn" onclick="openBookingModal('دكتورة لمياء حسن', 'غداً', '02:30 م', this)">02:30 م</button>
-                            <button class="slot-btn" onclick="openBookingModal('دكتورة لمياء حسن', 'غداً', '03:00 م', this)">03:00 م</button>
+                            <div class="day-block">
+                                <div class="day-label" id="date-tmrw-1">غداً</div>
+                                <button class="time-frame-btn" onclick="openBookingModal('دكتورة لمياء حسن', document.getElementById('date-tmrw-1').dataset.fullDate, 'العيادة الصباحية: 10:00 ص - 02:00 م', this)">
+                                    <span>العيادة الصباحية (10:00 ص - 02:00 م)</span>
+                                    <i class="fas fa-chevron-left"></i>
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -253,23 +303,29 @@
                             </div>
                             <ul class="doc-details-list">
                                 <li><i class="fas fa-map-marker-alt"></i> سموحة، امتداد كوبري 14 مايو</li>
-                                <li><i class="fas fa-clock"></i> مدة الانتظار: 30 دقيقة</li>
+                                <li><i class="fas fa-clock"></i> الانتظار: 30 دقيقة</li>
                             </ul>
                         </div>
                     </div>
                     
                     <div class="booking-slots-container">
-                        <div class="booking-header">المواعيد المتاحة (احجز الآن)</div>
-                        <div class="slots-grid">
-                            <div class="date-label">اليوم</div>
-                            <button class="slot-btn disabled">08:00 م</button>
-                            <button class="slot-btn" onclick="openBookingModal('د. مها سمير', 'اليوم', '08:30 م', this)">08:30 م</button>
-                            <button class="slot-btn" onclick="openBookingModal('د. مها سمير', 'اليوم', '09:00 م', this)">09:00 م</button>
+                        <div class="booking-header">احجز موعد العيادة</div>
+                        <div class="booking-row">
+                            <div class="day-block">
+                                <div class="day-label" id="date-today-2">اليوم</div>
+                                <button class="time-frame-btn disabled">
+                                    <span>مكتمل العدد</span>
+                                    <i class="fas fa-lock"></i>
+                                </button>
+                            </div>
                             
-                            <div class="date-label">غداً</div>
-                            <button class="slot-btn" onclick="openBookingModal('د. مها سمير', 'غداً', '08:00 م', this)">08:00 م</button>
-                            <button class="slot-btn" onclick="openBookingModal('د. مها سمير', 'غداً', '08:30 م', this)">08:30 م</button>
-                            <button class="slot-btn" onclick="openBookingModal('د. مها سمير', 'غداً', '09:00 م', this)">09:00 م</button>
+                            <div class="day-block">
+                                <div class="day-label" id="date-tmrw-2">غداً</div>
+                                <button class="time-frame-btn" onclick="openBookingModal('د. مها سمير', document.getElementById('date-tmrw-2').dataset.fullDate, 'العيادة المسائية: 05:00 م - 10:00 م', this)">
+                                    <span>العيادة المسائية (05:00 م - 10:00 م)</span>
+                                    <i class="fas fa-chevron-left"></i>
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -283,12 +339,18 @@
             <button class="close-modal" onclick="closeBookingModal()"><i class="fas fa-times"></i></button>
             
             <div class="modal-header">
-                <h3>تأكيد الحجز</h3>
+                <h3>تأكيد طلب الحجز</h3>
             </div>
 
             <div class="booking-summary">
                 <strong><i class="fas fa-user-doctor"></i> العيادة: <span id="modal-doc-name">...</span></strong>
-                <span><i class="fas fa-clock"></i> الموعد: <span id="modal-date">...</span> الساعة <span id="modal-time">...</span></span>
+                <strong><i class="fas fa-calendar-day"></i> التاريخ: <span id="modal-date">...</span></strong>
+                <span><i class="fas fa-clock"></i> التوقيت: <span id="modal-time-frame">...</span></span>
+                
+                <div class="confirmation-note">
+                    <i class="fas fa-info-circle"></i> 
+                    هذا طلب حجز أولي. سيقوم الطبيب أو السكرتارية بمراجعة الطلب وتحديد <strong>ساعة الحضور الدقيقة</strong> وإبلاغك بها.
+                </div>
             </div>
 
             <form id="confirm-booking-form">
@@ -301,7 +363,7 @@
                     <input type="tel" id="patient-phone" placeholder="سيتم جلبه تلقائياً" readonly>
                 </div>
                 
-                <button type="submit" class="confirm-btn">تأكيد الحجز الآن <i class="fas fa-check"></i></button>
+                <button type="submit" class="confirm-btn">إرسال طلب الحجز <i class="fas fa-paper-plane"></i></button>
             </form>
         </div>
     </div>
@@ -315,15 +377,41 @@
         const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFucHRwb21oaHV4c3hhZW9uaGNhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzIxMzU4OTYsImV4cCI6MjA4NzcxMTg5Nn0.7KGLqjcLRA2xzfOXdiDzINCVNhaOLBlj3sjJLBmYDiU';
         const supabaseClient = window.supabase.createClient(supabaseUrl, supabaseKey);
 
-        let activeSlotButton = null; // Store which button was clicked
-        let currentLoggedInUser = null; // Store user details globally
+        let activeSlotButton = null; 
+        let currentLoggedInUser = null; 
 
-        // 1. Check User Status on Load
+        // 1. Set Dynamic Dates (Today & Tomorrow)
+        function setDates() {
+            const today = new Date();
+            const tmrw = new Date(today);
+            tmrw.setDate(tmrw.getDate() + 1);
+
+            const options = { day: 'numeric', month: 'short' };
+            const todayStr = today.toLocaleDateString('ar-EG', options); // e.g., 27 فبراير
+            const tmrwStr = tmrw.toLocaleDateString('ar-EG', options);
+
+            // Update Labels & Data Attributes
+            ['date-today-1', 'date-today-2'].forEach(id => {
+                const el = document.getElementById(id);
+                if(el) { 
+                    el.innerHTML = `اليوم <br><span style="font-size:0.8rem; font-weight:normal">${todayStr}</span>`;
+                    el.dataset.fullDate = todayStr; 
+                }
+            });
+            ['date-tmrw-1', 'date-tmrw-2'].forEach(id => {
+                const el = document.getElementById(id);
+                if(el) { 
+                    el.innerHTML = `غداً <br><span style="font-size:0.8rem; font-weight:normal">${tmrwStr}</span>`;
+                    el.dataset.fullDate = tmrwStr; 
+                }
+            });
+        }
+
+        // 2. Check User Status
         async function checkUserStatus() {
             const { data: { user } } = await supabaseClient.auth.getUser();
             if (user) {
-                currentLoggedInUser = user; // Save user for booking logic
-                
+                currentLoggedInUser = user; 
                 document.getElementById('nav-auth-section').style.display = 'none';
                 document.getElementById('user-info').style.display = 'flex';
                 document.getElementById('user-display-name').innerText = user.user_metadata.full_name || "المريض";
@@ -335,26 +423,28 @@
             window.location.reload(); 
         }
 
-        document.addEventListener('DOMContentLoaded', checkUserStatus);
+        document.addEventListener('DOMContentLoaded', () => {
+            setDates();
+            checkUserStatus();
+        });
 
-        // --- Booking Logic with GATEKEEPER ---
+        // --- Booking Logic (GATEKEEPER) ---
         const modal = document.getElementById('booking-modal');
 
-        function openBookingModal(docName, date, time, btnElement) {
-            // THE GATEKEEPER CHECK: Is the user logged in?
+        function openBookingModal(docName, date, timeFrame, btnElement) {
+            // CHECK: Is user logged in?
             if (!currentLoggedInUser) {
                 if(confirm("عذراً، يجب تسجيل الدخول أولاً لتتمكن من حجز موعد.\nهل تريد الانتقال لصفحة الدخول الآن؟")) {
                     window.location.href = 'login-patient.html';
                 }
-                return; // Stop the function here! Don't open the modal.
+                return; 
             }
 
-            // If we get here, the user IS logged in. Proceed.
             document.getElementById('modal-doc-name').innerText = docName;
             document.getElementById('modal-date').innerText = date;
-            document.getElementById('modal-time').innerText = time;
+            document.getElementById('modal-time-frame').innerText = timeFrame;
             
-            // Auto-fill form from the logged-in user data
+            // Auto-fill form
             document.getElementById('patient-name').value = currentLoggedInUser.user_metadata.full_name || "";
             document.getElementById('patient-phone').value = currentLoggedInUser.user_metadata.phone_number || "";
 
@@ -371,17 +461,13 @@
             
             const pName = document.getElementById('patient-name').value;
             const docName = document.getElementById('modal-doc-name').innerText;
-            const time = document.getElementById('modal-time').innerText;
 
-            // Here we will eventually send the appointment data + User ID to Supabase
-            // const patientId = currentLoggedInUser.id; 
-
-            alert(`تم تأكيد الحجز بنجاح!\nالمريض: ${pName}\nالدكتور: ${docName}\nالموعد: ${time}`);
+            alert(`تم إرسال طلب الحجز بنجاح!\n\nالمريض: ${pName}\nالعيادة: ${docName}\n\nسيصلك إشعار بموعدك الدقيق قريباً.`);
             
-            // Disable the button visually
+            // Visual feedback: Disable button
             if (activeSlotButton) {
                 activeSlotButton.classList.add('disabled');
-                activeSlotButton.innerText = "محجوز";
+                activeSlotButton.innerHTML = '<span>تم طلب الحجز</span> <i class="fas fa-check"></i>';
                 activeSlotButton.onclick = null; 
             }
             
