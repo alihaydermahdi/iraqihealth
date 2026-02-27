@@ -730,7 +730,6 @@
                 const { data: { user } } = await supabaseClient.auth.getUser();
 
                 if (user) {
-                    // إخفاء أزرار الدخول وإظهار اسم المستخدم
                     document.getElementById('nav-auth-section').style.display = 'none';
                     document.getElementById('user-info').style.display = 'flex';
                     
@@ -753,12 +752,8 @@
         // 4. Handle Search Form
         document.getElementById('search-form').addEventListener('submit', function(e) {
             e.preventDefault();
-            const specialty = document.getElementById('search-specialty').value;
-            const city = document.getElementById('search-city').value;
-            const docName = document.getElementById('search-name').value;
-
-            // Logic to handle search routing will go here
-            alert("سيتم نقلك إلى صفحة نتائج البحث الخاصة بك قريباً!");
+            // Logic to handle search routing
+            window.location.href = 'search-results.html';
         });
 
         // 5. Original Dropdown Logic
