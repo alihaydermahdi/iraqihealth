@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>كشفيّة | احجز موعدك الطبي بسهولة</title>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    
+    <style>
+        :root {
+            --nhs-blue: #005eb8;
+            --nhs-dark-blue: #003087;
+            --nhs-light-grey: #f0f4f5;
+            --nhs-text: #212b32;
+            --nhs-white: #ffffff;
+            --orange-cta: #fb8500;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            margin: 0;
+            background-color: var(--nhs-light-grey);
+            color: var(--nhs-text);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* --- Professional Header Section --- */
+        .nhs-header { background-color: var(--nhs-white); border-bottom: 8px solid var(--nhs-blue); padding: 12px 0; }
+        .header-content { max-width: 1300px; margin: 0 auto; padding: 0 20px; display: flex; justify-content: space-between; align-items: center; }
+        .logo-link { display: inline-flex; align-items: center; text-decoration: none; gap: 15px; }
+        .site-logo { max-height: 55px; width: auto; object-fit: contain; }
+        .header-moto { font-weight: 700; color: var(--nhs-blue); font-size: 1.1rem; }
+
+        /* --- Professional Navigation --- */
+        .nhs-nav { background-color: var(--nhs-blue); color: white; position: sticky; top: 0; z-index: 1000; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        .nav-content { max-width: 1300px; margin: 0 auto; padding: 0 20px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; }
+        .main-links { display: flex; }
+        .main-links a { color: white; text-decoration: none; padding: 15px 20px; font-weight: 600; font-size: 0.95rem; transition: all 0.2s; display: flex; align-items: center; gap: 8px; border-bottom: 3px solid transparent; }
+        .main-links a:hover, .main-links a.active { background-color: var(--nhs-dark-blue); border-bottom-color: var(--orange-cta); }
+        .nav-actions { display: flex; align-items: center; gap: 15px; }
+        .nav-cta { background-color: var(--nhs-white); color: var(--nhs-blue) !important; padding: 8px 20px; border-radius: 20px; font-weight: 800; font-size: 0.9rem; text-decoration: none; transition: all 0.2s; display: flex; align-items: center; gap: 6px; }
+        .nav-cta:hover { background-color: #f0f4f5; transform: translateY(-1px); box-shadow: 0 2px 5px rgba(0,0,0,0.2); }
+        
+        .login-patient-btn { background-color: var(--nhs-light-grey); color: var(--nhs-dark-blue) !important; border: 1px solid var(--nhs-blue); }
+        .login-doctor-btn { background-color: var(--orange-cta); color: white !important; border: none; }
+        
+        /* User Profile in Nav */
+        .user-profile-info { display: none; align-items: center; gap: 10px; color: white; font-weight: bold; }
+        .user-profile-info i { font-size: 1.2rem; color: var(--orange-cta); }
+        .logout-btn { background-color: #d32f2f; color: white !important; padding: 6px 15px; border-radius: 20px; font-size: 0.85rem; cursor: pointer; text-decoration: none; border: none; transition: 0.2s; font-weight: bold; }
+        .logout-btn:hover { background-color: #b71c1c; }
+
+        /* --- Hero Search Section (Vezeeta Style) --- */
+        .hero-section {
+            background-color: var(--nhs-dark-blue);
+            background-image: linear-gradient(135deg, var(--nhs-dark-blue) 0%, var(--nhs-blue) 100%);
+            padding: 60px 20px;
+            text-align: center;
+            color: white;
+        }
+
+        .hero-section h1 { font-size: 2.2rem; margin-bottom: 10px; font-weight: 800; }
+        .hero-section p { font-size: 1.1rem; margin-bottom: 40px; opacity: 0.9; }
+
+        .search-box-container {
+            background: white;
+            max-width: 1000px;
+            margin: 0 auto;
+            border-radius: 12px;
+            padding: 10px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            display: flex;
+            gap: 10px;
+        }
+
+        .search-field {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 0 15px;
+            transition: border-color 0.2s;
+        }
+        .search-field:focus-within { border-color: var(--nhs-blue); box-shadow: 0 0 0 2px rgba(0,94,184,0.1); }
+        .search-field i { color: var(--nhs-blue); font-size: 1.1rem; margin-left: 10px; }
+        
+        .search-field select, .search-field input {
+            width: 100%;
+            border: none;
+            background: transparent;
+            padding: 15px 0;
+            font-size: 1rem;
+            font-family: inherit;
+            color: var(--nhs-text);
+            outline: none;
+        }
+
+        .search-btn {
+            background-color: var(--orange-cta);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 0 30px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .search-btn:hover { background-color: #e07700; }
+
+        /* --- Browse by Category Grid --- */
+        .clinical-grid { max-width: 1300px; margin: 50px auto; padding: 0 20px; }
+        .section-title { color: var(--nhs-dark-blue); font-size: 1.5rem; margin-bottom: 20px; text-align: right; font-weight: 800; }
+        
+        .grid-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; margin-bottom: 15px; }
+        .tile { display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 25px 10px; color: white; cursor: pointer; transition: all 0.2s ease; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.08); }
+        .tile:hover { transform: translateY(-3px); box-shadow: 0 8px 15px rgba(0,0,0,0.15); }
+        .tile i { font-size: 2.2rem; margin-bottom: 12px; }
+        .tile span { font-weight: 700; font-size: 1.1rem; line-height: 1.3; }
+
+        .neuro { background-color: #7cb342; } .eye { background-color: #d32f2f; } .ent { background-color: #d32f2f; }
+        .resp { background-color: #1976d2; } .cardio { background-color: #afb42b; } .diabetes { background-color: #0288d1; }
+        .gastro { background-color: #388e3c; } .renal { background-color: #1565c0; } 
+
+        /* --- Footer --- */
+        footer { background-color: #e8edee; border-top: 8px solid var(--nhs-blue); padding: 40px 20px 20px 20px; margin-top: 40px; }
+        .footer-content { max-width: 1300px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; margin-bottom: 25px; }
+        .footer-section h4 { color: var(--nhs-dark-blue); font-size: 1.05rem; font-weight: 800; margin-top: 0; margin-bottom: 15px; position: relative; padding-bottom: 10px; }
+        .footer-section h4::after { content: ''; position: absolute; bottom: 0; right: 0; width: 40px; height: 3px; background-color: var(--nhs-blue); border-radius: 2px; }
+        .footer-section ul { list-style: none; padding: 0; margin: 0; }
+        .footer-section ul li { margin-bottom: 10px; font-size: 0.85rem; color: #4a5568; display: flex; align-items: center; }
+        .footer-section ul li a { color: #4a5568; text-decoration: none; transition: all 0.3s ease; }
+        .footer-section ul li a:hover { color: var(--nhs-blue); padding-right: 6px; }
+        .footer-section i { color: var(--nhs-blue); width: 20px; font-size: 0.95rem; margin-left: 8px; }
+        .copyright-bar { text-align: center; border-top: 1px solid #d1d5d8; padding-top: 15px; font-size: 0.8rem; font-weight: 600; color: #718096; }
+
+        @media (max-width: 900px) {
+            .search-box-container { flex-direction: column; background: transparent; box-shadow: none; }
+            .search-field { background: white; border-radius: 8px; margin-bottom: 10px; }
+            .search-btn { padding: 15px; justify-content: center; }
+        }
+
+        @media (max-width: 768px) {
+            .header-content { flex-direction: column; text-align: center; gap: 8px; }
+            .nav-content { flex-direction: column; padding: 0; }
+            .main-links { width: 100%; justify-content: center; overflow-x: auto; }
+            .nav-actions { width: 100%; justify-content: center; padding: 10px; background-color: var(--nhs-dark-blue); flex-wrap: wrap; }
+            .grid-row { grid-template-columns: repeat(2, 1fr); } 
+        }
+    </style>
+</head>
+<body>
+
+    <header class="nhs-header">
+        <div class="header-content">
+            <a href="home-working.html" class="logo-link">
+                <img src="logo.png" alt="شعار كشفيّة" class="site-logo">
+                <div class="header-moto">كلشي عن صحتك… بلهجتنا العراقية</div>
+            </a>
+        </div>
+    </header>
+
+    <nav class="nhs-nav">
+        <div class="nav-content">
+            <div class="main-links">
+                <a href="home-working.html" class="active"><i class="fas fa-home"></i> الرئيسية</a>
+                <a href="#"><i class="fas fa-stethoscope"></i> التخصصات الطبية</a>
+                <a href="#"><i class="fas fa-calendar-check"></i> حجوزاتي</a>
+            </div>
+            
+            <div class="nav-actions" id="nav-auth-section">
+                <a href="login-patient.html" class="nav-cta login-patient-btn">
+                    <i class="fas fa-user"></i> دخول المرضى
+                </a>
+                <a href="login-doctor.html" class="nav-cta login-doctor-btn">
+                    <i class="fas fa-user-doctor"></i> انضم كطبيب
+                </a>
+            </div>
+
+            <div class="user-profile-info" id="user-info">
+                <i class="fas fa-user-circle"></i>
+                <span>أهلاً، <span id="user-display-name">...</span></span>
+                <button onclick="handleLogout()" class="logout-btn"><i class="fas fa-sign-out-alt"></i> خروج</button>
+            </div>
+        </div>
+    </nav>
+
+    <section class="hero-section">
+        <h1>احجز موعدك ويه أحسن دكاترة العراق</h1>
+        <p>ابحث، قارن، واحجز موعدك إلكترونياً بدون أي مكالمات هاتفية.</p>
+        
+        <form class="search-box-container" id="search-form">
+            
+            <div class="search-field">
+                <i class="fas fa-stethoscope"></i>
+                <select id="search-specialty">
+                    <option value="" disabled selected>اختار التخصص الطبي...</option>
+                    <option value="neuro">أمراض المخ والأعصاب</option>
+                    <option value="cardio">أمراض القلب والأوعية</option>
+                    <option value="eye">طب وجراحة العيون</option>
+                    <option value="paeds">طب الأطفال</option>
+                    <option value="dentist">طب وتجميل الأسنان</option>
+                    <option value="derm">الأمراض الجلدية</option>
+                </select>
+            </div>
+
+            <div class="search-field">
+                <i class="fas fa-map-marker-alt"></i>
+                <select id="search-city">
+                    <option value="" disabled selected>اختار المحافظة...</option>
+                    <option value="baghdad">بغداد</option>
+                    <option value="basra">البصرة</option>
+                    <option value="erbil">أربيل</option>
+                    <option value="najaf">النجف</option>
+                    <option value="babil">بابل</option>
+                </select>
+            </div>
+
+            <div class="search-field">
+                <i class="fas fa-user-doctor"></i>
+                <input type="text" id="search-name" placeholder="اسم الدكتور أو العيادة (اختياري)">
+            </div>
+
+            <button type="submit" class="search-btn">
+                <i class="fas fa-search"></i> ابحث الآن
+            </button>
+        </form>
+    </section>
+
+    <main class="clinical-grid">
+        <h2 class="section-title">أو تصفح حسب التخصص الشائع</h2>
+        
+        <div class="grid-row">
+            <div class="tile neuro">
+                <i class="fas fa-brain"></i>
+                <span>مخ وأعصاب</span>
+            </div>
+            <div class="tile ent">
+                <i class="fas fa-tooth"></i>
+                <span>أسنان</span>
+            </div>
+            <div class="tile cardio">
+                <i class="fas fa-heart-pulse"></i>
+                <span>قلب وأوعية</span>
+            </div>
+            <div class="tile eye">
+                <i class="fas fa-eye"></i>
+                <span>عيون</span>
+            </div>
+        </div>
+
+        <div class="grid-row">
+            <div class="tile diabetes">
+                <i class="fas fa-syringe"></i>
+                <span>غدد وسكري</span>
+            </div>
+            <div class="tile gastro">
+                <i class="fas fa-pills"></i>
+                <span>باطنية وهضمية</span>
+            </div>
+            <div class="tile women">
+                <i class="fas fa-person-pregnant"></i>
+                <span>نسائية وتوليد</span>
+            </div>
+            <div class="tile paeds">
+                <i class="fas fa-child-reaching"></i>
+                <span>أطفال</span>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>عن منصة كشفيّة</h4>
+                <ul>
+                    <li><a href="about.html"><i class="fas fa-angle-left"></i> من نحن</a></li>
+                    <li><a href="about.html#privacy"><i class="fas fa-angle-left"></i> سياسة الخصوصية</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>خدمات المرضى</h4>
+                <ul>
+                    <li><a href="home-working.html"><i class="fas fa-angle-left"></i> الرئيسية</a></li>
+                    <li><a href="#"><i class="fas fa-angle-left"></i> كيفية الحجز</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>معلومات التواصل</h4>
+                <ul>
+                    <li><a href="contact.html"><i class="fas fa-bullhorn"></i> للتواصل والإعلان</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="copyright-bar">&copy; 2026 جميع الحقوق محفوظة لـ كشفيّة</div>
+    </footer>
+
+    <script>
+        // 1. Initialize Supabase
+        const supabaseUrl = 'https://anptpomhhuxsxaeonhca.supabase.co';
+        const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFucHRwb21oaHV4c3hhZW9uaGNhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzIxMzU4OTYsImV4cCI6MjA4NzcxMTg5Nn0.7KGLqjcLRA2xzfOXdiDzINCVN';
+        const supabaseClient = window.supabase.createClient(supabaseUrl, supabaseKey);
+
+        // 2. Check User State globally
+        async function checkUserStatus() {
+            try {
+                const { data: { user } } = await supabaseClient.auth.getUser();
+
+                if (user) {
+                    // Hide Login buttons, Show Profile
+                    document.getElementById('nav-auth-section').style.display = 'none';
+                    document.getElementById('user-info').style.display = 'flex';
+                    
+                    // Display the name they signed up with
+                    const name = user.user_metadata.full_name || "مريضنا العزيز";
+                    document.getElementById('user-display-name').innerText = name;
+                }
+            } catch (error) {
+                console.error("Error checking auth status:", error);
+            }
+        }
+
+        // 3. Handle Logout
+        async function handleLogout() {
+            await supabaseClient.auth.signOut();
+            window.location.reload(); // Refresh the page to show the login buttons again
+        }
+
+        // Run the auth check as soon as the page loads
+        document.addEventListener('DOMContentLoaded', checkUserStatus);
+
+        // 4. Handle Search Button Submission (To be connected to database later)
+        document.getElementById('search-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const specialty = document.getElementById('search-specialty').value;
+            const city = document.getElementById('search-city').value;
+            const docName = document.getElementById('search-name').value;
+
+            // Later, this will redirect to: search-results.html?specialty=neuro&city=baghdad
+            alert("سيتم نقلك إلى صفحة نتائج البحث الخاصة بـ " + (specialty || "كافة التخصصات") + " في " + (city || "كل المحافظات") + " قريباً!");
+        });
+    </script>
+</body>
+</html>
