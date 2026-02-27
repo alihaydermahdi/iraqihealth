@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>نتائج البحث | كشفيّة</title>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    
+    <style>
+        :root {
+            --nhs-blue: #005eb8;
+            --nhs-dark-blue: #003087;
+            --nhs-light-grey: #f0f4f5;
+            --nhs-text: #212b32;
+            --nhs-white: #ffffff;
+            --star-gold: #ffc107;
+            --success-green: #007f3b;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            margin: 0;
+            background-color: var(--nhs-light-grey);
+            color: var(--nhs-text);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* --- Professional Header Section --- */
+        .nhs-header { background-color: var(--nhs-white); border-bottom: 8px solid var(--nhs-blue); padding: 12px 0; }
+        .header-content { max-width: 1300px; margin: 0 auto; padding: 0 20px; display: flex; justify-content: space-between; align-items: center; }
+        .logo-link { display: inline-flex; align-items: center; text-decoration: none; gap: 15px; }
+        .site-logo { max-height: 55px; width: auto; object-fit: contain; }
+        .header-moto { font-weight: 700; color: var(--nhs-blue); font-size: 1.1rem; }
+
+        /* --- Professional Blue Navigation --- */
+        .nhs-nav { background-color: var(--nhs-blue); color: white; position: sticky; top: 0; z-index: 1000; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        .nav-content { max-width: 1300px; margin: 0 auto; padding: 0 20px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; }
+        .main-links { display: flex; }
+        .main-links a { color: white; text-decoration: none; padding: 15px 20px; font-weight: 600; font-size: 0.95rem; transition: all 0.2s; display: flex; align-items: center; gap: 8px; border-bottom: 3px solid transparent; }
+        .main-links a:hover, .main-links a.active { background-color: var(--nhs-dark-blue); border-bottom-color: var(--nhs-white); }
+        .nav-actions { display: flex; align-items: center; gap: 15px; }
+        .nav-cta { background-color: var(--nhs-white); color: var(--nhs-blue) !important; padding: 8px 20px; border-radius: 20px; font-weight: 800; font-size: 0.9rem; text-decoration: none; transition: all 0.2s; display: flex; align-items: center; gap: 6px; }
+        .nav-cta:hover { background-color: #f0f4f5; transform: translateY(-1px); box-shadow: 0 2px 5px rgba(0,0,0,0.2); }
+        
+        .login-patient-btn { background-color: var(--nhs-light-grey); color: var(--nhs-dark-blue) !important; border: 1px solid var(--nhs-blue); }
+        .login-doctor-btn { background-color: var(--nhs-dark-blue); color: white !important; border: 1px solid rgba(255,255,255,0.2); }
+        .login-doctor-btn:hover { background-color: #00225e; color: white !important; }
+
+        /* User Profile UI in Nav */
+        .user-profile-info { display: none; align-items: center; gap: 10px; color: white; font-weight: bold; }
+        .user-profile-info i { font-size: 1.2rem; color: var(--nhs-white); }
+        .logout-btn { background-color: #d32f2f; color: white !important; padding: 6px 15px; border-radius: 20px; font-size: 0.85rem; cursor: pointer; text-decoration: none; border: none; font-weight: bold; transition: background-color 0.2s; }
+        .logout-btn:hover { background-color: #b71c1c; }
+
+        /* --- Page Title Bar --- */
+        .page-title-bar { background-color: #e2e8f0; padding: 15px 20px; border-bottom: 1px solid #cbd5e0; }
+        .page-title-content { max-width: 1300px; margin: 0 auto; color: var(--nhs-dark-blue); font-weight: bold; font-size: 1.1rem; }
+        .page-title-content span { color: #718096; font-weight: normal; font-size: 0.95rem; margin-right: 10px; }
+
+        /* --- Search Layout --- */
+        .search-layout { max-width: 1300px; margin: 30px auto; padding: 0 20px; display: grid; grid-template-columns: 280px 1fr; gap: 25px; flex: 1; }
+
+        /* Filters Sidebar */
+        .filters-sidebar { background: var(--nhs-white); border-radius: 8px; padding: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); height: fit-content; position: sticky; top: 80px; }
+        .filter-group { margin-bottom: 25px; border-bottom: 1px solid #edf2f7; padding-bottom: 15px; }
+        .filter-group:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+        .filter-title { font-weight: bold; color: var(--nhs-dark-blue); margin-bottom: 15px; display: flex; align-items: center; gap: 8px; }
+        .filter-option { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; cursor: pointer; color: #4a5568; font-size: 0.95rem; }
+        .filter-option input[type="checkbox"], .filter-option input[type="radio"] { cursor: pointer; accent-color: var(--nhs-blue); width: 16px; height: 16px; }
+
+        /* Results Area */
+        .results-container { display: flex; flex-direction: column; gap: 20px; }
+
+        /* Doctor Card */
+        .doctor-card { background: var(--nhs-white); border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); display: flex; overflow: hidden; transition: transform 0.2s, box-shadow 0.2s; border: 1px solid #edf2f7; }
+        .doctor-card:hover { transform: translateY(-2px); box-shadow: 0 8px 15px rgba(0,0,0,0.08); }
+        
+        /* Card Sections */
+        .doc-profile { padding: 25px; display: flex; gap: 20px; flex: 2; border-left: 1px solid #edf2f7; }
+        .doc-img-wrapper { width: 90px; height: 90px; border-radius: 50%; overflow: hidden; border: 3px solid var(--nhs-light-grey); flex-shrink: 0; }
+        .doc-img-wrapper img { width: 100%; height: 100%; object-fit: cover; }
+        
+        .doc-info h2 { margin: 0 0 5px 0; color: var(--nhs-blue); font-size: 1.3rem; }
+        .doc-info .specialty { color: #4a5568; font-size: 0.95rem; margin-bottom: 10px; font-weight: 600; }
+        .doc-rating { color: var(--star-gold); font-size: 0.9rem; margin-bottom: 15px; }
+        .doc-rating span { color: #718096; margin-right: 5px; font-size: 0.85rem; }
+        
+        .doc-details-list { list-style: none; padding: 0; margin: 0; }
+        .doc-details-list li { display: flex; align-items: flex-start; gap: 10px; margin-bottom: 8px; font-size: 0.9rem; color: #4a5568; }
+        .doc-details-list i { color: var(--nhs-blue); margin-top: 4px; width: 16px; text-align: center; }
+
+        /* Booking Section */
+        .doc-booking { padding: 25px; flex: 1; display: flex; flex-direction: column; justify-content: center; align-items: center; background-color: #f8fafc; }
+        .availability-badge { background-color: #e6f2ec; color: var(--success-green); padding: 5px 12px; border-radius: 4px; font-size: 0.85rem; font-weight: bold; margin-bottom: 15px; display: flex; align-items: center; gap: 6px; }
+        
+        .book-btn { background-color: var(--nhs-dark-blue); color: white; border: none; padding: 12px 30px; border-radius: 6px; font-size: 1rem; font-weight: bold; cursor: pointer; transition: background-color 0.2s; width: 100%; display: flex; align-items: center; justify-content: center; gap: 8px; }
+        .book-btn:hover { background-color: var(--nhs-blue); }
+        .wait-time { font-size: 0.8rem; color: #718096; margin-top: 10px; text-align: center; }
+
+        /* --- Footer --- */
+        footer { background-color: #e8edee; border-top: 8px solid var(--nhs-blue); padding: 40px 20px 20px 20px; margin-top: auto; }
+        .footer-content { max-width: 1300px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; margin-bottom: 25px; }
+        .footer-section h4 { color: var(--nhs-dark-blue); font-size: 1.05rem; font-weight: 800; margin-top: 0; margin-bottom: 15px; position: relative; padding-bottom: 10px; }
+        .footer-section h4::after { content: ''; position: absolute; bottom: 0; right: 0; width: 40px; height: 3px; background-color: var(--nhs-blue); border-radius: 2px; }
+        .footer-section ul { list-style: none; padding: 0; margin: 0; }
+        .footer-section ul li { margin-bottom: 10px; font-size: 0.85rem; color: #4a5568; display: flex; align-items: center; }
+        .footer-section ul li a { color: #4a5568; text-decoration: none; transition: all 0.3s ease; }
+        .footer-section ul li a:hover { color: var(--nhs-blue); padding-right: 6px; }
+        .footer-section i { color: var(--nhs-blue); width: 20px; font-size: 0.95rem; margin-left: 8px; }
+        .copyright-bar { text-align: center; border-top: 1px solid #d1d5d8; padding-top: 15px; font-size: 0.8rem; font-weight: 600; color: #718096; }
+
+        @media (max-width: 900px) {
+            .search-layout { grid-template-columns: 1fr; }
+            .filters-sidebar { position: static; }
+            .doctor-card { flex-direction: column; }
+            .doc-profile { border-left: none; border-bottom: 1px solid #edf2f7; }
+        }
+
+        @media (max-width: 768px) {
+            .header-content { flex-direction: column; text-align: center; gap: 8px; }
+            .nav-content { flex-direction: column; padding: 0; }
+            .main-links { width: 100%; justify-content: center; overflow-x: auto; }
+            .nav-actions { width: 100%; justify-content: center; padding: 10px; background-color: var(--nhs-dark-blue); flex-wrap: wrap; }
+            .user-profile-info { width: 100%; justify-content: center; padding: 10px; background-color: var(--nhs-dark-blue); flex-wrap: wrap; }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="nhs-header">
+        <div class="header-content">
+            <a href="index.html" class="logo-link">
+                <img src="logo.png" alt="شعار كشفيّة" class="site-logo">
+                <div class="header-moto">كلشي عن صحتك… بلهجتنا العراقية</div>
+            </a>
+        </div>
+    </header>
+
+    <nav class="nhs-nav">
+        <div class="nav-content">
+            <div class="main-links">
+                <a href="index.html"><i class="fas fa-home"></i> الرئيسية</a>
+                <a href="index.html"><i class="fas fa-stethoscope"></i> دليل الأمراض</a>
+                <a href="doctors.html" class="active"><i class="fas fa-user-doctor"></i> الأطباء والمراكز</a>
+            </div>
+            
+            <div class="nav-actions" id="nav-auth-section">
+                <a href="login-patient.html" class="nav-cta login-patient-btn">
+                    <i class="fas fa-user"></i> دخول المرضى
+                </a>
+                <a href="login-doctor.html" class="nav-cta login-doctor-btn">
+                    <i class="fas fa-user-doctor"></i> دخول الأطباء
+                </a>
+                <a href="contact.html" class="nav-cta">
+                    <i class="fas fa-phone"></i> تواصل معنا
+                </a>
+            </div>
+
+            <div class="user-profile-info" id="user-info">
+                <i class="fas fa-user-circle"></i>
+                <span>أهلاً، <span id="user-display-name">...</span></span>
+                <button onclick="handleLogout()" class="logout-btn"><i class="fas fa-sign-out-alt"></i> خروج</button>
+            </div>
+        </div>
+    </nav>
+
+    <div class="page-title-bar">
+        <div class="page-title-content">
+            أطباء أمراض المخ والأعصاب في بغداد <span>(12 طبيب متاح)</span>
+        </div>
+    </div>
+
+    <div class="search-layout">
+        
+        <aside class="filters-sidebar">
+            <div class="filter-group">
+                <div class="filter-title"><i class="fas fa-mars-and-venus"></i> جنس الطبيب</div>
+                <label class="filter-option">
+                    <input type="radio" name="gender" checked> الكل
+                </label>
+                <label class="filter-option">
+                    <input type="radio" name="gender"> طبيب (ذكر)
+                </label>
+                <label class="filter-option">
+                    <input type="radio" name="gender"> طبيبة (أنثى)
+                </label>
+            </div>
+
+            <div class="filter-group">
+                <div class="filter-title"><i class="fas fa-calendar-check"></i> المواعيد المتاحة</div>
+                <label class="filter-option">
+                    <input type="checkbox"> متاح اليوم
+                </label>
+                <label class="filter-option">
+                    <input type="checkbox"> متاح غداً
+                </label>
+            </div>
+
+            <div class="filter-group">
+                <div class="filter-title"><i class="fas fa-money-bill-wave"></i> سعر الكشفية</div>
+                <label class="filter-option">
+                    <input type="radio" name="price" checked> أي سعر
+                </label>
+                <label class="filter-option">
+                    <input type="radio" name="price"> أقل من 25,000 دينار
+                </label>
+                <label class="filter-option">
+                    <input type="radio" name="price"> 25,000 - 50,000 دينار
+                </label>
+            </div>
+        </aside>
+
+        <div class="results-container">
+            
+            <div class="doctor-card">
+                <div class="doc-profile">
+                    <div class="doc-img-wrapper">
+                        <img src="https://ui-avatars.com/api/?name=د.+أحمد&background=005eb8&color=fff&size=200&font-size=0.4" alt="Doctor Photo">
+                    </div>
+                    <div class="doc-info">
+                        <h2>د. أحمد محمود</h2>
+                        <div class="specialty">استشاري جراحة المخ والأعصاب والعمود الفقري</div>
+                        <div class="doc-rating">
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+                            <span>(45 تقييم)</span>
+                        </div>
+                        <ul class="doc-details-list">
+                            <li><i class="fas fa-map-marker-alt"></i> بغداد - المنصور - شارع 14 رمضان</li>
+                            <li><i class="fas fa-money-bill-alt"></i> سعر الكشفية: 40,000 دينار</li>
+                            <li><i class="fas fa-phone-alt"></i> 07700000000</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="doc-booking">
+                    <div class="availability-badge">
+                        <i class="fas fa-clock"></i> متاح اليوم
+                    </div>
+                    <button class="book-btn" onclick="alert('سيتم فتح نافذة تأكيد الحجز!')">
+                        احجز الآن
+                    </button>
+                    <div class="wait-time">مدة الانتظار التقريبية: 30 دقيقة</div>
+                </div>
+            </div>
+
+            <div class="doctor-card">
+                <div class="doc-profile">
+                    <div class="doc-img-wrapper">
+                        <img src="https://ui-avatars.com/api/?name=د.+سارة&background=003087&color=fff&size=200&font-size=0.4" alt="Doctor Photo">
+                    </div>
+                    <div class="doc-info">
+                        <h2>د. سارة علي</h2>
+                        <div class="specialty">أخصائية أمراض الجملة العصبية وتخطيط الدماغ</div>
+                        <div class="doc-rating">
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                            <span>(112 تقييم)</span>
+                        </div>
+                        <ul class="doc-details-list">
+                            <li><i class="fas fa-map-marker-alt"></i> بغداد - الحارثية - شارع الكندي</li>
+                            <li><i class="fas fa-money-bill-alt"></i> سعر الكشفية: 35,000 دينار</li>
+                            <li><i class="fas fa-phone-alt"></i> 07800000000</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="doc-booking">
+                    <div class="availability-badge">
+                        <i class="fas fa-calendar-check"></i> متاح غداً
+                    </div>
+                    <button class="book-btn" onclick="alert('سيتم فتح نافذة تأكيد الحجز!')">
+                        احجز الآن
+                    </button>
+                    <div class="wait-time">مدة الانتظار التقريبية: 15 دقيقة</div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>عن منصة كشفيّة</h4>
+                <ul>
+                    <li><a href="about.html"><i class="fas fa-angle-left"></i> من نحن</a></li>
+                    <li><a href="about.html#privacy"><i class="fas fa-angle-left"></i> سياسة الخصوصية</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>خدمات المرضى</h4>
+                <ul>
+                    <li><a href="index.html"><i class="fas fa-angle-left"></i> الرئيسية</a></li>
+                    <li><a href="doctors.html"><i class="fas fa-angle-left"></i> قائمة الأطباء</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>معلومات التواصل</h4>
+                <ul>
+                    <li><a href="contact.html"><i class="fas fa-bullhorn"></i> للتواصل والإعلان</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="copyright-bar">&copy; 2026 جميع الحقوق محفوظة لـ كشفيّة</div>
+    </footer>
+
+    <script>
+        // 1. Initialize Supabase Client
+        const supabaseUrl = 'https://anptpomhhuxsxaeonhca.supabase.co';
+        const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFucHRwb21oaHV4c3hhZW9uaGNhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzIxMzU4OTYsImV4cCI6MjA4NzcxMTg5Nn0.7KGLqjcLRA2xzfOXdiDzINCVN';
+        const supabaseClient = window.supabase.createClient(supabaseUrl, supabaseKey);
+
+        // 2. Check User Status
+        async function checkUserStatus() {
+            try {
+                const { data: { user } } = await supabaseClient.auth.getUser();
+
+                if (user) {
+                    // Hide Login buttons, Show Profile
+                    document.getElementById('nav-auth-section').style.display = 'none';
+                    document.getElementById('user-info').style.display = 'flex';
+                    
+                    const name = user.user_metadata.full_name || "مريضنا العزيز";
+                    document.getElementById('user-display-name').innerText = name;
+                }
+            } catch (error) {
+                console.error("Error checking auth status:", error);
+            }
+        }
+
+        // 3. Handle Logout
+        async function handleLogout() {
+            await supabaseClient.auth.signOut();
+            window.location.reload(); 
+        }
+
+        // Run the auth check as soon as the page loads
+        document.addEventListener('DOMContentLoaded', checkUserStatus);
+    </script>
+</body>
+</html>
