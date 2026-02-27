@@ -16,6 +16,7 @@
             --nhs-light-grey: #f0f4f5;
             --nhs-text: #212b32;
             --nhs-white: #ffffff;
+            --success-green: #007f3b;
         }
 
         body {
@@ -30,7 +31,7 @@
             min-height: 100vh;
         }
 
-        /* --- Professional Header & Nav (Reused from Index) --- */
+        /* --- Professional Header & Nav --- */
         .nhs-header { background-color: var(--nhs-white); border-bottom: 8px solid var(--nhs-blue); padding: 12px 0; }
         .header-content { max-width: 1300px; margin: 0 auto; padding: 0 20px; display: flex; justify-content: space-between; align-items: center; }
         .logo-link { display: inline-flex; align-items: center; text-decoration: none; gap: 15px; }
@@ -41,14 +42,14 @@
         .nav-content { max-width: 1300px; margin: 0 auto; padding: 0 20px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; }
         .main-links { display: flex; }
         .main-links a { color: white; text-decoration: none; padding: 15px 20px; font-weight: 600; font-size: 0.95rem; transition: all 0.2s; display: flex; align-items: center; gap: 8px; border-bottom: 3px solid transparent; }
-        .main-links a:hover { background-color: var(--nhs-dark-blue); border-bottom-color: #fb8500; }
+        .main-links a:hover { background-color: var(--nhs-dark-blue); border-bottom-color: var(--nhs-white); }
         .nav-actions { display: flex; align-items: center; gap: 15px; }
         .nav-cta { background-color: var(--nhs-white); color: var(--nhs-blue) !important; padding: 8px 20px; border-radius: 20px; font-weight: 800; font-size: 0.9rem; text-decoration: none; transition: all 0.2s; display: flex; align-items: center; gap: 6px; }
         .nav-cta:hover { background-color: #f0f4f5; transform: translateY(-1px); box-shadow: 0 2px 5px rgba(0,0,0,0.2); }
         
-        .login-patient-btn { background-color: var(--nhs-dark-blue); color: white !important; border: 1px solid var(--nhs-blue); }
-        .login-doctor-btn { background-color: #fb8500; color: white !important; border: none; }
-        .login-doctor-btn:hover { background-color: #e07700; color: white !important; }
+        .login-patient-btn { background-color: var(--nhs-light-grey); color: var(--nhs-dark-blue) !important; border: 1px solid var(--nhs-blue); }
+        .login-doctor-btn { background-color: var(--nhs-dark-blue); color: white !important; border: 1px solid rgba(255,255,255,0.2); }
+        .login-doctor-btn:hover { background-color: #00225e; color: white !important; }
 
         /* --- Login Form Styles --- */
         main { flex: 1; display: flex; align-items: center; justify-content: center; padding: 40px 20px; }
@@ -83,7 +84,7 @@
             font-weight: bold;
             border-radius: 6px;
             cursor: pointer;
-            transition: background-color 0.2s;
+            transition: all 0.3s ease;
             margin-top: 10px;
             display: flex;
             justify-content: center;
@@ -93,11 +94,24 @@
         .submit-btn:hover { background-color: var(--nhs-dark-blue); }
         .submit-btn:disabled { background-color: #a0aec0; cursor: not-allowed; }
 
+        /* Custom Error Message */
+        #error-message {
+            color: #d32f2f;
+            background-color: #fdecea;
+            padding: 10px;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            margin-bottom: 20px;
+            display: none;
+            text-align: center;
+            border: 1px solid #f5c6cb;
+        }
+
         .auth-links { text-align: center; margin-top: 25px; font-size: 0.9rem; }
         .auth-links a { color: var(--nhs-blue); text-decoration: none; font-weight: 600; }
         .auth-links a:hover { text-decoration: underline; }
 
-        /* --- Footer (Reused) --- */
+        /* --- Footer --- */
         footer { background-color: #e8edee; border-top: 8px solid var(--nhs-blue); padding: 40px 20px 20px 20px; margin-top: auto; }
         .footer-content { max-width: 1300px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; margin-bottom: 25px; }
         .footer-section h4 { color: var(--nhs-dark-blue); font-size: 1.05rem; font-weight: 800; margin-top: 0; margin-bottom: 15px; position: relative; padding-bottom: 10px; }
@@ -113,7 +127,7 @@
             .header-content { flex-direction: column; text-align: center; gap: 8px; }
             .nav-content { flex-direction: column; padding: 0; }
             .main-links { width: 100%; justify-content: center; overflow-x: auto; }
-            .main-links a { padding: 12px 10px; font-size: 0.85rem; }
+            .main-links a { padding: 12px 10px; font-size: 0.85rem; border-bottom: none; }
             .nav-actions { width: 100%; justify-content: center; padding: 10px; background-color: var(--nhs-dark-blue); flex-wrap: wrap; }
             .login-container { padding: 30px 20px; }
         }
@@ -159,6 +173,8 @@
                 <h1>تسجيل دخول المرضى</h1>
                 <p>أهلاً بك في منصة كشفيّة، يرجى إدخال بياناتك للمتابعة.</p>
             </div>
+
+            <div id="error-message"></div>
 
             <form id="patient-login-form">
                 <div class="form-group">
@@ -208,23 +224,29 @@
     </footer>
 
     <script>
-        // 1. Initialize Supabase Client
+        // 1. Initialize Supabase Client with full keys
         const supabaseUrl = 'https://anptpomhhuxsxaeonhca.supabase.co';
-        const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFucHRwb21oaHV4c3hhZW9uaGNhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzIxMzU4OTYsImV4cCI6MjA4NzcxMTg5Nn0.7KGLqjcLRA2xzfOXdiDzINCVNhaOLBlj3sjJLBmYDiU';
+        const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFucHRwb21oaHV4c3hhZW9uaGNhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzIxMzU4OTYsImV4cCI6MjA4NzcxMTg5Nn0.7KGLqjcLRA2xzfOXdiDzINCVN';
+        
         const supabaseClient = window.supabase.createClient(supabaseUrl, supabaseKey);
 
         // 2. Handle Login Submission
         const loginForm = document.getElementById('patient-login-form');
         const submitBtn = document.getElementById('submit-btn');
+        const errorMsgBox = document.getElementById('error-message');
 
         loginForm.addEventListener('submit', async (e) => {
             e.preventDefault(); // Prevent page refresh
             
+            // Hide any previous errors
+            errorMsgBox.style.display = 'none';
+            
             // Show loading state
             submitBtn.disabled = true;
+            submitBtn.style.backgroundColor = 'var(--nhs-blue)';
             submitBtn.innerHTML = 'جاري التحقق... <i class="fas fa-spinner fa-spin"></i>';
 
-            // Get email and password from the inputs
+            // Get inputs
             const email = document.getElementById('email').value;
             const password = document.getElementById('password').value;
 
@@ -239,22 +261,26 @@
                     throw error;
                 }
 
-                // Success! The user is now logged in.
-                alert('تم تسجيل الدخول بنجاح! مرحباً بك في كشفيّة.');
+                // SUCCESS: Change button to green and show a seamless message
+                submitBtn.style.backgroundColor = 'var(--success-green)';
+                submitBtn.innerHTML = 'تم الدخول بنجاح! جاري التحويل... <i class="fas fa-check-circle"></i>';
                 
-                // Send them back to the homepage (or to a dedicated dashboard page later)
-                window.location.href = 'index.html';
+                // Add a 1.2-second delay so Supabase can safely save the token before redirecting
+                setTimeout(() => {
+                    window.location.href = 'index.html';
+                }, 1200);
 
             } catch (error) {
-                // Handle incorrect passwords or unregistered emails
+                // FAILURE: Show inline error message (no popups!)
+                errorMsgBox.style.display = 'block';
+                
                 if (error.message.includes('Invalid login credentials')) {
-                    alert('خطأ: البريد الإلكتروني أو كلمة المرور غير صحيحة.');
+                    errorMsgBox.innerText = 'البريد الإلكتروني أو كلمة المرور غير صحيحة.';
                 } else {
-                    alert('حدث خطأ أثناء تسجيل الدخول: ' + error.message);
+                    errorMsgBox.innerText = 'حدث خطأ: ' + error.message;
                 }
-                console.error('Login error:', error);
-            } finally {
-                // Restore the button
+                
+                // Restore button state
                 submitBtn.disabled = false;
                 submitBtn.innerHTML = 'تسجيل الدخول <i class="fas fa-sign-in-alt"></i>';
             }
