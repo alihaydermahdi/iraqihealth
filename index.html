@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>كشفيّة | قريباً</title>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <style>
+        :root {
+            --nhs-blue: #005eb8;
+            --nhs-dark-blue: #003087;
+            --nhs-light-grey: #f0f4f5;
+            --nhs-text: #212b32;
+            --nhs-white: #ffffff;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            margin: 0;
+            background-color: var(--nhs-light-grey);
+            color: var(--nhs-text);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* --- Professional Header Section --- */
+        .nhs-header {
+            background-color: var(--nhs-white);
+            border-bottom: 8px solid var(--nhs-blue); 
+            padding: 12px 0;
+        }
+
+        .header-content {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: center; /* Centered for the landing page */
+            align-items: center;
+        }
+
+        .logo-link {
+            display: inline-flex;
+            align-items: center;
+            text-decoration: none;
+            gap: 15px; 
+        }
+
+        .site-logo {
+            max-height: 65px; /* Slightly larger for emphasis */
+            width: auto;
+            object-fit: contain;
+        }
+        
+        .header-moto {
+            font-weight: 700; 
+            color: var(--nhs-blue); 
+            font-size: 1.2rem;
+        }
+
+        /* --- Construction Section --- */
+        main {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 20px;
+        }
+
+        .construction-container {
+            background-color: var(--nhs-white);
+            max-width: 650px;
+            width: 100%;
+            padding: 50px 30px;
+            border-radius: 12px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+            text-align: center;
+            border-top: 6px solid #fb8500; /* Orange warning/construction color */
+        }
+
+        .icon-wrapper {
+            margin-bottom: 25px;
+        }
+
+        .icon-wrapper i {
+            font-size: 4.5rem;
+            color: #fb8500;
+            animation: pulse 2s infinite ease-in-out;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.1); opacity: 0.8; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        .construction-container h1 {
+            color: var(--nhs-dark-blue);
+            font-size: 2rem;
+            margin-bottom: 15px;
+            font-weight: 800;
+        }
+
+        .construction-container p {
+            color: #4a5568;
+            font-size: 1.15rem;
+            line-height: 1.8;
+            margin-bottom: 30px;
+        }
+
+        .social-follow {
+            margin-top: 30px;
+            padding-top: 25px;
+            border-top: 1px solid #e2e8f0;
+        }
+
+        .social-follow h3 {
+            color: var(--nhs-blue);
+            font-size: 1rem;
+            margin-bottom: 15px;
+        }
+
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .social-icons a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 45px;
+            height: 45px;
+            background-color: var(--nhs-light-grey);
+            color: var(--nhs-dark-blue);
+            border-radius: 50%;
+            text-decoration: none;
+            font-size: 1.4rem;
+            transition: all 0.3s ease;
+        }
+
+        .social-icons a:hover {
+            background-color: var(--nhs-blue);
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+        }
+
+        /* --- Footer --- */
+        footer {
+            background-color: #e8edee; 
+            border-top: 8px solid var(--nhs-blue); 
+            padding: 30px 20px 15px 20px; 
+        }
+
+        .copyright-bar {
+            text-align: center; 
+            font-size: 0.85rem; 
+            font-weight: 600;
+            color: #718096;
+            letter-spacing: 0.5px;
+        }
+
+        @media (max-width: 768px) {
+            .header-content { flex-direction: column; text-align: center; gap: 10px; }
+            .construction-container { padding: 40px 20px; }
+            .construction-container h1 { font-size: 1.6rem; }
+            .construction-container p { font-size: 1rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="nhs-header">
+        <div class="header-content">
+            <a href="index.html" class="logo-link">
+                <img src="logo.png" alt="شعار كشفيّة" class="site-logo">
+                <div class="header-moto">كلشي عن صحتك… بلهجتنا العراقية</div>
+            </a>
+        </div>
+    </header>
+
+    <main>
+        <div class="construction-container">
+            <div class="icon-wrapper">
+                <i class="fas fa-hard-hat"></i>
+            </div>
+            
+            <h1>هلا بيكم بمنصة كشفيّة!</h1>
+            
+            <p>
+                دا نشتغل حالياً على برمجة وتجهيز الموقع حتى نقدملكم أفضل تجربة طبية متكاملة.<br>
+                <strong>المنصة راح تكون جاهزة وتفتح أبوابها بأقرب وقت ممكن!</strong>
+            </p>
+
+            <div class="social-follow">
+                <h3>خلونا على تواصل، تابعونا لمعرفة موعد الإطلاق:</h3>
+                <div class="social-icons">
+                    <a href="https://www.facebook.com/kashfeyacom" target="_blank" title="فيسبوك"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://www.instagram.com/kashfeyacom" target="_blank" title="إنستغرام"><i class="fab fa-instagram"></i></a>
+                    <a href="https://www.tiktok.com/@kashfeya.com" target="_blank" title="تيكتوك"><i class="fab fa-tiktok"></i></a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="copyright-bar">
+            &copy; 2026 جميع الحقوق محفوظة لـ منصة كشفيّة | دليلك الطبي
+        </div>
+    </footer>
+
+</body>
+</html>
