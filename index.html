@@ -18,6 +18,7 @@
             --chat-bg: #f8fafc;
             --user-msg-bg: #005eb8;
             --bot-msg-bg: #ffffff;
+            --warning-red: #d52828;
         }
 
         body {
@@ -54,21 +55,21 @@
         .user-profile-info { display: none; align-items: center; gap: 10px; color: white; font-weight: bold; }
         .logout-btn { background-color: #d32f2f; color: white !important; padding: 6px 15px; border-radius: 20px; font-size: 0.85rem; cursor: pointer; text-decoration: none; border: none; font-weight: bold; }
 
-        /* --- AI CHAT SECTION (THE NEW HERO) --- */
+        /* --- AI CHAT SECTION --- */
         .ai-section {
             background-image: linear-gradient(135deg, var(--nhs-blue) 0%, var(--nhs-dark-blue) 100%);
             padding: 40px 20px;
             display: flex;
             justify-content: center;
             align-items: center;
-            min-height: 500px;
+            min-height: 600px;
         }
 
         .chat-container {
             background-color: white;
             width: 100%;
-            max-width: 700px;
-            height: 500px;
+            max-width: 800px;
+            height: 600px;
             border-radius: 20px;
             box-shadow: 0 20px 50px rgba(0,0,0,0.3);
             display: flex;
@@ -87,16 +88,16 @@
         }
 
         .ai-avatar {
-            width: 45px; height: 45px;
+            width: 50px; height: 50px;
             background: linear-gradient(45deg, #00c6ff, #0072ff);
             border-radius: 50%;
             display: flex; align-items: center; justify-content: center;
-            color: white; font-size: 1.2rem;
+            color: white; font-size: 1.5rem;
             box-shadow: 0 4px 10px rgba(0,114,255,0.3);
         }
 
-        .chat-header-info h2 { margin: 0; font-size: 1.1rem; color: var(--nhs-dark-blue); }
-        .chat-header-info span { font-size: 0.8rem; color: #007f3b; font-weight: bold; display: flex; align-items: center; gap: 5px; }
+        .chat-header-info h2 { margin: 0; font-size: 1.2rem; color: var(--nhs-dark-blue); }
+        .chat-header-info span { font-size: 0.85rem; color: #007f3b; font-weight: bold; display: flex; align-items: center; gap: 5px; }
         .dot { width: 8px; height: 8px; background-color: #007f3b; border-radius: 50%; animation: blink 1.5s infinite; }
         @keyframes blink { 0% { opacity: 0.4; } 50% { opacity: 1; } 100% { opacity: 0.4; } }
 
@@ -108,15 +109,15 @@
             background-color: var(--chat-bg);
             display: flex;
             flex-direction: column;
-            gap: 15px;
+            gap: 20px;
         }
 
         .message {
-            max-width: 80%;
-            padding: 12px 16px;
-            border-radius: 15px;
-            font-size: 0.95rem;
-            line-height: 1.5;
+            max-width: 85%;
+            padding: 15px 20px;
+            border-radius: 18px;
+            font-size: 1rem;
+            line-height: 1.6;
             position: relative;
             animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
@@ -127,7 +128,7 @@
             background-color: var(--bot-msg-bg);
             color: var(--nhs-text);
             border-bottom-right-radius: 2px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
             align-self: flex-start;
             border: 1px solid #e2e8f0;
         }
@@ -137,20 +138,27 @@
             color: white;
             border-bottom-left-radius: 2px;
             align-self: flex-end;
-            box-shadow: 0 2px 5px rgba(0,94,184,0.2);
+            box-shadow: 0 4px 15px rgba(0,94,184,0.3);
         }
+
+        /* Medical Info Box Styling */
+        .med-info-box { margin-top: 10px; border-top: 1px solid #eee; padding-top: 10px; }
+        .med-title { font-weight: bold; color: var(--nhs-blue); display: flex; align-items: center; gap: 8px; margin-bottom: 5px; }
+        .med-warning { color: var(--warning-red); font-weight: bold; margin-bottom: 8px; display: flex; align-items: center; gap: 5px; background: #fff5f5; padding: 8px; border-radius: 5px; border-right: 3px solid var(--warning-red); }
+        .med-advice ul { margin: 5px 0; padding-right: 20px; }
+        .med-source { font-size: 0.75rem; color: #718096; margin-top: 8px; text-align: left; display: block; font-style: italic; }
 
         /* Typing Indicator */
         .typing-indicator {
             align-self: flex-start;
             background-color: white;
-            padding: 10px 15px;
+            padding: 12px 20px;
             border-radius: 20px;
-            display: none; /* Hidden by default */
+            display: none;
             gap: 5px;
             box-shadow: 0 2px 5px rgba(0,0,0,0.05);
         }
-        .typing-dot { width: 6px; height: 6px; background-color: #a0aec0; border-radius: 50%; animation: bounce 1.4s infinite ease-in-out both; }
+        .typing-dot { width: 8px; height: 8px; background-color: #a0aec0; border-radius: 50%; animation: bounce 1.4s infinite ease-in-out both; }
         .typing-dot:nth-child(1) { animation-delay: -0.32s; }
         .typing-dot:nth-child(2) { animation-delay: -0.16s; }
         @keyframes bounce { 0%, 80%, 100% { transform: scale(0); } 40% { transform: scale(1); } }
@@ -158,15 +166,15 @@
         /* Input Area */
         .chat-input-area {
             background-color: white;
-            padding: 15px;
+            padding: 20px;
             border-top: 1px solid #e2e8f0;
             display: flex;
-            gap: 10px;
+            gap: 15px;
         }
 
         .chat-input {
             flex: 1;
-            padding: 12px 20px;
+            padding: 15px 25px;
             border: 2px solid #e2e8f0;
             border-radius: 30px;
             font-size: 1rem;
@@ -180,12 +188,12 @@
             background-color: var(--nhs-blue);
             color: white;
             border: none;
-            width: 50px;
-            height: 50px;
+            width: 55px;
+            height: 55px;
             border-radius: 50%;
             cursor: pointer;
             display: flex; align-items: center; justify-content: center;
-            font-size: 1.2rem;
+            font-size: 1.3rem;
             transition: transform 0.2s, background-color 0.2s;
         }
         .send-btn:hover { background-color: var(--nhs-dark-blue); transform: scale(1.05); }
@@ -193,15 +201,16 @@
         /* Recommendation Action Button */
         .action-btn {
             display: inline-block;
-            margin-top: 10px;
-            padding: 8px 20px;
+            margin-top: 15px;
+            padding: 10px 25px;
             background-color: #007f3b;
             color: white;
             text-decoration: none;
-            border-radius: 20px;
+            border-radius: 25px;
             font-weight: bold;
-            font-size: 0.9rem;
+            font-size: 0.95rem;
             transition: 0.2s;
+            box-shadow: 0 4px 6px rgba(0,127,59,0.2);
         }
         .action-btn:hover { background-color: #00602b; transform: translateY(-2px); }
 
@@ -210,8 +219,8 @@
         .copyright-bar { text-align: center; border-top: 1px solid #d1d5d8; padding-top: 15px; font-size: 0.8rem; font-weight: 600; color: #718096; }
 
         @media (max-width: 768px) {
-            .ai-section { padding: 20px 10px; min-height: 100vh; align-items: flex-start; }
-            .chat-container { height: 80vh; border-radius: 15px; }
+            .ai-section { padding: 10px; min-height: 100vh; align-items: flex-start; padding-top: 20px; }
+            .chat-container { height: 85vh; border-radius: 15px; }
             .header-content { flex-direction: column; gap: 10px; }
             .nav-content { flex-direction: column; padding: 0; }
             .main-links { width: 100%; justify-content: center; overflow-x: auto; }
@@ -258,18 +267,18 @@
     <section class="ai-section">
         <div class="chat-container">
             <div class="chat-header">
-                <div class="ai-avatar"><i class="fas fa-robot"></i></div>
+                <div class="ai-avatar"><i class="fas fa-user-md"></i></div>
                 <div class="chat-header-info">
-                    <h2>مساعد كشفيّة الذكي</h2>
-                    <span><div class="dot"></div> متصل الآن</span>
+                    <h2>المساعد الطبي (كشفيّة)</h2>
+                    <span><div class="dot"></div> متصل الآن | مدعوم بالمصادر الطبية</span>
                 </div>
             </div>
 
             <div class="chat-messages" id="chat-messages">
                 <div class="message bot-msg">
-                    هلا بيك! 🩺<br>
-                    آني مساعدك الطبي الذكي. تكدر تحجي وياي بلهجتنا العراقية.<br>
-                    <strong>بشنو تحس اليوم؟</strong> (مثلاً: راسي يوجعني، عندي صخونة، أسناني تأذيني...)
+                    <strong>هلا بيك! 🩺</strong><br>
+                    آني مساعدك الطبي الذكي. أكدر اساعدك بمعلومات طبية موثوقة من المصادر العالمية (مثل NHS و NICE) بس بلهجتنا.<br><br>
+                    <strong>بشنو دتحس اليوم؟</strong> (مثلاً: راسي ديأذيني، عندي ألم ببطني، أسناني...)
                 </div>
                 
                 <div class="typing-indicator" id="typing-indicator">
@@ -278,7 +287,7 @@
             </div>
 
             <form class="chat-input-area" id="chat-form">
-                <input type="text" id="user-input" class="chat-input" placeholder="اكتب شكواك هنا..." autocomplete="off">
+                <input type="text" id="user-input" class="chat-input" placeholder="اكتب اعراضك هنا..." autocomplete="off">
                 <button type="submit" class="send-btn"><i class="fas fa-paper-plane"></i></button>
             </form>
         </div>
@@ -299,7 +308,7 @@
     </footer>
 
     <script>
-        // 1. Supabase & Auth Logic (Same as before)
+        // 1. Supabase & Auth Logic
         const supabaseUrl = 'https://anptpomhhuxsxaeonhca.supabase.co';
         const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFucHRwb21oaHV4c3hhZW9uaGNhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzIxMzU4OTYsImV4cCI6MjA4NzcxMTg5Nn0.7KGLqjcLRA2xzfOXdiDzINCVNhaOLBlj3sjJLBmYDiU';
         const supabaseClient = window.supabase.createClient(supabaseUrl, supabaseKey);
@@ -315,18 +324,14 @@
         async function handleLogout() { await supabaseClient.auth.signOut(); window.location.reload(); }
         document.addEventListener('DOMContentLoaded', checkUserStatus);
 
-        // 2. --- AI CHAT LOGIC ---
+        // 2. --- ADVANCED MEDICAL CHAT LOGIC ---
         const chatForm = document.getElementById('chat-form');
         const chatInput = document.getElementById('user-input');
         const messagesBox = document.getElementById('chat-messages');
         const typingIndicator = document.getElementById('typing-indicator');
 
-        // Scroll to bottom
-        function scrollToBottom() {
-            messagesBox.scrollTop = messagesBox.scrollHeight;
-        }
+        function scrollToBottom() { messagesBox.scrollTop = messagesBox.scrollHeight; }
 
-        // Add User Message
         function addUserMessage(text) {
             const msgDiv = document.createElement('div');
             msgDiv.classList.add('message', 'user-msg');
@@ -335,7 +340,6 @@
             scrollToBottom();
         }
 
-        // Add Bot Message
         function addBotMessage(htmlContent) {
             const msgDiv = document.createElement('div');
             msgDiv.classList.add('message', 'bot-msg');
@@ -344,49 +348,107 @@
             scrollToBottom();
         }
 
-        // Show/Hide Typing
         function showTyping() { typingIndicator.style.display = 'flex'; scrollToBottom(); }
         function hideTyping() { typingIndicator.style.display = 'none'; }
 
-        // THE "BRAIN" (Simulated AI Logic)
-        function generateResponse(text) {
+        // --- MEDICAL KNOWLEDGE BASE (EVIDENCE BASED) ---
+        // Sources: NHS UK, NICE Guidelines, Patient.info (Simplified for Chat)
+        
+        function getMedicalResponse(text) {
             const lowerText = text.toLowerCase();
-            let response = "";
+            let advice = "";
             let specialty = "";
+            let url = "";
 
-            if (lowerText.includes("راس") || lowerText.includes("صداع") || lowerText.includes("دماغ")) {
-                response = "سلامتك. الصداع ممكن يكون بسبب إرهاق أو ضغط، بس إذا مستمر يفضل تراجع دكتور.";
+            // 1. HEADACHE (صداع، راسي)
+            if (lowerText.includes("راس") || lowerText.includes("صداع") || lowerText.includes("شقيقة")) {
+                advice = `
+                    <div class="med-title"><i class="fas fa-brain"></i> تحليل الأعراض: صداع (Headache)</div>
+                    سلامتك الف سلامة. الصداع اله أسباب هواية، اكثرها شيوعاً هو التوتر أو الشقيقة.
+                    <div class="med-info-box">
+                        <div class="med-warning"><i class="fas fa-exclamation-triangle"></i> علامات خطر (Red Flags):</div>
+                        اذا عندك أي من هاي الأعراض لازم تروح للطوارئ فوراً:
+                        <ul>
+                            <li>صداع مفاجئ وشديد جداً (مثل الضربة)</li>
+                            <li>تغير بالرؤية أو ضعف باليد/الرجل</li>
+                            <li>حرارة عالية مع تيبس بالرقبة</li>
+                        </ul>
+                    </div>
+                    <div class="med-advice">
+                        <strong>نصائح منزلية:</strong>
+                        <ul>
+                            <li>اشرب مي هواية (الجفاف يسبب صداع).</li>
+                            <li>ارتاح بغرفة هادئة ومظلمة.</li>
+                            <li>ممكن تاخذ مسكن بسيط (Paracetamol) اذا ما عندك مانع طبي.</li>
+                        </ul>
+                    </div>
+                    <span class="med-source">المصادر: NHS UK Guidelines / NICE CKS Headache</span>
+                `;
                 specialty = "neurology";
-            } 
-            else if (lowerText.includes("سن") || lowerText.includes("ضرس") || lowerText.includes("اسنان")) {
-                response = "ألم الأسنان ما ينسكت عليه. لازم تراجع طبيب أسنان فوراً.";
-                specialty = "dentistry";
             }
-            else if (lowerText.includes("بطن") || lowerText.includes("معدة") || lowerText.includes("قولون")) {
-                response = "المغص وألم البطن يحتاج فحص باطنية دقيق.";
+            
+            // 2. STOMACH / ABDOMINAL (بطن، معدة، قولون)
+            else if (lowerText.includes("بطن") || lowerText.includes("معدة") || lowerText.includes("قولون") || lowerText.includes("لعبان نفس")) {
+                advice = `
+                    <div class="med-title"><i class="fas fa-notes-medical"></i> تحليل الأعراض: ألم البطن (Abdominal Pain)</div>
+                    ما تشوف شر. ألم البطن ممكن يكون قولون عصبي، حموضة، أو التهاب.
+                    <div class="med-info-box">
+                        <div class="med-warning"><i class="fas fa-exclamation-triangle"></i> متى لازم تشوف دكتور؟:</div>
+                        <ul>
+                            <li>اذا الألم شديد ومستمر وما يخف.</li>
+                            <li>اذا اكو دم مع الخروج (عزك الله) او تقيؤ دم.</li>
+                            <li>اذا خسرت وزن بدون سبب.</li>
+                            <li>صعوبة بالبلع.</li>
+                        </ul>
+                    </div>
+                    <div class="med-advice">
+                        <strong>نصائح أولية:</strong>
+                        <ul>
+                            <li>ابتعد عن الأكل الدسم والحار.</li>
+                            <li>قسم وجباتك لوجبات صغيرة.</li>
+                            <li>مضادات الحموضة (Antacids) ممكن تساعد مؤقتاً.</li>
+                        </ul>
+                    </div>
+                    <span class="med-source">المصادر: NHS Dyspepsia Guidelines</span>
+                `;
                 specialty = "gastroenterology";
             }
-            else if (lowerText.includes("قلب") || lowerText.includes("خفقان") || lowerText.includes("صدر")) {
-                response = "سلامة قلبك. هاي الأعراض تحتاج تخطيط وفحص عند دكتور قلبية بأسرع وقت.";
-                specialty = "cardiology";
-            }
-            else if (lowerText.includes("جلد") || lowerText.includes("حكة") || lowerText.includes("حبوب")) {
-                response = "الأمراض الجلدية تحتاج معاينة مباشرة.";
-                specialty = "dermatology";
-            }
-            else if (lowerText.includes("عين") || lowerText.includes("نظر") || lowerText.includes("شوف")) {
-                response = "سلامة عيونك. يفضل تسوي فحص نظر.";
-                specialty = "ophthalmology";
-            }
-            else if (lowerText.includes("مرحبا") || lowerText.includes("هلا") || lowerText.includes("شلونك")) {
-                return "يا هلا بيك! آني بخير. كلي شنو اللي يوجعك؟";
-            }
-            else {
-                return "عفواً ما فهمت عليك زين. تكدر توصف الألم بغير طريقة؟ (مثلاً: راسي، بطني، اسناني...)";
+
+            // 3. DENTAL (أسناني، ضرس، سن)
+            else if (lowerText.includes("سن") || lowerText.includes("ضرس") || lowerText.includes("لثة")) {
+                advice = `
+                    <div class="med-title"><i class="fas fa-tooth"></i> تحليل الأعراض: ألم الأسنان (Dental Pain)</div>
+                    ألم الأسنان مزعج جداً، الله يساعدك. عادة يكون بسبب تسوس او التهاب العصب.
+                    <div class="med-info-box">
+                        <div class="med-warning"><i class="fas fa-exclamation-circle"></i> حالة طارئة؟</div>
+                        اذا عندك <strong>ورم بالوجه واصل للعين او الرقبة</strong>، او صعوبة بالتنفس، هاي حالة طارئة تحتاج مستشفى.
+                    </div>
+                    <div class="med-advice">
+                        <strong>نصائح لتخفيف الألم مؤقتاً:</strong>
+                        <ul>
+                            <li>تمضمض بمي وملح دافي.</li>
+                            <li>استخدم خيط الاسنان للتنظيف.</li>
+                            <li>مسكن ألم (Ibuprofen) اذا ما عندك حساسية او ربو.</li>
+                        </ul>
+                    </div>
+                    <strong>ملاحظة:</strong> ألم الأسنان ما يطيب وحده، لازم يشوفك طبيب.
+                    <span class="med-source">المصادر: NHS Dental Abscess Guide</span>
+                `;
+                specialty = "dentistry";
             }
 
-            // Return advice + Action Button
-            return `${response}<br><br>لقيتلك خوش دكاترة بهذا الاختصاص:<br><a href="search-results.html?specialty=${specialty}" class="action-btn">عرض الأطباء وحجز موعد</a>`;
+            // 4. GENERAL / DEFAULT
+            else {
+                return `
+                    عفواً، ما كدرت احدد الحالة بدقة من الوصف. 🤖<br><br>
+                    تكدر تحاول مرة ثانية وتكتب مثلاً: "راسي يوجعني"، "عندي ألم بصدري"، "طفح جلدي"...<br><br>
+                    أو تكدر تحجز موعد عام للفحص الشامل.
+                    <br><a href="search-results.html" class="action-btn">عرض كل الأطباء</a>
+                `;
+            }
+
+            // Return structured advice + Booking Button
+            return `${advice}<br><a href="search-results.html?specialty=${specialty}" class="action-btn">عرض الأطباء المختصين وحجز موعد</a>`;
         }
 
         // Handle Submit
@@ -395,18 +457,19 @@
             const text = chatInput.value.trim();
             if (!text) return;
 
-            // 1. Show User Input
+            // 1. User Message
             addUserMessage(text);
             chatInput.value = '';
 
-            // 2. Simulate AI Thinking Delay
+            // 2. Bot Thinking
             showTyping();
             
+            // 3. Simulated Response Delay (to feel real)
             setTimeout(() => {
                 hideTyping();
-                const reply = generateResponse(text);
+                const reply = getMedicalResponse(text);
                 addBotMessage(reply);
-            }, 1500); // 1.5 second delay for realism
+            }, 1500); 
         });
     </script>
 </body>
