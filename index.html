@@ -181,11 +181,11 @@
             background-color: #b71c1c;
         }
 
-        /* --- Hero Search Section (Vezeeta Style) --- */
+        /* --- Hero Search Section (AI Powered) --- */
         .hero-section {
             background-color: var(--nhs-blue);
             background-image: linear-gradient(135deg, var(--nhs-blue) 0%, var(--nhs-dark-blue) 100%);
-            padding: 50px 20px;
+            padding: 60px 20px;
             text-align: center;
             color: white;
             margin-bottom: 40px;
@@ -206,43 +206,38 @@
 
         .search-box-container {
             background: white;
-            max-width: 1000px;
+            max-width: 800px; /* Reduced width for single input */
             margin: 0 auto;
-            border-radius: 12px;
-            padding: 10px;
+            border-radius: 50px; /* More rounded for modern AI look */
+            padding: 8px;
             box-shadow: 0 10px 25px rgba(0,0,0,0.2);
             display: flex;
+            align-items: center; /* Center items vertically */
             gap: 10px;
+            border: 4px solid rgba(255,255,255,0.2); /* Subtle glow effect */
         }
 
         .search-field {
             flex: 1;
             display: flex;
             align-items: center;
-            background: #f8fafc;
-            border: 1px solid #e2e8f0;
-            border-radius: 8px;
+            background: transparent;
+            border: none;
             padding: 0 15px;
-            transition: border-color 0.2s;
-        }
-
-        .search-field:focus-within {
-            border-color: var(--nhs-blue);
-            box-shadow: 0 0 0 2px rgba(0,94,184,0.1);
         }
 
         .search-field i {
             color: var(--nhs-blue);
-            font-size: 1.1rem;
-            margin-left: 10px;
+            font-size: 1.3rem;
+            margin-left: 15px;
         }
         
-        .search-field select, .search-field input {
+        .search-field input {
             width: 100%;
             border: none;
             background: transparent;
             padding: 15px 0;
-            font-size: 1rem;
+            font-size: 1.1rem;
             font-family: inherit;
             color: var(--nhs-text);
             outline: none;
@@ -252,19 +247,21 @@
             background-color: var(--nhs-dark-blue); 
             color: white;
             border: none;
-            border-radius: 8px;
-            padding: 0 30px;
+            border-radius: 40px;
+            padding: 12px 35px;
             font-size: 1.1rem;
             font-weight: bold;
             cursor: pointer;
-            transition: background-color 0.2s;
+            transition: all 0.3s ease;
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 10px;
+            white-space: nowrap; /* Prevent text wrapping */
         }
 
         .search-btn:hover {
             background-color: #00225e; 
+            transform: scale(1.02); /* Slight zoom effect */
         }
 
         /* --- Grid & Interactive Dropdowns --- */
@@ -338,7 +335,7 @@
         .drop-section a { color: white; text-decoration: none; display: block; width: 100%; height: 100%; }
         .drop-section:hover { background: rgba(0,0,0,0.1); }
 
-        /* --- الألوان المسطحة --- */
+        /* --- Colors --- */
         .neuro     { background-color: #7cb342; } 
         .eye       { background-color: #d32f2f; } 
         .ent       { background-color: #d32f2f; } 
@@ -356,7 +353,7 @@
         .mental    { background-color: #7cb342; } 
         .nutrition { background-color: #f57c00; } 
 
-        /* --- Elegant Footer --- */
+        /* --- Footer --- */
         footer {
             background-color: #e8edee; 
             border-top: 8px solid var(--nhs-blue); 
@@ -440,9 +437,7 @@
         @media (max-width: 1024px) {
             .grid-row { grid-template-columns: repeat(3, 1fr); }
             .footer-content { gap: 25px; }
-            .search-box-container { flex-direction: column; background: transparent; box-shadow: none; }
-            .search-field { background: white; border-radius: 8px; margin-bottom: 10px; }
-            .search-btn { padding: 15px; justify-content: center; }
+            .search-box-container { max-width: 90%; } 
         }
 
         @media (max-width: 768px) {
@@ -464,6 +459,12 @@
             
             footer { padding: 30px 20px 15px 20px; }
             .footer-content { gap: 20px; margin-bottom: 20px; }
+            
+            .hero-section h1 { font-size: 1.8rem; }
+            .search-box-container { flex-direction: column; border-radius: 12px; padding: 15px; gap: 15px; }
+            .search-field input { text-align: center; padding: 10px 0; }
+            .search-field i { display: none; } /* Hide icon on mobile for simpler look */
+            .search-btn { width: 100%; justify-content: center; }
         }
     </style>
 </head>
@@ -508,74 +509,11 @@
 
     <section class="hero-section">
         <h1>احجز موعدك ويه أحسن دكاترة العراق</h1>
-        <p>ابحث، قارن، واحجز موعدك إلكترونياً بدون أي مكالمات هاتفية.</p>
+        <p>اكتب شنو تحس بلهجتك، والذكاء الاصطناعي راح يدليك على الدكتور المناسب.</p>
         
-        <form class="search-box-container" id="search-form">
-            
+        <form class="search-box-container" id="ai-search-form">
             <div class="search-field">
-                <i class="fas fa-stethoscope"></i>
-                <select id="search-specialty">
-                    <option value="" disabled selected>اختر التخصص الطبي...</option>
-                    <option value="general_surgery">جراحة عامة وجراحة المناظير</option>
-                    <option value="bariatric_surgery">جراحة السمنة</option>
-                    <option value="neurosurgery">جراحة المخ والأعصاب</option>
-                    <option value="cardiothoracic_surgery">جراحة القلب والصدر</option>
-                    <option value="pediatric_surgery">جراحة الأطفال</option>
-                    <option value="plastic_surgery">جراحة التجميل</option>
-                    <option value="family_medicine">طب الأسرة</option>
-                    <option value="dentistry">طب الأسنان</option>
-                    <option value="neurology">أمراض المخ والأعصاب</option>
-                    <option value="ent">الأنف والأذن والحنجرة</option>
-                    <option value="pulmonology">أمراض الجهاز التنفسي</option>
-                    <option value="cardiology">أمراض القلب والأوعية الدموية</option>
-                    <option value="endocrinology">السكري والغدد الصماء</option>
-                    <option value="gastroenterology">أمراض الجهاز الهضمي والكبد</option>
-                    <option value="nephrology_urology">أمراض الكلى والمسالك البولية</option>
-                    <option value="obstetrics_gynecology">النسائية والتوليد</option>
-                    <option value="pediatrics">طب الأطفال والخدج</option>
-                    <option value="dermatology">الأمراض الجلدية</option>
-                    <option value="orthopedics_rheumatology">العظام والمفاصل والروماتيزم</option>
-                    <option value="hematology_oncology">أمراض الدم والأورام</option>
-                    <option value="ophthalmology">طب وجراحة العيون</option>
-                    <option value="psychiatry">الطب النفسي والصحة النفسية</option>
-                    <option value="nutrition">التغذية العلاجية وعلاج السمنة</option>
-                    <option value="andrology_infertility">الذكورة والعقم</option>
-                    <option value="radiology">الأشعة</option>
-                    <option value="laboratory">التحاليل الطبية</option>
-                    <option value="physiotherapy">العلاج الطبيعي</option>
-                    <option value="allergy_immunology">الحساسية والمناعة</option>
-                </select>
-            </div>
-
-            <div class="search-field">
-                <i class="fas fa-map-marker-alt"></i>
-                <select id="search-city">
-                    <option value="" disabled selected>اختار المحافظة...</option>
-                    <option value="baghdad">بغداد</option>
-                    <option value="nineveh">نينوى</option>
-                    <option value="basra">البصرة</option>
-                    <option value="salah_al_din">صلاح الدين</option>
-                    <option value="duhok">دهوك</option>
-                    <option value="erbil">أربيل</option>
-                    <option value="sulaymaniyah">السليمانية</option>
-                    <option value="diyala">ديالى</option>
-                    <option value="wasit">واسط</option>
-                    <option value="maysan">ميسان</option>
-                    <option value="dhi_qar">ذي قار</option>
-                    <option value="muthanna">المثنى</option>
-                    <option value="babil">بابل</option>
-                    <option value="karbala">كربلاء</option>
-                    <option value="najaf">النجف</option>
-                    <option value="anbar">الانبار</option>
-                    <option value="diwaniya">الديوانية</option>
-                    <option value="kirkuk">كركوك</option>
-                    <option value="halabja">حلبجة</option>
-                </select>
-            </div>
-
-            <div class="search-field">
-                <i class="fas fa-user-doctor"></i>
-                <input type="text" id="search-name" placeholder="اسم الدكتور أو العيادة (اختياري)">
+                <i class="fas fa-sparkles"></i> <input type="text" id="ai-search-input" placeholder="مثال: راسي ديأذيني، عندي نحول، عيوني تغوش..." required autocomplete="off">
             </div>
 
             <button type="submit" class="search-btn">
@@ -730,7 +668,6 @@
                 const { data: { user } } = await supabaseClient.auth.getUser();
 
                 if (user) {
-                    // إخفاء أزرار الدخول وإظهار اسم المستخدم
                     document.getElementById('nav-auth-section').style.display = 'none';
                     document.getElementById('user-info').style.display = 'flex';
                     
@@ -750,15 +687,38 @@
 
         document.addEventListener('DOMContentLoaded', checkUserStatus);
 
-        // 4. Handle Search Form
-        document.getElementById('search-form').addEventListener('submit', function(e) {
+        // 4. Handle AI Search Simulation
+        document.getElementById('ai-search-form').addEventListener('submit', function(e) {
             e.preventDefault();
-            const specialty = document.getElementById('search-specialty').value;
-            const city = document.getElementById('search-city').value;
-            const docName = document.getElementById('search-name').value;
+            const input = document.getElementById('ai-search-input').value.trim();
+            
+            if (!input) return;
 
-            // Logic to handle search routing will go here
-            window.location.href = 'search-results.html';
+            // This is a basic keyword simulation. In the future, this would send 'input' to a real AI API.
+            let suggestedSpecialty = "";
+            const lowerInput = input.toLowerCase();
+
+            // Simple Logic for demonstration
+            if (input.includes("راس") || input.includes("دماغ") || input.includes("دوخة") || input.includes("صداع")) {
+                suggestedSpecialty = "neurology"; // Brain/Neuro
+            } else if (input.includes("سن") || input.includes("اسنان") || input.includes("ضرس")) {
+                suggestedSpecialty = "dentistry"; // Dentist
+            } else if (input.includes("عيون") || input.includes("نظر") || input.includes("مشوف")) {
+                suggestedSpecialty = "ophthalmology"; // Eyes
+            } else if (input.includes("بطن") || input.includes("معدة") || input.includes("قولون")) {
+                suggestedSpecialty = "gastroenterology"; // Gastro
+            } else if (input.includes("قلب") || input.includes("خفقان") || input.includes("صدر")) {
+                suggestedSpecialty = "cardiology"; // Heart
+            } else if (input.includes("جلد") || input.includes("حكة") || input.includes("حبوب")) {
+                suggestedSpecialty = "dermatology"; // Skin
+            } else {
+                // If no keywords match, just go to general search
+                suggestedSpecialty = "general"; 
+            }
+
+            // Redirect to search results with the predicted query param
+            // Example: search-results.html?specialty=neurology&ai_query=my+head+hurts
+            window.location.href = `search-results.html?specialty=${suggestedSpecialty}&q=${encodeURIComponent(input)}`;
         });
 
         // 5. Original Dropdown Logic
