@@ -100,7 +100,6 @@
             border-bottom: 3px solid transparent; 
         }
 
-        /* REMOVED ORANGE HOVER COLOR - Changed to White/Dark Blue */
         .main-links a:hover, .main-links a.active { 
             background-color: var(--nhs-dark-blue);
             border-bottom-color: var(--nhs-white); 
@@ -131,6 +130,24 @@
             background-color: #f0f4f5;
             transform: translateY(-1px);
             box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+
+        /* --- أزرار تسجيل الدخول المحدثة --- */
+        .login-patient-btn {
+            background-color: var(--nhs-light-grey);
+            color: var(--nhs-dark-blue) !important;
+            border: 1px solid var(--nhs-blue);
+        }
+
+        .login-doctor-btn {
+            background-color: var(--nhs-dark-blue); 
+            color: white !important;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .login-doctor-btn:hover {
+            background-color: #00225e; 
+            color: white !important;
         }
 
         /* User Profile UI in Nav */
@@ -164,10 +181,96 @@
             background-color: #b71c1c;
         }
 
+        /* --- Hero Search Section (Vezeeta Style) --- */
+        .hero-section {
+            background-color: var(--nhs-blue);
+            background-image: linear-gradient(135deg, var(--nhs-blue) 0%, var(--nhs-dark-blue) 100%);
+            padding: 50px 20px;
+            text-align: center;
+            color: white;
+            margin-bottom: 40px;
+        }
+
+        .hero-section h1 {
+            font-size: 2.2rem;
+            margin-top: 0;
+            margin-bottom: 10px;
+            font-weight: 800;
+        }
+
+        .hero-section p {
+            font-size: 1.1rem;
+            margin-bottom: 35px;
+            opacity: 0.9;
+        }
+
+        .search-box-container {
+            background: white;
+            max-width: 1000px;
+            margin: 0 auto;
+            border-radius: 12px;
+            padding: 10px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            display: flex;
+            gap: 10px;
+        }
+
+        .search-field {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 0 15px;
+            transition: border-color 0.2s;
+        }
+
+        .search-field:focus-within {
+            border-color: var(--nhs-blue);
+            box-shadow: 0 0 0 2px rgba(0,94,184,0.1);
+        }
+
+        .search-field i {
+            color: var(--nhs-blue);
+            font-size: 1.1rem;
+            margin-left: 10px;
+        }
+        
+        .search-field select, .search-field input {
+            width: 100%;
+            border: none;
+            background: transparent;
+            padding: 15px 0;
+            font-size: 1rem;
+            font-family: inherit;
+            color: var(--nhs-text);
+            outline: none;
+        }
+
+        .search-btn {
+            background-color: var(--nhs-dark-blue); 
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 0 30px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .search-btn:hover {
+            background-color: #00225e; 
+        }
+
         /* --- Grid & Interactive Dropdowns --- */
         .clinical-grid {
             max-width: 1300px;
-            margin: 30px auto 50px auto;
+            margin: 0 auto 50px auto;
             padding: 0 20px;
         }
 
@@ -337,6 +440,9 @@
         @media (max-width: 1024px) {
             .grid-row { grid-template-columns: repeat(3, 1fr); }
             .footer-content { gap: 25px; }
+            .search-box-container { flex-direction: column; background: transparent; box-shadow: none; }
+            .search-field { background: white; border-radius: 8px; margin-bottom: 10px; }
+            .search-btn { padding: 15px; justify-content: center; }
         }
 
         @media (max-width: 768px) {
@@ -346,8 +452,6 @@
             .nav-content { flex-direction: column; padding: 0; }
             .main-links { width: 100%; justify-content: center; overflow-x: auto; }
             .main-links a { padding: 12px 10px; font-size: 0.85rem; border-bottom: none; }
-            
-            /* Cleaned up nav actions */
             .nav-actions { width: 100%; justify-content: center; padding: 10px; background-color: var(--nhs-dark-blue); flex-wrap: wrap; }
             .user-profile-info { width: 100%; justify-content: center; padding: 10px; background-color: var(--nhs-dark-blue); flex-wrap: wrap; }
             
@@ -383,8 +487,14 @@
             </div>
             
             <div class="nav-actions" id="nav-auth-section">
+                <a href="login-patient.html" class="nav-cta login-patient-btn">
+                    <i class="fas fa-user"></i> دخول المرضى
+                </a>
+                <a href="login-doctor.html" class="nav-cta login-doctor-btn">
+                    <i class="fas fa-user-doctor"></i> دخول الأطباء
+                </a>
                 <a href="contact.html" class="nav-cta">
-                    <i class="fas fa-phone"></i> تواصل ويانا
+                    <i class="fas fa-phone"></i> تواصل معنا
                 </a>
             </div>
 
@@ -395,6 +505,84 @@
             </div>
         </div>
     </nav>
+
+    <section class="hero-section">
+        <h1>احجز موعدك ويه أحسن دكاترة العراق</h1>
+        <p>ابحث، قارن، واحجز موعدك إلكترونياً بدون أي مكالمات هاتفية.</p>
+        
+        <form class="search-box-container" id="search-form">
+            
+            <div class="search-field">
+                <i class="fas fa-stethoscope"></i>
+                <select id="search-specialty">
+                    <option value="" disabled selected>اختر التخصص الطبي...</option>
+                    <option value="general_surgery">جراحة عامة وجراحة المناظير</option>
+                    <option value="bariatric_surgery">جراحة السمنة</option>
+                    <option value="neurosurgery">جراحة المخ والأعصاب</option>
+                    <option value="cardiothoracic_surgery">جراحة القلب والصدر</option>
+                    <option value="pediatric_surgery">جراحة الأطفال</option>
+                    <option value="plastic_surgery">جراحة التجميل</option>
+                    <option value="family_medicine">طب الأسرة</option>
+                    <option value="dentistry">طب الأسنان</option>
+                    <option value="neurology">أمراض المخ والأعصاب</option>
+                    <option value="ent">الأنف والأذن والحنجرة</option>
+                    <option value="pulmonology">أمراض الجهاز التنفسي</option>
+                    <option value="cardiology">أمراض القلب والأوعية الدموية</option>
+                    <option value="endocrinology">السكري والغدد الصماء</option>
+                    <option value="gastroenterology">أمراض الجهاز الهضمي والكبد</option>
+                    <option value="nephrology_urology">أمراض الكلى والمسالك البولية</option>
+                    <option value="obstetrics_gynecology">النسائية والتوليد</option>
+                    <option value="pediatrics">طب الأطفال والخدج</option>
+                    <option value="dermatology">الأمراض الجلدية</option>
+                    <option value="orthopedics_rheumatology">العظام والمفاصل والروماتيزم</option>
+                    <option value="hematology_oncology">أمراض الدم والأورام</option>
+                    <option value="ophthalmology">طب وجراحة العيون</option>
+                    <option value="psychiatry">الطب النفسي والصحة النفسية</option>
+                    <option value="nutrition">التغذية العلاجية وعلاج السمنة</option>
+                    <option value="andrology_infertility">الذكورة والعقم</option>
+                    <option value="radiology">الأشعة</option>
+                    <option value="laboratory">التحاليل الطبية</option>
+                    <option value="physiotherapy">العلاج الطبيعي</option>
+                    <option value="allergy_immunology">الحساسية والمناعة</option>
+                </select>
+            </div>
+
+            <div class="search-field">
+                <i class="fas fa-map-marker-alt"></i>
+                <select id="search-city">
+                    <option value="" disabled selected>اختار المحافظة...</option>
+                    <option value="baghdad">بغداد</option>
+                    <option value="nineveh">نينوى</option>
+                    <option value="basra">البصرة</option>
+                    <option value="salah_al_din">صلاح الدين</option>
+                    <option value="duhok">دهوك</option>
+                    <option value="erbil">أربيل</option>
+                    <option value="sulaymaniyah">السليمانية</option>
+                    <option value="diyala">ديالى</option>
+                    <option value="wasit">واسط</option>
+                    <option value="maysan">ميسان</option>
+                    <option value="dhi_qar">ذي قار</option>
+                    <option value="muthanna">المثنى</option>
+                    <option value="babil">بابل</option>
+                    <option value="karbala">كربلاء</option>
+                    <option value="najaf">النجف</option>
+                    <option value="anbar">الانبار</option>
+                    <option value="diwaniya">الديوانية</option>
+                    <option value="kirkuk">كركوك</option>
+                    <option value="halabja">حلبجة</option>
+                </select>
+            </div>
+
+            <div class="search-field">
+                <i class="fas fa-user-doctor"></i>
+                <input type="text" id="search-name" placeholder="اسم الدكتور أو العيادة (اختياري)">
+            </div>
+
+            <button type="submit" class="search-btn">
+                <i class="fas fa-search"></i> ابحث الآن
+            </button>
+        </form>
+    </section>
 
     <main class="clinical-grid">
         
@@ -542,7 +730,7 @@
                 const { data: { user } } = await supabaseClient.auth.getUser();
 
                 if (user) {
-                    // Hide generic auth section, show specific user profile
+                    // إخفاء أزرار الدخول وإظهار اسم المستخدم
                     document.getElementById('nav-auth-section').style.display = 'none';
                     document.getElementById('user-info').style.display = 'flex';
                     
