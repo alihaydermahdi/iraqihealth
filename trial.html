@@ -10,6 +10,20 @@
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     
     <style>
+        /* --- FIX: Global Reset for Mobile Overflow Issues --- */
+        *, *::before, *::after {
+            box-sizing: border-box; 
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        html, body {
+            width: 100%;
+            overflow-x: hidden; /* Prevents horizontal scrolling */
+            margin: 0;
+            padding: 0;
+        }
+        /* ---------------------------------------------------- */
+
         :root {
             --nhs-blue: #005eb8;
             --nhs-dark-blue: #003087;
@@ -20,7 +34,6 @@
 
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            margin: 0;
             background-color: var(--nhs-light-grey);
             color: var(--nhs-text);
             line-height: 1.6;
@@ -32,6 +45,7 @@
             background-color: var(--nhs-white);
             border-bottom: 8px solid var(--nhs-blue); 
             padding: 12px 0;
+            width: 100%;
         }
 
         .header-content {
@@ -71,6 +85,7 @@
             z-index: 1000;
             box-shadow: 0 4px 6px rgba(0,0,0,0.1); 
             margin-bottom: 0; 
+            width: 100%;
         }
 
         .nav-content {
@@ -132,24 +147,6 @@
             box-shadow: 0 2px 5px rgba(0,0,0,0.2);
         }
 
-        /* --- أزرار تسجيل الدخول المحدثة --- */
-        .login-patient-btn {
-            background-color: var(--nhs-light-grey);
-            color: var(--nhs-dark-blue) !important;
-            border: 1px solid var(--nhs-blue);
-        }
-
-        .login-doctor-btn {
-            background-color: var(--nhs-dark-blue); 
-            color: white !important;
-            border: 1px solid rgba(255,255,255,0.2);
-        }
-
-        .login-doctor-btn:hover {
-            background-color: #00225e; 
-            color: white !important;
-        }
-
         /* User Profile UI in Nav */
         .user-profile-info {
             display: none; 
@@ -189,6 +186,7 @@
             text-align: center;
             color: white;
             margin-bottom: 40px;
+            width: 100%;
         }
 
         .hero-section h1 {
@@ -272,6 +270,7 @@
             max-width: 1300px;
             margin: 0 auto 50px auto;
             padding: 0 20px;
+            width: 100%;
         }
 
         .grid-row {
@@ -362,6 +361,7 @@
             border-top: 8px solid var(--nhs-blue); 
             padding: 40px 20px 20px 20px; 
             margin-top: 40px; 
+            width: 100%;
         }
 
         .footer-content {
@@ -487,14 +487,8 @@
             </div>
             
             <div class="nav-actions" id="nav-auth-section">
-                <a href="login-patient.html" class="nav-cta login-patient-btn">
-                    <i class="fas fa-user"></i> دخول المرضى
-                </a>
-                <a href="login-doctor.html" class="nav-cta login-doctor-btn">
-                    <i class="fas fa-user-doctor"></i> دخول الأطباء
-                </a>
                 <a href="contact.html" class="nav-cta">
-                    <i class="fas fa-phone"></i> تواصل معنا
+                    <i class="fas fa-phone"></i> تواصل ويانا
                 </a>
             </div>
 
@@ -507,8 +501,7 @@
     </nav>
 
     <section class="hero-section">
-        <h1>احجز موعدك ويه أحسن دكاترة العراق</h1>
-        <p>ابحث، قارن، واحجز موعدك إلكترونياً بدون أي مكالمات هاتفية.</p>
+        <h1>دليل أطباء العراق – بحث سريع حسب التخصص</h1>
         
         <form class="search-box-container" id="search-form">
             
@@ -569,7 +562,6 @@
                     <option value="anbar">الانبار</option>
                     <option value="diwaniya">الديوانية</option>
                     <option value="kirkuk">كركوك</option>
-                    <option value="halabja">حلبجة</option>
                 </select>
             </div>
 
@@ -730,7 +722,7 @@
                 const { data: { user } } = await supabaseClient.auth.getUser();
 
                 if (user) {
-                    // إخفاء أزرار الدخول وإظهار اسم المستخدم
+                    // Hide generic auth section, show specific user profile
                     document.getElementById('nav-auth-section').style.display = 'none';
                     document.getElementById('user-info').style.display = 'flex';
                     
