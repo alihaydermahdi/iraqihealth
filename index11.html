@@ -7,6 +7,8 @@
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    
     <style>
         :root {
             --nhs-blue: #005eb8;
@@ -68,7 +70,7 @@
             top: 0;
             z-index: 1000;
             box-shadow: 0 4px 6px rgba(0,0,0,0.1); 
-            margin-bottom: 30px; 
+            margin-bottom: 0; 
         }
 
         .nav-content {
@@ -98,9 +100,10 @@
             border-bottom: 3px solid transparent; 
         }
 
+        /* REMOVED ORANGE HOVER COLOR - Changed to White/Dark Blue */
         .main-links a:hover, .main-links a.active { 
             background-color: var(--nhs-dark-blue);
-            border-bottom-color: #fb8500; 
+            border-bottom-color: var(--nhs-white); 
         }
 
         /* أزرار الإجراءات */
@@ -130,22 +133,35 @@
             box-shadow: 0 2px 5px rgba(0,0,0,0.2);
         }
 
-        /* --- أزرار تسجيل الدخول --- */
-        .login-patient-btn {
-            background-color: var(--nhs-light-grey);
-            color: var(--nhs-dark-blue) !important;
-            border: 1px solid var(--nhs-blue);
+        /* User Profile UI in Nav */
+        .user-profile-info {
+            display: none; 
+            align-items: center;
+            gap: 10px;
+            color: white;
+            font-weight: bold;
+        }
+        
+        .user-profile-info i {
+            font-size: 1.2rem;
+            color: var(--nhs-white);
         }
 
-        .login-doctor-btn {
-            background-color: #fb8500; /* Distinct orange for doctors */
+        .logout-btn {
+            background-color: #d32f2f;
             color: white !important;
+            padding: 6px 15px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            cursor: pointer;
+            text-decoration: none;
             border: none;
+            font-weight: bold;
+            transition: background-color 0.2s;
         }
 
-        .login-doctor-btn:hover {
-            background-color: #e07700;
-            color: white !important;
+        .logout-btn:hover {
+            background-color: #b71c1c;
         }
 
         /* --- Grid & Interactive Dropdowns --- */
@@ -201,7 +217,7 @@
             width: 100%;
             margin-bottom: 6px;
             animation: fadeIn 0.2s ease;
-            grid-column: 1 / -1; /* يضمن تمدد القائمة بعرض الصفحة بالكامل */
+            grid-column: 1 / -1; 
             border-radius: 6px;
         }
 
@@ -330,7 +346,10 @@
             .nav-content { flex-direction: column; padding: 0; }
             .main-links { width: 100%; justify-content: center; overflow-x: auto; }
             .main-links a { padding: 12px 10px; font-size: 0.85rem; border-bottom: none; }
+            
+            /* Cleaned up nav actions */
             .nav-actions { width: 100%; justify-content: center; padding: 10px; background-color: var(--nhs-dark-blue); flex-wrap: wrap; }
+            .user-profile-info { width: 100%; justify-content: center; padding: 10px; background-color: var(--nhs-dark-blue); flex-wrap: wrap; }
             
             .grid-row { grid-template-columns: repeat(2, 1fr); } 
             .mega-dropdown { grid-template-columns: 1fr; }
@@ -363,16 +382,16 @@
                 <a href="doctors.html"><i class="fas fa-user-doctor"></i> الأطباء والمراكز</a>
             </div>
             
-            <div class="nav-actions">
-                <a href="login-patient.html" class="nav-cta login-patient-btn">
-                    <i class="fas fa-user"></i> دخول المرضى
-                </a>
-                <a href="login-doctor.html" class="nav-cta login-doctor-btn">
-                    <i class="fas fa-user-doctor"></i> دخول الأطباء
-                </a>
+            <div class="nav-actions" id="nav-auth-section">
                 <a href="contact.html" class="nav-cta">
-                    <i class="fas fa-phone"></i> تواصل معنا
+                    <i class="fas fa-phone"></i> تواصل ويانا
                 </a>
+            </div>
+
+            <div class="user-profile-info" id="user-info">
+                <i class="fas fa-user-circle"></i>
+                <span>أهلاً، <span id="user-display-name">...</span></span>
+                <button onclick="handleLogout()" class="logout-btn"><i class="fas fa-sign-out-alt"></i> خروج</button>
             </div>
         </div>
     </nav>
@@ -512,6 +531,49 @@
     </footer>
 
     <script>
+        // 1. Initialize Supabase
+        const supabaseUrl = 'https://anptpomhhuxsxaeonhca.supabase.co';
+        const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFucHRwb21oaHV4c3hhZW9uaGNhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzIxMzU4OTYsImV4cCI6MjA4NzcxMTg5Nn0.7KGLqjcLRA2xzfOXdiDzINCVNhaOLBlj3sjJLBmYDiU';
+        const supabaseClient = window.supabase.createClient(supabaseUrl, supabaseKey);
+
+        // 2. Check User Status
+        async function checkUserStatus() {
+            try {
+                const { data: { user } } = await supabaseClient.auth.getUser();
+
+                if (user) {
+                    // Hide generic auth section, show specific user profile
+                    document.getElementById('nav-auth-section').style.display = 'none';
+                    document.getElementById('user-info').style.display = 'flex';
+                    
+                    const name = user.user_metadata.full_name || "مريضنا العزيز";
+                    document.getElementById('user-display-name').innerText = name;
+                }
+            } catch (error) {
+                console.error("Error checking auth status:", error);
+            }
+        }
+
+        // 3. Handle Logout
+        async function handleLogout() {
+            await supabaseClient.auth.signOut();
+            window.location.reload(); 
+        }
+
+        document.addEventListener('DOMContentLoaded', checkUserStatus);
+
+        // 4. Handle Search Form
+        document.getElementById('search-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const specialty = document.getElementById('search-specialty').value;
+            const city = document.getElementById('search-city').value;
+            const docName = document.getElementById('search-name').value;
+
+            // Logic to handle search routing will go here
+            window.location.href = 'search-results.html';
+        });
+
+        // 5. Original Dropdown Logic
         function toggleDrop(dropId, colorClass) {
             const drop = document.getElementById(dropId);
             const tile = document.querySelector('.' + colorClass);
@@ -519,34 +581,24 @@
             const bgColor = window.getComputedStyle(tile).backgroundColor;
             const link = drop.querySelector('.dynamic-link');
             
-            // ربط القائمة المنسدلة بصفحة القسم الفرعي المخصصة
             link.href = colorClass + '-diseases.html';
             
-            // --- التعديل الذكي لضبط مكان القائمة في الموبايل والكمبيوتر ---
             const gridRow = tile.closest('.grid-row');
-            
-            // نحصل على جميع المربعات داخل هذا الصف
             const tiles = Array.from(gridRow.children).filter(c => c.classList.contains('tile'));
             const index = tiles.indexOf(tile);
             
-            // تحديد عدد الأعمدة الفعلي بناءً على حجم الشاشة
-            let columns = 4; // الافتراضي للكمبيوتر
+            let columns = 4;
             if (window.innerWidth <= 768) {
-                columns = 2; // للموبايل
+                columns = 2; 
             } else if (window.innerWidth <= 1024) {
-                columns = 3; // للتابلت
+                columns = 3; 
             }
             
-            // حساب السطر الذي يقع فيه القسم المضغوط
             const rowIndex = Math.floor(index / columns);
-            
-            // إيجاد آخر قسم موجود في نفس هذا السطر لإدراج القائمة بعده
             const lastIndexInRow = Math.min((rowIndex + 1) * columns - 1, tiles.length - 1);
             const insertAfterNode = tiles[lastIndexInRow];
             
-            // إدخال القائمة المنسدلة مباشرة بعد آخر قسم في هذا السطر
             insertAfterNode.insertAdjacentElement('afterend', drop);
-            // -------------------------------------------------------------
 
             document.querySelectorAll('.mega-dropdown').forEach(d => {
                 if (d.id !== dropId) d.style.display = 'none';
