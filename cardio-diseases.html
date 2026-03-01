@@ -7,6 +7,8 @@
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    
     <style>
         :root {
             --nhs-blue: #005eb8;
@@ -23,6 +25,9 @@
             color: var(--nhs-text);
             line-height: 1.6;
             -webkit-font-smoothing: antialiased;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
         }
 
         /* --- الهيدر --- */
@@ -37,10 +42,19 @@
         .nav-content { max-width: 1300px; margin: 0 auto; padding: 0 20px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; }
         .main-links { display: flex; }
         .main-links a { color: white; text-decoration: none; padding: 15px 20px; font-weight: 600; font-size: 0.95rem; transition: all 0.2s; display: flex; align-items: center; gap: 8px; border-bottom: 3px solid transparent; }
-        .main-links a:hover, .main-links a.active { background-color: var(--nhs-dark-blue); border-bottom-color: #fb8500; }
+        
+        /* Updated Hover (No Orange) */
+        .main-links a:hover, .main-links a.active { background-color: var(--nhs-dark-blue); border-bottom-color: var(--nhs-white); }
+        
         .nav-actions { display: flex; align-items: center; gap: 15px; }
         .nav-cta { background-color: var(--nhs-white); color: var(--nhs-blue) !important; padding: 8px 20px; border-radius: 20px; font-weight: 800; font-size: 0.9rem; text-decoration: none; transition: all 0.2s; display: flex; align-items: center; gap: 6px; }
         .nav-cta:hover { background-color: #f0f4f5; transform: translateY(-1px); box-shadow: 0 2px 5px rgba(0,0,0,0.2); }
+
+        /* User Profile UI in Nav */
+        .user-profile-info { display: none; align-items: center; gap: 10px; color: white; font-weight: bold; }
+        .user-profile-info i { font-size: 1.2rem; color: var(--nhs-white); }
+        .logout-btn { background-color: #d32f2f; color: white !important; padding: 6px 15px; border-radius: 20px; font-size: 0.85rem; cursor: pointer; text-decoration: none; border: none; font-weight: bold; transition: background-color 0.2s; }
+        .logout-btn:hover { background-color: #b71c1c; }
 
         /* --- شريط العنوان الداخلي --- */
         .page-header { max-width: 1300px; margin: 15px auto 20px auto; padding: 0 20px; display: flex; align-items: center; gap: 15px; }
@@ -90,7 +104,7 @@
         }
 
         /* --- الفوتر --- */
-        footer { background-color: #e8edee; border-top: 8px solid var(--nhs-blue); padding: 40px 20px 20px 20px; margin-top: 40px; }
+        footer { background-color: #e8edee; border-top: 8px solid var(--nhs-blue); padding: 40px 20px 20px 20px; margin-top: auto; }
         .footer-content { max-width: 1300px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; margin-bottom: 25px; }
         .footer-section h4 { color: var(--nhs-dark-blue); font-size: 1.05rem; font-weight: 800; margin-top: 0; margin-bottom: 15px; position: relative; padding-bottom: 10px; }
         .footer-section h4::after { content: ''; position: absolute; bottom: 0; right: 0; width: 40px; height: 3px; background-color: var(--nhs-blue); border-radius: 2px; }
@@ -110,6 +124,7 @@
             .main-links { width: 100%; justify-content: center; overflow-x: auto; }
             .main-links a { padding: 12px 10px; font-size: 0.85rem; border-bottom: none; }
             .nav-actions { width: 100%; justify-content: center; padding: 10px; background-color: var(--nhs-dark-blue); }
+            .user-profile-info { width: 100%; justify-content: center; padding: 10px; background-color: var(--nhs-dark-blue); }
             .site-logo { max-height: 45px; }
             .page-header { flex-direction: column; align-items: flex-start; gap: 12px; margin-top: 10px; margin-bottom: 15px; }
             .page-header h1 { font-size: 1.3rem; }
@@ -139,8 +154,17 @@
                 <a href="index.html" class="active"><i class="fas fa-stethoscope"></i> دليل الأمراض</a>
                 <a href="doctors.html"><i class="fas fa-user-doctor"></i> الأطباء والمراكز</a>
             </div>
-            <div class="nav-actions">
-                <a href="contact.html" class="nav-cta"><i class="fas fa-phone"></i> تواصل معنا</a>
+            
+            <div class="nav-actions" id="nav-auth-section">
+                <a href="contact.html" class="nav-cta">
+                    <i class="fas fa-phone"></i> تواصل ويانا
+                </a>
+            </div>
+
+            <div class="user-profile-info" id="user-info">
+                <i class="fas fa-user-circle"></i>
+                <span>أهلاً، <span id="user-display-name">...</span></span>
+                <button onclick="handleLogout()" class="logout-btn"><i class="fas fa-sign-out-alt"></i> خروج</button>
             </div>
         </div>
     </nav>
@@ -214,12 +238,44 @@
                     <li><a href="https://www.tiktok.com/@kashfeya.com" target="_blank" rel="noopener noreferrer"><i class="fab fa-tiktok"></i> تيكتوك (TikTok)</a></li>
                 </ul>
             </div>
-        </div> 
+        </div>
         
         <div class="copyright-bar">
             &copy; 2026 جميع الحقوق محفوظة لـ كشفيّة
         </div>
     </footer>
+
+    <script>
+        // 1. Initialize Supabase
+        const supabaseUrl = 'https://anptpomhhuxsxaeonhca.supabase.co';
+        const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFucHRwb21oaHV4c3hhZW9uaGNhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzIxMzU4OTYsImV4cCI6MjA4NzcxMTg5Nn0.7KGLqjcLRA2xzfOXdiDzINCVNhaOLBlj3sjJLBmYDiU';
+        const supabaseClient = window.supabase.createClient(supabaseUrl, supabaseKey);
+
+        // 2. Check User Status
+        async function checkUserStatus() {
+            try {
+                const { data: { user } } = await supabaseClient.auth.getUser();
+
+                if (user) {
+                    document.getElementById('nav-auth-section').style.display = 'none';
+                    document.getElementById('user-info').style.display = 'flex';
+                    
+                    const name = user.user_metadata.full_name || "مريضنا العزيز";
+                    document.getElementById('user-display-name').innerText = name;
+                }
+            } catch (error) {
+                console.error("Error checking auth status:", error);
+            }
+        }
+
+        // 3. Handle Logout
+        async function handleLogout() {
+            await supabaseClient.auth.signOut();
+            window.location.reload(); 
+        }
+
+        document.addEventListener('DOMContentLoaded', checkUserStatus);
+    </script>
 
 </body>
 </html>
