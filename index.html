@@ -2,173 +2,276 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>كشفيّة | دليلك الطبي</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>كشفيّة | المساعد الطبي الذكي</title>
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     
     <style>
+        /* --- 1. GLOBAL RESET & FIXES (Fixes the white column issue) --- */
+        *, *::before, *::after {
+            box-sizing: border-box; /* Crucial: Includes padding in width calculation */
+            -webkit-tap-highlight-color: transparent;
+        }
+
         :root {
             --nhs-blue: #005eb8;
             --nhs-dark-blue: #003087;
             --nhs-light-grey: #f0f4f5;
             --nhs-text: #212b32;
             --nhs-white: #ffffff;
+            --chat-bg: #f8fafc;
+            --user-msg-bg: #005eb8;
+            --bot-msg-bg: #ffffff;
+            --warning-red: #d52828;
+        }
+
+        html, body {
+            width: 100%;
+            overflow-x: hidden; /* Prevents horizontal scrolling/white bars */
+            margin: 0;
+            padding: 0;
         }
 
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            margin: 0;
             background-color: var(--nhs-light-grey);
             color: var(--nhs-text);
             line-height: 1.6;
-            -webkit-font-smoothing: antialiased;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
         }
 
-        /* --- Professional Header Section --- */
-        .nhs-header {
-            background-color: var(--nhs-white);
+        /* --- Header & Nav --- */
+        .nhs-header { 
+            background-color: var(--nhs-white); 
             border-bottom: 8px solid var(--nhs-blue); 
-            padding: 12px 0;
+            padding: 12px 0; 
+            width: 100%;
         }
+        .header-content { 
+            max-width: 1300px; 
+            margin: 0 auto; 
+            padding: 0 20px; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+        }
+        .logo-link { display: inline-flex; align-items: center; text-decoration: none; gap: 15px; }
+        .site-logo { max-height: 55px; width: auto; object-fit: contain; }
+        .header-moto { font-weight: 700; color: var(--nhs-blue); font-size: 1.1rem; }
 
-        .header-content {
-            max-width: 1300px;
-            margin: 0 auto;
-            padding: 0 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo-link {
-            display: inline-flex;
-            align-items: center;
-            text-decoration: none;
-            gap: 15px; 
-        }
-
-        .site-logo {
-            max-height: 55px;
-            width: auto;
-            object-fit: contain;
-        }
-        
-        .header-moto {
-            font-weight: 700; 
-            color: var(--nhs-blue); 
-            font-size: 1.1rem;
-        }
-
-        /* --- Professional Blue Navigation --- */
-        .nhs-nav {
-            background-color: var(--nhs-blue);
-            color: white;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
+        .nhs-nav { 
+            background-color: var(--nhs-blue); 
+            color: white; 
+            position: sticky; 
+            top: 0; 
+            z-index: 1000; 
             box-shadow: 0 4px 6px rgba(0,0,0,0.1); 
-            margin-bottom: 0; 
+            width: 100%;
         }
-
-        .nav-content {
-            max-width: 1300px;
-            margin: 0 auto;
-            padding: 0 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
+        .nav-content { 
+            max-width: 1300px; 
+            margin: 0 auto; 
+            padding: 0 20px; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            flex-wrap: wrap; 
         }
-
-        .main-links {
-            display: flex;
-        }
-
-        .main-links a {
-            color: white;
-            text-decoration: none;
-            padding: 15px 20px;
-            font-weight: 600;
-            font-size: 0.95rem;
-            transition: all 0.2s;
-            display: flex;
-            align-items: center;
-            gap: 8px;
+        .main-links { display: flex; }
+        .main-links a { 
+            color: white; 
+            text-decoration: none; 
+            padding: 15px 20px; 
+            font-weight: 600; 
+            font-size: 0.95rem; 
+            transition: all 0.2s; 
+            display: flex; 
+            align-items: center; 
+            gap: 8px; 
             border-bottom: 3px solid transparent; 
         }
+        /* No Orange Hover */
+        .main-links a:hover, .main-links a.active { background-color: var(--nhs-dark-blue); border-bottom-color: var(--nhs-white); }
+        
+        .nav-actions { display: flex; align-items: center; gap: 15px; }
+        .nav-cta { background-color: var(--nhs-white); color: var(--nhs-blue) !important; padding: 8px 20px; border-radius: 20px; font-weight: 800; font-size: 0.9rem; text-decoration: none; transition: all 0.2s; display: flex; align-items: center; gap: 6px; }
+        .nav-cta:hover { background-color: #f0f4f5; transform: translateY(-1px); box-shadow: 0 2px 5px rgba(0,0,0,0.2); }
+        
+        .user-profile-info { display: none; align-items: center; gap: 10px; color: white; font-weight: bold; }
+        .logout-btn { background-color: #d32f2f; color: white !important; padding: 6px 15px; border-radius: 20px; font-size: 0.85rem; cursor: pointer; text-decoration: none; border: none; font-weight: bold; }
 
-        /* REMOVED ORANGE HOVER COLOR - Changed to White/Dark Blue */
-        .main-links a:hover, .main-links a.active { 
-            background-color: var(--nhs-dark-blue);
-            border-bottom-color: var(--nhs-white); 
+        /* --- AI CHAT SECTION --- */
+        .ai-section {
+            background-image: linear-gradient(135deg, var(--nhs-blue) 0%, var(--nhs-dark-blue) 100%);
+            padding: 40px 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 600px;
+            width: 100%; /* Ensure full width */
         }
 
-        /* أزرار الإجراءات */
-        .nav-actions {
+        .chat-container {
+            background-color: white;
+            width: 100%;
+            max-width: 800px;
+            height: 600px;
+            border-radius: 20px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            border: 4px solid rgba(255,255,255,0.1);
+        }
+
+        .chat-header {
+            background-color: white;
+            padding: 15px 20px;
+            border-bottom: 1px solid #e2e8f0;
             display: flex;
             align-items: center;
             gap: 15px;
         }
 
-        .nav-cta {
-            background-color: var(--nhs-white);
-            color: var(--nhs-blue) !important;
-            padding: 8px 20px;
-            border-radius: 20px; 
-            font-weight: 800;
-            font-size: 0.9rem;
-            text-decoration: none;
-            transition: all 0.2s;
+        .ai-avatar {
+            width: 50px; height: 50px;
+            background: linear-gradient(45deg, #00c6ff, #0072ff);
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            color: white; font-size: 1.5rem;
+            box-shadow: 0 4px 10px rgba(0,114,255,0.3);
+            flex-shrink: 0;
+        }
+
+        .chat-header-info h2 { margin: 0; font-size: 1.2rem; color: var(--nhs-dark-blue); }
+        .chat-header-info span { font-size: 0.85rem; color: #007f3b; font-weight: bold; display: flex; align-items: center; gap: 5px; }
+        .dot { width: 8px; height: 8px; background-color: #007f3b; border-radius: 50%; animation: blink 1.5s infinite; }
+        @keyframes blink { 0% { opacity: 0.4; } 50% { opacity: 1; } 100% { opacity: 0.4; } }
+
+        /* Messages Area */
+        .chat-messages {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+            background-color: var(--chat-bg);
             display: flex;
-            align-items: center;
-            gap: 6px;
+            flex-direction: column;
+            gap: 20px;
         }
 
-        .nav-cta:hover {
-            background-color: #f0f4f5;
-            transform: translateY(-1px);
-            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        .message {
+            max-width: 85%;
+            padding: 15px 20px;
+            border-radius: 18px;
+            font-size: 1rem;
+            line-height: 1.6;
+            position: relative;
+            animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
-        /* User Profile UI in Nav */
-        .user-profile-info {
-            display: none; 
-            align-items: center;
-            gap: 10px;
+        @keyframes popIn { from { transform: scale(0.9); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+
+        .bot-msg {
+            background-color: var(--bot-msg-bg);
+            color: var(--nhs-text);
+            border-bottom-right-radius: 2px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            align-self: flex-start;
+            border: 1px solid #e2e8f0;
+        }
+
+        .user-msg {
+            background-color: var(--user-msg-bg);
             color: white;
-            font-weight: bold;
-        }
-        
-        .user-profile-info i {
-            font-size: 1.2rem;
-            color: var(--nhs-white);
+            border-bottom-left-radius: 2px;
+            align-self: flex-end;
+            box-shadow: 0 4px 15px rgba(0,94,184,0.3);
         }
 
-        .logout-btn {
-            background-color: #d32f2f;
-            color: white !important;
-            padding: 6px 15px;
+        /* Medical Info Box Styling */
+        .med-info-box { margin-top: 10px; border-top: 1px solid #eee; padding-top: 10px; }
+        .med-title { font-weight: bold; color: var(--nhs-blue); display: flex; align-items: center; gap: 8px; margin-bottom: 5px; }
+        .med-warning { color: var(--warning-red); font-weight: bold; margin-bottom: 8px; display: flex; align-items: center; gap: 5px; background: #fff5f5; padding: 8px; border-radius: 5px; border-right: 3px solid var(--warning-red); }
+        .med-advice ul { margin: 5px 0; padding-right: 20px; }
+        .med-source { font-size: 0.75rem; color: #718096; margin-top: 8px; text-align: left; display: block; font-style: italic; }
+
+        /* Typing Indicator */
+        .typing-indicator {
+            align-self: flex-start;
+            background-color: white;
+            padding: 12px 20px;
             border-radius: 20px;
-            font-size: 0.85rem;
-            cursor: pointer;
-            text-decoration: none;
-            border: none;
-            font-weight: bold;
-            transition: background-color 0.2s;
+            display: none;
+            gap: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+        .typing-dot { width: 8px; height: 8px; background-color: #a0aec0; border-radius: 50%; animation: bounce 1.4s infinite ease-in-out both; }
+        .typing-dot:nth-child(1) { animation-delay: -0.32s; }
+        .typing-dot:nth-child(2) { animation-delay: -0.16s; }
+        @keyframes bounce { 0%, 80%, 100% { transform: scale(0); } 40% { transform: scale(1); } }
+
+        /* Input Area */
+        .chat-input-area {
+            background-color: white;
+            padding: 20px;
+            border-top: 1px solid #e2e8f0;
+            display: flex;
+            gap: 15px;
         }
 
-        .logout-btn:hover {
-            background-color: #b71c1c;
+        .chat-input {
+            flex: 1;
+            padding: 15px 25px;
+            border: 2px solid #e2e8f0;
+            border-radius: 30px;
+            font-size: 1rem;
+            font-family: inherit;
+            outline: none;
+            transition: border-color 0.2s;
         }
+        .chat-input:focus { border-color: var(--nhs-blue); }
+
+        .send-btn {
+            background-color: var(--nhs-blue);
+            color: white;
+            border: none;
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.3rem;
+            transition: transform 0.2s, background-color 0.2s;
+            flex-shrink: 0;
+        }
+        .send-btn:hover { background-color: var(--nhs-dark-blue); transform: scale(1.05); }
+
+        /* Recommendation Action Button */
+        .action-btn {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 10px 25px;
+            background-color: #007f3b;
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: bold;
+            font-size: 0.95rem;
+            transition: 0.2s;
+            box-shadow: 0 4px 6px rgba(0,127,59,0.2);
+        }
+        .action-btn:hover { background-color: #00602b; transform: translateY(-2px); }
 
         /* --- Grid & Interactive Dropdowns --- */
         .clinical-grid {
             max-width: 1300px;
-            margin: 30px auto 50px auto;
+            margin: 0 auto 50px auto;
             padding: 0 20px;
+            width: 100%;
         }
 
         .grid-row {
@@ -200,144 +303,28 @@
             box-shadow: 0 4px 8px rgba(0,0,0,0.15);
         }
 
-        .tile i { 
-            font-size: 1.6rem; 
-            margin-bottom: 8px; 
-        }
+        .tile i { font-size: 1.6rem; margin-bottom: 8px; }
+        .tile span { font-weight: 700; font-size: 1.15rem; line-height: 1.3; }
 
-        .tile span { 
-            font-weight: 700; 
-            font-size: 1.15rem; 
-            line-height: 1.3;
-        }
-
-        .mega-dropdown {
-            display: none;
-            grid-template-columns: 1fr 1fr;
-            width: 100%;
-            margin-bottom: 6px;
-            animation: fadeIn 0.2s ease;
-            grid-column: 1 / -1; 
-            border-radius: 6px;
-        }
-
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-
-        .drop-section {
-            padding: 15px;
-            text-align: center;
-            color: white;
-            font-weight: bold;
-            font-size: 1.1rem;
-            border: 1px solid rgba(255,255,255,0.15);
-        }
-
-        .drop-section a { color: white; text-decoration: none; display: block; width: 100%; height: 100%; }
-        .drop-section:hover { background: rgba(0,0,0,0.1); }
-
-        /* --- الألوان المسطحة --- */
-        .neuro     { background-color: #7cb342; } 
-        .eye       { background-color: #d32f2f; } 
-        .ent       { background-color: #d32f2f; } 
-        .resp      { background-color: #1976d2; } 
-        .cardio    { background-color: #afb42b; } 
-        .diabetes  { background-color: #0288d1; } 
-        .gastro    { background-color: #388e3c; } 
-        .renal     { background-color: #1565c0; } 
-        .urology   { background-color: #1565c0; } 
-        .women     { background-color: #8e24aa; } 
-        .paeds     { background-color: #4a148c; } 
-        .derm      { background-color: #1b5e20; } 
-        .msk       { background-color: #1b5e20; } 
-        .cancer    { background-color: #b71c1c; } 
-        .mental    { background-color: #7cb342; } 
+        /* Colors */
+        .neuro { background-color: #7cb342; } .eye { background-color: #d32f2f; } .ent { background-color: #d32f2f; }
+        .resp { background-color: #1976d2; } .cardio { background-color: #afb42b; } .diabetes { background-color: #0288d1; }
+        .gastro { background-color: #388e3c; } .renal { background-color: #1565c0; } .urology { background-color: #1565c0; }
+        .women { background-color: #8e24aa; } .paeds { background-color: #4a148c; } .derm { background-color: #1b5e20; }
+        .msk { background-color: #1b5e20; } .cancer { background-color: #b71c1c; } .mental { background-color: #7cb342; }
         .nutrition { background-color: #f57c00; } 
 
-        /* --- Elegant Footer --- */
-        footer {
-            background-color: #e8edee; 
-            border-top: 8px solid var(--nhs-blue); 
-            padding: 40px 20px 20px 20px; 
-            margin-top: 40px; 
-        }
-
-        .footer-content {
-            max-width: 1300px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); 
-            gap: 30px; 
-            margin-bottom: 25px; 
-        }
-
-        .footer-section h4 { 
-            color: var(--nhs-dark-blue); 
-            font-size: 1.05rem; 
-            font-weight: 800;
-            margin-top: 0;
-            margin-bottom: 15px; 
-            position: relative;
-            padding-bottom: 10px;
-        }
-
-        .footer-section h4::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            right: 0; 
-            width: 40px;
-            height: 3px;
-            background-color: var(--nhs-blue);
-            border-radius: 2px;
-        }
-
-        .footer-section ul { 
-            list-style: none; 
-            padding: 0; 
-            margin: 0;
-        }
-
-        .footer-section ul li { 
-            margin-bottom: 10px; 
-            font-size: 0.85rem; 
-            color: #4a5568; 
-            display: flex;
-            align-items: center;
-        }
-
-        .footer-section ul li a { 
-            color: #4a5568; 
-            text-decoration: none; 
-            transition: all 0.3s ease;
-        }
-
-        .footer-section ul li a:hover { 
-            color: var(--nhs-blue); 
-            padding-right: 6px; 
-        }
-
-        .footer-section i {
-            color: var(--nhs-blue);
-            width: 20px; 
-            font-size: 0.95rem;
-            margin-left: 8px; 
-        }
-
-        .copyright-bar {
-            text-align: center; 
-            border-top: 1px solid #d1d5d8; 
-            padding-top: 15px; 
-            font-size: 0.8rem; 
-            font-weight: 600;
-            color: #718096;
-            letter-spacing: 0.5px;
-        }
-
-        /* --- Responsive Queries --- */
-        @media (max-width: 1024px) {
-            .grid-row { grid-template-columns: repeat(3, 1fr); }
-            .footer-content { gap: 25px; }
-        }
+        /* --- Footer --- */
+        footer { background-color: #e8edee; border-top: 8px solid var(--nhs-blue); padding: 40px 20px 20px 20px; margin-top: auto; }
+        .footer-content { max-width: 1300px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; margin-bottom: 25px; }
+        .footer-section h4 { color: var(--nhs-dark-blue); font-size: 1.05rem; font-weight: 800; margin-top: 0; margin-bottom: 15px; position: relative; padding-bottom: 10px; }
+        .footer-section h4::after { content: ''; position: absolute; bottom: 0; right: 0; width: 40px; height: 3px; background-color: var(--nhs-blue); border-radius: 2px; }
+        .footer-section ul { list-style: none; padding: 0; margin: 0; }
+        .footer-section ul li { margin-bottom: 10px; font-size: 0.85rem; color: #4a5568; display: flex; align-items: center; }
+        .footer-section ul li a { color: #4a5568; text-decoration: none; transition: all 0.3s ease; }
+        .footer-section ul li a:hover { color: var(--nhs-blue); padding-right: 6px; }
+        .footer-section i { color: var(--nhs-blue); width: 20px; font-size: 0.95rem; margin-left: 8px; }
+        .copyright-bar { text-align: center; border-top: 1px solid #d1d5d8; padding-top: 15px; font-size: 0.8rem; font-weight: 600; color: #718096; }
 
         @media (max-width: 768px) {
             .header-content { flex-direction: column; text-align: center; gap: 8px; }
@@ -345,18 +332,19 @@
             
             .nav-content { flex-direction: column; padding: 0; }
             .main-links { width: 100%; justify-content: center; overflow-x: auto; }
-            .main-links a { padding: 12px 10px; font-size: 0.85rem; border-bottom: none; }
+            .main-links a { padding: 12px 10px; font-size: 0.85rem; border-bottom: none; width: auto; flex-shrink: 0; }
             
-            /* Cleaned up nav actions */
             .nav-actions { width: 100%; justify-content: center; padding: 10px; background-color: var(--nhs-dark-blue); flex-wrap: wrap; }
             .user-profile-info { width: 100%; justify-content: center; padding: 10px; background-color: var(--nhs-dark-blue); flex-wrap: wrap; }
             
-            .grid-row { grid-template-columns: repeat(2, 1fr); } 
-            .mega-dropdown { grid-template-columns: 1fr; }
-            .site-logo { max-height: 45px; }
+            .ai-section { padding: 10px; min-height: 100vh; align-items: flex-start; padding-top: 20px; }
+            .chat-container { height: 85vh; border-radius: 15px; border: none; }
+            .chat-header { padding: 10px 15px; }
+            
+            .grid-row { grid-template-columns: repeat(2, 1fr); gap: 8px; } 
             .tile { min-height: 85px; padding: 12px 5px; }
             .tile i { font-size: 1.4rem; margin-bottom: 5px; }
-            .tile span { font-size: 0.95rem; } 
+            .tile span { font-size: 0.9rem; } 
             
             footer { padding: 30px 20px 15px 20px; }
             .footer-content { gap: 20px; margin-bottom: 20px; }
@@ -384,7 +372,7 @@
             
             <div class="nav-actions" id="nav-auth-section">
                 <a href="contact.html" class="nav-cta">
-                    <i class="fas fa-phone"></i> تواصل ويانا
+                    <i class="fas fa-phone"></i> تواصل معنا
                 </a>
             </div>
 
@@ -396,100 +384,64 @@
         </div>
     </nav>
 
+    <section class="ai-section">
+        <div class="chat-container">
+            <div class="chat-header">
+                <div class="ai-avatar"><i class="fas fa-user-md"></i></div>
+                <div class="chat-header-info">
+                    <h2>المساعد الطبي (كشفيّة)</h2>
+                    <span><div class="dot"></div> متصل الآن | مدعوم بالمصادر الطبية</span>
+                </div>
+            </div>
+
+            <div class="chat-messages" id="chat-messages">
+                <div class="message bot-msg">
+                    <strong>هلا بيك! 🩺</strong><br>
+                    آني مساعدك الطبي الذكي. أكدر اساعدك بمعلومات طبية موثوقة من المصادر العالمية (مثل NHS و NICE) بس بلهجتنا.<br><br>
+                    <strong>بشنو دتحس اليوم؟</strong> (مثلاً: راسي ديأذيني، عندي ألم ببطني، أسناني...)
+                </div>
+                
+                <div class="typing-indicator" id="typing-indicator">
+                    <div class="typing-dot"></div><div class="typing-dot"></div><div class="typing-dot"></div>
+                </div>
+            </div>
+
+            <form class="chat-input-area" id="chat-form">
+                <input type="text" id="user-input" class="chat-input" placeholder="اكتب اعراضك هنا..." autocomplete="off">
+                <button type="submit" class="send-btn"><i class="fas fa-paper-plane"></i></button>
+            </form>
+        </div>
+    </section>
+
     <main class="clinical-grid">
+        <h3 style="text-align:center; color:var(--nhs-dark-blue); margin-bottom:20px; width:100%;">أو تصفح التخصصات مباشرة</h3>
+        <div class="grid-row">
+            <div class="tile neuro" onclick="window.location.href='search-results.html?specialty=neurology'"><i class="fas fa-brain"></i><span>مخ وأعصاب</span></div>
+            <div class="tile cardio" onclick="window.location.href='search-results.html?specialty=cardiology'"><i class="fas fa-heart-pulse"></i><span>قلب وأوعية</span></div>
+            <div class="tile ent" onclick="window.location.href='search-results.html?specialty=ent'"><i class="fas fa-ear-listen"></i><span>أنف وأذن</span></div>
+            <div class="tile eye" onclick="window.location.href='search-results.html?specialty=ophthalmology'"><i class="fas fa-eye"></i><span>عيون</span></div>
+        </div>
         
         <div class="grid-row">
-            <div class="tile neuro" onclick="toggleDrop('drop1', 'neuro')">
-                <i class="fas fa-brain"></i>
-                <span>أمراض المخ والأعصاب</span>
-            </div>
-            <div class="tile ent" onclick="toggleDrop('drop1', 'ent')">
-                <i class="fas fa-ear-listen"></i>
-                <span>الأنف والأذن والحنجرة</span>
-            </div>
-            <div class="tile resp" onclick="toggleDrop('drop1', 'resp')">
-                <i class="fas fa-lungs"></i>
-                <span>أمراض الجهاز التنفسي</span>
-            </div>
-            <div class="tile cardio" onclick="toggleDrop('drop1', 'cardio')">
-                <i class="fas fa-heart-pulse"></i>
-                <span>أمراض القلب والأوعية</span>
-            </div>
-            <div id="drop1" class="mega-dropdown">
-                <div class="drop-section"><a href="#" class="dynamic-link">الأمراض الشائعة</a></div>
-                <div class="drop-section"><a href="#">أطباء الاختصاص</a></div>
-            </div>
+            <div class="tile diabetes" onclick="window.location.href='search-results.html?specialty=diabetes'"><i class="fas fa-syringe"></i><span>غدد وسكري</span></div>
+            <div class="tile gastro" onclick="window.location.href='search-results.html?specialty=gastro'"><i class="fas fa-pills"></i><span>باطنية وهضمية</span></div>
+            <div class="tile renal" onclick="window.location.href='search-results.html?specialty=renal'"><i class="fas fa-droplet"></i><span>كلى ومسالك</span></div>
+            <div class="tile women" onclick="window.location.href='search-results.html?specialty=women'"><i class="fas fa-person-pregnant"></i><span>نسائية وتوليد</span></div>
         </div>
 
         <div class="grid-row">
-            <div class="tile diabetes" onclick="toggleDrop('drop2', 'diabetes')">
-                <i class="fas fa-syringe"></i>
-                <span>السكري والغدد الصماء</span>
-            </div>
-            <div class="tile gastro" onclick="toggleDrop('drop2', 'gastro')">
-                <i class="fas fa-pills"></i>
-                <span>الجهاز الهضمي والكبد</span>
-            </div>
-            <div class="tile renal" onclick="toggleDrop('drop2', 'renal')">
-                <i class="fas fa-droplet"></i>
-                <span>أمراض الكلى والمسالك</span>
-            </div>
-            <div class="tile women" onclick="toggleDrop('drop2', 'women')">
-                <i class="fas fa-person-pregnant"></i>
-                <span>النسائية والتوليد</span>
-            </div>
-            <div id="drop2" class="mega-dropdown">
-                <div class="drop-section"><a href="#" class="dynamic-link">الأمراض الشائعة</a></div>
-                <div class="drop-section"><a href="#">أطباء الاختصاص</a></div>
-            </div>
+            <div class="tile paeds" onclick="window.location.href='search-results.html?specialty=paeds'"><i class="fas fa-child-reaching"></i><span>أطفال</span></div>
+            <div class="tile derm" onclick="window.location.href='search-results.html?specialty=derm'"><i class="fas fa-hand-sparkles"></i><span>جلدية وتجميل</span></div>
+            <div class="tile msk" onclick="window.location.href='search-results.html?specialty=msk'"><i class="fas fa-bone"></i><span>كسور ومفاصل</span></div>
+            <div class="tile cancer" onclick="window.location.href='search-results.html?specialty=cancer'"><i class="fas fa-ribbon"></i><span>أورام</span></div>
         </div>
 
         <div class="grid-row">
-            <div class="tile paeds" onclick="toggleDrop('drop3', 'paeds')">
-                <i class="fas fa-child-reaching"></i>
-                <span>طب الأطفال والخدج</span>
-            </div>
-            <div class="tile derm" onclick="toggleDrop('drop3', 'derm')">
-                <i class="fas fa-hand-sparkles"></i>
-                <span>الأمراض الجلدية</span>
-            </div>
-            <div class="tile msk" onclick="toggleDrop('drop3', 'msk')">
-                <i class="fas fa-bone"></i>
-                <span>الكسور والعظام والروماتيزم</span>
-            </div>
-            <div class="tile cancer" onclick="toggleDrop('drop3', 'cancer')">
-                <i class="fas fa-ribbon"></i>
-                <span>أمراض الدم والأورام</span>
-            </div>
-            <div id="drop3" class="mega-dropdown">
-                <div class="drop-section"><a href="#" class="dynamic-link">الأمراض الشائعة</a></div>
-                <div class="drop-section"><a href="#">أطباء الاختصاص</a></div>
-            </div>
+            <div class="tile mental" onclick="window.location.href='search-results.html?specialty=mental'"><i class="fas fa-hand-holding-heart"></i><span>صحة نفسية</span></div>
+            <div class="tile nutrition" onclick="window.location.href='search-results.html?specialty=nutrition'"><i class="fas fa-weight-scale"></i><span>تغذية وسمنة</span></div>
+            <div class="tile urology" onclick="window.location.href='search-results.html?specialty=urology'"><i class="fas fa-mars"></i><span>ذكورة وعقم</span></div>
+            <div class="tile resp" onclick="window.location.href='search-results.html?specialty=resp'"><i class="fas fa-lungs"></i><span>جهاز تنفسي</span></div>
         </div>
-
-        <div class="grid-row">
-            <div class="tile eye" onclick="toggleDrop('drop4', 'eye')">
-                <i class="fas fa-eye"></i>
-                <span>طب وجراحة العيون</span>
-            </div>
-            <div class="tile mental" onclick="toggleDrop('drop4', 'mental')">
-                <i class="fas fa-hand-holding-heart"></i>
-                <span>الصحة النفسية</span>
-            </div>
-            <div class="tile nutrition" onclick="toggleDrop('drop4', 'nutrition')">
-                <i class="fas fa-weight-scale"></i>
-                <span>التغذية و السمنة</span>
-            </div>
-            <div class="tile urology" onclick="toggleDrop('drop4', 'urology')">
-                <i class="fas fa-mars"></i>
-                <span>الذكورة والعقم</span>
-            </div>
-            <div id="drop4" class="mega-dropdown">
-                <div class="drop-section"><a href="#" class="dynamic-link">الأمراض الشائعة</a></div>
-                <div class="drop-section"><a href="#">أطباء الاختصاص</a></div>
-            </div>
-        </div>
-
     </main>
 
     <footer>
@@ -531,88 +483,166 @@
     </footer>
 
     <script>
-        // 1. Initialize Supabase
+        // 1. Supabase & Auth Logic
         const supabaseUrl = 'https://anptpomhhuxsxaeonhca.supabase.co';
         const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFucHRwb21oaHV4c3hhZW9uaGNhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzIxMzU4OTYsImV4cCI6MjA4NzcxMTg5Nn0.7KGLqjcLRA2xzfOXdiDzINCVNhaOLBlj3sjJLBmYDiU';
         const supabaseClient = window.supabase.createClient(supabaseUrl, supabaseKey);
 
-        // 2. Check User Status
         async function checkUserStatus() {
-            try {
-                const { data: { user } } = await supabaseClient.auth.getUser();
-
-                if (user) {
-                    // Hide generic auth section, show specific user profile
-                    document.getElementById('nav-auth-section').style.display = 'none';
-                    document.getElementById('user-info').style.display = 'flex';
-                    
-                    const name = user.user_metadata.full_name || "مريضنا العزيز";
-                    document.getElementById('user-display-name').innerText = name;
-                }
-            } catch (error) {
-                console.error("Error checking auth status:", error);
+            const { data: { user } } = await supabaseClient.auth.getUser();
+            if (user) {
+                document.getElementById('nav-auth-section').style.display = 'none';
+                document.getElementById('user-info').style.display = 'flex';
+                document.getElementById('user-display-name').innerText = user.user_metadata.full_name || "المريض";
             }
         }
-
-        // 3. Handle Logout
-        async function handleLogout() {
-            await supabaseClient.auth.signOut();
-            window.location.reload(); 
-        }
-
+        async function handleLogout() { await supabaseClient.auth.signOut(); window.location.reload(); }
         document.addEventListener('DOMContentLoaded', checkUserStatus);
 
-        // 4. Handle Search Form
-        document.getElementById('search-form').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const specialty = document.getElementById('search-specialty').value;
-            const city = document.getElementById('search-city').value;
-            const docName = document.getElementById('search-name').value;
+        // 2. --- ADVANCED MEDICAL CHAT LOGIC ---
+        const chatForm = document.getElementById('chat-form');
+        const chatInput = document.getElementById('user-input');
+        const messagesBox = document.getElementById('chat-messages');
+        const typingIndicator = document.getElementById('typing-indicator');
 
-            // Logic to handle search routing will go here
-            window.location.href = 'search-results.html';
-        });
+        function scrollToBottom() { messagesBox.scrollTop = messagesBox.scrollHeight; }
 
-        // 5. Original Dropdown Logic
-        function toggleDrop(dropId, colorClass) {
-            const drop = document.getElementById(dropId);
-            const tile = document.querySelector('.' + colorClass);
-            
-            const bgColor = window.getComputedStyle(tile).backgroundColor;
-            const link = drop.querySelector('.dynamic-link');
-            
-            link.href = colorClass + '-diseases.html';
-            
-            const gridRow = tile.closest('.grid-row');
-            const tiles = Array.from(gridRow.children).filter(c => c.classList.contains('tile'));
-            const index = tiles.indexOf(tile);
-            
-            let columns = 4;
-            if (window.innerWidth <= 768) {
-                columns = 2; 
-            } else if (window.innerWidth <= 1024) {
-                columns = 3; 
-            }
-            
-            const rowIndex = Math.floor(index / columns);
-            const lastIndexInRow = Math.min((rowIndex + 1) * columns - 1, tiles.length - 1);
-            const insertAfterNode = tiles[lastIndexInRow];
-            
-            insertAfterNode.insertAdjacentElement('afterend', drop);
-
-            document.querySelectorAll('.mega-dropdown').forEach(d => {
-                if (d.id !== dropId) d.style.display = 'none';
-            });
-
-            if (drop.style.display === 'grid' && drop.dataset.active === colorClass) {
-                drop.style.display = 'none';
-                drop.dataset.active = "";
-            } else {
-                drop.style.display = 'grid';
-                drop.style.background = bgColor;
-                drop.dataset.active = colorClass;
-            }
+        function addUserMessage(text) {
+            const msgDiv = document.createElement('div');
+            msgDiv.classList.add('message', 'user-msg');
+            msgDiv.innerText = text;
+            messagesBox.insertBefore(msgDiv, typingIndicator);
+            scrollToBottom();
         }
+
+        function addBotMessage(htmlContent) {
+            const msgDiv = document.createElement('div');
+            msgDiv.classList.add('message', 'bot-msg');
+            msgDiv.innerHTML = htmlContent;
+            messagesBox.insertBefore(msgDiv, typingIndicator);
+            scrollToBottom();
+        }
+
+        function showTyping() { typingIndicator.style.display = 'flex'; scrollToBottom(); }
+        function hideTyping() { typingIndicator.style.display = 'none'; }
+
+        // --- MEDICAL KNOWLEDGE BASE (EVIDENCE BASED) ---
+        function getMedicalResponse(text) {
+            const lowerText = text.toLowerCase();
+            let advice = "";
+            let specialty = "";
+
+            // 1. HEADACHE (صداع، راسي)
+            if (lowerText.includes("راس") || lowerText.includes("صداع") || lowerText.includes("شقيقة")) {
+                advice = `
+                    <div class="med-title"><i class="fas fa-brain"></i> تحليل الأعراض: صداع (Headache)</div>
+                    سلامتك الف سلامة. الصداع اله أسباب هواية، اكثرها شيوعاً هو التوتر أو الشقيقة.
+                    <div class="med-info-box">
+                        <div class="med-warning"><i class="fas fa-exclamation-triangle"></i> علامات خطر (Red Flags):</div>
+                        اذا عندك أي من هاي الأعراض لازم تروح للطوارئ فوراً:
+                        <ul>
+                            <li>صداع مفاجئ وشديد جداً (مثل الضربة)</li>
+                            <li>تغير بالرؤية أو ضعف باليد/الرجل</li>
+                            <li>حرارة عالية مع تيبس بالرقبة</li>
+                        </ul>
+                    </div>
+                    <div class="med-advice">
+                        <strong>نصائح منزلية:</strong>
+                        <ul>
+                            <li>اشرب مي هواية (الجفاف يسبب صداع).</li>
+                            <li>ارتاح بغرفة هادئة ومظلمة.</li>
+                            <li>ممكن تاخذ مسكن بسيط (Paracetamol) اذا ما عندك مانع طبي.</li>
+                        </ul>
+                    </div>
+                    <span class="med-source">المصادر: NHS UK Guidelines / NICE CKS Headache</span>
+                `;
+                specialty = "neurology";
+            }
+            
+            // 2. STOMACH / ABDOMINAL (بطن، معدة، قولون)
+            else if (lowerText.includes("بطن") || lowerText.includes("معدة") || lowerText.includes("قولون") || lowerText.includes("لعبان نفس")) {
+                advice = `
+                    <div class="med-title"><i class="fas fa-notes-medical"></i> تحليل الأعراض: ألم البطن (Abdominal Pain)</div>
+                    ما تشوف شر. ألم البطن ممكن يكون قولون عصبي، حموضة، أو التهاب.
+                    <div class="med-info-box">
+                        <div class="med-warning"><i class="fas fa-exclamation-triangle"></i> متى لازم تشوف دكتور؟:</div>
+                        <ul>
+                            <li>اذا الألم شديد ومستمر وما يخف.</li>
+                            <li>اذا اكو دم مع الخروج (عزك الله) او تقيؤ دم.</li>
+                            <li>اذا خسرت وزن بدون سبب.</li>
+                            <li>صعوبة بالبلع.</li>
+                        </ul>
+                    </div>
+                    <div class="med-advice">
+                        <strong>نصائح أولية:</strong>
+                        <ul>
+                            <li>ابتعد عن الأكل الدسم والحار.</li>
+                            <li>قسم وجباتك لوجبات صغيرة.</li>
+                            <li>مضادات الحموضة (Antacids) ممكن تساعد مؤقتاً.</li>
+                        </ul>
+                    </div>
+                    <span class="med-source">المصادر: NHS Dyspepsia Guidelines</span>
+                `;
+                specialty = "gastroenterology";
+            }
+
+            // 3. DENTAL (أسناني، ضرس، سن)
+            else if (lowerText.includes("سن") || lowerText.includes("ضرس") || lowerText.includes("لثة")) {
+                advice = `
+                    <div class="med-title"><i class="fas fa-tooth"></i> تحليل الأعراض: ألم الأسنان (Dental Pain)</div>
+                    ألم الأسنان مزعج جداً، الله يساعدك. عادة يكون بسبب تسوس او التهاب العصب.
+                    <div class="med-info-box">
+                        <div class="med-warning"><i class="fas fa-exclamation-circle"></i> حالة طارئة؟</div>
+                        اذا عندك <strong>ورم بالوجه واصل للعين او الرقبة</strong>، او صعوبة بالتنفس، هاي حالة طارئة تحتاج مستشفى.
+                    </div>
+                    <div class="med-advice">
+                        <strong>نصائح لتخفيف الألم مؤقتاً:</strong>
+                        <ul>
+                            <li>تمضمض بمي وملح دافي.</li>
+                            <li>استخدم خيط الاسنان للتنظيف.</li>
+                            <li>مسكن ألم (Ibuprofen) اذا ما عندك حساسية او ربو.</li>
+                        </ul>
+                    </div>
+                    <strong>ملاحظة:</strong> ألم الأسنان ما يطيب وحده، لازم يشوفك طبيب.
+                    <span class="med-source">المصادر: NHS Dental Abscess Guide</span>
+                `;
+                specialty = "dentistry";
+            }
+
+            // 4. GENERAL / DEFAULT
+            else {
+                return `
+                    عفواً، ما كدرت احدد الحالة بدقة من الوصف. 🤖<br><br>
+                    تكدر تحاول مرة ثانية وتكتب مثلاً: "راسي يوجعني"، "عندي ألم بصدري"، "طفح جلدي"...<br><br>
+                    أو تكدر تحجز موعد عام للفحص الشامل.
+                    <br><a href="doctors.html" class="action-btn">عرض كل الأطباء</a>
+                `;
+            }
+
+            // Return structured advice + Booking Button
+            return `${advice}<br><a href="search-results.html?specialty=${specialty}" class="action-btn">عرض الأطباء المختصين وحجز موعد</a>`;
+        }
+
+        // Handle Submit
+        chatForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const text = chatInput.value.trim();
+            if (!text) return;
+
+            // 1. User Message
+            addUserMessage(text);
+            chatInput.value = '';
+
+            // 2. Bot Thinking
+            showTyping();
+            
+            // 3. Simulated Response Delay (to feel real)
+            setTimeout(() => {
+                hideTyping();
+                const reply = getMedicalResponse(text);
+                addBotMessage(reply);
+            }, 1500); 
+        });
     </script>
 </body>
 </html>
