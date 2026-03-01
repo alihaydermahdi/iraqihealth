@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>كشفيّة | دليلك الطبي</title>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    
+    <style>
+        :root {
+            --nhs-blue: #005eb8;
+            --nhs-dark-blue: #003087;
+            --nhs-light-grey: #f0f4f5;
+            --nhs-text: #212b32;
+            --nhs-white: #ffffff;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            margin: 0;
+            background-color: var(--nhs-light-grey);
+            color: var(--nhs-text);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* --- Professional Header Section --- */
+        .nhs-header {
+            background-color: var(--nhs-white);
+            border-bottom: 8px solid var(--nhs-blue); 
+            padding: 12px 0;
+        }
+
+        .header-content {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-link {
+            display: inline-flex;
+            align-items: center;
+            text-decoration: none;
+            gap: 15px; 
+        }
+
+        .site-logo {
+            max-height: 55px;
+            width: auto;
+            object-fit: contain;
+        }
+        
+        .header-moto {
+            font-weight: 700; 
+            color: var(--nhs-blue); 
+            font-size: 1.1rem;
+        }
+
+        /* --- Professional Blue Navigation --- */
+        .nhs-nav {
+            background-color: var(--nhs-blue);
+            color: white;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1); 
+            margin-bottom: 0; 
+        }
+
+        .nav-content {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .main-links {
+            display: flex;
+        }
+
+        .main-links a {
+            color: white;
+            text-decoration: none;
+            padding: 15px 20px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            border-bottom: 3px solid transparent; 
+        }
+
+        /* REMOVED ORANGE HOVER COLOR - Changed to White/Dark Blue */
+        .main-links a:hover, .main-links a.active { 
+            background-color: var(--nhs-dark-blue);
+            border-bottom-color: var(--nhs-white); 
+        }
+
+        /* أزرار الإجراءات */
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .nav-cta {
+            background-color: var(--nhs-white);
+            color: var(--nhs-blue) !important;
+            padding: 8px 20px;
+            border-radius: 20px; 
+            font-weight: 800;
+            font-size: 0.9rem;
+            text-decoration: none;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .nav-cta:hover {
+            background-color: #f0f4f5;
+            transform: translateY(-1px);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+
+        /* User Profile UI in Nav */
+        .user-profile-info {
+            display: none; 
+            align-items: center;
+            gap: 10px;
+            color: white;
+            font-weight: bold;
+        }
+        
+        .user-profile-info i {
+            font-size: 1.2rem;
+            color: var(--nhs-white);
+        }
+
+        .logout-btn {
+            background-color: #d32f2f;
+            color: white !important;
+            padding: 6px 15px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            cursor: pointer;
+            text-decoration: none;
+            border: none;
+            font-weight: bold;
+            transition: background-color 0.2s;
+        }
+
+        .logout-btn:hover {
+            background-color: #b71c1c;
+        }
+
+        /* --- Grid & Interactive Dropdowns --- */
+        .clinical-grid {
+            max-width: 1300px;
+            margin: 30px auto 50px auto;
+            padding: 0 20px;
+        }
+
+        .grid-row {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 6px; 
+            margin-bottom: 6px;
+            position: relative;
+        }
+
+        .tile {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 15px 5px; 
+            color: white;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            min-height: 90px; 
+            border-radius: 6px; 
+            box-shadow: 0 2px 4px rgba(0,0,0,0.08);
+        }
+
+        .tile:hover { 
+            opacity: 0.95; 
+            transform: translateY(-2px); 
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+        }
+
+        .tile i { 
+            font-size: 1.6rem; 
+            margin-bottom: 8px; 
+        }
+
+        .tile span { 
+            font-weight: 700; 
+            font-size: 1.15rem; 
+            line-height: 1.3;
+        }
+
+        .mega-dropdown {
+            display: none;
+            grid-template-columns: 1fr 1fr;
+            width: 100%;
+            margin-bottom: 6px;
+            animation: fadeIn 0.2s ease;
+            grid-column: 1 / -1; 
+            border-radius: 6px;
+        }
+
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+        .drop-section {
+            padding: 15px;
+            text-align: center;
+            color: white;
+            font-weight: bold;
+            font-size: 1.1rem;
+            border: 1px solid rgba(255,255,255,0.15);
+        }
+
+        .drop-section a { color: white; text-decoration: none; display: block; width: 100%; height: 100%; }
+        .drop-section:hover { background: rgba(0,0,0,0.1); }
+
+        /* --- الألوان المسطحة --- */
+        .neuro     { background-color: #7cb342; } 
+        .eye       { background-color: #d32f2f; } 
+        .ent       { background-color: #d32f2f; } 
+        .resp      { background-color: #1976d2; } 
+        .cardio    { background-color: #afb42b; } 
+        .diabetes  { background-color: #0288d1; } 
+        .gastro    { background-color: #388e3c; } 
+        .renal     { background-color: #1565c0; } 
+        .urology   { background-color: #1565c0; } 
+        .women     { background-color: #8e24aa; } 
+        .paeds     { background-color: #4a148c; } 
+        .derm      { background-color: #1b5e20; } 
+        .msk       { background-color: #1b5e20; } 
+        .cancer    { background-color: #b71c1c; } 
+        .mental    { background-color: #7cb342; } 
+        .nutrition { background-color: #f57c00; } 
+
+        /* --- Elegant Footer --- */
+        footer {
+            background-color: #e8edee; 
+            border-top: 8px solid var(--nhs-blue); 
+            padding: 40px 20px 20px 20px; 
+            margin-top: 40px; 
+        }
+
+        .footer-content {
+            max-width: 1300px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); 
+            gap: 30px; 
+            margin-bottom: 25px; 
+        }
+
+        .footer-section h4 { 
+            color: var(--nhs-dark-blue); 
+            font-size: 1.05rem; 
+            font-weight: 800;
+            margin-top: 0;
+            margin-bottom: 15px; 
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-section h4::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 0; 
+            width: 40px;
+            height: 3px;
+            background-color: var(--nhs-blue);
+            border-radius: 2px;
+        }
+
+        .footer-section ul { 
+            list-style: none; 
+            padding: 0; 
+            margin: 0;
+        }
+
+        .footer-section ul li { 
+            margin-bottom: 10px; 
+            font-size: 0.85rem; 
+            color: #4a5568; 
+            display: flex;
+            align-items: center;
+        }
+
+        .footer-section ul li a { 
+            color: #4a5568; 
+            text-decoration: none; 
+            transition: all 0.3s ease;
+        }
+
+        .footer-section ul li a:hover { 
+            color: var(--nhs-blue); 
+            padding-right: 6px; 
+        }
+
+        .footer-section i {
+            color: var(--nhs-blue);
+            width: 20px; 
+            font-size: 0.95rem;
+            margin-left: 8px; 
+        }
+
+        .copyright-bar {
+            text-align: center; 
+            border-top: 1px solid #d1d5d8; 
+            padding-top: 15px; 
+            font-size: 0.8rem; 
+            font-weight: 600;
+            color: #718096;
+            letter-spacing: 0.5px;
+        }
+
+        /* --- Responsive Queries --- */
+        @media (max-width: 1024px) {
+            .grid-row { grid-template-columns: repeat(3, 1fr); }
+            .footer-content { gap: 25px; }
+        }
+
+        @media (max-width: 768px) {
+            .header-content { flex-direction: column; text-align: center; gap: 8px; }
+            .header-moto { font-size: 1rem; }
+            
+            .nav-content { flex-direction: column; padding: 0; }
+            .main-links { width: 100%; justify-content: center; overflow-x: auto; }
+            .main-links a { padding: 12px 10px; font-size: 0.85rem; border-bottom: none; }
+            
+            /* Cleaned up nav actions */
+            .nav-actions { width: 100%; justify-content: center; padding: 10px; background-color: var(--nhs-dark-blue); flex-wrap: wrap; }
+            .user-profile-info { width: 100%; justify-content: center; padding: 10px; background-color: var(--nhs-dark-blue); flex-wrap: wrap; }
+            
+            .grid-row { grid-template-columns: repeat(2, 1fr); } 
+            .mega-dropdown { grid-template-columns: 1fr; }
+            .site-logo { max-height: 45px; }
+            .tile { min-height: 85px; padding: 12px 5px; }
+            .tile i { font-size: 1.4rem; margin-bottom: 5px; }
+            .tile span { font-size: 0.95rem; } 
+            
+            footer { padding: 30px 20px 15px 20px; }
+            .footer-content { gap: 20px; margin-bottom: 20px; }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="nhs-header">
+        <div class="header-content">
+            <a href="index.html" class="logo-link">
+                <img src="logo.png" alt="شعار كشفيّة" class="site-logo">
+                <div class="header-moto">كلشي عن صحتك… بلهجتنا العراقية</div>
+            </a>
+        </div>
+    </header>
+
+    <nav class="nhs-nav">
+        <div class="nav-content">
+            <div class="main-links">
+                <a href="index.html" class="active"><i class="fas fa-home"></i> الرئيسية</a>
+                <a href="index.html"><i class="fas fa-stethoscope"></i> دليل الأمراض</a>
+                <a href="doctors.html"><i class="fas fa-user-doctor"></i> الأطباء والمراكز</a>
+            </div>
+            
+            <div class="nav-actions" id="nav-auth-section">
+                <a href="contact.html" class="nav-cta">
+                    <i class="fas fa-phone"></i> تواصل ويانا
+                </a>
+            </div>
+
+            <div class="user-profile-info" id="user-info">
+                <i class="fas fa-user-circle"></i>
+                <span>أهلاً، <span id="user-display-name">...</span></span>
+                <button onclick="handleLogout()" class="logout-btn"><i class="fas fa-sign-out-alt"></i> خروج</button>
+            </div>
+        </div>
+    </nav>
+
+    <main class="clinical-grid">
+        
+        <div class="grid-row">
+            <div class="tile neuro" onclick="toggleDrop('drop1', 'neuro')">
+                <i class="fas fa-brain"></i>
+                <span>أمراض المخ والأعصاب</span>
+            </div>
+            <div class="tile ent" onclick="toggleDrop('drop1', 'ent')">
+                <i class="fas fa-ear-listen"></i>
+                <span>الأنف والأذن والحنجرة</span>
+            </div>
+            <div class="tile resp" onclick="toggleDrop('drop1', 'resp')">
+                <i class="fas fa-lungs"></i>
+                <span>أمراض الجهاز التنفسي</span>
+            </div>
+            <div class="tile cardio" onclick="toggleDrop('drop1', 'cardio')">
+                <i class="fas fa-heart-pulse"></i>
+                <span>أمراض القلب والأوعية</span>
+            </div>
+            <div id="drop1" class="mega-dropdown">
+                <div class="drop-section"><a href="#" class="dynamic-link">الأمراض الشائعة</a></div>
+                <div class="drop-section"><a href="#">أطباء الاختصاص</a></div>
+            </div>
+        </div>
+
+        <div class="grid-row">
+            <div class="tile diabetes" onclick="toggleDrop('drop2', 'diabetes')">
+                <i class="fas fa-syringe"></i>
+                <span>السكري والغدد الصماء</span>
+            </div>
+            <div class="tile gastro" onclick="toggleDrop('drop2', 'gastro')">
+                <i class="fas fa-pills"></i>
+                <span>الجهاز الهضمي والكبد</span>
+            </div>
+            <div class="tile renal" onclick="toggleDrop('drop2', 'renal')">
+                <i class="fas fa-droplet"></i>
+                <span>أمراض الكلى والمسالك</span>
+            </div>
+            <div class="tile women" onclick="toggleDrop('drop2', 'women')">
+                <i class="fas fa-person-pregnant"></i>
+                <span>النسائية والتوليد</span>
+            </div>
+            <div id="drop2" class="mega-dropdown">
+                <div class="drop-section"><a href="#" class="dynamic-link">الأمراض الشائعة</a></div>
+                <div class="drop-section"><a href="#">أطباء الاختصاص</a></div>
+            </div>
+        </div>
+
+        <div class="grid-row">
+            <div class="tile paeds" onclick="toggleDrop('drop3', 'paeds')">
+                <i class="fas fa-child-reaching"></i>
+                <span>طب الأطفال والخدج</span>
+            </div>
+            <div class="tile derm" onclick="toggleDrop('drop3', 'derm')">
+                <i class="fas fa-hand-sparkles"></i>
+                <span>الأمراض الجلدية</span>
+            </div>
+            <div class="tile msk" onclick="toggleDrop('drop3', 'msk')">
+                <i class="fas fa-bone"></i>
+                <span>الكسور والعظام والروماتيزم</span>
+            </div>
+            <div class="tile cancer" onclick="toggleDrop('drop3', 'cancer')">
+                <i class="fas fa-ribbon"></i>
+                <span>أمراض الدم والأورام</span>
+            </div>
+            <div id="drop3" class="mega-dropdown">
+                <div class="drop-section"><a href="#" class="dynamic-link">الأمراض الشائعة</a></div>
+                <div class="drop-section"><a href="#">أطباء الاختصاص</a></div>
+            </div>
+        </div>
+
+        <div class="grid-row">
+            <div class="tile eye" onclick="toggleDrop('drop4', 'eye')">
+                <i class="fas fa-eye"></i>
+                <span>طب وجراحة العيون</span>
+            </div>
+            <div class="tile mental" onclick="toggleDrop('drop4', 'mental')">
+                <i class="fas fa-hand-holding-heart"></i>
+                <span>الصحة النفسية</span>
+            </div>
+            <div class="tile nutrition" onclick="toggleDrop('drop4', 'nutrition')">
+                <i class="fas fa-weight-scale"></i>
+                <span>التغذية و السمنة</span>
+            </div>
+            <div class="tile urology" onclick="toggleDrop('drop4', 'urology')">
+                <i class="fas fa-mars"></i>
+                <span>الذكورة والعقم</span>
+            </div>
+            <div id="drop4" class="mega-dropdown">
+                <div class="drop-section"><a href="#" class="dynamic-link">الأمراض الشائعة</a></div>
+                <div class="drop-section"><a href="#">أطباء الاختصاص</a></div>
+            </div>
+        </div>
+
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>عن منصة كشفيّة</h4>
+                <ul>
+                    <li><a href="about.html"><i class="fas fa-angle-left"></i> من نحن</a></li>
+                    <li><a href="about.html#vision"><i class="fas fa-angle-left"></i> رؤيتنا ورسالتنا</a></li>
+                    <li><a href="about.html#privacy"><i class="fas fa-angle-left"></i> سياسة الخصوصية</a></li>
+                    <li><a href="about.html#terms"><i class="fas fa-angle-left"></i> الشروط والأحكام</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h4>خدمات المرضى</h4>
+                <ul>
+                    <li><a href="index.html"><i class="fas fa-angle-left"></i> الرئيسية</a></li>
+                    <li><a href="index.html"><i class="fas fa-angle-left"></i> دليل الأمراض الشائعة</a></li>
+                    <li><a href="doctors.html"><i class="fas fa-angle-left"></i> قائمة الأطباء والمراكز</a></li>
+                    <li><a href="faq.html"><i class="fas fa-angle-left"></i> الأسئلة الشائعة</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h4>معلومات التواصل</h4>
+                <ul>
+                    <li><a href="contact.html"><i class="fas fa-bullhorn"></i> للتواصل والإعلان: اضغط هنا</a></li>
+                    <li><a href="https://www.facebook.com/kashfeyacom" target="_blank" rel="noopener noreferrer"><i class="fab fa-facebook"></i> فيسبوك (Facebook)</a></li>
+                    <li><a href="https://www.instagram.com/kashfeyacom" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram"></i> إنستغرام (Instagram)</a></li>
+                    <li><a href="https://www.tiktok.com/@kashfeya.com" target="_blank" rel="noopener noreferrer"><i class="fab fa-tiktok"></i> تيكتوك (TikTok)</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="copyright-bar">
+            &copy; 2026 جميع الحقوق محفوظة لـ كشفيّة
+        </div>
+    </footer>
+
+    <script>
+        // 1. Initialize Supabase
+        const supabaseUrl = 'https://anptpomhhuxsxaeonhca.supabase.co';
+        const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFucHRwb21oaHV4c3hhZW9uaGNhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzIxMzU4OTYsImV4cCI6MjA4NzcxMTg5Nn0.7KGLqjcLRA2xzfOXdiDzINCVNhaOLBlj3sjJLBmYDiU';
+        const supabaseClient = window.supabase.createClient(supabaseUrl, supabaseKey);
+
+        // 2. Check User Status
+        async function checkUserStatus() {
+            try {
+                const { data: { user } } = await supabaseClient.auth.getUser();
+
+                if (user) {
+                    // Hide generic auth section, show specific user profile
+                    document.getElementById('nav-auth-section').style.display = 'none';
+                    document.getElementById('user-info').style.display = 'flex';
+                    
+                    const name = user.user_metadata.full_name || "مريضنا العزيز";
+                    document.getElementById('user-display-name').innerText = name;
+                }
+            } catch (error) {
+                console.error("Error checking auth status:", error);
+            }
+        }
+
+        // 3. Handle Logout
+        async function handleLogout() {
+            await supabaseClient.auth.signOut();
+            window.location.reload(); 
+        }
+
+        document.addEventListener('DOMContentLoaded', checkUserStatus);
+
+        // 4. Handle Search Form
+        document.getElementById('search-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const specialty = document.getElementById('search-specialty').value;
+            const city = document.getElementById('search-city').value;
+            const docName = document.getElementById('search-name').value;
+
+            // Logic to handle search routing will go here
+            window.location.href = 'search-results.html';
+        });
+
+        // 5. Original Dropdown Logic
+        function toggleDrop(dropId, colorClass) {
+            const drop = document.getElementById(dropId);
+            const tile = document.querySelector('.' + colorClass);
+            
+            const bgColor = window.getComputedStyle(tile).backgroundColor;
+            const link = drop.querySelector('.dynamic-link');
+            
+            link.href = colorClass + '-diseases.html';
+            
+            const gridRow = tile.closest('.grid-row');
+            const tiles = Array.from(gridRow.children).filter(c => c.classList.contains('tile'));
+            const index = tiles.indexOf(tile);
+            
+            let columns = 4;
+            if (window.innerWidth <= 768) {
+                columns = 2; 
+            } else if (window.innerWidth <= 1024) {
+                columns = 3; 
+            }
+            
+            const rowIndex = Math.floor(index / columns);
+            const lastIndexInRow = Math.min((rowIndex + 1) * columns - 1, tiles.length - 1);
+            const insertAfterNode = tiles[lastIndexInRow];
+            
+            insertAfterNode.insertAdjacentElement('afterend', drop);
+
+            document.querySelectorAll('.mega-dropdown').forEach(d => {
+                if (d.id !== dropId) d.style.display = 'none';
+            });
+
+            if (drop.style.display === 'grid' && drop.dataset.active === colorClass) {
+                drop.style.display = 'none';
+                drop.dataset.active = "";
+            } else {
+                drop.style.display = 'grid';
+                drop.style.background = bgColor;
+                drop.dataset.active = colorClass;
+            }
+        }
+    </script>
+</body>
+</html>
