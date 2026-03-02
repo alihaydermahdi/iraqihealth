@@ -79,7 +79,7 @@
         .logout-btn { background-color: #d32f2f; color: white !important; padding: 6px 15px; border-radius: 20px; font-size: 0.85rem; cursor: pointer; text-decoration: none; border: none; font-weight: bold; transition: background-color 0.2s; font-family: "Cairo", sans-serif; }
         .logout-btn:hover { background-color: #b71c1c; }
 
-        /* --- Page Header (Styled Like Image) --- */
+        /* --- Page Header (UPDATED LAYOUT) --- */
         .page-header { 
             max-width: 1300px; 
             margin: 30px auto 30px auto; 
@@ -88,7 +88,7 @@
             align-items: center; 
             gap: 20px;
             
-            /* Moves the content to the LEFT side in RTL */
+            /* KEY FIX: flex-end in RTL pushes content to the LEFT side */
             justify-content: flex-end; 
         }
 
@@ -96,35 +96,29 @@
             display: inline-flex; 
             align-items: center; 
             gap: 10px; 
-            background-color: white; /* White Background */
-            color: var(--nhs-text); 
-            padding: 10px 20px; 
+            background-color: white; 
+            color: #212b32; 
+            padding: 8px 20px; 
             border-radius: 6px; 
             text-decoration: none; 
             font-size: 1rem; 
             font-weight: 700; 
-            border: 1px solid #d8dde0; /* Subtle Grey Border */
+            border: 1px solid #c8c8c8; /* Grey Border */
             transition: all 0.2s; 
-            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+            box-shadow: 0 1px 2px rgba(0,0,0,0.05);
         }
 
         .back-btn:hover { 
             background-color: #f8fafc; 
             border-color: var(--nhs-blue);
             color: var(--nhs-blue);
-            transform: translateY(-1px);
         }
         
-        .back-btn i {
-            font-size: 0.9rem;
-        }
-
         .page-header h1 { 
             margin: 0; 
             font-size: 1.8rem; 
-            color: var(--nhs-blue); /* NHS Blue Title */
+            color: var(--nhs-blue); 
             font-weight: 800; 
-            line-height: 1.2;
         }
 
         /* --- شبكة الأمراض --- */
@@ -203,8 +197,8 @@
             
             /* Mobile adjustment for Header */
             .page-header { 
-                flex-direction: column-reverse; /* Button below Title on small screens */
-                align-items: center; /* Center them */
+                flex-direction: column-reverse; 
+                align-items: center; 
                 gap: 15px; 
                 margin-top: 20px; 
                 margin-bottom: 25px; 
@@ -256,7 +250,7 @@
 
     <div class="page-header">
         <h1>أمراض القلب والأوعية الدموية</h1>
-        <a href="index.html" class="back-btn"><i class="fas fa-arrow-left"></i> العودة للرئيسية</a>
+        <a href="index.html" class="back-btn"><i class="fas fa-arrow-right"></i> العودة للرئيسية</a>
     </div>
 
     <main class="disease-grid">
