@@ -76,16 +76,16 @@
         .logout-btn { background-color: #d32f2f; color: white !important; padding: 6px 15px; border-radius: 20px; font-size: 0.85rem; cursor: pointer; text-decoration: none; border: none; font-weight: bold; transition: background-color 0.2s; font-family: "Cairo", sans-serif; }
         .logout-btn:hover { background-color: #b71c1c; }
 
-        /* --- Page Header (SHIFTED TO VERY LEFT) --- */
+        /* --- Page Header (UPDATED: ALIGNED TO LEFT) --- */
         .page-header { 
             max-width: 1300px; 
             margin: 25px auto 30px auto; 
             padding: 0 20px; 
             display: flex; 
             align-items: center; 
-            justify-content: flex-start; /* Shifts everything to the left side */
+            /* In RTL context, flex-end aligns content to the LEFT side */
+            justify-content: flex-end; 
             gap: 20px; 
-            flex-direction: row-reverse; /* Button first, then Title */
         }
 
         .back-btn { 
