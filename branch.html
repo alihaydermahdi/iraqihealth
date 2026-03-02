@@ -26,7 +26,6 @@
             --nhs-light-grey: #f0f4f5;
             --nhs-text: #212b32;
             --nhs-white: #ffffff;
-            --nhs-border: #d8dde0;
         }
 
         body {
@@ -50,7 +49,7 @@
         .header-moto { font-weight: 700; color: var(--nhs-blue); font-size: 1.1rem; }
 
         /* --- الشريط الأزرق --- */
-        .nhs-nav { background-color: var(--nhs-blue); color: white; position: sticky; top: 0; z-index: 1000; box-shadow: 0 4px 6px rgba(0,0,0,0.1); margin-bottom: 0; }
+        .nhs-nav { background-color: var(--nhs-blue); color: white; position: sticky; top: 0; z-index: 1000; box-shadow: 0 4px 6px rgba(0,0,0,0.1); margin-bottom: 15px; }
         .nav-content { max-width: 1300px; margin: 0 auto; padding: 0 20px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; }
         
         .main-links { display: flex; }
@@ -79,46 +78,45 @@
         .logout-btn { background-color: #d32f2f; color: white !important; padding: 6px 15px; border-radius: 20px; font-size: 0.85rem; cursor: pointer; text-decoration: none; border: none; font-weight: bold; transition: background-color 0.2s; font-family: "Cairo", sans-serif; }
         .logout-btn:hover { background-color: #b71c1c; }
 
-        /* --- Page Header (UPDATED LAYOUT) --- */
+        /* --- Page Header (FIXED ALIGNMENT) --- */
         .page-header { 
             max-width: 1300px; 
-            margin: 30px auto 30px auto; 
+            margin: 25px auto 30px auto; 
             padding: 0 20px; 
             display: flex; 
             align-items: center; 
-            gap: 20px;
-            
-            /* KEY FIX: flex-end in RTL pushes content to the LEFT side */
-            justify-content: flex-end; 
+            justify-content: space-between; /* This pushes the title and button apart */
+            flex-direction: row-reverse; /* Reverses order so Title is Right, Button is Left */
         }
 
         .back-btn { 
             display: inline-flex; 
             align-items: center; 
-            gap: 10px; 
-            background-color: white; 
-            color: #212b32; 
-            padding: 8px 20px; 
+            gap: 8px; 
+            background-color: var(--nhs-white); 
+            color: var(--nhs-text); 
+            padding: 8px 16px; 
             border-radius: 6px; 
             text-decoration: none; 
-            font-size: 1rem; 
+            font-size: 0.95rem; 
             font-weight: 700; 
-            border: 1px solid #c8c8c8; /* Grey Border */
+            border: 1px solid #d1d5d8; 
             transition: all 0.2s; 
             box-shadow: 0 1px 2px rgba(0,0,0,0.05);
         }
 
         .back-btn:hover { 
-            background-color: #f8fafc; 
-            border-color: var(--nhs-blue);
-            color: var(--nhs-blue);
+            background-color: var(--nhs-blue); 
+            color: var(--nhs-white); 
+            border-color: var(--nhs-blue); 
         }
-        
+
         .page-header h1 { 
             margin: 0; 
-            font-size: 1.8rem; 
+            font-size: 2.2rem; /* Increased size to match photo */
             color: var(--nhs-blue); 
             font-weight: 800; 
+            line-height: 1.2;
         }
 
         /* --- شبكة الأمراض --- */
@@ -135,18 +133,18 @@
             background-color: var(--nhs-white); 
             border: 1px solid #e2e8f0; 
             border-radius: 8px; 
-            padding: 25px 15px; 
+            padding: 20px 15px; 
             text-align: center; 
             color: var(--nhs-text); 
             text-decoration: none; 
             font-weight: 700; 
-            font-size: 1.1rem; 
+            font-size: 1.05rem; 
             transition: all 0.2s ease; 
             display: flex; 
             flex-direction: column;
             align-items: center; 
             justify-content: center; 
-            min-height: 100px; 
+            min-height: 90px; 
             box-shadow: 0 2px 4px rgba(0,0,0,0.04); 
             gap: 8px;
         }
@@ -160,10 +158,9 @@
         }
         
         .disease-card span {
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             color: #718096;
             font-weight: 600;
-            margin-top: 4px;
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
         }
         
@@ -195,17 +192,14 @@
             .user-profile-info { width: 100%; justify-content: center; padding: 10px; background-color: var(--nhs-dark-blue); }
             .site-logo { max-height: 45px; }
             
-            /* Mobile adjustment for Header */
             .page-header { 
-                flex-direction: column-reverse; 
-                align-items: center; 
-                gap: 15px; 
-                margin-top: 20px; 
-                margin-bottom: 25px; 
-                justify-content: center;
+                flex-direction: column; 
+                align-items: center;
+                gap: 12px; 
+                margin-top: 15px; 
+                margin-bottom: 20px; 
             }
-            .page-header h1 { font-size: 1.5rem; text-align: center; }
-            .back-btn { width: 100%; justify-content: center; }
+            .page-header h1 { font-size: 1.6rem; text-align: center; }
             
             .disease-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
             .disease-card { min-height: 80px; font-size: 0.9rem; padding: 15px 5px; }
