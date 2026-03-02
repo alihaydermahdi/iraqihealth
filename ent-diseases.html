@@ -157,6 +157,17 @@
             transform: translateY(-3px); 
             box-shadow: 0 6px 12px rgba(0,0,0,0.15); 
         }
+        
+        .disease-card span {
+            font-size: 0.8rem;
+            color: #718096;
+            font-weight: 600;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+        
+        .disease-card:hover span {
+            color: #e2e8f0;
+        }
 
         /* --- الفوتر --- */
         footer { background-color: #e8edee; border-top: 8px solid var(--nhs-blue); padding: 40px 20px 20px 20px; margin-top: auto; }
@@ -235,34 +246,34 @@
     </div>
 
     <main class="disease-grid">
-        <a href="otitis-media.html" class="disease-card">التهاب الأذن الوسطى</a>
-        <a href="otitis-externa.html" class="disease-card">التهاب الأذن الخارجية</a>
-        <a href="vestibular-neuritis.html" class="disease-card">التهاب العصب الدهليزي والتهاب التيه (دوار الأذن الداخلية)</a>
-        <a href="earache.html" class="disease-card">ألم ووجع الأذن</a>
-        <a href="earwax.html" class="disease-card">تراكم الشمع (سداد الأذن)</a>
-        <a href="fungal-ear-infection.html" class="disease-card">فطريات الأذن</a>
-        <a href="perforated-eardrum.html" class="disease-card">ثقب طبلة الأذن</a>
-        <a href="hearing-problems.html" class="disease-card">ضعف ومشاكل السمع</a>
-        <a href="tinnitus.html" class="disease-card">طنين الأذن (الوشة)</a>
-        <a href="glue-ear.html" class="disease-card">الأذن الصمغية (سوائل الأذن)</a>
-        <a href="eustachian-tube-dysfunction.html" class="disease-card">انسداد قناة استاكيوس</a>
-        <a href="menieres-disease.html" class="disease-card">مرض منيير (دوار الأذن)</a>
-        <a href="cholesteatoma.html" class="disease-card">كيس الأذن (الكوليستياتوما)</a>
+        <a href="earache.html" class="disease-card">ألم ووجع الأذن <span>(Earache)</span></a>
+        <a href="otitis-media.html" class="disease-card">التهاب الأذن الوسطى <span>(Otitis Media)</span></a>
+        <a href="otitis-externa.html" class="disease-card">التهاب الأذن الخارجية <span>(Otitis Externa)</span></a>
+        <a href="earwax.html" class="disease-card">تراكم الشمع <span>(Earwax Build-up)</span></a>
+        <a href="fungal-ear-infection.html" class="disease-card">فطريات الأذن <span>(Otomycosis)</span></a>
+        <a href="perforated-eardrum.html" class="disease-card">ثقب طبلة الأذن <span>(Perforated Eardrum)</span></a>
+        <a href="hearing-problems.html" class="disease-card">ضعف السمع <span>(Hearing Loss)</span></a>
+        <a href="tinnitus.html" class="disease-card">طنين الأذن (الوشة) <span>(Tinnitus)</span></a>
+        <a href="glue-ear.html" class="disease-card">الأذن الصمغية <span>(Glue Ear)</span></a>
+        <a href="eustachian-tube-dysfunction.html" class="disease-card">انسداد قناة استاكيوس <span>(Eustachian Tube Dysfunction)</span></a>
+        <a href="vestibular-neuritis.html" class="disease-card">دوار الأذن الداخلية <span>(Labyrinthitis)</span></a>
+        <a href="menieres-disease.html" class="disease-card">مرض منيير <span>(Meniere's Disease)</span></a>
+        <a href="cholesteatoma.html" class="disease-card">كيس الأذن <span>(Cholesteatoma)</span></a>
 
-        <a href="nasal-congestion.html" class="disease-card">احتقان وانسداد الأنف</a>
-        <a href="sinusitis.html" class="disease-card">التهاب الجيوب الأنفية</a>
-        <a href="hay-fever.html" class="disease-card">حساسية الربيع (حمى القش)</a>
-        <a href="nosebleed.html" class="disease-card">نزيف الأنف (الرعاف)</a>
-        <a href="nasal-polyps.html" class="disease-card">لحميات الأنف</a>
-        <a href="smell-taste-disorders.html" class="disease-card">فقدان الشم والتذوق</a>
+        <a href="nasal-congestion.html" class="disease-card">احتقان الأنف <span>(Nasal Congestion)</span></a>
+        <a href="sinusitis.html" class="disease-card">التهاب الجيوب الأنفية <span>(Sinusitis)</span></a>
+        <a href="hay-fever.html" class="disease-card">حساسية الربيع <span>(Hay Fever)</span></a>
+        <a href="nosebleed.html" class="disease-card">نزيف الأنف (الرعاف) <span>(Nosebleeds)</span></a>
+        <a href="nasal-polyps.html" class="disease-card">لحميات الأنف <span>(Nasal Polyps)</span></a>
+        <a href="smell-taste-disorders.html" class="disease-card">فقدان الشم والتذوق <span>(Smell & Taste Disorders)</span></a>
 
-        <a href="sore-throat.html" class="disease-card">وجع البلاعيم (التهاب البلعوم)</a>
-        <a href="tonsillitis-tonsillectomy.html" class="disease-card">التهاب واستئصال اللوزتين</a>
-        <a href="tonsil-stones.html" class="disease-card">حصى اللوزتين</a>
-        <a href="laryngitis.html" class="disease-card">التهاب الحنجرة وبحة الصوت</a>
-        <a href="globus-sensation.html" class="disease-card">غصة البلعوم (إحساس اللقمة)</a>
-        <a href="snoring.html" class="disease-card">الشخير وانقطاع النفس</a>
-        <a href="glandular-fever.html" class="disease-card">الحمى الغدية (مرض التقبيل)</a>
+        <a href="sore-throat.html" class="disease-card">وجع البلاعيم <span>(Sore Throat)</span></a>
+        <a href="tonsillitis-tonsillectomy.html" class="disease-card">التهاب اللوزتين <span>(Tonsillitis)</span></a>
+        <a href="tonsil-stones.html" class="disease-card">حصى اللوزتين <span>(Tonsil Stones)</span></a>
+        <a href="laryngitis.html" class="disease-card">التهاب الحنجرة <span>(Laryngitis)</span></a>
+        <a href="globus-sensation.html" class="disease-card">غصة البلعوم <span>(Globus Sensation)</span></a>
+        <a href="snoring.html" class="disease-card">الشخير وانقطاع النفس <span>(Snoring / Sleep Apnea)</span></a>
+        <a href="glandular-fever.html" class="disease-card">الحمى الغدية <span>(Glandular Fever)</span></a>
     </main>
 
     <footer>
@@ -296,7 +307,7 @@
                     <li><a href="https://www.tiktok.com/@kashfeya.com" target="_blank" rel="noopener noreferrer"><i class="fab fa-tiktok"></i> تيكتوك (TikTok)</a></li>
                 </ul>
             </div>
-        </div>
+        </div> 
         
         <div class="copyright-bar">
             &copy; 2026 جميع الحقوق محفوظة لـ كشفيّة
