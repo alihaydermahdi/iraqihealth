@@ -5,6 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>كشفيّة | دليلك الطبي</title>
     
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -12,13 +16,13 @@
     <style>
         /* --- FIX: Global Reset for Mobile Overflow Issues --- */
         *, *::before, *::after {
-            box-sizing: border-box; /* Ensures padding doesn't make elements wider than the screen */
+            box-sizing: border-box; 
             -webkit-tap-highlight-color: transparent;
         }
 
         html, body {
             width: 100%;
-            overflow-x: hidden; /* Cuts off any accidental horizontal scrolling/white bars */
+            overflow-x: hidden; /* Prevents horizontal scrolling */
             margin: 0;
             padding: 0;
         }
@@ -33,7 +37,8 @@
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            /* Font Family: Cairo */
+            font-family: "Cairo", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
             background-color: var(--nhs-light-grey);
             color: var(--nhs-text);
             line-height: 1.6;
@@ -45,7 +50,7 @@
             background-color: var(--nhs-white);
             border-bottom: 8px solid var(--nhs-blue); 
             padding: 12px 0;
-            width: 100%; /* Ensure full width */
+            width: 100%;
         }
 
         .header-content {
@@ -85,7 +90,7 @@
             z-index: 1000;
             box-shadow: 0 4px 6px rgba(0,0,0,0.1); 
             margin-bottom: 0; 
-            width: 100%; /* Ensure full width */
+            width: 100%;
         }
 
         .nav-content {
@@ -106,7 +111,7 @@
             color: white;
             text-decoration: none;
             padding: 15px 20px;
-            font-weight: 600;
+            font-weight: 700; 
             font-size: 0.95rem;
             transition: all 0.2s;
             display: flex;
@@ -120,7 +125,7 @@
             border-bottom-color: var(--nhs-white); 
         }
 
-        /* أزرار الإجراءات */
+        /* Action Buttons */
         .nav-actions {
             display: flex;
             align-items: center;
@@ -145,24 +150,6 @@
             background-color: #f0f4f5;
             transform: translateY(-1px);
             box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-        }
-
-        /* --- أزرار تسجيل الدخول المحدثة --- */
-        .login-patient-btn {
-            background-color: var(--nhs-light-grey);
-            color: var(--nhs-dark-blue) !important;
-            border: 1px solid var(--nhs-blue);
-        }
-
-        .login-doctor-btn {
-            background-color: var(--nhs-dark-blue); 
-            color: white !important;
-            border: 1px solid rgba(255,255,255,0.2);
-        }
-
-        .login-doctor-btn:hover {
-            background-color: #00225e; 
-            color: white !important;
         }
 
         /* User Profile UI in Nav */
@@ -190,6 +177,7 @@
             border: none;
             font-weight: bold;
             transition: background-color 0.2s;
+            font-family: "Cairo", sans-serif;
         }
 
         .logout-btn:hover {
@@ -200,24 +188,28 @@
         .hero-section {
             background-color: var(--nhs-blue);
             background-image: linear-gradient(135deg, var(--nhs-blue) 0%, var(--nhs-dark-blue) 100%);
-            padding: 50px 20px;
+            padding: 50px 20px; /* Reduced padding slightly */
             text-align: center;
             color: white;
             margin-bottom: 40px;
-            width: 100%; /* Ensure full width */
+            width: 100%;
         }
 
         .hero-section h1 {
-            font-size: 2.2rem;
+            font-family: "Cairo", sans-serif;
+            font-size: 1.8rem; /* REDUCED SIZE (was 2.5rem) */
             margin-top: 0;
-            margin-bottom: 10px;
+            margin-bottom: 15px;
             font-weight: 800;
+            letter-spacing: -0.3px;
+            line-height: 1.4;
         }
 
         .hero-section p {
             font-size: 1.1rem;
-            margin-bottom: 35px;
-            opacity: 0.9;
+            margin-bottom: 30px;
+            opacity: 0.95;
+            font-weight: 400;
         }
 
         .search-box-container {
@@ -259,7 +251,8 @@
             background: transparent;
             padding: 15px 0;
             font-size: 1rem;
-            font-family: inherit;
+            font-family: "Cairo", sans-serif; 
+            font-weight: 600;
             color: var(--nhs-text);
             outline: none;
         }
@@ -271,7 +264,8 @@
             border-radius: 8px;
             padding: 0 30px;
             font-size: 1.1rem;
-            font-weight: bold;
+            font-family: "Cairo", sans-serif;
+            font-weight: 800;
             cursor: pointer;
             transition: background-color 0.2s;
             display: flex;
@@ -288,7 +282,7 @@
             max-width: 1300px;
             margin: 0 auto 50px auto;
             padding: 0 20px;
-            width: 100%; /* Ensure full width */
+            width: 100%;
         }
 
         .grid-row {
@@ -347,15 +341,22 @@
             padding: 15px;
             text-align: center;
             color: white;
-            font-weight: bold;
+            font-weight: 700;
             font-size: 1.1rem;
             border: 1px solid rgba(255,255,255,0.15);
         }
 
-        .drop-section a { color: white; text-decoration: none; display: block; width: 100%; height: 100%; }
+        .drop-section a { 
+            color: white; 
+            text-decoration: none; 
+            display: block; 
+            width: 100%; 
+            height: 100%;
+            font-family: "Cairo", sans-serif;
+        }
         .drop-section:hover { background: rgba(0,0,0,0.1); }
 
-        /* --- الألوان المسطحة --- */
+        /* --- Flat Colors --- */
         .neuro     { background-color: #7cb342; } 
         .eye       { background-color: #d32f2f; } 
         .ent       { background-color: #d32f2f; } 
@@ -379,7 +380,7 @@
             border-top: 8px solid var(--nhs-blue); 
             padding: 40px 20px 20px 20px; 
             margin-top: 40px; 
-            width: 100%; /* Ensure full width */
+            width: 100%;
         }
 
         .footer-content {
@@ -393,7 +394,7 @@
 
         .footer-section h4 { 
             color: var(--nhs-dark-blue); 
-            font-size: 1.05rem; 
+            font-size: 1.15rem; 
             font-weight: 800;
             margin-top: 0;
             margin-bottom: 15px; 
@@ -420,10 +421,11 @@
 
         .footer-section ul li { 
             margin-bottom: 10px; 
-            font-size: 0.85rem; 
+            font-size: 0.9rem; 
             color: #4a5568; 
             display: flex;
             align-items: center;
+            font-weight: 600;
         }
 
         .footer-section ul li a { 
@@ -448,8 +450,8 @@
             text-align: center; 
             border-top: 1px solid #d1d5d8; 
             padding-top: 15px; 
-            font-size: 0.8rem; 
-            font-weight: 600;
+            font-size: 0.85rem; 
+            font-weight: 700;
             color: #718096;
             letter-spacing: 0.5px;
         }
@@ -469,9 +471,12 @@
             
             .nav-content { flex-direction: column; padding: 0; }
             .main-links { width: 100%; justify-content: center; overflow-x: auto; }
-            .main-links a { padding: 12px 10px; font-size: 0.85rem; border-bottom: none; }
+            .main-links a { padding: 12px 10px; font-size: 0.9rem; border-bottom: none; }
             .nav-actions { width: 100%; justify-content: center; padding: 10px; background-color: var(--nhs-dark-blue); flex-wrap: wrap; }
             .user-profile-info { width: 100%; justify-content: center; padding: 10px; background-color: var(--nhs-dark-blue); flex-wrap: wrap; }
+            
+            /* Reduced mobile font size */
+            .hero-section h1 { font-size: 1.4rem; }
             
             .grid-row { grid-template-columns: repeat(2, 1fr); } 
             .mega-dropdown { grid-template-columns: 1fr; }
@@ -505,14 +510,8 @@
             </div>
             
             <div class="nav-actions" id="nav-auth-section">
-                <a href="login-patient.html" class="nav-cta login-patient-btn">
-                    <i class="fas fa-user"></i> دخول المرضى
-                </a>
-                <a href="login-doctor.html" class="nav-cta login-doctor-btn">
-                    <i class="fas fa-user-doctor"></i> دخول الأطباء
-                </a>
                 <a href="contact.html" class="nav-cta">
-                    <i class="fas fa-phone"></i> تواصل معنا
+                    <i class="fas fa-phone"></i> تواصل ويانا
                 </a>
             </div>
 
@@ -525,8 +524,7 @@
     </nav>
 
     <section class="hero-section">
-        <h1>احجز موعدك ويه أحسن دكاترة العراق</h1>
-        <p>ابحث، قارن، واحجز موعدك إلكترونياً بدون أي مكالمات هاتفية.</p>
+        <h1>دليل أطباء العراق – بحث سريع حسب التخصص</h1>
         
         <form class="search-box-container" id="search-form">
             
@@ -587,7 +585,6 @@
                     <option value="anbar">الانبار</option>
                     <option value="diwaniya">الديوانية</option>
                     <option value="kirkuk">كركوك</option>
-                    <option value="halabja">حلبجة</option>
                 </select>
             </div>
 
@@ -748,7 +745,7 @@
                 const { data: { user } } = await supabaseClient.auth.getUser();
 
                 if (user) {
-                    // إخفاء أزرار الدخول وإظهار اسم المستخدم
+                    // Hide generic auth section, show specific user profile
                     document.getElementById('nav-auth-section').style.display = 'none';
                     document.getElementById('user-info').style.display = 'flex';
                     
