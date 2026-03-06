@@ -14,7 +14,7 @@
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     
     <style>
-        /* --- نفس الستايل العام المستخدم في الصفحات السابقة --- */
+        /* --- نفس الستايل العام المستخدم في صفحة الأعصاب --- */
         *, *::before, *::after { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
         :root { --nhs-blue: #005eb8; --nhs-dark-blue: #003087; --nhs-light-grey: #f0f4f5; --nhs-text: #212b32; --nhs-white: #ffffff; }
         body { font-family: "Cairo", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; margin: 0; background-color: var(--nhs-light-grey); color: var(--nhs-text); line-height: 1.6; -webkit-font-smoothing: antialiased; display: flex; flex-direction: column; min-height: 100vh; }
@@ -51,11 +51,11 @@
         .disease-card:hover { background-color: var(--nhs-blue); color: var(--nhs-white); border-color: var(--nhs-blue); transform: translateY(-3px); box-shadow: 0 6px 12px rgba(0,0,0,0.15); }
         .disease-card span { font-size: 0.8rem; color: #718096; font-weight: 600; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
         .disease-card:hover span { color: #e2e8f0; }
-        
-        /* Section Dividers */
-        .grid-divider { grid-column: 1 / -1; margin-top: 20px; margin-bottom: 10px; border-bottom: 2px solid #e2e8f0; padding-bottom: 10px; }
-        .grid-divider h3 { color: var(--nhs-dark-blue); margin: 0; font-size: 1.2rem; }
 
+        /* Section Dividers (لترتيب المواضيع الكثيرة) */
+        .grid-divider { grid-column: 1 / -1; margin-top: 20px; margin-bottom: 10px; border-bottom: 2px solid #e2e8f0; padding-bottom: 10px; }
+        .grid-divider h3 { color: var(--nhs-dark-blue); margin: 0; font-size: 1.2rem; font-weight: 800; }
+        
         /* Footer */
         footer { background-color: #e8edee; border-top: 8px solid var(--nhs-blue); padding: 40px 20px 20px 20px; margin-top: auto; }
         .footer-content { max-width: 1300px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; margin-bottom: 25px; }
