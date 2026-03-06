@@ -1,11 +1,17 @@
-<!DOCTYPE html><html lang="ar" dir="rtl"><head>
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title> كشفيّـة | الأكزيما التأتبية </title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
     <style>
-        /* نفس الستايل الموحد */
+        /* [نفس الستايل الموحد للموقع] */
         *, *::before, *::after { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
         :root { --nhs-blue: #005eb8; --nhs-dark-blue: #003087; --nhs-light-grey: #f0f4f5; --nhs-text: #212b32; --nhs-white: #ffffff; }
         body { font-family: "Cairo", sans-serif; margin: 0; background-color: var(--nhs-light-grey); color: var(--nhs-text); line-height: 1.8; display: flex; flex-direction: column; min-height: 100vh; }
@@ -30,6 +36,7 @@
         .medical-disclaimer { background-color: #fff3cd; border-right: 4px solid #f6ad55; padding: 15px 20px; border-radius: 4px; font-weight: 600; color: #9c4221; margin-bottom: 30px; font-size: 0.95rem; display: flex; gap: 15px; align-items: flex-start; }
         .medical-disclaimer i { font-size: 1.4rem; margin-top: 2px; }
         .article-content h2 { color: var(--nhs-blue); font-size: 1.6rem; font-weight: 800; margin-top: 40px; margin-bottom: 15px; padding-bottom: 8px; border-bottom: 2px solid #e2e8f0; }
+        .article-content h3 { color: var(--nhs-dark-blue); font-size: 1.3rem; font-weight: 700; margin-top: 25px; margin-bottom: 10px; }
         .article-content p { font-size: 1.1rem; color: #2d3748; margin-bottom: 20px; }
         .article-content ul { padding-right: 25px; margin-bottom: 25px; list-style-type: disc; }
         .article-content ul li { font-size: 1.1rem; color: #2d3748; margin-bottom: 8px; }
@@ -45,7 +52,9 @@
         footer { background-color: #e8edee; border-top: 8px solid var(--nhs-blue); padding: 40px 20px 20px 20px; margin-top: auto; }
         .copyright-bar { text-align: center; border-top: 1px solid #d1d5d8; padding-top: 15px; font-size: 0.85rem; font-weight: 700; color: #718096; }
         @media (max-width: 768px) { .header-content, .nav-content { flex-direction: column; text-align: center; gap: 8px; } .main-links { width: 100%; justify-content: center; overflow-x: auto; } .nav-actions { width: 100%; justify-content: center; padding: 10px; background-color: var(--nhs-dark-blue); } .article-card { padding: 20px; } .article-title { font-size: 1.8rem; } }
-    </style></head><body>
+    </style>
+</head>
+<body>
 
     <header class="nhs-header">
         <div class="header-content">
@@ -60,7 +69,7 @@
         <div class="nav-content">
             <div class="main-links">
                 <a href="index.html"><i class="fas fa-home"></i> الرئيسية</a>
-                <a href="index.html" class="active"><i class="fas fa-stethoscope"></i> دليل الأمراض</a>
+                <a href="dermatology.html" class="active"><i class="fas fa-stethoscope"></i> الأمراض الجلدية</a>
                 <a href="doctors.html"><i class="fas fa-user-doctor"></i> الأطباء والمراكز</a>
             </div>
             <div class="nav-actions">
@@ -78,75 +87,91 @@
 
         <div class="article-card">
             <h1 class="article-title">الأكزيما التأتبية (Atopic Eczema)</h1>
-            <div class="article-meta"><span><i class="fas fa-user-md"></i> مراجعة: د. أحمد (اختصاص جلدية)</span></div>
+            <div class="article-meta"><span><i class="fas fa-user-md"></i> مراجعة: فريق كشفيّة الطبي</span></div>
 
             <div class="medical-disclaimer">
                 <i class="fas fa-circle-info"></i>
-                <div>ملاحظة مهمة: هاي المعلومات مخصصة للتوعية والتثقيف الصحي فقط، وما تعوض أبد عن استشارة الطبيب المختص أو الفحص السريري.</div>
+                <div>هاي المعلومات مخصصة للتوعية والتثقيف الصحي فقط، وما تعوض أبد عن استشارة الطبيب المختص أو الفحص السريري.</div>
             </div>
 
             <div class="article-content">
-                <p>الأكزيما التأتبية (أو حساسية الجلد) هي أكثر حالة جلدية شائعة نشوفها بالعيادات، وتصيب الأطفال بشكل خاص بس ممكن تستمر للكبار. هي باختصار عبارة عن جلد "حساس" و"ناشف" ما يگدر يحافظ على رطوبته، فيصير عرضة للتهيج والحكة.</p>
-                <p>كلمة "تأتبية" (Atopic) تعني إن الشخص عنده استعداد وراثي للحساسية، يعني غالباً تلگى العائلة عدهم ربو (Asthma) أو حساسية قصبات أو حساسية أنف (Allergic Rhinitis).</p>
+                <p>الأكزيما التأتبية (أو التهاب الجلد التأقبي) هي حالة جلدية شائعة جداً، تخلي الجلد ناشف، يحك، وملتهب. هي أكثر شي تصير عند الأطفال، بس ممكن تصير بأي عمر. الخبر الزين إنها مو مرض معدي (ما تنتقل باللمس)، والخبر الموزين إنها "مزمنة"، يعني تجي وتروح على شكل نوبات (تهيج) وتخف مرات.</p>
+                <p>كلمة "تأتبية" (Atopic) تعني إن الشخص عنده استعداد وراثي للحساسية، يعني غالباً الشخص اللي عنده أكزيما، هو أو أهله عندهم ربو (Asthma) أو حساسية القش (Hay fever).</p>
 
                 <h2>شلون تعرف إنها أكزيما؟ (الأعراض)</h2>
-                <p>الأعراض تختلف شوية حسب العمر، بس العلامة الأساسية هي <strong>الحكة القوية</strong>:</p>
+                <p>الأكزيما ممكن تطلع بأي مكان بالجسم، بس أماكنها المفضلة تتغير حسب العمر:</p>
                 <ul>
-                    <li><strong>حكة لا تطاق:</strong> تزيد كلش بالليل وتخلي الطفل ما ينام زين.</li>
-                    <li><strong>جفاف الجلد:</strong> الجلد يكون خشن، يابس، ومتقشر.</li>
-                    <li><strong>احمرار والتهاب:</strong> الجلد يصير أحمر وممكن يورم شوية من كثر الحك.</li>
-                    <li><strong>أماكن الإصابة:</strong>
-                        <ul>
-                            <li><strong>عند الرضع:</strong> تطلع بالخدود، الوجه، وفروة الراس (بس ما تصيب منطقة الحفاظة).</li>
-                            <li><strong>عند الأطفال والكبار:</strong> تتركز بطيات الجلد (العكس، خلف الركبة، الرقبة، الكاحل).</li>
-                        </ul>
-                    </li>
-                    <li>أحياناً الجلد يتشقق وينزف أو يفرز سائل شفاف (معناها صار بي التهاب بكتيري).</li>
+                    <li><strong>عند الرضع والأطفال الصغار:</strong> تطلع أكثر شي بالوجه (الخدود)، فروة الراس، والجذع.</li>
+                    <li><strong>عند الأطفال الأكبر والكبار:</strong> تتركز بطيات الجلد (ثنيات الجسم) مثل العكس (باطن المرفق)، خلف الركبة، الرقبة، والكاحل.</li>
+                </ul>
+                <p><strong>شكل الجلد المصاب:</strong></p>
+                <ul>
+                    <li>حكة قوية (وهي العلامة الأساسية، وتزيد بالليل وتخرب النوم).</li>
+                    <li>جلد جاف جداً، متشقق، وممكن يصير خشن أو سميك من كثرة الحك.</li>
+                    <li>احمرار (بالبشرة الفاتحة) أو لون بنفسجي/رصاصي/بني غامق (بالبشرة السمراء).</li>
+                    <li>مرات تطلع فقاعات صغيرة أو ينزف الجلد إذا انجرح.</li>
                 </ul>
 
-                <h2>شنو اللي يهيج الأكزيما؟ (المحفزات)</h2>
-                <p>الأكزيما تجي وتروح (نوبات)، وأكو شغلات تخليها "تهيج" وتصير أسوأ، لازم تنتبهون منها:</p>
+                <h2>ليش تصير؟ (الأسباب والمحفزات)</h2>
+                <p>السبب الدقيق مية بالمية محد يعرفه، بس هو خليط من الوراثة والبيئة:</p>
                 <ul>
-                    <li><strong>الصابون والعطور:</strong> الصابون العادي، الشامبو المعطر، وفقاعات الحمام تنشف الجلد حيل وتزيد المشكلة.</li>
-                    <li><strong>الملابس:</strong> الصوف والنايلون والملابس الخشنة تخلي الجسم "ياكل" المريض. (القطن 100% هو الصديق الوحيد للأكزيما).</li>
+                    <li><strong>الوراثة:</strong> إذا أحد الأبوين عنده أكزيما، احتمال 60% الطفل ياخذها. إذا الأثنين عندهم، الاحتمال يصير 80%.</li>
+                    <li><strong>حاجز الجلد:</strong> بجلد مرضى الأكزيما، الطبقة الدهنية الحامية تكون ضعيفة (بسبب نقص بروتين اسمه filaggrin)، فالمي يتبخر بسرعة والجلد ينشف، وتدخل المواد المهيجة بسهولة.</li>
+                </ul>
+                <p><strong>المحفزات (الأشياء اللي تهيج الأكزيما):</strong></p>
+                <ul>
+                    <li><strong>الصابون والمنظفات:</strong> الصابون العادي، فقاعات الحمام، ومساحيق الغسيل تنشف الجلد.</li>
+                    <li><strong>الملابس:</strong> الصوف والنايلون والأقمشة الخشنة.</li>
                     <li><strong>الحرارة والتعرق:</strong> الجو الحار والتعرق يسبب حكة فظيعة.</li>
-                    <li><strong>التوتر النفسي:</strong> القلق والضوجة تزيد الحكة بشكل مباشر.</li>
-                    <li><strong>الجفاف:</strong> قلة شرب المي وجفاف الجو بالشتاء.</li>
-                    <li><strong>الخدش (الحك):</strong> كلما تحك الجلد، كلما يلتهب أكثر وتحك أكثر (نسميها دورة الحكة-الخدش).</li>
+                    <li><strong>التوتر النفسي (Stress):</strong> يزيد الحكة بشكل واضح.</li>
+                    <li><strong>عث الغبار والحيوانات الأليفة:</strong> وبر الحيوانات وغبار البيت ممكن يهيج التحسس.</li>
+                    <li><strong>الطعام:</strong> عند الأطفال الصغار (أقل من سنة)، ممكن بعض الأكلات (مثل الحليب، البيض، المكسرات) تهيج الأكزيما، بس هذا مو شائع عند الكبار.</li>
                 </ul>
 
-                <h2>خطة العلاج الشاملة</h2>
-                <p>علاج الأكزيما مو بس دواء، هو "نمط حياة" وروتين يومي لازم تلتزمون بي:</p>
+                <h2>خطة العلاج الذهبية</h2>
+                <p>علاج الأكزيما يعتمد على شغلتين: ترطيب دائم لمنع الهيجان، وعلاج قوي وقت الهيجان.</p>
 
-                <h3>1. الترطيب ثم الترطيب (Emollients)</h3>
-                <p>هذا هو العلاج الحقيقي واليومي. المرطبات الطبية (مثل الفازلين الطبي، كريمات خاصة خالية من العطور) وظيفتها تعوض الدهون المفقودة بالجلد وتسوي طبقة حماية.</p>
+                <h3>1. المرطبات (Emollients) - خط الدفاع الأول</h3>
+                <p>هاي مو مستحضرات تجميل، هاي "علاج". لازم تستخدمها يومياً وبكثرة حتى لو الجلد زين.</p>
                 <ul>
-                    <li>ادهن جسم الطفل <strong>بكثرة</strong> (غرقه بالكريم) مرتين أو ثلاثة باليوم.</li>
-                    <li>أحسن وقت للدهن هو <strong>بعد الحمام مباشرة</strong> والجلد بعده رطب، حتى نحبس الرطوبة جوة الجلد.</li>
-                    <li>استخدم بدائل الصابون (Soap substitutes) من تغسل، لأن الصابون العادي عدو الأكزيما.</li>
+                    <li><strong>الكمية:</strong> ادهن كمية كبيرة وغطي كل الجلد.</li>
+                    <li><strong>الوقت:</strong> أحسن وقت هو بعد الحمام مباشرة والجلد بعده رطب.</li>
+                    <li><strong>النوع:</strong> المراهم (Ointments) اللي تكون دهنية (مثل الفازلين) أحسن بهواي من الكريمات واللوشنات لأنها تحبس الرطوبة أكثر.</li>
+                    <li><strong>طريقة الاستخدام:</strong> ادهن باتجاه نمو الشعر (مو عكسه) حتى لا تنسد بصيلات الشعر وتلتهب.</li>
+                    <li><strong>النظافة:</strong> لا تدخل أصبعك بعلبة الكريم، استخدم خاشوكة (ملعقة) نظيفة أو ضغاط (Pump) حتى لا تتلوث العلبة بالجراثيم.</li>
+                    <li><strong>بديل الصابون:</strong> استخدم مرطبات خاصة للغسل (Soap substitutes) بدل الصابون العادي.</li>
                 </ul>
 
-                <h3>2. الستيرويدات الموضعية (الكورتيزون)</h3>
-                <p>هواي ناس يخافون من كلمة "كورتيزون"، بس هو العلاج السحري والآمن <strong>للهيجان</strong> (من يصير الجلد أحمر وملتهب).</p>
+                <h3>2. الستيرويدات الموضعية (Topical Steroids)</h3>
+                <p>تستخدم فقط من "تهيج" الأكزيما (يصير الجلد أحمر وملتهب).</p>
                 <ul>
-                    <li>يستخدم <strong>فقط</strong> على الأماكن المصابة (الحمرة والخشنة).</li>
-                    <li>يستخدم مرة أو مرتين باليوم لفترة قصيرة (أسبوع أو أسبوعين) حسب وصفة الطبيب، وبعدين توقفه وترجع بس عالمرطب.</li>
-                    <li>إذا استخدمته حسب تعليمات الطبيب، ماكو أي خوف منه ولا يسبب أضرار.</li>
+                    <li>تجي بقوات مختلفة (خفيف، متوسط، قوي). الطبيب يحدد النوع حسب مكان الإصابة وعمر المريض.</li>
+                    <li>تستخدم لفترة قصيرة (أيام أو أسابيع) لحد ما يروح الالتهاب، وبعدين ترجع بس عالمرطب.</li>
+                    <li>لا تخاف منها، إذا استخدمتها صح وحسب وصفة الطبيب، هي آمنة جداً وما تسبب أضرار.</li>
                 </ul>
 
-                <h3>3. مضادات الهيستامين (شراب الحساسية)</h3>
-                <p>ممكن الطبيب يكتب شراب (مثل هستادين أو أليرفين) خاصة بالليل، حتى يقلل الحكة ويخلي الطفل ينام مرتاح.</p>
+                <h3>3. علاجات أخرى</h3>
+                <ul>
+                    <li><strong>مضادات الهيستامين:</strong> لتقليل الحكة والمساعدة على النوم.</li>
+                    <li><strong>الضمادات الرطبة:</strong> للحالات الشديدة.</li>
+                    <li><strong>أدوية مناعية:</strong> للحالات اللي ما تستجيب للكريمات (بوصفة أخصائي حصراً).</li>
+                </ul>
             </div>
 
             <div class="emergency-box">
-                <h2>حالة طارئة: الأكزيما الهربسية</h2>
-                <p>إذا فجأة شفتي طفح الأكزيما تحول إلى <strong>فقاعات مائية صغيرة ومؤلمة</strong>، وانتشرت بسرعة، وصار عند الطفل صخونة وتعب.. هاي حالة خطرة سببها فيروس الهربس (نفس فيروس لطمة الحمى). <strong>لازم تروحين للمستشفى فوراً</strong> لأنها تحتاج علاج مضاد للفيروسات، وإهمالها خطر.</p>
+                <h2>حالة طارئة: الأكزيما الملتهبة</h2>
+                <p>راجع الطبيب فوراً إذا شفت:</p>
+                <ul>
+                    <li>سائل يخرج من الجلد (نز) أو قشور صفراء (علامة التهاب بكتيري).</li>
+                    <li>فقاعات مائية صغيرة مؤلمة تنتشر بسرعة (أكزيما هربسية - Eczema herpeticum).</li>
+                    <li>صخونة ورجفة وتعب عام.</li>
+                </ul>
             </div>
 
             <div class="cta-box">
-                <h3>تعبتي من الحكة والسهر؟</h3>
-                <p>الأكزيما تحتاج "طولة بال" ومتابعة. طبيب الجلدية يگدر يرتب لج خطة علاجية تسيطرين بيها ع المرض تماماً. احجزي موعدج هسه.</p>
-                <a href="doctors.html" class="cta-btn">عرض أطباء الجلدية</a>
+                <h3>الأكزيما مأثرة على حياتك؟</h3>
+                <p>السيطرة على الأكزيما ممكنة جداً بخطة علاجية صحيحة ومتابعة مستمرة. احجز موعدك هسه وي أطباء الجلدية.</p>
+                <a href="doctors.html" class="cta-btn">عرض قائمة الأطباء</a>
             </div>
         </div>
     </main>
