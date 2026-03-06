@@ -14,17 +14,19 @@
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     
     <style>
-        /* --- نفس الستايل العام المستخدم في صفحة الأعصاب --- */
+        /* --- Global Reset & Colors --- */
         *, *::before, *::after { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
         :root { --nhs-blue: #005eb8; --nhs-dark-blue: #003087; --nhs-light-grey: #f0f4f5; --nhs-text: #212b32; --nhs-white: #ffffff; }
         body { font-family: "Cairo", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; margin: 0; background-color: var(--nhs-light-grey); color: var(--nhs-text); line-height: 1.6; -webkit-font-smoothing: antialiased; display: flex; flex-direction: column; min-height: 100vh; }
         
+        /* --- Header --- */
         .nhs-header { background-color: var(--nhs-white); border-bottom: 8px solid var(--nhs-blue); padding: 12px 0; }
         .header-content { max-width: 1300px; margin: 0 auto; padding: 0 20px; display: flex; justify-content: space-between; align-items: center; }
         .logo-link { display: inline-flex; align-items: center; text-decoration: none; gap: 15px; }
         .site-logo { max-height: 55px; width: auto; object-fit: contain; }
         .header-moto { font-weight: 700; color: var(--nhs-blue); font-size: 1.1rem; }
         
+        /* --- Nav --- */
         .nhs-nav { background-color: var(--nhs-blue); color: white; position: sticky; top: 0; z-index: 1000; box-shadow: 0 4px 6px rgba(0,0,0,0.1); margin-bottom: 15px; }
         .nav-content { max-width: 1300px; margin: 0 auto; padding: 0 20px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; }
         .main-links { display: flex; }
@@ -39,24 +41,25 @@
         .logout-btn { background-color: #d32f2f; color: white !important; padding: 6px 15px; border-radius: 20px; font-size: 0.85rem; cursor: pointer; text-decoration: none; border: none; font-weight: bold; transition: background-color 0.2s; font-family: "Cairo", sans-serif; }
         .logout-btn:hover { background-color: #b71c1c; }
         
-        /* Page Header */
+        /* --- Page Header --- */
         .page-header { max-width: 1300px; margin: 25px auto 30px auto; padding: 0 20px; display: flex; align-items: center; justify-content: flex-end; gap: 20px; }
         .back-btn { display: inline-flex; align-items: center; gap: 8px; background-color: var(--nhs-white); color: var(--nhs-text); padding: 8px 16px; border-radius: 6px; text-decoration: none; font-size: 0.95rem; font-weight: 700; border: 1px solid #d1d5d8; transition: all 0.2s; box-shadow: 0 1px 2px rgba(0,0,0,0.05); }
         .back-btn:hover { background-color: var(--nhs-blue); color: var(--nhs-white); border-color: var(--nhs-blue); }
         .page-header h1 { margin: 0; font-size: 1.6rem; color: var(--nhs-blue); font-weight: 800; line-height: 1.2; }
         
-        /* Grid System */
+        /* --- Grid System --- */
         .disease-grid { max-width: 1300px; margin: 0 auto 50px auto; padding: 0 20px; display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 15px; }
         .disease-card { background-color: var(--nhs-white); border: 1px solid #e2e8f0; border-radius: 8px; padding: 20px 15px; text-align: center; color: var(--nhs-text); text-decoration: none; font-weight: 700; font-size: 1.05rem; transition: all 0.2s ease; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 90px; box-shadow: 0 2px 4px rgba(0,0,0,0.04); gap: 8px; }
         .disease-card:hover { background-color: var(--nhs-blue); color: var(--nhs-white); border-color: var(--nhs-blue); transform: translateY(-3px); box-shadow: 0 6px 12px rgba(0,0,0,0.15); }
         .disease-card span { font-size: 0.8rem; color: #718096; font-weight: 600; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
         .disease-card:hover span { color: #e2e8f0; }
-
-        /* Section Dividers (لترتيب المواضيع الكثيرة) */
-        .grid-divider { grid-column: 1 / -1; margin-top: 20px; margin-bottom: 10px; border-bottom: 2px solid #e2e8f0; padding-bottom: 10px; }
-        .grid-divider h3 { color: var(--nhs-dark-blue); margin: 0; font-size: 1.2rem; font-weight: 800; }
         
-        /* Footer */
+        /* --- Section Dividers --- */
+        .grid-divider { grid-column: 1 / -1; margin-top: 30px; margin-bottom: 15px; border-bottom: 2px solid #e2e8f0; padding-bottom: 10px; display: flex; align-items: center; gap: 10px; }
+        .grid-divider h3 { color: var(--nhs-dark-blue); margin: 0; font-size: 1.3rem; font-weight: 800; }
+        .grid-divider i { color: var(--nhs-blue); font-size: 1.2rem; }
+
+        /* --- Footer --- */
         footer { background-color: #e8edee; border-top: 8px solid var(--nhs-blue); padding: 40px 20px 20px 20px; margin-top: auto; }
         .footer-content { max-width: 1300px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; margin-bottom: 25px; }
         .footer-section h4 { color: var(--nhs-dark-blue); font-size: 1.15rem; font-weight: 800; margin-top: 0; margin-bottom: 15px; position: relative; padding-bottom: 10px; }
@@ -116,59 +119,70 @@
     </div>
 
     <main class="disease-grid">
-        <div class="grid-divider"><h3>حديثي الولادة والرضع</h3></div>
-        <a href="neonatal-jaundice.html" class="disease-card">أبو صفار <span>(Jaundice)</span></a>
+        
+        <div class="grid-divider"><i class="fas fa-baby"></i> <h3>حديثي الولادة والرضع</h3></div>
+        <a href="neonatal-jaundice.html" class="disease-card">أبو صفار <span>(Neonatal Jaundice)</span></a>
         <a href="colic-in-babies.html" class="disease-card">مغص الرضع <span>(Colic)</span></a>
         <a href="gastro-oesophageal-reflux.html" class="disease-card">الارتجاع (الزواع) <span>(Reflux)</span></a>
         <a href="teething.html" class="disease-card">التسنين <span>(Teething)</span></a>
         <a href="nappy-rash.html" class="disease-card">طفح الحفاظ <span>(Nappy Rash)</span></a>
+        <a href="cradle-cap.html" class="disease-card">قبعة المهد (خبزة الراس) <span>(Cradle Cap)</span></a>
+        <a href="sudden-infant-death.html" class="disease-card">موت المهد المفاجئ <span>(SIDS)</span></a>
 
-        <div class="grid-divider"><h3>الحمى والالتهابات</h3></div>
+        <div class="grid-divider"><i class="fas fa-temperature-high"></i> <h3>الحمى والأمراض الفيروسية</h3></div>
         <a href="fever-in-children.html" class="disease-card">سخونة الأطفال <span>(Fever)</span></a>
         <a href="febrile-seizures.html" class="disease-card">شمرة الحرارة <span>(Febrile Seizures)</span></a>
-        <a href="chickenpox.html" class="disease-card">جدري الماء <span>(Chickenpox)</span></a>
+        <a href="measles.html" class="disease-card">الحصبة <span>(Measles)</span></a>
+        <a href="chickenpox.html" class="disease-card">جدري الماء (أبو خريان) <span>(Chickenpox)</span></a>
+        <a href="mumps.html" class="disease-card">النكاف (أبو دغيم) <span>(Mumps)</span></a>
+        <a href="rubella.html" class="disease-card">الحصبة الألمانية <span>(Rubella)</span></a>
         <a href="hand-foot-mouth.html" class="disease-card">اليد والقدم والفم <span>(HFMD)</span></a>
         <a href="scarlet-fever.html" class="disease-card">الحمى القرمزية <span>(Scarlet Fever)</span></a>
+        <a href="meningitis-children.html" class="disease-card">التهاب السحايا <span>(Meningitis)</span></a>
+        <a href="head-lice.html" class="disease-card">قمل الرأس <span>(Head Lice)</span></a>
 
-        <div class="grid-divider"><h3>الجهاز الهضمي</h3></div>
-        <a href="gastroenteritis-children.html" class="disease-card">النزلة المعوية <span>(Gastroenteritis)</span></a>
-        <a href="toddlers-diarrhoea.html" class="disease-card">إسهال الدارجين <span>(Toddler's Diarrhoea)</span></a>
-        <a href="constipation-children.html" class="disease-card">الإمساك <span>(Constipation)</span></a>
-        <a href="threadworms.html" class="disease-card">الديدان <span>(Threadworms)</span></a>
-        <a href="coeliac-disease-children.html" class="disease-card">حساسية الحنطة <span>(Coeliac Disease)</span></a>
-
-        <div class="grid-divider"><h3>الجهاز التنفسي والحساسية</h3></div>
+        <div class="grid-divider"><i class="fas fa-lungs"></i> <h3>الجهاز التنفسي والحساسية</h3></div>
         <a href="coughs-and-colds-children.html" class="disease-card">النشلة والسعال <span>(Coughs & Colds)</span></a>
         <a href="croup.html" class="disease-card">الخناق <span>(Croup)</span></a>
         <a href="bronchiolitis.html" class="disease-card">التهاب القصيبات <span>(Bronchiolitis)</span></a>
         <a href="whooping-cough.html" class="disease-card">السعال الديكي <span>(Whooping Cough)</span></a>
         <a href="eczema-children.html" class="disease-card">أكزيما الأطفال <span>(Eczema)</span></a>
+        <a href="cystic-fibrosis.html" class="disease-card">التليف الكيسي <span>(Cystic Fibrosis)</span></a>
 
-        <div class="grid-divider"><h3>العظام والمفاصل</h3></div>
-        <a href="ddh.html" class="disease-card">خلع الورك <span>(DDH)</span></a>
+        <div class="grid-divider"><i class="fas fa-utensils"></i> <h3>الجهاز الهضمي</h3></div>
+        <a href="gastroenteritis-children.html" class="disease-card">النزلة المعوية <span>(Gastroenteritis)</span></a>
+        <a href="toddlers-diarrhoea.html" class="disease-card">إسهال الدارجين <span>(Toddler's Diarrhoea)</span></a>
+        <a href="constipation-children.html" class="disease-card">الإمساك <span>(Constipation)</span></a>
+        <a href="threadworms.html" class="disease-card">الديدان الخيطية <span>(Threadworms)</span></a>
+        <a href="coeliac-disease-children.html" class="disease-card">حساسية الحنطة <span>(Coeliac Disease)</span></a>
+
+        <div class="grid-divider"><i class="fas fa-bone"></i> <h3>العظام والمفاصل</h3></div>
+        <a href="ddh.html" class="disease-card">خلع الورك الولادي <span>(DDH)</span></a>
         <a href="growing-pains.html" class="disease-card">آلام النمو <span>(Growing Pains)</span></a>
         <a href="juvenile-arthritis.html" class="disease-card">روماتيزم الأطفال <span>(JIA)</span></a>
         <a href="perthes-disease.html" class="disease-card">مرض بيرثيز <span>(Perthes)</span></a>
         <a href="short-stature.html" class="disease-card">قصر القامة <span>(Short Stature)</span></a>
+        <a href="duchenne-md.html" class="disease-card">الحثل العضلي <span>(Duchenne MD)</span></a>
 
-        <div class="grid-divider"><h3>الأمراض الوراثية والمزمنة</h3></div>
+        <div class="grid-divider"><i class="fas fa-dna"></i> <h3>أمراض وراثية ومزمنة</h3></div>
         <a href="downs-syndrome.html" class="disease-card">متلازمة داون <span>(Down Syndrome)</span></a>
         <a href="thalassaemia.html" class="disease-card">الثلاسيميا <span>(Thalassaemia)</span></a>
         <a href="sickle-cell-disease.html" class="disease-card">فقر الدم المنجلي <span>(Sickle Cell)</span></a>
-        <a href="diabetes-children.html" class="disease-card">سكري الأطفال <span>(Diabetes)</span></a>
+        <a href="diabetes-children.html" class="disease-card">سكري الأطفال <span>(Diabetes Type 1)</span></a>
         <a href="cerebral-palsy.html" class="disease-card">الشلل الدماغي <span>(Cerebral Palsy)</span></a>
 
-        <div class="grid-divider"><h3>جراحة، عيون، وأذن</h3></div>
+        <div class="grid-divider"><i class="fas fa-user-md"></i> <h3>جراحة، عيون، وتشوهات خلقية</h3></div>
         <a href="undescended-testicles.html" class="disease-card">الخصية الهاجرة <span>(Undescended Testicles)</span></a>
         <a href="hydrocele-children.html" class="disease-card">القيلة المائية <span>(Hydrocele)</span></a>
         <a href="tear-duct-blockage.html" class="disease-card">انسداد القناة الدمعية <span>(Blocked Tear Duct)</span></a>
         <a href="glue-ear.html" class="disease-card">الأذن الصمغية <span>(Glue Ear)</span></a>
         <a href="squint-children.html" class="disease-card">الحول <span>(Squint)</span></a>
+        <a href="cleft-lip.html" class="disease-card">الشفة الأرنبية <span>(Cleft Lip/Palate)</span></a>
+        <a href="spina-bifida.html" class="disease-card">الصلب المشقوق <span>(Spina Bifida)</span></a>
 
-        <div class="grid-divider"><h3>حالات خطرة (توعية)</h3></div>
+        <div class="grid-divider"><i class="fas fa-procedures"></i> <h3>حالات خطرة وأورام</h3></div>
+        <a href="kawasaki-disease.html" class="disease-card">مرض كاواساكي <span>(Kawasaki Disease)</span></a>
         <a href="childhood-leukaemia.html" class="disease-card">لوكيميا الأطفال <span>(Leukaemia)</span></a>
-        <a href="meningitis-children.html" class="disease-card">التهاب السحايا <span>(Meningitis)</span></a>
-        <a href="kawasaki-disease.html" class="disease-card">مرض كاواساكي <span>(Kawasaki)</span></a>
         <a href="neuroblastoma.html" class="disease-card">ورم الخلايا العصبية <span>(Neuroblastoma)</span></a>
         <a href="retinoblastoma.html" class="disease-card">سرطان الشبكية <span>(Retinoblastoma)</span></a>
     </main>
