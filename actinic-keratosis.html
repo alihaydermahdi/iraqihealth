@@ -1,4 +1,6 @@
-<!DOCTYPE html><html lang="ar" dir="rtl"><head>
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title> كشفيّـة | التقرن الشمسي </title>
@@ -9,7 +11,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     
     <style>
-        /* [نفس الستايل الموحد] */
+        /* [نفس الستايل الموحد للموقع] */
         *, *::before, *::after { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
         :root { --nhs-blue: #005eb8; --nhs-dark-blue: #003087; --nhs-light-grey: #f0f4f5; --nhs-text: #212b32; --nhs-white: #ffffff; }
         body { font-family: "Cairo", sans-serif; margin: 0; background-color: var(--nhs-light-grey); color: var(--nhs-text); line-height: 1.8; display: flex; flex-direction: column; min-height: 100vh; }
@@ -34,6 +36,7 @@
         .medical-disclaimer { background-color: #fff3cd; border-right: 4px solid #f6ad55; padding: 15px 20px; border-radius: 4px; font-weight: 600; color: #9c4221; margin-bottom: 30px; font-size: 0.95rem; display: flex; gap: 15px; align-items: flex-start; }
         .medical-disclaimer i { font-size: 1.4rem; margin-top: 2px; }
         .article-content h2 { color: var(--nhs-blue); font-size: 1.6rem; font-weight: 800; margin-top: 40px; margin-bottom: 15px; padding-bottom: 8px; border-bottom: 2px solid #e2e8f0; }
+        .article-content h3 { color: var(--nhs-dark-blue); font-size: 1.3rem; font-weight: 700; margin-top: 25px; margin-bottom: 10px; }
         .article-content p { font-size: 1.1rem; color: #2d3748; margin-bottom: 20px; }
         .article-content ul { padding-right: 25px; margin-bottom: 25px; list-style-type: disc; }
         .article-content ul li { font-size: 1.1rem; color: #2d3748; margin-bottom: 8px; }
@@ -49,7 +52,9 @@
         footer { background-color: #e8edee; border-top: 8px solid var(--nhs-blue); padding: 40px 20px 20px 20px; margin-top: auto; }
         .copyright-bar { text-align: center; border-top: 1px solid #d1d5d8; padding-top: 15px; font-size: 0.85rem; font-weight: 700; color: #718096; }
         @media (max-width: 768px) { .header-content, .nav-content { flex-direction: column; text-align: center; gap: 8px; } .main-links { width: 100%; justify-content: center; overflow-x: auto; } .nav-actions { width: 100%; justify-content: center; padding: 10px; background-color: var(--nhs-dark-blue); } .article-card { padding: 20px; } .article-title { font-size: 1.8rem; } }
-    </style></head><body>
+    </style>
+</head>
+<body>
 
     <header class="nhs-header">
         <div class="header-content">
@@ -64,7 +69,7 @@
         <div class="nav-content">
             <div class="main-links">
                 <a href="index.html"><i class="fas fa-home"></i> الرئيسية</a>
-                <a href="index.html" class="active"><i class="fas fa-stethoscope"></i> دليل الأمراض</a>
+                <a href="dermatology.html" class="active"><i class="fas fa-stethoscope"></i> الأمراض الجلدية</a>
                 <a href="doctors.html"><i class="fas fa-user-doctor"></i> الأطباء والمراكز</a>
             </div>
             <div class="nav-actions">
@@ -82,42 +87,72 @@
 
         <div class="article-card">
             <h1 class="article-title">التقرن الشمسي (Actinic Keratosis)</h1>
-            <div class="article-meta"><span><i class="fas fa-user-md"></i> مراجعة: فريق كشفيّة الطبي</span></div>
+            <div class="article-meta"><span><i class="fas fa-user-md"></i> مراجعة: د. أحمد (اختصاص جلدية)</span></div>
 
             <div class="medical-disclaimer">
                 <i class="fas fa-circle-info"></i>
-                <div>هاي المعلومات مخصصة للتوعية والتثقيف الصحي فقط، وما تعوض أبد عن استشارة الطبيب المختص أو الفحص السريري.</div>
+                <div>ملاحظة مهمة: هاي المعلومات مخصصة للتوعية والتثقيف الصحي فقط، وما تعوض أبد عن استشارة الطبيب المختص أو الفحص السريري.</div>
             </div>
 
             <div class="article-content">
-                <p>التقرن الشمسي هو بقع خشنة تظهر على الجلد اللي تعرض للشمس لفترات طويلة (مثل الوجه، الصلعة، وظهر اليد). تعتبر حالة "ما قبل سرطانية" (Pre-cancerous)، يعني إذا انتركت سنين طويلة، ممكن تتحول لنوع من أنواع سرطان الجلد (SCC).</p>
+                <p>التقرن الشمسي (أو التقرن السفعي) هو عبارة عن بقع خشنة ومتقشرة تظهر على الجلد اللي تعرض للشمس لفترات طويلة وبشكل متكرر على مر السنين. هاي البقع تعتبر "مرحلة ما قبل السرطان" (Pre-cancerous)، يعني هي مو سرطان حالياً، بس إذا انتركت بدون علاج لفترة طويلة، ممكن تتحول إلى نوع من أنواع سرطان الجلد (سرطان الخلايا الحرشفية).</p>
+                <p>لهذا السبب، الأطباء ياخذون هاي الحالة بجدية ويعالجونها حتى يمنعون أي مشاكل بالمستقبل. هي شائعة جداً عند كبار السن، وأصحاب البشرة الفاتحة.</p>
 
-                <h2>الأعراض</h2>
+                <h2>شلون تعرف التقرن الشمسي؟ (الأعراض)</h2>
+                <p>البقع تظهر بالأماكن المكشوفة للشمس مثل: الوجه، الأذنين، الشفاه، فروة الراس (عند الصلعان)، وظهر اليدين. مميزاتها:</p>
                 <ul>
-                    <li>بقعة صغيرة خشنة الملمس (مثل ورق الجام/الصنفرة).</li>
-                    <li>لونها وردي، أحمر، أو بني.</li>
-                    <li>ممكن تكون حساسة أو توجع شوية.</li>
-                    <li>تظهر غالباً عند كبار السن.</li>
+                    <li><strong>الملمس:</strong> تكون خشنة وجافة جداً، تشبه ملمس "ورق الجام" (الصنفرة). مرات تحس بيها قبل ما تشوفها.</li>
+                    <li><strong>الشكل:</strong> بقع صغيرة (أقل من 2.5 سم)، مسطحة أو بارزة شوية، وعليها قشور.</li>
+                    <li><strong>اللون:</strong> ممكن تكون وردية، حمراء، بنية، أو بنفس لون الجلد.</li>
+                    <li><strong>الأحساس:</strong> مرات تسبب حكة خفيفة أو شعور بالحرقة، أو تكون حساسة من تلمسها.</li>
                 </ul>
 
-                <h2>العلاج</h2>
-                <p>العلاج بسيط وضروري لمنع تحولها لسرطان:</p>
+                <h2>ليش تصير؟ (الأسباب وعوامل الخطر)</h2>
+                <p>السبب الرئيسي هو تراكم الضرر الناتج عن الأشعة فوق البنفسجية (UV) من الشمس على خلايا الجلد عبر السنين. يعني "حروق الشمس" اللي صارتلك من چنت صغير، ممكن تبين نتايجها هسه.</p>
+                <p><strong>أنت معرض أكثر للإصابة إذا:</strong></p>
                 <ul>
-                    <li><strong>التجميد (Cryotherapy):</strong> بالنيتروجين السائل.</li>
-                    <li><strong>كريمات طبية:</strong> (مثل 5-FU أو Imiquimod) تقشر الخلايا المتضررة.</li>
-                    <li><strong>الكشط:</strong> إزالتها جراحياً.</li>
+                    <li>عمرك فوق الـ 40 سنة (بس ممكن تصير للأصغر).</li>
+                    <li>بشرتك فاتحة، عيونك ملونة، أو شعرك أشقر/أحمر.</li>
+                    <li>تشتغل بالشمس لفترات طويلة (مثل عمال البناء، الفلاحين).</li>
+                    <li>عندك تاريخ سابق لحروق شمس قوية.</li>
+                    <li>مناعتك ضعيفة (بسبب أدوية أو مرض).</li>
+                </ul>
+
+                <h2>خيارات العلاج</h2>
+                <p>بما إنها ممكن تتحول لسرطان، الطبيب راح ينصح بإزالتها. العلاج سهل وبسيط ويعتمد على عدد البقع ومكانها:</p>
+
+                <h3>1. العلاجات الموضعية (كريمات وعصارات)</h3>
+                <p>إذا كان عندك بقع هواي أو منتشرة بمنطقة واسعة (مثل الجبهة أو الصلعة)، الطبيب ممكن يوصف كريمات تهاجم الخلايا المتضررة، مثل:</p>
+                <ul>
+                    <li><strong>كريم 5-فلورويوراسيل (5-FU):</strong> كريم كيميائي يوضع ع الجلد، يسبب احمرار وتقشير قوي (مثل الحرق) وبعدين يطلع جلد جديد صافي.</li>
+                    <li><strong>كريم إيميكويمود (Imiquimod):</strong> يحفز مناعة الجسم حتى تهاجم الخلايا الشاذة.</li>
+                    <li><strong>جل ديكلوفيناك (Diclofenac):</strong> مضاد التهاب يستخدم لفترة أطول.</li>
+                </ul>
+
+                <h3>2. التجميد (Cryotherapy)</h3>
+                <p>هذا أشيع علاج للبقع المفردة. الطبيب يرش "نتروجين سائل" بارد جداً على البقعة ويجمدها. البقعة تصير فقاعة وتوگع بعد أيام. العلاج سريع وياخذ ثواني بالعيادة.</p>
+
+                <h3>3. الكشط والكي (Curettage)</h3>
+                <p>الطبيب يكشط البقعة بأداة خاصة وبعدين يكوي مكانها بالكهرباء لوقف النزف وقتل أي خلايا باقية.</p>
+
+                <h2>الوقاية (درهم وقاية خير من قنطار علاج)</h2>
+                <p>حتى لو عالجت البقع، إذا رجعت تتعرض للشمس بدون حماية، راح تطلع بقع جديدة. لازم تحمي جلدك:</p>
+                <ul>
+                    <li><strong>واقي الشمس:</strong> استخدم واقي شمس بدرجة حماية (SPF 30) أو أكثر، كل يوم حتى بالشتاء.</li>
+                    <li><strong>توقيت الشمس:</strong> تجنب الشمس القوية بين الساعة 11 الصبح والـ 3 الظهر.</li>
+                    <li><strong>الملابس:</strong> البس قبعة عريضة تغطي الوجه والرقبة، وملابس بأكمام طويلة إذا شغلك بالشمس.</li>
                 </ul>
             </div>
 
             <div class="emergency-box">
-                <h2>الوقاية</h2>
-                <p>أفضل طريقة لمنع التقرن الشمسي هي استخدام واقي الشمس يومياً ولبس قبعة عريضة.</p>
+                <h2>شوكت لازم تخاف؟</h2>
+                <p>إذا لاحظت إن البقعة بدت: <strong>تكبر بسرعة، تنزف، تلتهب وتصير حمرة، أو صارت قاسية ومرتفعة مثل "القرن"</strong>. هاي علامات تحول لسرطان الجلد (SCC) ولازم فحص فوري.</p>
             </div>
 
             <div class="cta-box">
-                <h3>عندك بقع خشنة بوجهك؟</h3>
-                <p>علاجها سهل جداً ويحميك من مشاكل أكبر بالمستقبل. راجع طبيب الجلدية.</p>
-                <a href="doctors.html" class="cta-btn">عرض الأطباء</a>
+                <h3>عندك بقع خشنة بوجهك أو ايدك؟</h3>
+                <p>لا تهملها وتعتبرها مجرد جفاف. فحص بسيط عند طبيب الجلدية يطمنك ويخلصك منها قبل ما تصير مشكلة كبيرة. احجز موعدك.</p>
+                <a href="doctors.html" class="cta-btn">عرض أطباء الجلدية</a>
             </div>
         </div>
     </main>
