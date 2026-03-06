@@ -5,11 +5,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>كشفيّة | دليلك الطبي</title>
     
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     
     <style>
+        /* --- FIX: Global Reset for Mobile Overflow Issues --- */
+        *, *::before, *::after {
+            box-sizing: border-box; 
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        html, body {
+            width: 100%;
+            overflow-x: hidden; /* Prevents horizontal scrolling */
+            margin: 0;
+            padding: 0;
+        }
+        /* ---------------------------------------------------- */
+
         :root {
             --nhs-blue: #005eb8;
             --nhs-dark-blue: #003087;
@@ -19,8 +37,8 @@
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            margin: 0;
+            /* Font Family: Cairo */
+            font-family: "Cairo", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
             background-color: var(--nhs-light-grey);
             color: var(--nhs-text);
             line-height: 1.6;
@@ -32,6 +50,7 @@
             background-color: var(--nhs-white);
             border-bottom: 8px solid var(--nhs-blue); 
             padding: 12px 0;
+            width: 100%;
         }
 
         .header-content {
@@ -71,6 +90,7 @@
             z-index: 1000;
             box-shadow: 0 4px 6px rgba(0,0,0,0.1); 
             margin-bottom: 0; 
+            width: 100%;
         }
 
         .nav-content {
@@ -91,7 +111,7 @@
             color: white;
             text-decoration: none;
             padding: 15px 20px;
-            font-weight: 600;
+            font-weight: 700; 
             font-size: 0.95rem;
             transition: all 0.2s;
             display: flex;
@@ -100,13 +120,12 @@
             border-bottom: 3px solid transparent; 
         }
 
-        /* REMOVED ORANGE HOVER COLOR - Changed to White/Dark Blue */
         .main-links a:hover, .main-links a.active { 
             background-color: var(--nhs-dark-blue);
             border-bottom-color: var(--nhs-white); 
         }
 
-        /* أزرار الإجراءات */
+        /* Action Buttons */
         .nav-actions {
             display: flex;
             align-items: center;
@@ -158,59 +177,162 @@
             border: none;
             font-weight: bold;
             transition: background-color 0.2s;
+            font-family: "Cairo", sans-serif;
         }
 
         .logout-btn:hover {
             background-color: #b71c1c;
         }
 
+        /* --- Hero Search Section (Vezeeta Style) --- */
+        .hero-section {
+            background-color: var(--nhs-blue);
+            background-image: linear-gradient(135deg, var(--nhs-blue) 0%, var(--nhs-dark-blue) 100%);
+            padding: 50px 20px; /* Reduced padding slightly */
+            text-align: center;
+            color: white;
+            margin-bottom: 40px;
+            width: 100%;
+        }
+
+        .hero-section h1 {
+            font-family: "Cairo", sans-serif;
+            font-size: 1.8rem; /* REDUCED SIZE (was 2.5rem) */
+            margin-top: 0;
+            margin-bottom: 15px;
+            font-weight: 800;
+            letter-spacing: -0.3px;
+            line-height: 1.4;
+        }
+
+        .hero-section p {
+            font-size: 1.1rem;
+            margin-bottom: 30px;
+            opacity: 0.95;
+            font-weight: 400;
+        }
+
+        .search-box-container {
+            background: white;
+            max-width: 1000px;
+            margin: 0 auto;
+            border-radius: 12px;
+            padding: 10px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            display: flex;
+            gap: 10px;
+        }
+
+        .search-field {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 0 15px;
+            transition: border-color 0.2s;
+        }
+
+        .search-field:focus-within {
+            border-color: var(--nhs-blue);
+            box-shadow: 0 0 0 2px rgba(0,94,184,0.1);
+        }
+
+        .search-field i {
+            color: var(--nhs-blue);
+            font-size: 1.1rem;
+            margin-left: 10px;
+        }
+        
+        .search-field select, .search-field input {
+            width: 100%;
+            border: none;
+            background: transparent;
+            padding: 15px 0;
+            font-size: 1rem;
+            font-family: "Cairo", sans-serif; 
+            font-weight: 600;
+            color: var(--nhs-text);
+            outline: none;
+        }
+
+        .search-btn {
+            background-color: var(--nhs-dark-blue); 
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 0 30px;
+            font-size: 1.1rem;
+            font-family: "Cairo", sans-serif;
+            font-weight: 800;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .search-btn:hover {
+            background-color: #00225e; 
+        }
+
         /* --- Grid & Interactive Dropdowns --- */
         .clinical-grid {
             max-width: 1300px;
-            margin: 30px auto 50px auto;
+            margin: 0 auto 50px auto;
             padding: 0 20px;
+            width: 100%;
         }
 
         .grid-row {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 6px; 
-            margin-bottom: 6px;
+            gap: 10px; 
+            margin-bottom: 10px;
             position: relative;
         }
 
+        /* UPDATED: Single Professional Tile Style */
         .tile {
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
             text-align: center;
-            padding: 15px 5px; 
-            color: white;
+            padding: 20px 10px; 
+            background-color: var(--nhs-white); /* White Background */
+            color: var(--nhs-blue); /* Blue Text/Icon */
+            border: 1px solid #d1d5d8;
             cursor: pointer;
             transition: all 0.2s ease;
-            min-height: 90px; 
-            border-radius: 6px; 
-            box-shadow: 0 2px 4px rgba(0,0,0,0.08);
+            min-height: 100px; 
+            border-radius: 8px; 
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
         }
 
-        .tile:hover { 
-            opacity: 0.95; 
+        /* Hover & Active State: Invert Colors (Blue Background) */
+        .tile:hover, .tile.active-tile { 
+            background-color: var(--nhs-blue); 
+            color: var(--nhs-white);
+            border-color: var(--nhs-blue);
             transform: translateY(-2px); 
-            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
         }
 
         .tile i { 
-            font-size: 1.6rem; 
-            margin-bottom: 8px; 
+            font-size: 1.8rem; 
+            margin-bottom: 10px; 
+            transition: color 0.2s;
         }
 
         .tile span { 
             font-weight: 700; 
-            font-size: 1.15rem; 
+            font-size: 1.05rem; 
             line-height: 1.3;
         }
 
+        /* UPDATED: Mega Dropdown (Universal Blue) */
         .mega-dropdown {
             display: none;
             grid-template-columns: 1fr 1fr;
@@ -218,7 +340,11 @@
             margin-bottom: 6px;
             animation: fadeIn 0.2s ease;
             grid-column: 1 / -1; 
-            border-radius: 6px;
+            border-radius: 8px;
+            background-color: var(--nhs-blue); /* Fixed NHS Blue */
+            color: white;
+            margin-top: 5px;
+            box-shadow: inset 0 0 10px rgba(0,0,0,0.1);
         }
 
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
@@ -227,31 +353,20 @@
             padding: 15px;
             text-align: center;
             color: white;
-            font-weight: bold;
+            font-weight: 700;
             font-size: 1.1rem;
             border: 1px solid rgba(255,255,255,0.15);
         }
 
-        .drop-section a { color: white; text-decoration: none; display: block; width: 100%; height: 100%; }
+        .drop-section a { 
+            color: white; 
+            text-decoration: none; 
+            display: block; 
+            width: 100%; 
+            height: 100%;
+            font-family: "Cairo", sans-serif;
+        }
         .drop-section:hover { background: rgba(0,0,0,0.1); }
-
-        /* --- الألوان المسطحة --- */
-        .neuro     { background-color: #7cb342; } 
-        .eye       { background-color: #d32f2f; } 
-        .ent       { background-color: #d32f2f; } 
-        .resp      { background-color: #1976d2; } 
-        .cardio    { background-color: #afb42b; } 
-        .diabetes  { background-color: #0288d1; } 
-        .gastro    { background-color: #388e3c; } 
-        .renal     { background-color: #1565c0; } 
-        .urology   { background-color: #1565c0; } 
-        .women     { background-color: #8e24aa; } 
-        .paeds     { background-color: #4a148c; } 
-        .derm      { background-color: #1b5e20; } 
-        .msk       { background-color: #1b5e20; } 
-        .cancer    { background-color: #b71c1c; } 
-        .mental    { background-color: #7cb342; } 
-        .nutrition { background-color: #f57c00; } 
 
         /* --- Elegant Footer --- */
         footer {
@@ -259,6 +374,7 @@
             border-top: 8px solid var(--nhs-blue); 
             padding: 40px 20px 20px 20px; 
             margin-top: 40px; 
+            width: 100%;
         }
 
         .footer-content {
@@ -272,7 +388,7 @@
 
         .footer-section h4 { 
             color: var(--nhs-dark-blue); 
-            font-size: 1.05rem; 
+            font-size: 1.15rem; 
             font-weight: 800;
             margin-top: 0;
             margin-bottom: 15px; 
@@ -299,10 +415,11 @@
 
         .footer-section ul li { 
             margin-bottom: 10px; 
-            font-size: 0.85rem; 
+            font-size: 0.9rem; 
             color: #4a5568; 
             display: flex;
             align-items: center;
+            font-weight: 600;
         }
 
         .footer-section ul li a { 
@@ -327,8 +444,8 @@
             text-align: center; 
             border-top: 1px solid #d1d5d8; 
             padding-top: 15px; 
-            font-size: 0.8rem; 
-            font-weight: 600;
+            font-size: 0.85rem; 
+            font-weight: 700;
             color: #718096;
             letter-spacing: 0.5px;
         }
@@ -337,6 +454,9 @@
         @media (max-width: 1024px) {
             .grid-row { grid-template-columns: repeat(3, 1fr); }
             .footer-content { gap: 25px; }
+            .search-box-container { flex-direction: column; background: transparent; box-shadow: none; }
+            .search-field { background: white; border-radius: 8px; margin-bottom: 10px; }
+            .search-btn { padding: 15px; justify-content: center; }
         }
 
         @media (max-width: 768px) {
@@ -345,11 +465,12 @@
             
             .nav-content { flex-direction: column; padding: 0; }
             .main-links { width: 100%; justify-content: center; overflow-x: auto; }
-            .main-links a { padding: 12px 10px; font-size: 0.85rem; border-bottom: none; }
-            
-            /* Cleaned up nav actions */
+            .main-links a { padding: 12px 10px; font-size: 0.9rem; border-bottom: none; }
             .nav-actions { width: 100%; justify-content: center; padding: 10px; background-color: var(--nhs-dark-blue); flex-wrap: wrap; }
             .user-profile-info { width: 100%; justify-content: center; padding: 10px; background-color: var(--nhs-dark-blue); flex-wrap: wrap; }
+            
+            /* Reduced mobile font size */
+            .hero-section h1 { font-size: 1.4rem; }
             
             .grid-row { grid-template-columns: repeat(2, 1fr); } 
             .mega-dropdown { grid-template-columns: 1fr; }
@@ -396,22 +517,98 @@
         </div>
     </nav>
 
+    <section class="hero-section">
+        <h1>دليل أطباء العراق – بحث سريع حسب التخصص</h1>
+        
+        <form class="search-box-container" id="search-form">
+            
+            <div class="search-field">
+                <i class="fas fa-stethoscope"></i>
+                <select id="search-specialty">
+                    <option value="" disabled selected>اختر التخصص الطبي...</option>
+                    <option value="general_surgery">جراحة عامة وجراحة المناظير</option>
+                    <option value="bariatric_surgery">جراحة السمنة</option>
+                    <option value="neurosurgery">جراحة المخ والأعصاب</option>
+                    <option value="cardiothoracic_surgery">جراحة القلب والصدر</option>
+                    <option value="pediatric_surgery">جراحة الأطفال</option>
+                    <option value="plastic_surgery">جراحة التجميل</option>
+                    <option value="family_medicine">طب الأسرة</option>
+                    <option value="dentistry">طب الأسنان</option>
+                    <option value="neurology">أمراض المخ والأعصاب</option>
+                    <option value="ent">الأنف والأذن والحنجرة</option>
+                    <option value="pulmonology">أمراض الجهاز التنفسي</option>
+                    <option value="cardiology">أمراض القلب والأوعية الدموية</option>
+                    <option value="endocrinology">السكري والغدد الصماء</option>
+                    <option value="gastroenterology">أمراض الجهاز الهضمي والكبد</option>
+                    <option value="nephrology_urology">أمراض الكلى والمسالك البولية</option>
+                    <option value="obstetrics_gynecology">النسائية والتوليد</option>
+                    <option value="pediatrics">طب الأطفال والخدج</option>
+                    <option value="dermatology">الأمراض الجلدية</option>
+                    <option value="orthopedics_rheumatology">العظام والمفاصل والروماتيزم</option>
+                    <option value="hematology_oncology">أمراض الدم والأورام</option>
+                    <option value="ophthalmology">طب وجراحة العيون</option>
+                    <option value="psychiatry">الطب النفسي والصحة النفسية</option>
+                    <option value="nutrition">التغذية العلاجية وعلاج السمنة</option>
+                    <option value="andrology_infertility">الذكورة والعقم</option>
+                    <option value="radiology">الأشعة</option>
+                    <option value="laboratory">التحاليل الطبية</option>
+                    <option value="physiotherapy">العلاج الطبيعي</option>
+                    <option value="allergy_immunology">الحساسية والمناعة</option>
+                </select>
+            </div>
+
+            <div class="search-field">
+                <i class="fas fa-map-marker-alt"></i>
+                <select id="search-city">
+                    <option value="" disabled selected>اختار المحافظة...</option>
+                    <option value="baghdad">بغداد</option>
+                    <option value="nineveh">نينوى</option>
+                    <option value="basra">البصرة</option>
+                    <option value="salah_al_din">صلاح الدين</option>
+                    <option value="duhok">دهوك</option>
+                    <option value="erbil">أربيل</option>
+                    <option value="sulaymaniyah">السليمانية</option>
+                    <option value="diyala">ديالى</option>
+                    <option value="wasit">واسط</option>
+                    <option value="maysan">ميسان</option>
+                    <option value="dhi_qar">ذي قار</option>
+                    <option value="muthanna">المثنى</option>
+                    <option value="babil">بابل</option>
+                    <option value="karbala">كربلاء</option>
+                    <option value="najaf">النجف</option>
+                    <option value="anbar">الانبار</option>
+                    <option value="diwaniya">الديوانية</option>
+                    <option value="kirkuk">كركوك</option>
+                </select>
+            </div>
+
+            <div class="search-field">
+                <i class="fas fa-user-doctor"></i>
+                <input type="text" id="search-name" placeholder="اسم الدكتور أو العيادة (اختياري)">
+            </div>
+
+            <button type="submit" class="search-btn">
+                <i class="fas fa-search"></i> ابحث الآن
+            </button>
+        </form>
+    </section>
+
     <main class="clinical-grid">
         
         <div class="grid-row">
-            <div class="tile neuro" onclick="toggleDrop('drop1', 'neuro')">
+            <div class="tile" onclick="toggleDrop(this, 'drop1', 'neuro')">
                 <i class="fas fa-brain"></i>
                 <span>أمراض المخ والأعصاب</span>
             </div>
-            <div class="tile ent" onclick="toggleDrop('drop1', 'ent')">
+            <div class="tile" onclick="toggleDrop(this, 'drop1', 'ent')">
                 <i class="fas fa-ear-listen"></i>
                 <span>الأنف والأذن والحنجرة</span>
             </div>
-            <div class="tile resp" onclick="toggleDrop('drop1', 'resp')">
+            <div class="tile" onclick="toggleDrop(this, 'drop1', 'resp')">
                 <i class="fas fa-lungs"></i>
                 <span>أمراض الجهاز التنفسي</span>
             </div>
-            <div class="tile cardio" onclick="toggleDrop('drop1', 'cardio')">
+            <div class="tile" onclick="toggleDrop(this, 'drop1', 'cardio')">
                 <i class="fas fa-heart-pulse"></i>
                 <span>أمراض القلب والأوعية</span>
             </div>
@@ -422,19 +619,19 @@
         </div>
 
         <div class="grid-row">
-            <div class="tile diabetes" onclick="toggleDrop('drop2', 'diabetes')">
+            <div class="tile" onclick="toggleDrop(this, 'drop2', 'diabetes')">
                 <i class="fas fa-syringe"></i>
                 <span>السكري والغدد الصماء</span>
             </div>
-            <div class="tile gastro" onclick="toggleDrop('drop2', 'gastro')">
+            <div class="tile" onclick="toggleDrop(this, 'drop2', 'gastro')">
                 <i class="fas fa-pills"></i>
                 <span>الجهاز الهضمي والكبد</span>
             </div>
-            <div class="tile renal" onclick="toggleDrop('drop2', 'renal')">
+            <div class="tile" onclick="toggleDrop(this, 'drop2', 'renal')">
                 <i class="fas fa-droplet"></i>
                 <span>أمراض الكلى والمسالك</span>
             </div>
-            <div class="tile women" onclick="toggleDrop('drop2', 'women')">
+            <div class="tile" onclick="toggleDrop(this, 'drop2', 'women')">
                 <i class="fas fa-person-pregnant"></i>
                 <span>النسائية والتوليد</span>
             </div>
@@ -445,19 +642,19 @@
         </div>
 
         <div class="grid-row">
-            <div class="tile paeds" onclick="toggleDrop('drop3', 'paeds')">
+            <div class="tile" onclick="toggleDrop(this, 'drop3', 'paeds')">
                 <i class="fas fa-child-reaching"></i>
                 <span>طب الأطفال والخدج</span>
             </div>
-            <div class="tile derm" onclick="toggleDrop('drop3', 'derm')">
+            <div class="tile" onclick="toggleDrop(this, 'drop3', 'derm')">
                 <i class="fas fa-hand-sparkles"></i>
                 <span>الأمراض الجلدية</span>
             </div>
-            <div class="tile msk" onclick="toggleDrop('drop3', 'msk')">
+            <div class="tile" onclick="toggleDrop(this, 'drop3', 'msk')">
                 <i class="fas fa-bone"></i>
                 <span>الكسور والعظام والروماتيزم</span>
             </div>
-            <div class="tile cancer" onclick="toggleDrop('drop3', 'cancer')">
+            <div class="tile" onclick="toggleDrop(this, 'drop3', 'cancer')">
                 <i class="fas fa-ribbon"></i>
                 <span>أمراض الدم والأورام</span>
             </div>
@@ -468,19 +665,19 @@
         </div>
 
         <div class="grid-row">
-            <div class="tile eye" onclick="toggleDrop('drop4', 'eye')">
+            <div class="tile" onclick="toggleDrop(this, 'drop4', 'eye')">
                 <i class="fas fa-eye"></i>
                 <span>طب وجراحة العيون</span>
             </div>
-            <div class="tile mental" onclick="toggleDrop('drop4', 'mental')">
+            <div class="tile" onclick="toggleDrop(this, 'drop4', 'mental')">
                 <i class="fas fa-hand-holding-heart"></i>
                 <span>الصحة النفسية</span>
             </div>
-            <div class="tile nutrition" onclick="toggleDrop('drop4', 'nutrition')">
+            <div class="tile" onclick="toggleDrop(this, 'drop4', 'nutrition')">
                 <i class="fas fa-weight-scale"></i>
                 <span>التغذية و السمنة</span>
             </div>
-            <div class="tile urology" onclick="toggleDrop('drop4', 'urology')">
+            <div class="tile" onclick="toggleDrop(this, 'drop4', 'urology')">
                 <i class="fas fa-mars"></i>
                 <span>الذكورة والعقم</span>
             </div>
@@ -573,19 +770,21 @@
             window.location.href = 'search-results.html';
         });
 
-        // 5. Original Dropdown Logic
-        function toggleDrop(dropId, colorClass) {
+        // 5. Updated Dropdown Logic for Uniform Theme
+        function toggleDrop(clickedTile, dropId, typeKey) {
             const drop = document.getElementById(dropId);
-            const tile = document.querySelector('.' + colorClass);
-            
-            const bgColor = window.getComputedStyle(tile).backgroundColor;
             const link = drop.querySelector('.dynamic-link');
             
-            link.href = colorClass + '-diseases.html';
+            // 1. Set the correct link
+            link.href = typeKey + '-diseases.html';
             
-            const gridRow = tile.closest('.grid-row');
+            // 2. Reset all tiles visual state
+            document.querySelectorAll('.tile').forEach(t => t.classList.remove('active-tile'));
+
+            // 3. Position Logic (Move dropdown after the row)
+            const gridRow = clickedTile.closest('.grid-row');
             const tiles = Array.from(gridRow.children).filter(c => c.classList.contains('tile'));
-            const index = tiles.indexOf(tile);
+            const index = tiles.indexOf(clickedTile);
             
             let columns = 4;
             if (window.innerWidth <= 768) {
@@ -600,17 +799,26 @@
             
             insertAfterNode.insertAdjacentElement('afterend', drop);
 
+            // 4. Close other dropdowns
             document.querySelectorAll('.mega-dropdown').forEach(d => {
-                if (d.id !== dropId) d.style.display = 'none';
+                if (d.id !== dropId) {
+                    d.style.display = 'none';
+                    d.dataset.active = "";
+                }
             });
 
-            if (drop.style.display === 'grid' && drop.dataset.active === colorClass) {
+            // 5. Toggle Current Dropdown
+            if (drop.style.display === 'grid' && drop.dataset.active === typeKey) {
+                // If clicking the SAME tile that is already open -> Close it
                 drop.style.display = 'none';
                 drop.dataset.active = "";
+                clickedTile.classList.remove('active-tile');
             } else {
+                // Open it
                 drop.style.display = 'grid';
-                drop.style.background = bgColor;
-                drop.dataset.active = colorClass;
+                drop.dataset.active = typeKey;
+                // Add active visual class to the clicked tile so it stays blue
+                clickedTile.classList.add('active-tile');
             }
         }
     </script>
