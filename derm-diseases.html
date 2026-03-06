@@ -14,7 +14,7 @@
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     
     <style>
-        /* --- نفس الستايل العام المستخدم --- */
+        /* --- نفس الستايل العام --- */
         *, *::before, *::after { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
         :root { --nhs-blue: #005eb8; --nhs-dark-blue: #003087; --nhs-light-grey: #f0f4f5; --nhs-text: #212b32; --nhs-white: #ffffff; }
         body { font-family: "Cairo", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; margin: 0; background-color: var(--nhs-light-grey); color: var(--nhs-text); line-height: 1.6; -webkit-font-smoothing: antialiased; display: flex; flex-direction: column; min-height: 100vh; }
@@ -51,12 +51,11 @@
         .disease-card:hover { background-color: var(--nhs-blue); color: var(--nhs-white); border-color: var(--nhs-blue); transform: translateY(-3px); box-shadow: 0 6px 12px rgba(0,0,0,0.15); }
         .disease-card span { font-size: 0.8rem; color: #718096; font-weight: 600; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
         .disease-card:hover span { color: #e2e8f0; }
-
-        /* Section Dividers */
-        .grid-divider { grid-column: 1 / -1; margin-top: 30px; margin-bottom: 15px; border-bottom: 2px solid #e2e8f0; padding-bottom: 10px; display: flex; align-items: center; gap: 10px; }
-        .grid-divider h3 { color: var(--nhs-dark-blue); margin: 0; font-size: 1.3rem; font-weight: 800; }
-        .grid-divider i { color: var(--nhs-blue); font-size: 1.2rem; }
         
+        /* Section Dividers (Updated: Removed Icon Styling) */
+        .grid-divider { grid-column: 1 / -1; margin-top: 30px; margin-bottom: 15px; border-bottom: 2px solid #e2e8f0; padding-bottom: 10px; }
+        .grid-divider h3 { color: var(--nhs-dark-blue); margin: 0; font-size: 1.3rem; font-weight: 800; }
+
         /* Footer */
         footer { background-color: #e8edee; border-top: 8px solid var(--nhs-blue); padding: 40px 20px 20px 20px; margin-top: auto; }
         .footer-content { max-width: 1300px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; margin-bottom: 25px; }
@@ -118,7 +117,7 @@
 
     <main class="disease-grid">
         
-        <div class="grid-divider"><i class="fas fa-hand-dots"></i> <h3>الأكزيما والصدفية وحب الشباب</h3></div>
+        <div class="grid-divider"><h3>الأكزيما والصدفية وحب الشباب</h3></div>
         <a href="atopic-eczema.html" class="disease-card">الأكزيما التأتبية <span>(Eczema)</span></a>
         <a href="eczema-types.html" class="disease-card">أنواع الأكزيما الأخرى <span>(Discoid/Pompholyx)</span></a>
         <a href="contact-dermatitis.html" class="disease-card">التهاب الجلد التماسي <span>(Contact Dermatitis)</span></a>
@@ -126,7 +125,7 @@
         <a href="psoriasis.html" class="disease-card">الصدفية <span>(Psoriasis)</span></a>
         <a href="acne-rosacea.html" class="disease-card">حب الشباب والوردية <span>(Acne & Rosacea)</span></a>
 
-        <div class="grid-divider"><i class="fas fa-virus"></i> <h3>التهابات بكتيرية وفيروسية</h3></div>
+        <div class="grid-divider"><h3>التهابات بكتيرية وفيروسية</h3></div>
         <a href="shingles.html" class="disease-card">الحزام الناري <span>(Shingles)</span></a>
         <a href="impetigo.html" class="disease-card">القوباء (الحف) <span>(Impetigo)</span></a>
         <a href="warts.html" class="disease-card">الثالول <span>(Warts)</span></a>
@@ -135,7 +134,7 @@
         <a href="cellulitis.html" class="disease-card">التهاب النسيج الخلوي <span>(Cellulitis)</span></a>
         <a href="hidradenitis-suppurativa.html" class="disease-card">التهاب الغدد العرقية <span>(Hidradenitis)</span></a>
 
-        <div class="grid-divider"><i class="fas fa-bug"></i> <h3>فطريات وطفيليات</h3></div>
+        <div class="grid-divider"><h3>فطريات وطفيليات</h3></div>
         <a href="tinea-pedis.html" class="disease-card">فطريات القدم <span>(Athlete's Foot)</span></a>
         <a href="tinea-corporis.html" class="disease-card">السعفة (التينيا) <span>(Ringworm)</span></a>
         <a href="pityriasis-versicolor.html" class="disease-card">النخالية المبرقشة <span>(Pityriasis)</span></a>
@@ -143,28 +142,28 @@
         <a href="bedbugs.html" class="disease-card">بق الفراش <span>(Bedbugs)</span></a>
         <a href="insect-bites.html" class="disease-card">قرصات الحشرات <span>(Insect Bites)</span></a>
 
-        <div class="grid-divider"><i class="fas fa-scissors"></i> <h3>مشاكل الشعر والأظافر</h3></div>
+        <div class="grid-divider"><h3>مشاكل الشعر والأظافر</h3></div>
         <a href="alopecia-areata.html" class="disease-card">الثعلبة <span>(Alopecia)</span></a>
         <a href="hair-loss.html" class="disease-card">تساقط الشعر والصلع <span>(Hair Loss)</span></a>
         <a href="scalp-ringworm.html" class="disease-card">فطريات الراس <span>(Scalp Ringworm)</span></a>
         <a href="fungal-nail.html" class="disease-card">فطريات الأظافر <span>(Fungal Nail)</span></a>
         <a href="nail-problems.html" class="disease-card">مشاكل الأظافر المؤلمة <span>(Ingrown/Paronychia)</span></a>
 
-        <div class="grid-divider"><i class="fas fa-circle"></i> <h3>كتل، تصبغات، وأورام</h3></div>
+        <div class="grid-divider"><h3>كتل، تصبغات، وأورام</h3></div>
         <a href="skin-cancer.html" class="disease-card">سرطان الجلد <span>(Skin Cancer)</span></a>
         <a href="actinic-keratosis.html" class="disease-card">التقرن الشمسي <span>(Actinic Keratosis)</span></a>
         <a href="vitiligo.html" class="disease-card">البهاق <span>(Vitiligo)</span></a>
         <a href="lipoma-cysts.html" class="disease-card">الكتل والأكياس <span>(Lipoma & Cysts)</span></a>
         <a href="keloid.html" class="disease-card">الجدرة (كيلويد) <span>(Keloid)</span></a>
 
-        <div class="grid-divider"><i class="fas fa-shield-virus"></i> <h3>أمراض مناعية ومزمنة</h3></div>
+        <div class="grid-divider"><h3>أمراض مناعية ومزمنة</h3></div>
         <a href="discoid-lupus.html" class="disease-card">الذئبة القرصية <span>(Discoid Lupus)</span></a>
         <a href="lichen-planus.html" class="disease-card">الحزاز المسطح <span>(Lichen Planus)</span></a>
         <a href="bullous-pemphigoid.html" class="disease-card">الفقاعات المناعية <span>(Bullous Pemphigoid)</span></a>
         <a href="scleroderma.html" class="disease-card">تصلب الجلد <span>(Scleroderma)</span></a>
         <a href="erythema-nodosum.html" class="disease-card">الحمامى العقدية <span>(Erythema Nodosum)</span></a>
 
-        <div class="grid-divider"><i class="fas fa-kit-medical"></i> <h3>الحوادث والعناية بالقدم</h3></div>
+        <div class="grid-divider"><h3>الحوادث والعناية بالقدم</h3></div>
         <a href="burns.html" class="disease-card">الحروق <span>(Burns)</span></a>
         <a href="corns-calluses.html" class="disease-card">مسامير اللحم <span>(Corns)</span></a>
         <a href="chilblains.html" class="disease-card">تورم الأصابع <span>(Chilblains)</span></a>
