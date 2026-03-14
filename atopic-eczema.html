@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     
     <style>
-        /* [نفس الستايل الموحد للموقع] */
+        /* [نفس الستايل الموحد] */
         *, *::before, *::after { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
         :root { --nhs-blue: #005eb8; --nhs-dark-blue: #003087; --nhs-light-grey: #f0f4f5; --nhs-text: #212b32; --nhs-white: #ffffff; }
         body { font-family: "Cairo", sans-serif; margin: 0; background-color: var(--nhs-light-grey); color: var(--nhs-text); line-height: 1.8; display: flex; flex-direction: column; min-height: 100vh; }
@@ -36,7 +36,6 @@
         .medical-disclaimer { background-color: #fff3cd; border-right: 4px solid #f6ad55; padding: 15px 20px; border-radius: 4px; font-weight: 600; color: #9c4221; margin-bottom: 30px; font-size: 0.95rem; display: flex; gap: 15px; align-items: flex-start; }
         .medical-disclaimer i { font-size: 1.4rem; margin-top: 2px; }
         .article-content h2 { color: var(--nhs-blue); font-size: 1.6rem; font-weight: 800; margin-top: 40px; margin-bottom: 15px; padding-bottom: 8px; border-bottom: 2px solid #e2e8f0; }
-        .article-content h3 { color: var(--nhs-dark-blue); font-size: 1.3rem; font-weight: 700; margin-top: 25px; margin-bottom: 10px; }
         .article-content p { font-size: 1.1rem; color: #2d3748; margin-bottom: 20px; }
         .article-content ul { padding-right: 25px; margin-bottom: 25px; list-style-type: disc; }
         .article-content ul li { font-size: 1.1rem; color: #2d3748; margin-bottom: 8px; }
@@ -52,9 +51,7 @@
         footer { background-color: #e8edee; border-top: 8px solid var(--nhs-blue); padding: 40px 20px 20px 20px; margin-top: auto; }
         .copyright-bar { text-align: center; border-top: 1px solid #d1d5d8; padding-top: 15px; font-size: 0.85rem; font-weight: 700; color: #718096; }
         @media (max-width: 768px) { .header-content, .nav-content { flex-direction: column; text-align: center; gap: 8px; } .main-links { width: 100%; justify-content: center; overflow-x: auto; } .nav-actions { width: 100%; justify-content: center; padding: 10px; background-color: var(--nhs-dark-blue); } .article-card { padding: 20px; } .article-title { font-size: 1.8rem; } }
-    </style>
-</head>
-<body>
+    </style></head><body>
 
     <header class="nhs-header">
         <div class="header-content">
@@ -69,7 +66,7 @@
         <div class="nav-content">
             <div class="main-links">
                 <a href="index.html"><i class="fas fa-home"></i> الرئيسية</a>
-                <a href="dermatology.html" class="active"><i class="fas fa-stethoscope"></i> الأمراض الجلدية</a>
+                <a href="index.html" class="active"><i class="fas fa-stethoscope"></i> دليل الأمراض</a>
                 <a href="doctors.html"><i class="fas fa-user-doctor"></i> الأطباء والمراكز</a>
             </div>
             <div class="nav-actions">
@@ -131,30 +128,10 @@
                 <h2>خطة العلاج الذهبية</h2>
                 <p>علاج الأكزيما يعتمد على شغلتين: ترطيب دائم لمنع الهيجان، وعلاج قوي وقت الهيجان.</p>
 
-                <h3>1. المرطبات (Emollients) - خط الدفاع الأول</h3>
-                <p>هاي مو مستحضرات تجميل، هاي "علاج". لازم تستخدمها يومياً وبكثرة حتى لو الجلد زين.</p>
                 <ul>
-                    <li><strong>الكمية:</strong> ادهن كمية كبيرة وغطي كل الجلد.</li>
-                    <li><strong>الوقت:</strong> أحسن وقت هو بعد الحمام مباشرة والجلد بعده رطب.</li>
-                    <li><strong>النوع:</strong> المراهم (Ointments) اللي تكون دهنية (مثل الفازلين) أحسن بهواي من الكريمات واللوشنات لأنها تحبس الرطوبة أكثر.</li>
-                    <li><strong>طريقة الاستخدام:</strong> ادهن باتجاه نمو الشعر (مو عكسه) حتى لا تنسد بصيلات الشعر وتلتهب.</li>
-                    <li><strong>النظافة:</strong> لا تدخل أصبعك بعلبة الكريم، استخدم خاشوكة (ملعقة) نظيفة أو ضغاط (Pump) حتى لا تتلوث العلبة بالجراثيم.</li>
-                    <li><strong>بديل الصابون:</strong> استخدم مرطبات خاصة للغسل (Soap substitutes) بدل الصابون العادي.</li>
-                </ul>
-
-                <h3>2. الستيرويدات الموضعية (Topical Steroids)</h3>
-                <p>تستخدم فقط من "تهيج" الأكزيما (يصير الجلد أحمر وملتهب).</p>
-                <ul>
-                    <li>تجي بقوات مختلفة (خفيف، متوسط، قوي). الطبيب يحدد النوع حسب مكان الإصابة وعمر المريض.</li>
-                    <li>تستخدم لفترة قصيرة (أيام أو أسابيع) لحد ما يروح الالتهاب، وبعدين ترجع بس عالمرطب.</li>
-                    <li>لا تخاف منها، إذا استخدمتها صح وحسب وصفة الطبيب، هي آمنة جداً وما تسبب أضرار.</li>
-                </ul>
-
-                <h3>3. علاجات أخرى</h3>
-                <ul>
-                    <li><strong>مضادات الهيستامين:</strong> لتقليل الحكة والمساعدة على النوم.</li>
-                    <li><strong>الضمادات الرطبة:</strong> للحالات الشديدة.</li>
-                    <li><strong>أدوية مناعية:</strong> للحالات اللي ما تستجيب للكريمات (بوصفة أخصائي حصراً).</li>
+                    <li><strong>1. المرطبات (Emollients):</strong> هاي مو مستحضرات تجميل، هاي "علاج". لازم تستخدمها يومياً وبكثرة حتى لو الجلد زين. ادهن كمية كبيرة وغطي كل الجلد، أحسن وقت هو بعد الحمام مباشرة والجلد بعده رطب.</li>
+                    <li><strong>2. الستيرويدات الموضعية (Topical Steroids):</strong> تستخدم فقط من "تهيج" الأكزيما (يصير الجلد أحمر وملتهب). تجي بقوات مختلفة وتستخدم لفترة قصيرة (أيام أو أسابيع) لحد ما يروح الالتهاب، وبعدين ترجع بس عالمرطب.</li>
+                    <li><strong>3. مضادات الهيستامين:</strong> لتقليل الحكة والمساعدة على النوم.</li>
                 </ul>
             </div>
 
