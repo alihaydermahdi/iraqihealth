@@ -226,8 +226,28 @@ title: دليلك الطبي
         const specialty = document.getElementById('search-specialty').value;
         const city = document.getElementById('search-city').value;
         const docName = document.getElementById('search-name').value;
-        window.location.href = 'search-results.html';
+        window.location.href = '/search-results/';
     });
+
+    // Translation Map for Professional Folder Names
+    const categoryMap = {
+        'neuro': 'neurology',
+        'ent': 'ent',
+        'resp': 'pulmonology',
+        'cardio': 'cardiology',
+        'diabetes': 'endocrinology',
+        'gastro': 'gastroenterology',
+        'renal': 'nephrology',
+        'women': 'gynecology',
+        'paeds': 'pediatrics',
+        'derm': 'dermatology',
+        'msk': 'orthopedics',
+        'cancer': 'oncology',
+        'eye': 'ophthalmology',
+        'mental': 'psychiatry',
+        'nutrition': 'nutrition',
+        'urology': 'urology'
+    };
 
     function toggleDrop(dropId, colorClass) {
         const drop = document.getElementById(dropId);
@@ -235,7 +255,8 @@ title: دليلك الطبي
         const bgColor = window.getComputedStyle(tile).backgroundColor;
         const link = drop.querySelector('.dynamic-link');
         
-        link.href = colorClass + '-diseases.html';
+        // This generates the clean folder link based on the map above
+        link.href = '/' + categoryMap[colorClass] + '/';
         
         const gridRow = tile.closest('.grid-row');
         const tiles = Array.from(gridRow.children).filter(c => c.classList.contains('tile'));
