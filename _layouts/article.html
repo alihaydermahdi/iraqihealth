@@ -3,43 +3,120 @@ layout: default
 ---
 <style>
     /* WhatsApp Share Box Styling */
-    .whatsapp-share-box { background-color: #f0fdf4; border: 1px solid #bbf7d0; border-right: 5px solid #25D366; border-radius: 8px; padding: 25px; margin-top: 10px; margin-bottom: 40px; }
-    .whatsapp-share-box h3 { color: #166534; margin-top: 0; margin-bottom: 5px; font-size: 1.25rem; display: flex; align-items: center; gap: 8px; font-weight: 800; }
+    .whatsapp-share-box { 
+        background-color: #f0fdf4; 
+        border: 1px solid #bbf7d0; 
+        border-right: 5px solid #25D366; 
+        border-radius: 8px; 
+        padding: 25px; 
+        margin-top: 10px; 
+        margin-bottom: 40px; 
+    }
     
-    .wa-input-group { display: flex; gap: 8px; margin-top: 15px; flex-wrap: wrap; }
+    .whatsapp-share-box h3 { 
+        color: #166534; 
+        margin-top: 0; 
+        margin-bottom: 5px; 
+        font-size: 1.25rem; 
+        display: flex; 
+        align-items: center; 
+        gap: 8px; 
+        font-weight: 800; 
+    }
+    
+    .whatsapp-share-box p { 
+        color: #15803d; 
+        margin-bottom: 15px; 
+        font-size: 0.95rem; 
+        font-weight: 600; 
+        line-height: 1.6;
+    }
+    
+    /* Main wrapper for inputs and button */
+    .wa-form-wrapper { 
+        display: flex; 
+        gap: 12px; 
+        margin-top: 15px; 
+        flex-wrap: wrap; 
+        align-items: stretch; 
+    }
+    
+    /* Phone number group - forced LTR so the code is on the left and number on the right */
+    .wa-phone-group {
+        display: flex;
+        gap: 8px;
+        flex: 1;
+        min-width: 280px;
+        direction: ltr; /* This fixes the layout issue */
+    }
     
     /* Country Code Select Styling */
     .wa-country-select { 
+        width: 130px;
         padding: 12px; 
         border: 1px solid #d1d5db; 
         border-radius: 25px; 
         font-family: inherit; 
-        font-size: 0.95rem; 
+        font-size: 0.9rem; 
         background-color: white; 
         outline: none;
         cursor: pointer;
+        direction: ltr;
     }
     
-    .wa-input-group input { 
+    /* Number Input Styling */
+    .wa-number-input { 
         flex: 1; 
-        min-width: 180px; 
+        min-width: 140px; 
         padding: 12px 15px; 
         border: 1px solid #d1d5db; 
         border-radius: 25px; 
-        font-family: 'Cairo', sans-serif; 
-        font-size: 0.95rem; 
+        font-family: inherit; 
+        font-size: 1rem; 
         outline: none; 
         transition: all 0.2s; 
+        direction: ltr;
     }
     
-    .wa-input-group input:focus, .wa-country-select:focus { border-color: #25D366; box-shadow: 0 0 0 3px rgba(37, 211, 102, 0.2); }
+    .wa-number-input::placeholder {
+        color: #9ca3af;
+    }
     
-    .wa-btn { background-color: #25D366; color: white; border: none; padding: 12px 25px; border-radius: 25px; font-weight: 700; font-family: 'Cairo', sans-serif; cursor: pointer; transition: all 0.2s; display: flex; align-items: center; gap: 8px; font-size: 0.95rem; }
-    .wa-btn:hover { background-color: #16a34a; transform: translateY(-1px); }
+    .wa-country-select:focus, .wa-number-input:focus { 
+        border-color: #25D366; 
+        box-shadow: 0 0 0 3px rgba(37, 211, 102, 0.2); 
+    }
+    
+    /* Button Styling */
+    .wa-btn { 
+        background-color: #25D366; 
+        color: white; 
+        border: none; 
+        padding: 12px 25px; 
+        border-radius: 25px; 
+        font-weight: 700; 
+        font-family: 'Cairo', sans-serif; 
+        cursor: pointer; 
+        transition: all 0.2s; 
+        display: flex; 
+        align-items: center; 
+        justify-content: center;
+        gap: 8px; 
+        font-size: 0.95rem; 
+        white-space: nowrap;
+    }
+    
+    .wa-btn:hover { 
+        background-color: #16a34a; 
+        transform: translateY(-1px); 
+    }
 
+    /* Mobile adjustments */
     @media (max-width: 480px) {
-        .wa-input-group { flex-direction: column; }
-        .wa-country-select, .wa-btn { width: 100%; justify-content: center; }
+        .wa-form-wrapper { flex-direction: column; }
+        .wa-btn { width: 100%; }
+        /* Keeps the country code and input side-by-side on mobile */
+        .wa-phone-group { width: 100%; flex-direction: row; } 
     }
 </style>
 
@@ -49,24 +126,72 @@ layout: default
     <div class="article-card" style="padding: 0; background: transparent; box-shadow: none;">
         <div class="whatsapp-share-box">
             <h3><i class="fab fa-whatsapp" style="font-size: 1.5rem;"></i> دز هالمقال لشخص يهمك</h3>
-            <p style="color: #15803d; margin-bottom: 15px; font-size: 0.95rem; font-weight: 600;">
-                اختار الدولة واكتب الرقم، أو عوفه فارغ واختار جهة الاتصال من تطبيقك مباشرة.
+            <p>
+                اختار الدولة واكتب الرقم (بدون صفر بالبداية)، أو عوفه فارغ واضغط إرسال حتى تختار جهة الاتصال من تطبيق الواتساب مباشرة.
             </p>
-            <div class="wa-input-group">
-                <select id="wa-country-code" class="wa-country-select">
-                    <option value="964">🇮🇶 العراق (+964)</option>
-                    <option value="965">🇰🇼 الكويت (+965)</option>
-                    <option value="966">🇸🇦 السعودية (+966)</option>
-                    <option value="971">🇦🇪 الإمارات (+971)</option>
-                    <option value="962">🇯🇴 الأردن (+962)</option>
-                    <option value="90">🇹🇷 تركيا (+90)</option>
-                    <option value="44">🇬🇧 بريطانيا (+44)</option>
-                    <option value="49">🇩🇪 ألمانيا (+49)</option>
-                    <option value="1">🇺🇸 أمريكا (+1)</option>
-                </select>
+            <div class="wa-form-wrapper">
+                <div class="wa-phone-group">
+                    <select id="wa-country-code" class="wa-country-select">
+                        <option value="964">🇮🇶 +964 (Iraq)</option>
+                        <option value="966">🇸🇦 +966 (KSA)</option>
+                        <option value="971">🇦🇪 +971 (UAE)</option>
+                        <option value="965">🇰🇼 +965 (Kuwait)</option>
+                        <option value="962">🇯🇴 +962 (Jordan)</option>
+                        <option value="20">🇪🇬 +20 (Egypt)</option>
+                        <option value="974">🇶🇦 +974 (Qatar)</option>
+                        <option value="973">🇧🇭 +973 (Bahrain)</option>
+                        <option value="968">🇴🇲 +968 (Oman)</option>
+                        <option value="961">🇱🇧 +961 (Lebanon)</option>
+                        <option value="963">🇸🇾 +963 (Syria)</option>
+                        <option value="967">🇾🇪 +967 (Yemen)</option>
+                        <option value="970">🇵🇸 +970 (Palestine)</option>
+                        <option value="212">🇲🇦 +212 (Morocco)</option>
+                        <option value="213">🇩🇿 +213 (Algeria)</option>
+                        <option value="216">🇩🇿 +216 (Tunisia)</option>
+                        <option disabled>──────────</option>
+                        <option value="1">🇺🇸 +1 (USA/Canada)</option>
+                        <option value="44">🇬🇧 +44 (UK)</option>
+                        <option value="49">🇩🇪 +49 (Germany)</option>
+                        <option value="33">🇫🇷 +33 (France)</option>
+                        <option value="39">🇫🇷 +39 (Italy)</option>
+                        <option value="34">🇪🇸 +34 (Spain)</option>
+                        <option value="90">🇹🇷 +90 (Turkey)</option>
+                        <option value="98">🇮🇷 +98 (Iran)</option>
+                        <option value="61">🇦🇺 +61 (Australia)</option>
+                        <option value="43">🇦🇹 +43 (Austria)</option>
+                        <option value="32">🇦🇹 +32 (Belgium)</option>
+                        <option value="55">🇧🇷 +55 (Brazil)</option>
+                        <option value="86">🇨🇳 +86 (China)</option>
+                        <option value="45">🇩🇰 +45 (Denmark)</option>
+                        <option value="358">🇩🇰 +358 (Finland)</option>
+                        <option value="30">🇬🇷 +30 (Greece)</option>
+                        <option value="91">🇮🇳 +91 (India)</option>
+                        <option value="62">🇮🇩 +62 (Indonesia)</option>
+                        <option value="353">🇮🇪 +353 (Ireland)</option>
+                        <option value="81">🇯🇵 +81 (Japan)</option>
+                        <option value="60">🇲🇾 +60 (Malaysia)</option>
+                        <option value="31">🇳🇱 +31 (Netherlands)</option>
+                        <option value="64">🇳🇿 +64 (New Zealand)</option>
+                        <option value="47">🇳🇴 +47 (Norway)</option>
+                        <option value="92">🇵🇰 +92 (Pakistan)</option>
+                        <option value="63">🇵🇭 +63 (Philippines)</option>
+                        <option value="48">🇵🇱 +48 (Poland)</option>
+                        <option value="351">🇵🇹 +351 (Portugal)</option>
+                        <option value="7">🇷🇺 +7 (Russia)</option>
+                        <option value="65">🇸🇬 +65 (Singapore)</option>
+                        <option value="27">🇿🇦 +27 (South Africa)</option>
+                        <option value="82">🇰🇷 +82 (South Korea)</option>
+                        <option value="46">🇸🇪 +46 (Sweden)</option>
+                        <option value="41">🇨🇭 +41 (Switzerland)</option>
+                        <option value="66">🇹🇭 +66 (Thailand)</option>
+                    </select>
+                    
+                    <input type="tel" id="wa-number" class="wa-number-input" placeholder="780 000 0000">
+                </div>
                 
-                <input type="tel" id="wa-number" placeholder="مثال: 7800000000">
-                <button onclick="shareViaWhatsApp()" class="wa-btn">إرسال المقال <i class="fas fa-paper-plane"></i></button>
+                <button onclick="shareViaWhatsApp()" class="wa-btn">
+                    إرسال المقال <i class="fas fa-paper-plane"></i>
+                </button>
             </div>
         </div>
     </div>
@@ -74,25 +199,24 @@ layout: default
 
 <script>
     function shareViaWhatsApp() {
-        // 1. Get components
         var countryCode = document.getElementById('wa-country-code').value;
         var rawNumber = document.getElementById('wa-number').value;
         
-        // 2. Clean the phone number (remove leading zeros if user writes 078...)
+        // Clean the number (remove non-digits, trim leading zeros)
         var cleanNumber = rawNumber.replace(/\D/g, ''); 
         if (cleanNumber.startsWith('0')) {
             cleanNumber = cleanNumber.substring(1);
         }
         
-        // 3. Get current page URL and Title
+        // Get URL and Page Title
         var pageUrl = window.location.href;
         var pageTitle = document.title.split('|')[0].trim(); 
         
-        // 4. Prepare the message
+        // Build message
         var message = "مرحباً، اقرأ هالمقال الطبي المفيد من منصة كشفيّة عن (" + pageTitle + "):\n\n" + pageUrl;
         var encodedMessage = encodeURIComponent(message);
         
-        // 5. Generate Link (If number is provided, use it. If not, open contact selector)
+        // Generate Link
         var waLink = "";
         if (cleanNumber) {
             waLink = "https://wa.me/" + countryCode + cleanNumber + "?text=" + encodedMessage;
@@ -100,7 +224,7 @@ layout: default
             waLink = "https://wa.me/?text=" + encodedMessage;
         }
         
-        // 6. Open WhatsApp
+        // Execute
         window.open(waLink, '_blank');
     }
 </script>
