@@ -1,6 +1,57 @@
 ---
 layout: default
 ---
+<style>
+    /* WhatsApp Share Box Styling */
+    .whatsapp-share-box { background-color: #f0fdf4; border: 1px solid #bbf7d0; border-right: 5px solid #25D366; border-radius: 8px; padding: 25px; margin-top: 10px; margin-bottom: 40px; }
+    .whatsapp-share-box h3 { color: #166534; margin-top: 0; margin-bottom: 5px; font-size: 1.25rem; display: flex; align-items: center; gap: 8px; font-weight: 800; }
+    .wa-input-group { display: flex; gap: 10px; margin-top: 15px; flex-wrap: wrap; }
+    .wa-input-group input { flex: 1; min-width: 200px; padding: 12px 15px; border: 1px solid #d1d5db; border-radius: 25px; font-family: 'Cairo', sans-serif; font-size: 0.95rem; outline: none; transition: all 0.2s; }
+    .wa-input-group input:focus { border-color: #25D366; box-shadow: 0 0 0 3px rgba(37, 211, 102, 0.2); }
+    .wa-btn { background-color: #25D366; color: white; border: none; padding: 12px 25px; border-radius: 25px; font-weight: 700; font-family: 'Cairo', sans-serif; cursor: pointer; transition: all 0.2s; display: flex; align-items: center; gap: 8px; font-size: 0.95rem; }
+    .wa-btn:hover { background-color: #16a34a; transform: translateY(-1px); }
+</style>
+
 <main class="article-wrapper">
     {{ content }}
+    
+    <div class="article-card" style="padding: 0; background: transparent; box-shadow: none;">
+        <div class="whatsapp-share-box">
+            <h3><i class="fab fa-whatsapp" style="font-size: 1.5rem;"></i> دز هالمقال لشخص يهمك</h3>
+            <p style="color: #15803d; margin-bottom: 15px; font-size: 0.95rem; font-weight: 600;">
+                أدخل رقم الواتساب (مع رمز الدولة، مثلاً: 96478...) واضغط إرسال، أو اضغط إرسال مباشرة واختار جهة الاتصال من تطبيقك.
+            </p>
+            <div class="wa-input-group">
+                <input type="text" id="wa-number" placeholder="مثال: 9647800000000">
+                <button onclick="shareViaWhatsApp()" class="wa-btn">إرسال المقال <i class="fas fa-paper-plane"></i></button>
+            </div>
+        </div>
+    </div>
 </main>
+
+<script>
+    function shareViaWhatsApp() {
+        // 1. Get the number and clean it (remove +, spaces, or dashes)
+        var rawNumber = document.getElementById('wa-number').value;
+        var cleanNumber = rawNumber.replace(/\D/g, ''); 
+        
+        // 2. Get the current page URL and Title dynamically
+        var pageUrl = window.location.href;
+        var pageTitle = document.title.split('|')[0].trim(); // Gets the disease name cleanly
+        
+        // 3. Prepare the friendly Arabic message
+        var message = "مرحباً، اقرأ هالمقال الطبي المفيد من منصة كشفيّة عن (" + pageTitle + "):\n\n" + pageUrl;
+        var encodedMessage = encodeURIComponent(message);
+        
+        // 4. Generate the correct WhatsApp link
+        var waLink = "";
+        if (cleanNumber) {
+            waLink = "https://wa.me/" + cleanNumber + "?text=" + encodedMessage;
+        } else {
+            waLink = "https://wa.me/?text=" + encodedMessage;
+        }
+        
+        // 5. Open WhatsApp in a new tab/window
+        window.open(waLink, '_blank');
+    }
+</script>
