@@ -5,11 +5,42 @@ layout: default
     /* WhatsApp Share Box Styling */
     .whatsapp-share-box { background-color: #f0fdf4; border: 1px solid #bbf7d0; border-right: 5px solid #25D366; border-radius: 8px; padding: 25px; margin-top: 10px; margin-bottom: 40px; }
     .whatsapp-share-box h3 { color: #166534; margin-top: 0; margin-bottom: 5px; font-size: 1.25rem; display: flex; align-items: center; gap: 8px; font-weight: 800; }
-    .wa-input-group { display: flex; gap: 10px; margin-top: 15px; flex-wrap: wrap; }
-    .wa-input-group input { flex: 1; min-width: 200px; padding: 12px 15px; border: 1px solid #d1d5db; border-radius: 25px; font-family: 'Cairo', sans-serif; font-size: 0.95rem; outline: none; transition: all 0.2s; }
-    .wa-input-group input:focus { border-color: #25D366; box-shadow: 0 0 0 3px rgba(37, 211, 102, 0.2); }
+    
+    .wa-input-group { display: flex; gap: 8px; margin-top: 15px; flex-wrap: wrap; }
+    
+    /* Country Code Select Styling */
+    .wa-country-select { 
+        padding: 12px; 
+        border: 1px solid #d1d5db; 
+        border-radius: 25px; 
+        font-family: inherit; 
+        font-size: 0.95rem; 
+        background-color: white; 
+        outline: none;
+        cursor: pointer;
+    }
+    
+    .wa-input-group input { 
+        flex: 1; 
+        min-width: 180px; 
+        padding: 12px 15px; 
+        border: 1px solid #d1d5db; 
+        border-radius: 25px; 
+        font-family: 'Cairo', sans-serif; 
+        font-size: 0.95rem; 
+        outline: none; 
+        transition: all 0.2s; 
+    }
+    
+    .wa-input-group input:focus, .wa-country-select:focus { border-color: #25D366; box-shadow: 0 0 0 3px rgba(37, 211, 102, 0.2); }
+    
     .wa-btn { background-color: #25D366; color: white; border: none; padding: 12px 25px; border-radius: 25px; font-weight: 700; font-family: 'Cairo', sans-serif; cursor: pointer; transition: all 0.2s; display: flex; align-items: center; gap: 8px; font-size: 0.95rem; }
     .wa-btn:hover { background-color: #16a34a; transform: translateY(-1px); }
+
+    @media (max-width: 480px) {
+        .wa-input-group { flex-direction: column; }
+        .wa-country-select, .wa-btn { width: 100%; justify-content: center; }
+    }
 </style>
 
 <main class="article-wrapper">
@@ -19,10 +50,22 @@ layout: default
         <div class="whatsapp-share-box">
             <h3><i class="fab fa-whatsapp" style="font-size: 1.5rem;"></i> دز هالمقال لشخص يهمك</h3>
             <p style="color: #15803d; margin-bottom: 15px; font-size: 0.95rem; font-weight: 600;">
-                أدخل رقم الواتساب (مع رمز الدولة، مثلاً: 96478...) واضغط إرسال، أو اضغط إرسال مباشرة واختار جهة الاتصال من تطبيقك.
+                اختار الدولة واكتب الرقم، أو عوفه فارغ واختار جهة الاتصال من تطبيقك مباشرة.
             </p>
             <div class="wa-input-group">
-                <input type="text" id="wa-number" placeholder="مثال: 9647800000000">
+                <select id="wa-country-code" class="wa-country-select">
+                    <option value="964">🇮🇶 العراق (+964)</option>
+                    <option value="965">🇰🇼 الكويت (+965)</option>
+                    <option value="966">🇸🇦 السعودية (+966)</option>
+                    <option value="971">🇦🇪 الإمارات (+971)</option>
+                    <option value="962">🇯🇴 الأردن (+962)</option>
+                    <option value="90">🇹🇷 تركيا (+90)</option>
+                    <option value="44">🇬🇧 بريطانيا (+44)</option>
+                    <option value="49">🇩🇪 ألمانيا (+49)</option>
+                    <option value="1">🇺🇸 أمريكا (+1)</option>
+                </select>
+                
+                <input type="tel" id="wa-number" placeholder="مثال: 7800000000">
                 <button onclick="shareViaWhatsApp()" class="wa-btn">إرسال المقال <i class="fas fa-paper-plane"></i></button>
             </div>
         </div>
@@ -31,27 +74,33 @@ layout: default
 
 <script>
     function shareViaWhatsApp() {
-        // 1. Get the number and clean it (remove +, spaces, or dashes)
+        // 1. Get components
+        var countryCode = document.getElementById('wa-country-code').value;
         var rawNumber = document.getElementById('wa-number').value;
+        
+        // 2. Clean the phone number (remove leading zeros if user writes 078...)
         var cleanNumber = rawNumber.replace(/\D/g, ''); 
+        if (cleanNumber.startsWith('0')) {
+            cleanNumber = cleanNumber.substring(1);
+        }
         
-        // 2. Get the current page URL and Title dynamically
+        // 3. Get current page URL and Title
         var pageUrl = window.location.href;
-        var pageTitle = document.title.split('|')[0].trim(); // Gets the disease name cleanly
+        var pageTitle = document.title.split('|')[0].trim(); 
         
-        // 3. Prepare the friendly Arabic message
+        // 4. Prepare the message
         var message = "مرحباً، اقرأ هالمقال الطبي المفيد من منصة كشفيّة عن (" + pageTitle + "):\n\n" + pageUrl;
         var encodedMessage = encodeURIComponent(message);
         
-        // 4. Generate the correct WhatsApp link
+        // 5. Generate Link (If number is provided, use it. If not, open contact selector)
         var waLink = "";
         if (cleanNumber) {
-            waLink = "https://wa.me/" + cleanNumber + "?text=" + encodedMessage;
+            waLink = "https://wa.me/" + countryCode + cleanNumber + "?text=" + encodedMessage;
         } else {
             waLink = "https://wa.me/?text=" + encodedMessage;
         }
         
-        // 5. Open WhatsApp in a new tab/window
+        // 6. Open WhatsApp
         window.open(waLink, '_blank');
     }
 </script>
