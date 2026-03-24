@@ -4,13 +4,113 @@ title: أمراض الجهاز الهضمي والكبد | كشفيّـة
 permalink: /gastroenterology/
 ---
 
+<style>
+    /* الخط المخصص لهذه الصفحة */
+    @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800;900&display=swap');
+    
+    body { font-family: "Cairo", sans-serif; }
+
+    /* --- Page Header --- */
+    .page-header { 
+        max-width: 1300px; 
+        margin: 25px auto 30px auto; 
+        padding: 0 20px; 
+        display: flex; 
+        align-items: center; 
+        justify-content: flex-end; 
+        gap: 20px;
+    }
+
+    .back-btn { 
+        display: inline-flex; 
+        align-items: center; 
+        gap: 8px; 
+        background-color: var(--nhs-white); 
+        color: var(--nhs-text); 
+        padding: 8px 16px; 
+        border-radius: 6px; 
+        text-decoration: none; 
+        font-size: 0.95rem; 
+        font-weight: 700; 
+        border: 1px solid #d1d5d8; 
+        transition: all 0.2s; 
+    }
+
+    .back-btn:hover { 
+        background-color: var(--nhs-blue); 
+        color: var(--nhs-white); 
+        border-color: var(--nhs-blue); 
+    }
+
+    .page-header h1 { 
+        margin: 0; 
+        font-size: 1.6rem; 
+        color: var(--nhs-blue); 
+        font-weight: 800; 
+    }
+
+    /* --- شبكة الأمراض --- */
+    .disease-grid { 
+        max-width: 1300px; 
+        margin: 0 auto 50px auto; 
+        padding: 0 20px; 
+        display: grid; 
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); 
+        gap: 15px; 
+    }
+    
+    .disease-card { 
+        background-color: var(--nhs-white); 
+        border: 1px solid #e2e8f0; 
+        border-radius: 8px; 
+        padding: 20px 15px; 
+        text-align: center; 
+        color: var(--nhs-text); 
+        text-decoration: none; 
+        font-weight: 700; 
+        font-size: 1.05rem; 
+        transition: all 0.2s ease; 
+        display: flex; 
+        flex-direction: column;
+        align-items: center; 
+        justify-content: center; 
+        min-height: 90px; 
+        box-shadow: 0 2px 4px rgba(0,0,0,0.04); 
+        gap: 8px;
+    }
+    
+    .disease-card:hover { 
+        background-color: var(--nhs-blue); 
+        color: var(--nhs-white); 
+        border-color: var(--nhs-blue); 
+        transform: translateY(-3px); 
+        box-shadow: 0 6px 12px rgba(0,0,0,0.15); 
+    }
+    
+    .disease-card span {
+        font-size: 0.8rem;
+        color: #718096;
+        font-weight: 600;
+    }
+    
+    .disease-card:hover span {
+        color: #e2e8f0;
+    }
+
+    @media (max-width: 768px) {
+        .page-header { flex-direction: column; align-items: center; }
+        .disease-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+        .disease-card { font-size: 0.9rem; min-height: 80px; }
+    }
+</style>
+
 <div class="page-header">
     <a href="/" class="back-btn"><i class="fas fa-arrow-right"></i> العودة للرئيسية</a>
     <h1>أمراض الجهاز الهضمي والكبد</h1>
 </div>
 
 <main class="disease-grid">
-    <a href="/gastroenterology/abdominal-pain/" class="disease-card" style="border-right: 4px solid var(--nhs-blue);">خريطة أوجاع البطن <span>(Abdominal Pain Map)</span></a>
+    <a href="/gastroenterology/abdominal-pain/" class="disease-card">خريطة أوجاع البطن <span>(Abdominal Pain Map)</span></a>
     
     <a href="/gastroenterology/gastritis/" class="disease-card">جرثومة والتهاب المعدة <span>(Gastritis & H. Pylori)</span></a>
     <a href="/gastroenterology/stomach-ulcer/" class="disease-card">قرحة المعدة والاثني عشر <span>(Peptic Ulcer)</span></a>
@@ -36,10 +136,10 @@ permalink: /gastroenterology/
     <a href="/gastroenterology/viral-hepatitis/" class="disease-card">التهاب الكبد الفيروسي <span>(Viral Hepatitis)</span></a>
     <a href="/gastroenterology/liver-cirrhosis/" class="disease-card">تشمع الكبد <span>(Liver Cirrhosis)</span></a>
 
-    <a href="/gastroenterology/bowel-cancer/" class="disease-card" style="border-color: #d63939;">سرطان القولون <span>(Bowel Cancer)</span></a>
-    <a href="/gastroenterology/stomach-cancer/" class="disease-card" style="border-color: #d63939;">سرطان المعدة <span>(Stomach Cancer)</span></a>
-    <a href="/gastroenterology/oesophageal-cancer/" class="disease-card" style="border-color: #d63939;">سرطان المريء <span>(Oesophageal Cancer)</span></a>
-    <a href="/gastroenterology/pancreatic-cancer/" class="disease-card" style="border-color: #d63939;">سرطان البنكرياس <span>(Pancreatic Cancer)</span></a>
+    <a href="/gastroenterology/bowel-cancer/" class="disease-card">سرطان القولون <span>(Bowel Cancer)</span></a>
+    <a href="/gastroenterology/stomach-cancer/" class="disease-card">سرطان المعدة <span>(Stomach Cancer)</span></a>
+    <a href="/gastroenterology/oesophageal-cancer/" class="disease-card">سرطان المريء <span>(Oesophageal Cancer)</span></a>
+    <a href="/gastroenterology/pancreatic-cancer/" class="disease-card">سرطان البنكرياس <span>(Pancreatic Cancer)</span></a>
 
     <a href="/gastroenterology/children-abdominal-pain/" class="disease-card">وجع بطن الأطفال <span>(Children's Pain)</span></a>
     <a href="/gastroenterology/pregnancy-abdominal-pain/" class="disease-card">وجع البطن للحامل <span>(Pregnancy Pain)</span></a>
