@@ -1,0 +1,142 @@
+---
+layout: default
+title: أمراض السكري والغدد الصماء | كشفيّـة
+---
+
+<style>
+    /* الخط المخصص لهذه الصفحة */
+    @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800;900&display=swap');
+    
+    body { font-family: "Cairo", sans-serif; }
+
+    /* --- Page Header --- */
+    .page-header { 
+        max-width: 1300px; 
+        margin: 25px auto 30px auto; 
+        padding: 0 20px; 
+        display: flex; 
+        align-items: center; 
+        justify-content: flex-end; 
+        gap: 20px;
+    }
+
+    .back-btn { 
+        display: inline-flex; 
+        align-items: center; 
+        gap: 8px; 
+        background-color: var(--nhs-white); 
+        color: var(--nhs-text); 
+        padding: 8px 16px; 
+        border-radius: 6px; 
+        text-decoration: none; 
+        font-size: 0.95rem; 
+        font-weight: 700; 
+        border: 1px solid #d1d5d8; 
+        transition: all 0.2s; 
+    }
+
+    .back-btn:hover { 
+        background-color: var(--nhs-blue); 
+        color: var(--nhs-white); 
+        border-color: var(--nhs-blue); 
+    }
+
+    .page-header h1 { 
+        margin: 0; 
+        font-size: 1.6rem; 
+        color: var(--nhs-blue); 
+        font-weight: 800; 
+    }
+
+    /* --- شبكة الأمراض --- */
+    .disease-grid { 
+        max-width: 1300px; 
+        margin: 0 auto 50px auto; 
+        padding: 0 20px; 
+        display: grid; 
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); 
+        gap: 15px; 
+    }
+    
+    .disease-card { 
+        background-color: var(--nhs-white); 
+        border: 1px solid #e2e8f0; 
+        border-radius: 8px; 
+        padding: 20px 15px; 
+        text-align: center; 
+        color: var(--nhs-text); 
+        text-decoration: none; 
+        font-weight: 700; 
+        font-size: 1.05rem; 
+        transition: all 0.2s ease; 
+        display: flex; 
+        flex-direction: column;
+        align-items: center; 
+        justify-content: center; 
+        min-height: 90px; 
+        box-shadow: 0 2px 4px rgba(0,0,0,0.04); 
+        gap: 8px;
+    }
+    
+    .disease-card:hover { 
+        background-color: var(--nhs-blue); 
+        color: var(--nhs-white); 
+        border-color: var(--nhs-blue); 
+        transform: translateY(-3px); 
+        box-shadow: 0 6px 12px rgba(0,0,0,0.15); 
+    }
+    
+    .disease-card span {
+        font-size: 0.8rem;
+        color: #718096;
+        font-weight: 600;
+    }
+    
+    .disease-card:hover span {
+        color: #e2e8f0;
+    }
+
+    @media (max-width: 768px) {
+        .page-header { flex-direction: column; align-items: center; }
+        .disease-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+        .disease-card { font-size: 0.9rem; min-height: 80px; }
+    }
+</style>
+
+<div class="page-header">
+    <a href="/" class="back-btn"><i class="fas fa-arrow-right"></i> العودة للرئيسية</a>
+    <h1>أمراض السكري والغدد الصماء</h1>
+</div>
+
+<main class="disease-grid">
+    <a href="/diabetes-endocrinology/type1-diabetes/" class="disease-card">السكري من النوع الأول <span>(Type 1 Diabetes)</span></a>
+    <a href="/diabetes-endocrinology/type2-diabetes/" class="disease-card">السكري من النوع الثاني <span>(Type 2 Diabetes)</span></a>
+    <a href="/diabetes-endocrinology/prediabetes/" class="disease-card">مرحلة ما قبل السكري <span>(Prediabetes)</span></a>
+    <a href="/diabetes-endocrinology/gestational-diabetes/" class="disease-card">سكري الحمل <span>(Gestational Diabetes)</span></a>
+    <a href="/diabetes-endocrinology/type2-treatment/" class="disease-card">علاج السكري النوع الثاني <span>(Type 2 Treatment)</span></a>
+    <a href="/diabetes-endocrinology/insulin-types/" class="disease-card">الأنسولين وأنواعه <span>(Insulin Types)</span></a>
+    <a href="/diabetes-endocrinology/hypoglycemia/" class="disease-card">هبوط السكر <span>(Hypoglycemia)</span></a>
+    <a href="/diabetes-endocrinology/hyperglycemia/" class="disease-card">ارتفاع السكر <span>(Hyperglycemia)</span></a>
+    
+    <a href="/diabetes-endocrinology/diabetic-foot/" class="disease-card">العناية بالقدم السكري <span>(Diabetic Foot Care)</span></a>
+    <a href="/diabetes-endocrinology/diabetic-kidney/" class="disease-card">اعتلال الكلية السكري <span>(Diabetic Kidney Disease)</span></a>
+    <a href="/diabetes-endocrinology/diabetic-retinopathy/" class="disease-card">اعتلال الشبكية السكري <span>(Diabetic Retinopathy)</span></a>
+
+    <a href="/diabetes-endocrinology/hypothyroidism/" class="disease-card">قصور الغدة الدرقية <span>(Hypothyroidism)</span></a>
+    <a href="/diabetes-endocrinology/hyperthyroidism/" class="disease-card">فرط نشاط الغدة الدرقية <span>(Hyperthyroidism)</span></a>
+    <a href="/diabetes-endocrinology/thyroid-eye-disease/" class="disease-card">اعتلال العين الدرقي <span>(Thyroid Eye Disease)</span></a>
+    <a href="/diabetes-endocrinology/hyperparathyroidism/" class="disease-card">فرط جارات الدرقية <span>(Hyperparathyroidism)</span></a>
+    <a href="/diabetes-endocrinology/hypoparathyroidism/" class="disease-card">قصور جارات الدرقية <span>(Hypoparathyroidism)</span></a>
+
+    <a href="/diabetes-endocrinology/addisons-disease/" class="disease-card">مرض أديسون <span>(Addison's Disease)</span></a>
+    <a href="/diabetes-endocrinology/cushings-syndrome/" class="disease-card">متلازمة كوشينغ <span>(Cushing's Syndrome)</span></a>
+    <a href="/diabetes-endocrinology/cah/" class="disease-card">تضخم الغدة الكظرية الخلقي <span>(CAH)</span></a>
+    <a href="/diabetes-endocrinology/acromegaly/" class="disease-card">ضخامة الأطراف <span>(Acromegaly)</span></a>
+    <a href="/diabetes-endocrinology/diabetes-insipidus/" class="disease-card">السكري الكاذب <span>(Diabetes Insipidus)</span></a>
+    <a href="/diabetes-endocrinology/pituitary-disorders/" class="disease-card">اضطرابات الغدة النخامية <span>(Pituitary Disorders)</span></a>
+    <a href="/diabetes-endocrinology/prolactinoma/" class="disease-card">ورم هرمون الحليب <span>(Prolactinoma)</span></a>
+
+    <a href="/diabetes-endocrinology/acute-pancreatitis/" class="disease-card">التهاب البنكرياس الحاد <span>(Acute Pancreatitis)</span></a>
+    <a href="/diabetes-endocrinology/chronic-pancreatitis/" class="disease-card">التهاب البنكرياس المزمن <span>(Chronic Pancreatitis)</span></a>
+    <a href="/diabetes-endocrinology/menopause/" class="disease-card">سن اليأس (انقطاع الطمث) <span>(Menopause)</span></a>
+</main>
