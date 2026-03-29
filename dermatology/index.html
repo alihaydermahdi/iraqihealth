@@ -1,0 +1,92 @@
+---
+layout: default
+title: "الأمراض الجلدية | كشفيّـة"
+permalink: /dermatology/
+---
+
+<style>
+    .page-header { max-width: 1300px; margin: 25px auto 30px auto; padding: 0 20px; display: flex; align-items: center; justify-content: flex-end; gap: 20px; }
+    .back-btn { display: inline-flex; align-items: center; gap: 8px; background-color: var(--nhs-white); color: var(--nhs-text); padding: 8px 16px; border-radius: 6px; text-decoration: none; font-size: 0.95rem; font-weight: 700; border: 1px solid #d1d5d8; transition: all 0.2s; box-shadow: 0 1px 2px rgba(0,0,0,0.05); }
+    .back-btn:hover { background-color: var(--nhs-blue); color: var(--nhs-white); border-color: var(--nhs-blue); }
+    .page-header h1 { margin: 0; font-size: 1.6rem; color: var(--nhs-blue); font-weight: 800; line-height: 1.2; }
+    
+    /* Grid System */
+    .disease-grid { max-width: 1300px; margin: 0 auto 50px auto; padding: 0 20px; display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 15px; }
+    .disease-card { background-color: var(--nhs-white); border: 1px solid #e2e8f0; border-radius: 8px; padding: 20px 15px; text-align: center; color: var(--nhs-text); text-decoration: none; font-weight: 700; font-size: 1.05rem; transition: all 0.2s ease; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 90px; box-shadow: 0 2px 4px rgba(0,0,0,0.04); gap: 8px; }
+    .disease-card:hover { background-color: var(--nhs-blue); color: var(--nhs-white); border-color: var(--nhs-blue); transform: translateY(-3px); box-shadow: 0 6px 12px rgba(0,0,0,0.15); }
+    .disease-card span { font-size: 0.8rem; color: #718096; font-weight: 600; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+    .disease-card:hover span { color: #e2e8f0; }
+    
+    /* Section Dividers */
+    .grid-divider { grid-column: 1 / -1; margin-top: 30px; margin-bottom: 15px; border-bottom: 2px solid #e2e8f0; padding-bottom: 10px; }
+    .grid-divider h3 { color: var(--nhs-dark-blue); margin: 0; font-size: 1.3rem; font-weight: 800; }
+
+    @media (max-width: 768px) { 
+        .page-header { flex-direction: column; align-items: center; gap: 12px; } 
+        .disease-grid { grid-template-columns: repeat(2, 1fr); } 
+    }
+</style>
+
+<div class="page-header">
+    <a href="/" class="back-btn"><i class="fas fa-arrow-right"></i> العودة للرئيسية</a>
+    <h1>الأمراض الجلدية</h1>
+</div>
+
+<main class="disease-grid">
+    
+    <div class="grid-divider"><h3>الأكزيما والصدفية وحب الشباب</h3></div>
+    <a href="/dermatology/atopic-eczema/" class="disease-card">الأكزيما التأتبية <span>(Eczema)</span></a>
+    <a href="/dermatology/eczema-types/" class="disease-card">أنواع الأكزيما الأخرى <span>(Discoid/Pompholyx)</span></a>
+    <a href="/dermatology/contact-dermatitis/" class="disease-card">التهاب الجلد التماسي <span>(Contact Dermatitis)</span></a>
+    <a href="/dermatology/seborrhoeic-dermatitis/" class="disease-card">القشرة الدهنية <span>(Seborrhoeic)</span></a>
+    <a href="/dermatology/psoriasis/" class="disease-card">الصدفية <span>(Psoriasis)</span></a>
+    <a href="/dermatology/acne-rosacea/" class="disease-card">حب الشباب والوردية <span>(Acne & Rosacea)</span></a>
+
+    <div class="grid-divider"><h3>التهابات بكتيرية وفيروسية</h3></div>
+    <a href="/dermatology/shingles/" class="disease-card">الحزام الناري <span>(Shingles)</span></a>
+    <a href="/dermatology/impetigo/" class="disease-card">القوباء (الحف) <span>(Impetigo)</span></a>
+    <a href="/dermatology/warts/" class="disease-card">الثالول <span>(Warts)</span></a>
+    <a href="/dermatology/molluscum-contagiosum/" class="disease-card">المليساء المعدية <span>(Molluscum)</span></a>
+    <a href="/dermatology/boils/" class="disease-card">الدمامل <span>(Boils)</span></a>
+    <a href="/dermatology/cellulitis/" class="disease-card">التهاب النسيج الخلوي <span>(Cellulitis)</span></a>
+    <a href="/dermatology/hidradenitis-suppurativa/" class="disease-card">التهاب الغدد العرقية <span>(Hidradenitis)</span></a>
+
+    <div class="grid-divider"><h3>فطريات وطفيليات</h3></div>
+    <a href="/dermatology/tinea-pedis/" class="disease-card">فطريات القدم <span>(Athlete's Foot)</span></a>
+    <a href="/dermatology/tinea-corporis/" class="disease-card">السعفة (التينيا) <span>(Ringworm)</span></a>
+    <a href="/dermatology/pityriasis-versicolor/" class="disease-card">النخالية المبرقشة <span>(Pityriasis)</span></a>
+    <a href="/dermatology/scabies/" class="disease-card">الجرب <span>(Scabies)</span></a>
+    <a href="/dermatology/bedbugs/" class="disease-card">بق الفراش <span>(Bedbugs)</span></a>
+    <a href="/dermatology/insect-bites/" class="disease-card">قرصات الحشرات <span>(Insect Bites)</span></a>
+
+    <div class="grid-divider"><h3>مشاكل الشعر والأظافر</h3></div>
+    <a href="/dermatology/alopecia-areata/" class="disease-card">الثعلبة <span>(Alopecia)</span></a>
+    <a href="/dermatology/hair-loss/" class="disease-card">تساقط الشعر والصلع <span>(Hair Loss)</span></a>
+    <a href="/dermatology/scalp-ringworm/" class="disease-card">فطريات الراس <span>(Scalp Ringworm)</span></a>
+    <a href="/dermatology/fungal-nail/" class="disease-card">فطريات الأظافر <span>(Fungal Nail)</span></a>
+    <a href="/dermatology/nail-problems/" class="disease-card">مشاكل الأظافر المؤلمة <span>(Ingrown/Paronychia)</span></a>
+
+    <div class="grid-divider"><h3>كتل، تصبغات، وأورام</h3></div>
+    <a href="/dermatology/skin-cancer/" class="disease-card">سرطان الجلد <span>(Skin Cancer)</span></a>
+    <a href="/dermatology/actinic-keratosis/" class="disease-card">التقرن الشمسي <span>(Actinic Keratosis)</span></a>
+    <a href="/dermatology/vitiligo/" class="disease-card">البهاق <span>(Vitiligo)</span></a>
+    <a href="/dermatology/lipoma-cysts/" class="disease-card">الكتل والأكياس <span>(Lipoma & Cysts)</span></a>
+    <a href="/dermatology/keloid/" class="disease-card">الجدرة (كيلويد) <span>(Keloid)</span></a>
+
+    <div class="grid-divider"><h3>أمراض مناعية ومزمنة</h3></div>
+    <a href="/dermatology/discoid-lupus/" class="disease-card">الذئبة القرصية <span>(Discoid Lupus)</span></a>
+    <a href="/dermatology/lichen-planus/" class="disease-card">الحزاز المسطح <span>(Lichen Planus)</span></a>
+    <a href="/dermatology/bullous-pemphigoid/" class="disease-card">الفقاعات المناعية <span>(Bullous Pemphigoid)</span></a>
+    <a href="/dermatology/scleroderma/" class="disease-card">تصلب الجلد <span>(Scleroderma)</span></a>
+    <a href="/dermatology/erythema-nodosum/" class="disease-card">الحمامى العقدية <span>(Erythema Nodosum)</span></a>
+
+    <div class="grid-divider"><h3>الحوادث والعناية بالقدم</h3></div>
+    <a href="/dermatology/burns/" class="disease-card">الحروق <span>(Burns)</span></a>
+    <a href="/dermatology/corns-calluses/" class="disease-card">مسامير اللحم <span>(Corns)</span></a>
+    <a href="/dermatology/chilblains/" class="disease-card">تورم الأصابع <span>(Chilblains)</span></a>
+    <a href="/dermatology/blisters/" class="disease-card">فقاعات القدم <span>(Blisters)</span></a>
+    <a href="/dermatology/pressure-sores/" class="disease-card">قرح الفراش <span>(Pressure Sores)</span></a>
+    <a href="/dermatology/prickly-heat/" class="disease-card">الطفح الحراري <span>(Prickly Heat)</span></a>
+    <a href="/dermatology/hives/" class="disease-card">الشرى (الآرتيكاريا) <span>(Hives)</span></a>
+    <a href="/dermatology/sunburn/" class="disease-card">حروق الشمس <span>(Sunburn)</span></a>
+</main>
