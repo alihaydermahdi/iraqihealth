@@ -1,102 +1,100 @@
 ---
 layout: default
-title: "طب الأطفال والخدج | كشفيّـة"
+title: "دليل طب الأطفال والخدج | كشفيّـة"
 permalink: /pediatrics/
 ---
 
 <style>
-    .page-header { max-width: 1300px; margin: 25px auto 30px auto; padding: 0 20px; display: flex; align-items: center; justify-content: flex-end; gap: 20px; }
-    .back-btn { display: inline-flex; align-items: center; gap: 8px; background-color: var(--nhs-white); color: var(--nhs-text); padding: 8px 16px; border-radius: 6px; text-decoration: none; font-size: 0.95rem; font-weight: 700; border: 1px solid #d1d5d8; transition: all 0.2s; box-shadow: 0 1px 2px rgba(0,0,0,0.05); }
-    .back-btn:hover { background-color: var(--nhs-blue); color: var(--nhs-white); border-color: var(--nhs-blue); }
-    .page-header h1 { margin: 0; font-size: 1.6rem; color: var(--nhs-blue); font-weight: 800; line-height: 1.2; }
-    
-    /* Grid System */
-    .disease-grid { max-width: 1300px; margin: 0 auto 50px auto; padding: 0 20px; display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 15px; }
-    .disease-card { background-color: var(--nhs-white); border: 1px solid #e2e8f0; border-radius: 8px; padding: 20px 15px; text-align: center; color: var(--nhs-text); text-decoration: none; font-weight: 700; font-size: 1.05rem; transition: all 0.2s ease; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 90px; box-shadow: 0 2px 4px rgba(0,0,0,0.04); gap: 8px; }
-    .disease-card:hover { background-color: var(--nhs-blue); color: var(--nhs-white); border-color: var(--nhs-blue); transform: translateY(-3px); box-shadow: 0 6px 12px rgba(0,0,0,0.15); }
-    .disease-card span { font-size: 0.8rem; color: #718096; font-weight: 600; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
-    .disease-card:hover span { color: #e2e8f0; }
-    
-    /* Section Dividers */
-    .grid-divider { grid-column: 1 / -1; margin-top: 30px; margin-bottom: 15px; border-bottom: 2px solid #e2e8f0; padding-bottom: 10px; }
-    .grid-divider h3 { color: var(--nhs-dark-blue); margin: 0; font-size: 1.3rem; font-weight: 800; }
+    .pediatrics-container { max-width: 1100px; margin: 0 auto; padding: 20px; }
+    .hero-section { background: linear-gradient(135deg, var(--nhs-blue), #003087); color: white; padding: 40px 30px; border-radius: 15px; margin-bottom: 40px; text-align: center; }
+    .hero-section h1 { margin: 0; font-size: 2.2rem; font-weight: 800; }
+    .hero-section p { font-size: 1.1rem; opacity: 0.9; margin-top: 10px; }
 
-    @media (max-width: 768px) { 
-        .page-header { flex-direction: column; align-items: center; gap: 12px; } 
-        .disease-grid { grid-template-columns: repeat(2, 1fr); } 
-    }
+    .category-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 25px; }
+    .category-card { background: white; border-radius: 12px; padding: 25px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); border-top: 5px solid var(--nhs-blue); }
+    .category-card h2 { color: var(--nhs-dark-blue); font-size: 1.4rem; margin-top: 0; display: flex; align-items: center; gap: 10px; border-bottom: 1px solid #eee; padding-bottom: 15px; }
+    .category-card h2 i { color: var(--nhs-blue); }
+    
+    .article-list { list-style: none; padding: 0; margin: 15px 0 0 0; }
+    .article-list li { margin-bottom: 12px; }
+    .article-list a { text-decoration: none; color: #2d3748; font-weight: 600; display: flex; align-items: center; gap: 8px; transition: color 0.2s; }
+    .article-list a:hover { color: var(--nhs-blue); }
+    .article-list a::before { content: "\f104"; font-family: "Font Awesome 6 Free"; font-weight: 900; color: #cbd5e0; font-size: 0.8rem; }
+
+    @media (max-width: 768px) { .hero-section h1 { font-size: 1.8rem; } .category-grid { grid-template-columns: 1fr; } }
 </style>
 
-<div class="page-header">
-    <a href="/" class="back-btn"><i class="fas fa-arrow-right"></i> العودة للرئيسية</a>
-    <h1>طب الأطفال والخدج</h1>
-</div>
-
-<main class="disease-grid">
+<div class="pediatrics-container">
     
-    <div class="grid-divider"><h3>حديثي الولادة والرضع</h3></div>
-    <a href="/pediatrics/neonatal-jaundice/" class="disease-card">أبو صفار <span>(Neonatal Jaundice)</span></a>
-    <a href="/pediatrics/colic-in-babies/" class="disease-card">مغص الرضع <span>(Colic)</span></a>
-    <a href="/pediatrics/gastro-oesophageal-reflux/" class="disease-card">الارتجاع (الزواع) <span>(Reflux)</span></a>
-    <a href="/pediatrics/teething/" class="disease-card">التسنين <span>(Teething)</span></a>
-    <a href="/pediatrics/nappy-rash/" class="disease-card">طفح الحفاظ <span>(Nappy Rash)</span></a>
-    <a href="/pediatrics/cradle-cap/" class="disease-card">قبعة المهد (خبزة الراس) <span>(Cradle Cap)</span></a>
-    <a href="/pediatrics/sudden-infant-death/" class="disease-card">موت المهد المفاجئ <span>(SIDS)</span></a>
+    <div class="hero-section">
+        <h1>طب الأطفال والخدج</h1>
+        <p>كل المعلومات الصحية اللي تخص نمو وصحة طفلك.. بلهجتنا وعن لسان أطباء مختصين.</p>
+    </div>
 
-    <div class="grid-divider"><h3>الحمى والأمراض الفيروسية</h3></div>
-    <a href="/pediatrics/fever-in-children/" class="disease-card">سخونة الأطفال <span>(Fever)</span></a>
-    <a href="/pediatrics/febrile-seizures/" class="disease-card">شمرة الحرارة <span>(Febrile Seizures)</span></a>
-    <a href="/pediatrics/measles/" class="disease-card">الحصبة <span>(Measles)</span></a>
-    <a href="/pediatrics/chickenpox/" class="disease-card">جدري الماء (أبو خريان) <span>(Chickenpox)</span></a>
-    <a href="/pediatrics/mumps/" class="disease-card">النكاف (أبو دغيم) <span>(Mumps)</span></a>
-    <a href="/pediatrics/rubella/" class="disease-card">الحصبة الألمانية <span>(Rubella)</span></a>
-    <a href="/pediatrics/hand-foot-mouth/" class="disease-card">اليد والقدم والفم <span>(HFMD)</span></a>
-    <a href="/pediatrics/scarlet-fever/" class="disease-card">الحمى القرمزية <span>(Scarlet Fever)</span></a>
-    <a href="/pediatrics/meningitis-children/" class="disease-card">التهاب السحايا <span>(Meningitis)</span></a>
-    <a href="/pediatrics/head-lice/" class="disease-card">قمل الرأس <span>(Head Lice)</span></a>
+    <div class="category-grid">
 
-    <div class="grid-divider"><h3>الجهاز التنفسي والحساسية</h3></div>
-    <a href="/pediatrics/coughs-and-colds-children/" class="disease-card">النشلة والسعال <span>(Coughs & Colds)</span></a>
-    <a href="/pediatrics/croup/" class="disease-card">الخناق <span>(Croup)</span></a>
-    <a href="/pediatrics/bronchiolitis/" class="disease-card">التهاب القصيبات <span>(Bronchiolitis)</span></a>
-    <a href="/pediatrics/whooping-cough/" class="disease-card">السعال الديكي <span>(Whooping Cough)</span></a>
-    <a href="/pediatrics/eczema-children/" class="disease-card">أكزيما الأطفال <span>(Eczema)</span></a>
-    <a href="/pediatrics/cystic-fibrosis/" class="disease-card">التليف الكيسي <span>(Cystic Fibrosis)</span></a>
+        <div class="category-card">
+            <h2><i class="fas fa-dropper"></i> أمراض الدم والأورام</h2>
+            <ul class="article-list">
+                <li><a href="/pediatrics/thalassaemia/">الثلاسيميا (فقر دم البحر المتوسط)</a></li>
+                <li><a href="/pediatrics/sickle-cell-disease/">فقر الدم المنجلي</a></li>
+                <li><a href="/pediatrics/g6pd-deficiency/">نقص الخميرة (مرض الباقلاء)</a></li>
+                <li><a href="/pediatrics/leukaemia/">لوكيميا الأطفال (سرطان الدم)</a></li>
+                <li><a href="/pediatrics/neuroblastoma/">ورم الخلايا العصبية</a></li>
+                <li><a href="/pediatrics/retinoblastoma/">سرطان الشبكية (اللمعة البيضاء)</a></li>
+            </ul>
+        </div>
 
-    <div class="grid-divider"><h3>الجهاز الهضمي</h3></div>
-    <a href="/pediatrics/gastroenteritis-children/" class="disease-card">النزلة المعوية <span>(Gastroenteritis)</span></a>
-    <a href="/pediatrics/toddlers-diarrhoea/" class="disease-card">إسهال الدارجين <span>(Toddler's Diarrhoea)</span></a>
-    <a href="/pediatrics/constipation-children/" class="disease-card">الإمساك <span>(Constipation)</span></a>
-    <a href="/pediatrics/threadworms/" class="disease-card">الديدان الخيطية <span>(Threadworms)</span></a>
-    <a href="/pediatrics/coeliac-disease-children/" class="disease-card">حساسية الحنطة <span>(Coeliac Disease)</span></a>
+        <div class="category-card">
+            <h2><i class="fas fa-bone"></i> العظام والمفاصل والنمو</h2>
+            <ul class="article-list">
+                <li><a href="/pediatrics/ddh/">خلع الورك الولادي</a></li>
+                <li><a href="/pediatrics/growing-pains/">آلام النمو عند الأطفال</a></li>
+                <li><a href="/pediatrics/perthes-disease/">مرض بيرثيز (نقص تروية الورك)</a></li>
+                <li><a href="/pediatrics/juvenile-arthritis/">روماتيزم الأطفال (JIA)</a></li>
+                <li><a href="/pediatrics/short-stature/">قصر القامة ومشاكل النمو</a></li>
+                <li><a href="/pediatrics/type-1-diabetes/">سكري الأطفال (النوع الأول)</a></li>
+            </ul>
+        </div>
 
-    <div class="grid-divider"><h3>العظام والمفاصل</h3></div>
-    <a href="/pediatrics/ddh/" class="disease-card">خلع الورك الولادي <span>(DDH)</span></a>
-    <a href="/pediatrics/growing-pains/" class="disease-card">آلام النمو <span>(Growing Pains)</span></a>
-    <a href="/pediatrics/juvenile-arthritis/" class="disease-card">روماتيزم الأطفال <span>(JIA)</span></a>
-    <a href="/pediatrics/perthes-disease/" class="disease-card">مرض بيرثيز <span>(Perthes)</span></a>
-    <a href="/pediatrics/short-stature/" class="disease-card">قصر القامة <span>(Short Stature)</span></a>
-    <a href="/pediatrics/duchenne-md/" class="disease-card">الحثل العضلي <span>(Duchenne MD)</span></a>
+        <div class="category-card">
+            <h2><i class="fas fa-brain"></i> الجهاز العصبي والتطور</h2>
+            <ul class="article-list">
+                <li><a href="/pediatrics/cerebral-palsy/">الشلل الدماغي</a></li>
+                <li><a href="/pediatrics/down-syndrome/">متلازمة داون</a></li>
+                <li><a href="/pediatrics/spina-bifida/">الصلب المشقوق (فتحة الظهر)</a></li>
+                <li><a href="/pediatrics/muscular-dystrophy-duchenne/">الحثل العضلي (دوشين)</a></li>
+                <li><a href="/pediatrics/speech-delay/">تأخر النطق والكلام</a></li>
+            </ul>
+        </div>
 
-    <div class="grid-divider"><h3>أمراض وراثية ومزمنة</h3></div>
-    <a href="/pediatrics/downs-syndrome/" class="disease-card">متلازمة داون <span>(Down Syndrome)</span></a>
-    <a href="/pediatrics/thalassaemia/" class="disease-card">الثلاسيميا <span>(Thalassaemia)</span></a>
-    <a href="/pediatrics/sickle-cell-disease/" class="disease-card">فقر الدم المنجلي <span>(Sickle Cell)</span></a>
-    <a href="/pediatrics/diabetes-children/" class="disease-card">سكري الأطفال <span>(Diabetes Type 1)</span></a>
-    <a href="/pediatrics/cerebral-palsy/" class="disease-card">الشلل الدماغي <span>(Cerebral Palsy)</span></a>
+        <div class="category-card">
+            <h2><i class="fas fa-child-reaching"></i> الجراحة والمسالك</h2>
+            <ul class="article-list">
+                <li><a href="/pediatrics/undescended-testicles/">الخصية الهاجرة</a></li>
+                <li><a href="/pediatrics/hydrocele/">القيلة المائية (تجمع سوائل الكيس)</a></li>
+                <li><a href="/pediatrics/bedwetting/">التبول اللاإرادي (البلل الليلي)</a></li>
+                <li><a href="/pediatrics/cleft-lip-palate/">الشفة الأرنبية وسقف الحلق</a></li>
+            </ul>
+        </div>
 
-    <div class="grid-divider"><h3>جراحة، عيون، وتشوهات خلقية</h3></div>
-    <a href="/pediatrics/undescended-testicles/" class="disease-card">الخصية الهاجرة <span>(Undescended Testicles)</span></a>
-    <a href="/pediatrics/hydrocele-children/" class="disease-card">القيلة المائية <span>(Hydrocele)</span></a>
-    <a href="/pediatrics/tear-duct-blockage/" class="disease-card">انسداد القناة الدمعية <span>(Blocked Tear Duct)</span></a>
-    <a href="/pediatrics/glue-ear/" class="disease-card">الأذن الصمغية <span>(Glue Ear)</span></a>
-    <a href="/pediatrics/squint-children/" class="disease-card">الحول <span>(Squint)</span></a>
-    <a href="/pediatrics/cleft-lip/" class="disease-card">الشفة الأرنبية <span>(Cleft Lip/Palate)</span></a>
-    <a href="/pediatrics/spina-bifida/" class="disease-card">الصلب المشقوق <span>(Spina Bifida)</span></a>
+        <div class="category-card">
+            <h2><i class="fas fa-stethoscope"></i> صحة الطفل العامة</h2>
+            <ul class="article-list">
+                <li><a href="/pediatrics/coeliac-disease/">حساسية الحنطة (السيلياك)</a></li>
+                <li><a href="/pediatrics/blocked-tear-duct/">انسداد القناة الدمعية</a></li>
+                <li><a href="/pediatrics/squint/">الحول عند الأطفال</a></li>
+                <li><a href="/pediatrics/glue-ear/">الأذن الصمغية (سوائل خلف الطبلة)</a></li>
+                <li><a href="/pediatrics/kawasaki-disease/">مرض كاواساكي</a></li>
+            </ul>
+        </div>
 
-    <div class="grid-divider"><h3>حالات خطرة وأورام</h3></div>
-    <a href="/pediatrics/kawasaki-disease/" class="disease-card">مرض كاواساكي <span>(Kawasaki Disease)</span></a>
-    <a href="/pediatrics/childhood-leukaemia/" class="disease-card">لوكيميا الأطفال <span>(Leukaemia)</span></a>
-    <a href="/pediatrics/neuroblastoma/" class="disease-card">ورم الخلايا العصبية <span>(Neuroblastoma)</span></a>
-    <a href="/pediatrics/retinoblastoma/" class="disease-card">سرطان الشبكية <span>(Retinoblastoma)</span></a>
-</main>
+    </div>
+
+    <div class="cta-box" style="margin-top: 50px; background: #e8edee;">
+        <h3>تحتاجين فحص سريري لطفلك؟</h3>
+        <p>دليلنا يحتوي على أفضل أطباء الأطفال والخدج والجراحين في كافة محافظات العراق.</p>
+        <a href="/doctors.html" class="cta-btn">ابحثي عن طبيب قريب منكِ</a>
+    </div>
+
+</div>
