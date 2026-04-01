@@ -4,158 +4,71 @@ title: "النقرس (داء الملوك) | كشفيّـة"
 permalink: /msk/gout/
 ---
 
-<!DOCTYPE html>
-<html lang="ar" dir="rtl">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> كشفيّـة | النقرس </title>
+<div class="breadcrumb">
+    <a href="/">الرئيسية</a> <i class="fas fa-chevron-left" style="font-size: 0.7rem;"></i> 
+    <a href="/msk/">أمراض العظام والمفاصل</a> <i class="fas fa-chevron-left" style="font-size: 0.7rem;"></i> 
+    <span>النقرس</span>
+</div>
+
+<div class="article-card">
+    <h1 class="article-title">النقرس وداء الملوك (Gout)</h1>
     
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    
-    <style>
-        *, *::before, *::after { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-        :root { --nhs-blue: #005eb8; --nhs-dark-blue: #003087; --nhs-light-grey: #f0f4f5; --nhs-text: #212b32; --nhs-white: #ffffff; }
-        body { font-family: "Cairo", sans-serif; margin: 0; background-color: var(--nhs-light-grey); color: var(--nhs-text); line-height: 1.8; display: flex; flex-direction: column; min-height: 100vh; }
-        .nhs-header { background-color: var(--nhs-white); border-bottom: 8px solid var(--nhs-blue); padding: 12px 0; }
-        .header-content { max-width: 1300px; margin: 0 auto; padding: 0 20px; display: flex; justify-content: space-between; align-items: center; }
-        .logo-link { display: inline-flex; align-items: center; text-decoration: none; gap: 15px; }
-        .site-logo { max-height: 55px; width: auto; object-fit: contain; }
-        .header-moto { font-weight: 700; color: var(--nhs-blue); font-size: 1.1rem; }
-        .nhs-nav { background-color: var(--nhs-blue); color: white; position: sticky; top: 0; z-index: 1000; box-shadow: 0 4px 6px rgba(0,0,0,0.1); margin-bottom: 20px; }
-        .nav-content { max-width: 1300px; margin: 0 auto; padding: 0 20px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; }
-        .main-links { display: flex; }
-        .main-links a { color: white; text-decoration: none; padding: 15px 20px; font-weight: 700; font-size: 0.95rem; transition: all 0.2s; display: flex; align-items: center; gap: 8px; border-bottom: 3px solid transparent; }
-        .main-links a:hover, .main-links a.active { background-color: var(--nhs-dark-blue); border-bottom-color: var(--nhs-white); }
-        .nav-actions { display: flex; align-items: center; gap: 15px; }
-        .nav-cta { background-color: var(--nhs-white); color: var(--nhs-blue) !important; padding: 8px 20px; border-radius: 20px; font-weight: 800; font-size: 0.9rem; text-decoration: none; transition: all 0.2s; display: flex; align-items: center; gap: 6px; }
-        .article-wrapper { max-width: 900px; margin: 0 auto 50px auto; padding: 0 20px; }
-        .breadcrumb { font-size: 0.9rem; color: #718096; margin-bottom: 20px; display: flex; align-items: center; gap: 8px; }
-        .breadcrumb a { color: var(--nhs-blue); text-decoration: none; font-weight: 600; }
-        .article-card { background: var(--nhs-white); border-radius: 8px; padding: 40px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
-        .article-title { color: var(--nhs-dark-blue); font-size: 2.2rem; font-weight: 800; margin-top: 0; margin-bottom: 10px; line-height: 1.3; }
-        .article-meta { display: flex; align-items: center; gap: 20px; font-size: 0.9rem; color: #718096; margin-bottom: 30px; padding-bottom: 20px; border-bottom: 1px solid #e2e8f0; }
-        .medical-disclaimer { background-color: #fff3cd; border-right: 4px solid #f6ad55; padding: 15px 20px; border-radius: 4px; font-weight: 600; color: #9c4221; margin-bottom: 30px; font-size: 0.95rem; display: flex; gap: 15px; align-items: flex-start; }
-        .medical-disclaimer i { font-size: 1.4rem; margin-top: 2px; }
-        .article-content h2 { color: var(--nhs-blue); font-size: 1.6rem; font-weight: 800; margin-top: 40px; margin-bottom: 15px; padding-bottom: 8px; border-bottom: 2px solid #e2e8f0; }
-        .article-content h3 { color: var(--nhs-dark-blue); font-size: 1.3rem; font-weight: 700; margin-top: 25px; margin-bottom: 10px; }
-        .article-content p { font-size: 1.1rem; color: #2d3748; margin-bottom: 20px; }
-        .article-content ul { padding-right: 25px; margin-bottom: 25px; list-style-type: disc; }
-        .article-content ul li { font-size: 1.1rem; color: #2d3748; margin-bottom: 8px; }
-        .emergency-box { background-color: #fff5f5; border: 1px solid #fed7d7; border-right: 5px solid #e53e3e; border-radius: 8px; padding: 30px; margin-top: 40px; margin-bottom: 20px; }
-        .emergency-box h2 { color: #c53030 !important; border-bottom: 2px solid #feb2b2 !important; margin-top: 0 !important; padding-bottom: 10px; font-size: 1.5rem; }
-        .emergency-box p { color: #742a2a; margin-bottom: 15px; font-weight: 600; }
-        .emergency-box ul { margin-bottom: 0; color: #742a2a; }
-        .emergency-box ul li { color: #742a2a; margin-bottom: 8px; font-weight: 600; }
-        .cta-box { background-color: var(--nhs-light-grey); border: 1px solid #cbd5e0; border-radius: 8px; padding: 30px; text-align: center; margin-top: 50px; }
-        .cta-box h3 { color: var(--nhs-dark-blue); margin-top: 0; margin-bottom: 15px; font-size: 1.3rem; font-weight: 800; }
-        .cta-box p { color: #4a5568; margin-bottom: 20px; font-size: 1rem; }
-        .cta-btn { display: inline-block; background-color: var(--nhs-blue); color: white; padding: 12px 30px; border-radius: 25px; font-weight: 700; text-decoration: none; transition: background 0.2s; }
-        footer { background-color: #e8edee; border-top: 8px solid var(--nhs-blue); padding: 40px 20px 20px 20px; margin-top: auto; }
-        .copyright-bar { text-align: center; border-top: 1px solid #d1d5d8; padding-top: 15px; font-size: 0.85rem; font-weight: 700; color: #718096; }
-        @media (max-width: 768px) { .header-content, .nav-content { flex-direction: column; text-align: center; gap: 8px; } .main-links { width: 100%; justify-content: center; overflow-x: auto; } .nav-actions { width: 100%; justify-content: center; padding: 10px; background-color: var(--nhs-dark-blue); } .article-card { padding: 20px; } .article-title { font-size: 1.8rem; } }
-    </style>
-</head>
-<body>
+    <div class="article-meta">
+        <span><i class="fas fa-user-md"></i> مراجعة: فريق كشفيّة الطبي</span>
+    </div>
 
-    <header class="nhs-header">
-        <div class="header-content">
-            <a href="/" class="logo-link">
-                <img src="/logo.png" alt="شعار كشفيّة" class="site-logo">
-                <div class="header-moto">كلشي عن صحتك… بلهجتنا العراقية</div>
-            </a>
+    <div class="medical-disclaimer">
+        <i class="fas fa-circle-info"></i>
+        <div>
+            <strong>ملاحظة مهمة:</strong> هاي المعلومات مخصصة للتوعية والتثقيف الصحي فقط. تشخيص النقرس وعلاجه يحتاج تحاليل دم ومتابعة وي طبيب المفاصل.
         </div>
-    </header>
+    </div>
 
-    <nav class="nhs-nav">
-        <div class="nav-content">
-            <div class="main-links">
-                <a href="/"><i class="fas fa-home"></i> الرئيسية</a>
-                <a href="/msk/" class="active"><i class="fas fa-stethoscope"></i> أمراض العظام والمفاصل</a>
-                <a href="/doctors.html"><i class="fas fa-user-doctor"></i> الأطباء والمراكز</a>
-            </div>
-            <div class="nav-actions">
-                <a href="/contact.html" class="nav-cta"><i class="fas fa-phone"></i> تواصل معنا</a>
-            </div>
-        </div>
-    </nav>
+    <div class="article-content">
+        <p>النقرس (Gout)، أو اللي يسموه شعبياً "داء الملوك"، هو نوع شائع ومؤلم جداً من أنواع التهاب المفاصل. يصير هذا المرض من ترتفع نسبة "حامض اليوريك" (Uric acid) بالدم، وهذا الحامض الزايد يتحول إلى بلورات صغيرة تشبه الإبر وتتجمع بداخل المفصل، وتسوي هجمة ألم مفاجئة وقوية.</p>
 
-    <main class="article-wrapper">
-        <div class="breadcrumb">
-            <a href="/">الرئيسية</a> <i class="fas fa-chevron-left" style="font-size: 0.7rem;"></i> 
-            <a href="/msk/">أمراض العظام والمفاصل</a> <i class="fas fa-chevron-left" style="font-size: 0.7rem;"></i> 
-            <span>النقرس</span>
-        </div>
+        <h2>الأعراض (شلون تبين هجمة النقرس؟)</h2>
+        <p>هجمة النقرس تجي فجأة، وغالباً تگعد المريض من نومه بالليل:</p>
+        <ul>
+            <li><strong>ألم رهيب ومفاجئ:</strong> الوجع يكون قوي لدرجة إن حتى غطا الجرباية (اللحاف) إذا طخ المفصل يسبب ألم ما ينحمل.</li>
+            <li><strong>المكان المفضل للنقرس:</strong> أكثر مفصل ينضرب هو <strong>مفصل إصبع القدم الچبير</strong>، بس ممكن يصير بالكاحل، الركبة، الرسغ، أو أصابع الإيد.</li>
+            <li><strong>تورم واحمرار:</strong> المفصل يورم حيل، يصير حار، والجلد فوگاه يبين أحمر طوخ ويلمع.</li>
+            <li><strong>تقشر الجلد:</strong> بعد ما تخلص الهجمة وتطيب، مرات الجلد اللي فوگ المفصل يبدي يتقشر.</li>
+        </ul>
 
-        <div class="article-card">
-            <h1 class="article-title">النقرس وداء الملوك (Gout)</h1>
-            
-            <div class="article-meta">
-                <span><i class="fas fa-user-md"></i> مراجعة: فريق كشفيّة الطبي</span>
-            </div>
+        <h2>ليش يرتفع حامض اليوريك؟ (الأسباب والمحفزات)</h2>
+        <p>حامض اليوريك هو فضلات طبيعية تنتج من تكسير مواد اسمها "البيورينات" موجودة بالجسم وبالأكل. الكليتين تصفي هذا الحامض وتطلعه وي الإدرار، بس إذا الكلى دتتأخر بتصفيته، أو إنت كاعد تاكل أكل بي "بيورينات" هواي، راح يتراكم بالدم. أكثر الأشياء اللي تهيج النقرس:</p>
+        <ul>
+            <li><strong>الأكل الدسم:</strong> اللحوم الحمراء (خاصة المعلاگ والكلى)، والمأكولات البحرية.</li>
+            <li><strong>المشروبات:</strong> الكحول (خاصة البيرة)، والمشروبات الغازية المحلاة بالسكر والفركتوز.</li>
+            <li><strong>السمنة والوزن الزايد:</strong> تخلي الجسم ينتج حامض يوريك أكثر، وتصعب شغل الكلى.</li>
+            <li><strong>بعض الأدوية:</strong> حبوب الإدرار (مدررات البول) اللي ياخذوها مرضى الضغط، وحبوب الأسبرين ممكن ترفع نسبة الحامض.</li>
+            <li><strong>العمر والجنس:</strong> يصيب الرجال أكثر من النساء، ويزيد الخطر وي التقدم بالعمر.</li>
+        </ul>
 
-            <div class="medical-disclaimer">
-                <i class="fas fa-circle-info"></i>
-                <div>
-                    <strong>ملاحظة مهمة:</strong> هاي المعلومات مخصصة للتوعية والتثقيف الصحي فقط. تشخيص النقرس وعلاجه يحتاج تحاليل دم ومتابعة وي طبيب المفاصل.
-                </div>
-            </div>
+        <h2>خطة العلاج (وقت الهجمة القوية)</h2>
+        <p>الهدف وقت الهجمة هو إطفاء "النار" والوجع بأسرع وقت. الطبيب غالباً يوصفلك:</p>
+        <ul>
+            <li><strong>مسكنات قوية (NSAIDs):</strong> مثل النابروكسين أو الإيبوبروفين (ديربالك تاخذ أسبرين لأن ممكن يزيد الحالة سوء!).</li>
+            <li><strong>الكولشيسين (Colchicine):</strong> حبوب ممتازة إذا أخذتها بأول ساعات من بداية الوجع.</li>
+            <li><strong>الكورتيزون:</strong> حبوب أو إبرة بالوريد أو مباشرة بالمفصل للحالات الصعبة اللي ما فادتها المسكنات العادية.</li>
+            <li><strong>نصيحة بالبيت:</strong> ريح المفصل تماماً، ارفعه على مخدة، وخلي عليه كمادة ثلج (بس لف الثلج بوصلة ولا تخليه مباشر ع الجلد) لمدة 20 دقيقة.</li>
+        </ul>
 
-            <div class="article-content">
-                <p>النقرس (Gout)، أو اللي يسموه شعبياً "داء الملوك"، هو نوع شائع ومؤلم جداً من أنواع التهاب المفاصل. يصير هذا المرض من ترتفع نسبة "حامض اليوريك" (Uric acid) بالدم، وهذا الحامض الزايد يتحول إلى بلورات صغيرة تشبه الإبر وتتجمع بداخل المفصل، وتسوي هجمة ألم مفاجئة وقوية.</p>
+        <h2>الوقاية والعلاج الدائم (حتى لا يرجعلك!)</h2>
+        <p>إذا النقرس يرجعلك دائماً، الطبيب راح يمشيك على أدوية تنزل نسبة الحامض بالدم حتى لا تتجمع البلورات بعد، مثل حبوب <strong>الألوبيورينول (Allopurinol)</strong> أو الفيبوكسوستات (Febuxostat). ملاحظة كلش مهمة: <strong>أبد لا تبدي تاخذ هاي الحبوب وقت الهجمة</strong>، لأن ممكن تزيد الوجع. تاخذها بس من تهدأ المفاصل، وتستمر عليها يومية حتى لو ماكو ألم.</p>
+        <p>بالإضافة للأدوية، لازم تشرب مي هواي يومياً (حتى تغسل الكلى)، وتنزل وزنك، وتقلل من اللحوم الحمراء والسكريات.</p>
+    </div>
 
-                <h2>الأعراض (شلون تبين هجمة النقرس؟)</h2>
-                <p>هجمة النقرس تجي فجأة، وغالباً تگعد المريض من نومه بالليل:</p>
-                <ul>
-                    <li><strong>ألم رهيب ومفاجئ:</strong> الوجع يكون قوي لدرجة إن حتى غطا الجرباية (اللحاف) إذا طخ المفصل يسبب ألم ما ينحمل.</li>
-                    <li><strong>المكان المفضل للنقرس:</strong> أكثر مفصل ينضرب هو <strong>مفصل إصبع القدم الچبير</strong>، بس ممكن يصير بالكاحل، الركبة، الرسغ، أو أصابع الإيد.</li>
-                    <li><strong>تورم واحمرار:</strong> المفصل يورم حيل، يصير حار، والجلد فوگاه يبين أحمر طوخ ويلمع.</li>
-                    <li><strong>تقشر الجلد:</strong> بعد ما تخلص الهجمة وتطيب، مرات الجلد اللي فوگ المفصل يبدي يتقشر.</li>
-                </ul>
+    <div class="emergency-box">
+        <h2>حالة طارئة: نقرس لو التهاب بكتيري؟</h2>
+        <p>أعراض النقرس تشبه كلش أعراض "التهاب المفاصل الإنتاني" (التهاب بكتيري خطير). إذا مفصلك صار حار وأحمر ومورم، وترافق هذا الشي ويه <strong>سخونة (حمى) عالية ورجفة</strong>، لازم تراجع الطوارئ فوراً! الطبيب راح يسحب سائل من المفصل ليتأكد من السبب ويعطيك العلاج الصح.</p>
+    </div>
 
-                <h2>ليش يرتفع حامض اليوريك؟ (الأسباب والمحفزات)</h2>
-                <p>حامض اليوريك هو فضلات طبيعية تنتج من تكسير مواد اسمها "البيورينات" موجودة بالجسم وبالأكل. الكليتين تصفي هذا الحامض وتطلعه وي الإدرار، بس إذا الكلى دتتأخر بتصفيته، أو إنت كاعد تاكل أكل بي "بيورينات" هواي، راح يتراكم بالدم. أكثر الأشياء اللي تهيج النقرس:</p>
-                <ul>
-                    <li><strong>الأكل الدسم:</strong> اللحوم الحمراء (خاصة المعلاگ والكلى)، والمأكولات البحرية.</li>
-                    <li><strong>المشروبات:</strong> الكحول (خاصة البيرة)، والمشروبات الغازية المحلاة بالسكر والفركتوز.</li>
-                    <li><strong>السمنة والوزن الزايد:</strong> تخلي الجسم ينتج حامض يوريك أكثر، وتصعب شغل الكلى.</li>
-                    <li><strong>بعض الأدوية:</strong> حبوب الإدرار (مدررات البول) اللي ياخذوها مرضى الضغط، وحبوب الأسبرين ممكن ترفع نسبة الحامض.</li>
-                    <li><strong>العمر والجنس:</strong> يصيب الرجال أكثر من النساء، ويزيد الخطر وي التقدم بالعمر.</li>
-                </ul>
+    <div class="cta-box">
+        <h3>وجع إصبع رجلك يگعدك من النوم؟</h3>
+        <p>النقرس مرض مؤلم بس السيطرة عليه كلش سهلة إذا التزمت بالعلاج وتعليمات الطبيب. سوي تحليل حامض اليوريك بالدم واحجز موعد وي طبيب المفاصل حتى تتخلص من الهجمات المزعجة.</p>
+        <a href="/doctors.html" class="cta-btn">عرض أطباء المفاصل والروماتيزم</a>
+    </div>
 
-                <h2>خطة العلاج (وقت الهجمة القوية)</h2>
-                <p>الهدف وقت الهجمة هو إطفاء "النار" والوجع بأسرع وقت. الطبيب غالباً يوصفلك:</p>
-                <ul>
-                    <li><strong>مسكنات قوية (NSAIDs):</strong> مثل النابروكسين أو الإيبوبروفين (ديربالك تاخذ أسبرين لأن ممكن يزيد الحالة سوء!).</li>
-                    <li><strong>الكولشيسين (Colchicine):</strong> حبوب ممتازة إذا أخذتها بأول ساعات من بداية الوجع.</li>
-                    <li><strong>الكورتيزون:</strong> حبوب أو إبرة بالوريد أو مباشرة بالمفصل للحالات الصعبة اللي ما فادتها المسكنات العادية.</li>
-                    <li><strong>نصيحة بالبيت:</strong> ريح المفصل تماماً، ارفعه على مخدة، وخلي عليه كمادة ثلج (بس لف الثلج بوصلة ولا تخليه مباشر ع الجلد) لمدة 20 دقيقة.</li>
-                </ul>
-
-                <h2>الوقاية والعلاج الدائم (حتى لا يرجعلك!)</h2>
-                <p>إذا النقرس يرجعلك دائماً، الطبيب راح يمشيك على أدوية تنزل نسبة الحامض بالدم حتى لا تتجمع البلورات بعد، مثل حبوب <strong>الألوبيورينول (Allopurinol)</strong> أو الفيبوكسوستات (Febuxostat). ملاحظة كلش مهمة: <strong>أبد لا تبدي تاخذ هاي الحبوب وقت الهجمة</strong>، لأن ممكن تزيد الوجع. تاخذها بس من تهدأ المفاصل، وتستمر عليها يومية حتى لو ماكو ألم.</p>
-                <p>بالإضافة للأدوية، لازم تشرب مي هواي يومياً (حتى تغسل الكلى)، وتنزل وزنك، وتقلل من اللحوم الحمراء والسكريات.</p>
-            </div>
-
-            <div class="emergency-box">
-                <h2>حالة طارئة: نقرس لو التهاب بكتيري؟</h2>
-                <p>أعراض النقرس تشبه كلش أعراض "التهاب المفاصل الإنتاني" (التهاب بكتيري خطير). إذا مفصلك صار حار وأحمر ومورم، وترافق هذا الشي ويه <strong>سخونة (حمى) عالية ورجفة</strong>، لازم تراجع الطوارئ فوراً! الطبيب راح يسحب سائل من المفصل ليتأكد من السبب ويعطيك العلاج الصح.</p>
-            </div>
-
-            <div class="cta-box">
-                <h3>وجع إصبع رجلك يگعدك من النوم؟</h3>
-                <p>النقرس مرض مؤلم بس السيطرة عليه كلش سهلة إذا التزمت بالعلاج وتعليمات الطبيب. سوي تحليل حامض اليوريك بالدم واحجز موعد وي طبيب المفاصل حتى تتخلص من الهجمات المزعجة.</p>
-                <a href="/doctors.html" class="cta-btn">عرض أطباء المفاصل والروماتيزم</a>
-            </div>
-
-        </div>
-    </main>
-
-    <footer>
-        <div class="copyright-bar">&copy; 2026 جميع الحقوق محفوظة لـ كشفيّة</div>
-    </footer>
-</body>
-</html>
+</div>
