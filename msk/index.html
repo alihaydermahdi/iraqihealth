@@ -1,0 +1,78 @@
+---
+layout: default
+title: "أمراض العظام والمفاصل | كشفيّـة"
+permalink: /msk/
+---
+
+<style>
+    .page-header { max-width: 1300px; margin: 25px auto 30px auto; padding: 0 20px; display: flex; align-items: center; justify-content: flex-end; gap: 20px; }
+    .back-btn { display: inline-flex; align-items: center; gap: 8px; background-color: var(--nhs-white); color: var(--nhs-text); padding: 8px 16px; border-radius: 6px; text-decoration: none; font-size: 0.95rem; font-weight: 700; border: 1px solid #d1d5d8; transition: all 0.2s; box-shadow: 0 1px 2px rgba(0,0,0,0.05); }
+    .back-btn:hover { background-color: var(--nhs-blue); color: var(--nhs-white); border-color: var(--nhs-blue); }
+    .page-header h1 { margin: 0; font-size: 1.6rem; color: var(--nhs-blue); font-weight: 800; line-height: 1.2; }
+    
+    /* Grid System */
+    .disease-grid { max-width: 1300px; margin: 0 auto 50px auto; padding: 0 20px; display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 15px; }
+    .disease-card { background-color: var(--nhs-white); border: 1px solid #e2e8f0; border-radius: 8px; padding: 20px 15px; text-align: center; color: var(--nhs-text); text-decoration: none; font-weight: 700; font-size: 1.05rem; transition: all 0.2s ease; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 90px; box-shadow: 0 2px 4px rgba(0,0,0,0.04); gap: 8px; }
+    .disease-card:hover { background-color: var(--nhs-blue); color: var(--nhs-white); border-color: var(--nhs-blue); transform: translateY(-3px); box-shadow: 0 6px 12px rgba(0,0,0,0.15); }
+    .disease-card span { font-size: 0.8rem; color: #718096; font-weight: 600; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+    .disease-card:hover span { color: #e2e8f0; }
+    
+    /* Section Dividers */
+    .grid-divider { grid-column: 1 / -1; margin-top: 30px; margin-bottom: 15px; border-bottom: 2px solid #e2e8f0; padding-bottom: 10px; }
+    .grid-divider h3 { color: var(--nhs-dark-blue); margin: 0; font-size: 1.3rem; font-weight: 800; }
+
+    @media (max-width: 768px) { 
+        .page-header { flex-direction: column; align-items: center; gap: 12px; } 
+        .disease-grid { grid-template-columns: repeat(2, 1fr); } 
+    }
+</style>
+
+<div class="page-header">
+    <a href="/" class="back-btn"><i class="fas fa-arrow-right"></i> العودة للرئيسية</a>
+    <h1>أمراض العظام والمفاصل</h1>
+</div>
+
+<main class="disease-grid">
+    
+    <div class="grid-divider"><h3>التهابات المفاصل بأنواعها</h3></div>
+    <a href="/msk/arthritis/" class="disease-card">التهاب المفاصل العام <span>(Arthritis)</span></a>
+    <a href="/msk/osteoarthritis/" class="disease-card">خشونة المفاصل / السوفان <span>(Osteoarthritis)</span></a>
+    <a href="/msk/rheumatoid-arthritis/" class="disease-card">الروماتيزم <span>(Rheumatoid)</span></a>
+    <a href="/msk/gout/" class="disease-card">النقرس / داء الملوك <span>(Gout)</span></a>
+    <a href="/msk/chondrocalcinosis/" class="disease-card">النقرس الكاذب <span>(Pseudogout)</span></a>
+    <a href="/msk/psoriatic-arthritis/" class="disease-card">التهاب المفاصل الصدفي <span>(Psoriatic)</span></a>
+    <a href="/msk/reactive-arthritis/" class="disease-card">التهاب المفاصل التفاعلي <span>(Reactive)</span></a>
+    <a href="/msk/ankylosing-spondylitis/" class="disease-card">التهاب الفقار اللاصق <span>(Ankylosing)</span></a>
+    <a href="/msk/septic-arthritis/" class="disease-card">التهاب المفاصل البكتيري <span>(Septic)</span></a>
+
+    <div class="grid-divider"><h3>مشاكل الظهر والعمود الفقري</h3></div>
+    <a href="/msk/back-pain/" class="disease-card">ألم الظهر <span>(Back Pain)</span></a>
+    <a href="/msk/sciatica/" class="disease-card">عرق النسا <span>(Sciatica)</span></a>
+    <a href="/msk/slipped-disc/" class="disease-card">الانزلاق الغضروفي <span>(Slipped Disc)</span></a>
+    <a href="/msk/spinal-stenosis/" class="disease-card">تضيق القناة الشوكية <span>(Spinal Stenosis)</span></a>
+    <a href="/msk/cervical-spondylosis/" class="disease-card">سوفان الرقبة <span>(Cervical Spondylosis)</span></a>
+
+    <div class="grid-divider"><h3>العضلات، الأوتار، والأعصاب</h3></div>
+    <a href="/msk/carpal-tunnel/" class="disease-card">متلازمة النفق الرسغي <span>(Carpal Tunnel)</span></a>
+    <a href="/msk/fibromyalgia/" class="disease-card">الفيبروميالجيا <span>(Fibromyalgia)</span></a>
+    <a href="/msk/polymyalgia-rheumatica/" class="disease-card">ألم العضلات الروماتزمي <span>(PMR)</span></a>
+    <a href="/msk/plantar-fasciitis/" class="disease-card">مسمار العظم (اللفافة الأخمصية) <span>(Plantar Fasciitis)</span></a>
+    <a href="/msk/tennis-elbow/" class="disease-card">مرفق التنس والگولف <span>(Tennis/Golfer's Elbow)</span></a>
+    <a href="/msk/frozen-shoulder/" class="disease-card">الكتف المتجمد <span>(Frozen Shoulder)</span></a>
+    <a href="/msk/tendinitis-bursitis/" class="disease-card">التهاب الأوتار والأكياس <span>(Tendinitis & Bursitis)</span></a>
+    <a href="/msk/ganglion-cyst/" class="disease-card">العقدة الكيسية <span>(Ganglion Cyst)</span></a>
+    <a href="/msk/trigger-finger/" class="disease-card">الإصبع الزنادي <span>(Trigger Finger)</span></a>
+
+    <div class="grid-divider"><h3>أمراض العظام</h3></div>
+    <a href="/msk/osteoporosis/" class="disease-card">هشاشة العظام <span>(Osteoporosis)</span></a>
+    <a href="/msk/pagets-disease/" class="disease-card">مرض باجيت <span>(Paget's Disease)</span></a>
+    <a href="/msk/osteomyelitis/" class="disease-card">التهاب العظم البكتيري <span>(Osteomyelitis)</span></a>
+    <a href="/msk/bone-cancer/" class="disease-card">سرطان العظام <span>(Bone Cancer)</span></a>
+
+    <div class="grid-divider"><h3>العمليات والإصابات</h3></div>
+    <a href="/msk/knee-replacement/" class="disease-card">تبديل مفصل الركبة <span>(Knee Replacement)</span></a>
+    <a href="/msk/hip-replacement/" class="disease-card">تبديل مفصل الورك <span>(Hip Replacement)</span></a>
+    <a href="/msk/sprains-strains/" class="disease-card">التمزق العضلي والالتواء <span>(Sprains & Strains)</span></a>
+    <a href="/msk/meniscus-tear/" class="disease-card">تمزق الغضروف الهلالي <span>(Meniscus Tear)</span></a>
+    <a href="/msk/dislocated-shoulder/" class="disease-card">خلع الكتف <span>(Dislocated Shoulder)</span></a>
+</main>
