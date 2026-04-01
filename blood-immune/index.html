@@ -1,0 +1,72 @@
+---
+layout: default
+title: "أمراض الدم والمناعة والحساسية | كشفيّـة"
+permalink: /blood-immune/
+---
+
+<style>
+    .page-header { max-width: 1300px; margin: 25px auto 30px auto; padding: 0 20px; display: flex; align-items: center; justify-content: flex-end; gap: 20px; }
+    .back-btn { display: inline-flex; align-items: center; gap: 8px; background-color: var(--nhs-white); color: var(--nhs-text); padding: 8px 16px; border-radius: 6px; text-decoration: none; font-size: 0.95rem; font-weight: 700; border: 1px solid #d1d5d8; transition: all 0.2s; box-shadow: 0 1px 2px rgba(0,0,0,0.05); }
+    .back-btn:hover { background-color: var(--nhs-blue); color: var(--nhs-white); border-color: var(--nhs-blue); }
+    .page-header h1 { margin: 0; font-size: 1.6rem; color: var(--nhs-blue); font-weight: 800; line-height: 1.2; }
+    
+    /* Grid System */
+    .disease-grid { max-width: 1300px; margin: 0 auto 50px auto; padding: 0 20px; display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 15px; }
+    .disease-card { background-color: var(--nhs-white); border: 1px solid #e2e8f0; border-radius: 8px; padding: 20px 15px; text-align: center; color: var(--nhs-text); text-decoration: none; font-weight: 700; font-size: 1.05rem; transition: all 0.2s ease; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 90px; box-shadow: 0 2px 4px rgba(0,0,0,0.04); gap: 8px; }
+    .disease-card:hover { background-color: var(--nhs-blue); color: var(--nhs-white); border-color: var(--nhs-blue); transform: translateY(-3px); box-shadow: 0 6px 12px rgba(0,0,0,0.15); }
+    .disease-card span { font-size: 0.8rem; color: #718096; font-weight: 600; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+    .disease-card:hover span { color: #e2e8f0; }
+    
+    /* Section Dividers */
+    .grid-divider { grid-column: 1 / -1; margin-top: 30px; margin-bottom: 15px; border-bottom: 2px solid #e2e8f0; padding-bottom: 10px; }
+    .grid-divider h3 { color: var(--nhs-dark-blue); margin: 0; font-size: 1.3rem; font-weight: 800; }
+
+    @media (max-width: 768px) { 
+        .page-header { flex-direction: column; align-items: center; gap: 12px; } 
+        .disease-grid { grid-template-columns: repeat(2, 1fr); } 
+    }
+</style>
+
+<div class="page-header">
+    <a href="/" class="back-btn"><i class="fas fa-arrow-right"></i> العودة للرئيسية</a>
+    <h1>أمراض الدم والمناعة والحساسية</h1>
+</div>
+
+<main class="disease-grid">
+    
+    <div class="grid-divider"><h3>فقر الدم (الأنيميا)</h3></div>
+    <a href="/blood-immune/anaemia/" class="disease-card">فقر الدم (بشكل عام) <span>(Anaemia)</span></a>
+    <a href="/blood-immune/iron-deficiency/" class="disease-card">نقص الحديد <span>(Iron Deficiency)</span></a>
+    <a href="/blood-immune/vitamin-b12-deficiency/" class="disease-card">نقص B12 والفوليك أسيد <span>(B12/Folate)</span></a>
+    <a href="/blood-immune/sickle-cell/" class="disease-card">فقر الدم المنجلي <span>(Sickle Cell)</span></a>
+    <a href="/blood-immune/thalassaemia/" class="disease-card">الثلاسيميا <span>(Thalassaemia)</span></a>
+    <a href="/blood-immune/pernicious-anaemia/" class="disease-card">فقر الدم الخبيث <span>(Pernicious Anaemia)</span></a>
+
+    <div class="grid-divider"><h3>أنواع الحساسية الشائعة</h3></div>
+    <a href="/blood-immune/anaphylaxis/" class="disease-card">الصدمة التحسسية (حالة طارئة) <span>(Anaphylaxis)</span></a>
+    <a href="/blood-immune/hay-fever/" class="disease-card">حساسية الأنف (حمى القش) <span>(Hay Fever)</span></a>
+    <a href="/blood-immune/food-allergy/" class="disease-card">حساسية الطعام <span>(Food Allergy)</span></a>
+    <a href="/blood-immune/drug-allergy/" class="disease-card">حساسية الأدوية <span>(Drug Allergy)</span></a>
+    <a href="/blood-immune/hives-urticaria/" class="disease-card">الشرى (الآرتيكاريا) <span>(Hives)</span></a>
+    <a href="/blood-immune/insect-stings/" class="disease-card">حساسية الحشرات <span>(Insect Stings)</span></a>
+
+    <div class="grid-divider"><h3>أمراض المناعة والدم المعقدة</h3></div>
+    <a href="/blood-immune/lupus/" class="disease-card">الذئبة الحمراء الجهازية <span>(Systemic Lupus - SLE)</span></a>
+    <a href="/blood-immune/sarcoidosis/" class="disease-card">مرض الساركويد <span>(Sarcoidosis)</span></a>
+    <a href="/blood-immune/sjogrens-syndrome/" class="disease-card">متلازمة جوجرن (الجفاف) <span>(Sjögren's)</span></a>
+    <a href="/blood-immune/vasculitis/" class="disease-card">التهاب الأوعية الدموية <span>(Vasculitis)</span></a>
+    <a href="/blood-immune/itp-platelets/" class="disease-card">نقص الصفائح المناعي <span>(ITP)</span></a>
+    <a href="/blood-immune/myasthenia-gravis/" class="disease-card">وهن العضلات الوبيل <span>(Myasthenia)</span></a>
+
+    <div class="grid-divider"><h3>أورام الدم والغدد اللمفاوية</h3></div>
+    <a href="/blood-immune/swollen-glands/" class="disease-card">تضخم الغدد اللمفاوية <span>(Swollen Glands)</span></a>
+    <a href="/blood-immune/leukaemia/" class="disease-card">سرطان الدم (اللوكيميا) <span>(Leukaemia)</span></a>
+    <a href="/blood-immune/lymphoma/" class="disease-card">سرطان الغدد اللمفاوية <span>(Lymphoma)</span></a>
+    <a href="/blood-immune/myeloma/" class="disease-card">الميلوما المتعددة <span>(Myeloma)</span></a>
+    <a href="/blood-immune/polycythaemia/" class="disease-card">كثرة الكريات الحمر (اللزوجة) <span>(Polycythaemia)</span></a>
+
+    <div class="grid-divider"><h3>فحوصات الدم الأساسية</h3></div>
+    <a href="/blood-immune/cbp-full-blood-count/" class="disease-card">شرح تحليل الدم الشامل <span>(CBP / CBC)</span></a>
+    <a href="/blood-immune/bone-marrow-biopsy/" class="disease-card">خزعة نخاع العظم <span>(Bone Marrow)</span></a>
+    <a href="/blood-immune/bruising-bleeding/" class="disease-card">سهولة التكدم والنزف <span>(Bruising)</span></a>
+</main>
