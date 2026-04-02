@@ -1,0 +1,94 @@
+---
+layout: default
+title: "أويلي.. الصفحة مفقودة! | 404"
+permalink: /404.html
+---
+
+<style>
+    .error-container {
+        max-width: 800px;
+        margin: 100px auto;
+        padding: 40px 20px;
+        text-align: center;
+        background: var(--nhs-white);
+        border-radius: 12px;
+        border: 2px dashed #d1d5d8;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    }
+    .error-icon {
+        font-size: 5rem;
+        color: #e67e22; /* لون برتقالي للتنبيه */
+        margin-bottom: 20px;
+    }
+    .error-title {
+        font-size: 2.5rem;
+        color: var(--nhs-blue);
+        font-weight: 800;
+        margin-bottom: 15px;
+    }
+    .error-message {
+        font-size: 1.2rem;
+        color: var(--nhs-text);
+        margin-bottom: 30px;
+        line-height: 1.6;
+    }
+    .error-actions {
+        display: flex;
+        justify-content: center;
+        gap: 15px;
+        flex-wrap: wrap;
+    }
+    .btn-home {
+        background-color: var(--nhs-blue);
+        color: white;
+        padding: 12px 25px;
+        border-radius: 8px;
+        text-decoration: none;
+        font-weight: 700;
+        transition: background 0.2s;
+    }
+    .btn-home:hover {
+        background-color: var(--nhs-dark-blue);
+    }
+    .btn-contact {
+        background-color: #f0f4f7;
+        color: var(--nhs-text);
+        padding: 12px 25px;
+        border-radius: 8px;
+        text-decoration: none;
+        font-weight: 700;
+        border: 1px solid #d1d5d8;
+    }
+    .steth-icon {
+        opacity: 0.1;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 20rem;
+        z-index: -1;
+    }
+</style>
+
+<div style="position: relative; overflow: hidden;">
+    <i class="fas fa-stethoscope steth-icon"></i>
+    
+    <div class="error-container">
+        <div class="error-icon">
+            <i class="fas fa-map-signs"></i>
+        </div>
+        
+        <h1 class="error-title">أويلي.. تيهنا الطريق!</h1>
+        
+        <p class="error-message">
+            الصفحة اللي دتدور عليها ما موجودة. يمكن الرابط بي غلط، أو الصفحة انمسحت وانتقلت لغير مكان. <br>
+            لا تدوخ، خلينه نرجعك للطريق الصحيح.
+        </p>
+        
+        <div class="error-actions">
+            <a href="/" class="btn-home"><i class="fas fa-home"></i> العودة للرئيسية</a>
+            <a href="/mental-health/" class="btn-contact"><i class="fas fa-brain"></i> قسم الصحة النفسية</a>
+            <a href="/healthy-living/" class="btn-contact"><i class="fas fa-heartbeat"></i> قسم الحياة الصحية</a>
+        </div>
+    </div>
+</div>
