@@ -1,0 +1,101 @@
+---
+layout: default
+title: "الأسئلة الشائعة | كشفيّـة"
+permalink: /faq/
+---
+
+<style>
+    /* --- تنسيق صفحة الأسئلة الشائعة (الأكورديون) --- */
+    .page-container { max-width: 800px; margin: 40px auto 50px auto; padding: 0 20px; min-height: 50vh; }
+    .page-title { text-align: center; color: var(--nhs-dark-blue); font-size: 2rem; font-weight: 800; margin-bottom: 40px; position: relative; padding-bottom: 15px; }
+    .page-title::after { content: ''; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: 60px; height: 4px; background-color: var(--nhs-blue); border-radius: 2px; }
+
+    .faq-item { background: var(--nhs-white); border-radius: 8px; margin-bottom: 15px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); overflow: hidden; border: 1px solid #e2e8f0; }
+    .faq-question { width: 100%; text-align: right; background: none; border: none; padding: 20px; font-size: 1.1rem; font-weight: 700; color: var(--nhs-dark-blue); cursor: pointer; display: flex; justify-content: space-between; align-items: center; transition: background 0.2s; font-family: inherit; }
+    .faq-question:hover { background-color: #f8fafc; }
+    .faq-question i { color: var(--nhs-blue); transition: transform 0.3s ease; }
+    .faq-question.active i { transform: rotate(180deg); } /* دوران السهم عند الفتح */
+    
+    .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out; background-color: #fafbfc; }
+    .faq-answer-content { padding: 0 20px 20px 20px; color: #4a5568; font-size: 1.05rem; border-top: 1px solid #e2e8f0; margin-top: 10px; padding-top: 15px; line-height: 1.7; }
+
+    @media (max-width: 768px) {
+        .page-title { font-size: 1.6rem; }
+        .faq-question { font-size: 1rem; padding: 15px; }
+        .faq-answer-content { font-size: 0.95rem; }
+    }
+</style>
+
+<div class="page-container">
+    <h1 class="page-title">الأسئلة الشائعة</h1>
+
+    <div class="faq-item">
+        <button class="faq-question">هل المعلومات بموقع كشفيّة تغني عن زيارة الدكتور؟ <i class="fas fa-chevron-down"></i></button>
+        <div class="faq-answer">
+            <div class="faq-answer-content">
+                أكيد لا. كل المعلومات والمقالات الموجودة بالموقع هي للتوعية والتثقيف الطبي بس، وتساعدك تفهم حالتك أو مرضك بصورة أحسن. لكنها أبداً ما تعوض عن زيارتك للطبيب المختص حتى يشخصك بدقة ويكتبلك العلاج المناسب.
+            </div>
+        </div>
+    </div>
+
+    <div class="faq-item">
+        <button class="faq-question">شلون أگدر أحجز موعد وي طبيب أو مركز طبي؟ <i class="fas fa-chevron-down"></i></button>
+        <div class="faq-answer">
+            <div class="faq-answer-content">
+                تگدر تدخل على قسم "الأطباء والمراكز" من القائمة الفوك، وتختار التخصص اللي تريده. راح تطلعلك لستة بأسماء الدكاترة الموثوقين، أرقام عياداتهم، عناوينهم وأوقات الدوام، حتى تتصل بيهم وتحجز مباشرة.
+            </div>
+        </div>
+    </div>
+
+    <div class="faq-item">
+        <button class="faq-question">هل استخدام منصة كشفيّة مجاني؟ <i class="fas fa-chevron-down"></i></button>
+        <div class="faq-answer">
+            <div class="faq-answer-content">
+                إي نعم! تصفح الموقع وقراءة كل المقالات والمعلومات الطبية ودليل الأطباء هي خدمات مجانية 100% لكل العراقيين وما بيها أي رسوم.
+            </div>
+        </div>
+    </div>
+
+    <div class="faq-item">
+        <button class="faq-question">شلون أگدر أضيف عيادتي أو مركزي الطبي للمنصة؟ <i class="fas fa-chevron-down"></i></button>
+        <div class="faq-answer">
+            <div class="faq-answer-content">
+                نتشرف بيكم! تگدرون تتواصلون ويانا عن طريق زر "تواصل معنا" الموجود فوك ، وفريقنا راح يجاوبكم بأسرع وقت لترتيب الإضافة وتوثيق العيادة.
+            </div>
+        </div>
+    </div>
+
+    <div class="faq-item">
+        <button class="faq-question">هل المعلومات الطبية بالموقع موثوقة؟ <i class="fas fa-chevron-down"></i></button>
+        <div class="faq-answer">
+            <div class="faq-answer-content">
+                نعم، فريق كشفيّة يعتمد على مصادر طبية عالمية معتمدة وموثوقة، وتتم مراجعة المعلومات وصياغتها بلهجتنا العراقية البسيطة حتى توصل الفكرة للكل بدون تعقيد أو مصطلحات صعبة.
+            </div>
+        </div>
+    </div>
+
+    <div class="faq-item">
+        <button class="faq-question">إذا عندي سؤال طبي، أگدر أستشيركم أونلاين؟ <i class="fas fa-chevron-down"></i></button>
+        <div class="faq-answer">
+            <div class="faq-answer-content">
+                حالياً المنصة تقدم معلومات ومقالات طبية جاهزة وما نقدم استشارات طبية مباشرة (أونلاين) لحماية سلامتكم. ننصحك دائماً بمراجعة طبيبك الخاص لأي استشارة أو تشخيص يخص حالتك الصحية.
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.querySelectorAll('.faq-question').forEach(button => {
+        button.addEventListener('click', () => {
+            // فتح أو إغلاق السؤال الحالي
+            const answer = button.nextElementSibling;
+            button.classList.toggle('active');
+            
+            if (button.classList.contains('active')) {
+                answer.style.maxHeight = answer.scrollHeight + "px";
+            } else {
+                answer.style.maxHeight = 0;
+            }
+        });
+    });
+</script>
