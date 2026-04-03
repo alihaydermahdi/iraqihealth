@@ -1,0 +1,602 @@
+---
+layout: default
+title: "دليل الأمراض ( أ - ي ) | كشفيّـة"
+permalink: /conditions/index.html
+---
+
+<style>
+    /* --- تنسيق صفحة الدليل الأبجدي --- */
+    .page-container { max-width: 1300px; margin: 40px auto 50px auto; padding: 0 20px; min-height: 60vh; }
+    .page-title { text-align: center; color: var(--nhs-dark-blue); font-size: 2.2rem; font-weight: 800; margin-bottom: 20px; }
+    .page-subtitle { text-align: center; color: #4a5568; font-size: 1.1rem; margin-bottom: 40px; }
+
+    /* شريط الحروف (Sticky Alphabet Bar) */
+    .az-nav-wrapper { background: var(--nhs-white); position: sticky; top: 60px; z-index: 99; padding: 15px 0; border-bottom: 2px solid #e2e8f0; border-top: 2px solid #e2e8f0; margin-bottom: 40px; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05); }
+    .az-nav { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; max-width: 1300px; margin: 0 auto; padding: 0 20px; }
+    .az-nav a { display: flex; justify-content: center; align-items: center; width: 40px; height: 40px; background-color: var(--nhs-light-grey); color: var(--nhs-blue); text-decoration: none; font-size: 1.2rem; font-weight: 800; border-radius: 6px; transition: all 0.2s; border: 1px solid #cbd5e0; }
+    .az-nav a:hover { background-color: var(--nhs-blue); color: white; transform: translateY(-2px); border-color: var(--nhs-blue); }
+    .az-nav a.disabled { opacity: 0.4; cursor: not-allowed; pointer-events: none; background-color: #f8fafc; color: #a0aec0; }
+
+    /* أقسام الحروف */
+    .letter-section { margin-bottom: 40px; scroll-margin-top: 140px; background: var(--nhs-white); border-radius: 8px; border: 1px solid #e2e8f0; padding: 30px; box-shadow: 0 2px 4px rgba(0,0,0,0.02); }
+    .letter-header { display: inline-flex; justify-content: center; align-items: center; width: 60px; height: 60px; background-color: var(--nhs-blue); color: white; font-size: 2rem; font-weight: 900; border-radius: 8px; margin-bottom: 20px; }
+    
+    /* قائمة الأمراض */
+    .condition-list { list-style: none; padding: 0; margin: 0; columns: 3; column-gap: 40px; }
+    .condition-list li { margin-bottom: 12px; break-inside: avoid; }
+    .condition-list a { color: #2d3748; text-decoration: none; font-size: 1.05rem; font-weight: 600; display: inline-block; transition: color 0.2s; position: relative; padding-right: 15px; }
+    .condition-list a::before { content: '■'; color: #fb8500; font-size: 0.6rem; position: absolute; right: 0; top: 8px; }
+    .condition-list a:hover { color: var(--nhs-blue); }
+
+    /* الموبايل */
+    @media (max-width: 992px) {
+        .condition-list { columns: 2; }
+    }
+    @media (max-width: 768px) {
+        .az-nav-wrapper { top: 110px; } /* تعديل لمراعاة الهيدر بالموبايل */
+        .az-nav a { width: 35px; height: 35px; font-size: 1.1rem; }
+        .condition-list { columns: 1; }
+        .letter-section { padding: 20px; }
+        .page-title { font-size: 1.8rem; }
+    }
+</style>
+
+<div class="page-container">
+    <h1 class="page-title">دليل الأمراض ( أ - ي )</h1>
+    <p class="page-subtitle">ابحث عن اسم المرض، الحالة الصحية، أو الأعراض اللي تهمك حسب الترتيب الأبجدي.</p>
+</div>
+
+<div class="az-nav-wrapper">
+    <div class="az-nav">
+        <a href="#letter-A">أ</a>
+        <a href="#letter-B">ب</a>
+        <a href="#letter-T">ت</a>
+        <a href="#letter-TH">ث</a>
+        <a href="#letter-J">ج</a>
+        <a href="#letter-H">ح</a>
+        <a href="#letter-KH">خ</a>
+        <a href="#letter-D">د</a>
+        <a href="#letter-DH">ذ</a>
+        <a href="#letter-R">ر</a>
+        <a href="#letter-Z">ز</a>
+        <a href="#letter-S">س</a>
+        <a href="#letter-SH">ش</a>
+        <a href="#letter-SA">ص</a>
+        <a href="#letter-DA">ض</a>
+        <a href="#letter-TA">ط</a>
+        <a href="#letter-ZA">ظ</a>
+        <a href="#letter-AA">ع</a>
+        <a href="#letter-GH">غ</a>
+        <a href="#letter-F">ف</a>
+        <a href="#letter-Q">ق</a>
+        <a href="#letter-K">ك</a>
+        <a href="#letter-L">ل</a>
+        <a href="#letter-M">م</a>
+        <a href="#letter-N">ن</a>
+        <a href="#letter-HA">هـ</a>
+        <a href="#letter-W">و</a>
+        <a href="#letter-Y">ي</a>
+    </div>
+</div>
+
+<div class="page-container" style="margin-top: 0;">
+
+    <div class="letter-section" id="letter-A">
+        <div class="letter-header">أ</div>
+        <ul class="condition-list">
+            <li><a href="#">أبو صفار</a></li>
+            <li><a href="#">أذن صمغية</a></li>
+            <li><a href="#">ارتجاع (زواع)</a></li>
+            <li><a href="#">ارتفاع السكر</a></li>
+            <li><a href="#">ارتفاع الكوليسترول</a></li>
+            <li><a href="#">ارتفاع ضغط الدم</a></li>
+            <li><a href="#">ارتفاع ضغط العين المفاجئ</a></li>
+            <li><a href="#">استرواح صدري</a></li>
+            <li><a href="#">استشارة نفسية</a></li>
+            <li><a href="#">استجماتزم</a></li>
+            <li><a href="#">أكزيما أطفال</a></li>
+            <li><a href="#">أكزيما تأتبية</a></li>
+            <li><a href="#">اكتئاب ما بعد الولادة</a></li>
+            <li><a href="#">اعتلال الشبكية السكري</a></li>
+            <li><a href="#">اعتلال القلب التوسعي</a></li>
+            <li><a href="#">اعتلال الكلية السكري</a></li>
+            <li><a href="#">اعتلال عصبي سكري</a></li>
+            <li><a href="#">أكل صحي</a></li>
+            <li><a href="#">أكياس المبيض</a></li>
+            <li><a href="#">ألم الثدي</a></li>
+            <li><a href="#">ألم الحوض المزمن</a></li>
+            <li><a href="#">ألم الخصية والتهاب البربخ</a></li>
+            <li><a href="#">ألم الدورة</a></li>
+            <li><a href="#">ألم الظهر</a></li>
+            <li><a href="#">ألم العضلات الروماتزمي</a></li>
+            <li><a href="#">ألياف الرحم</a></li>
+            <li><a href="#">أمراض الصمام الأبهر</a></li>
+            <li><a href="#">أمراض منقولة جنسياً</a></li>
+            <li><a href="#">أنسولين وأنواعه</a></li>
+            <li><a href="#">انصباب الجنب</a></li>
+            <li><a href="#">انسداد القناة الدمعية</a></li>
+            <li><a href="#">انسداد رئوي مزمن</a></li>
+            <li><a href="#">انسداد قناة استاكيوس</a></li>
+            <li><a href="#">انزلاق غضروفي</a></li>
+            <li><a href="#">انفصال الشبكية</a></li>
+            <li><a href="#">إحمرار العين</a></li>
+            <li><a href="#">إدمان</a></li>
+            <li><a href="#">إدارة التوتر</a></li>
+            <li><a href="#">إسهال</a></li>
+            <li><a href="#">إسهال الدارجين</a></li>
+            <li><a href="#">إسقاط</a></li>
+            <li><a href="#">إصابات وضربات العين</a></li>
+            <li><a href="#">إصبع زنادي</a></li>
+            <li><a href="#">إفرازات مهبلية</a></li>
+            <li><a href="#">إقلاع عن التدخين</a></li>
+            <li><a href="#">إكزيما الدوالي</a></li>
+            <li><a href="#">إمساك (قبض)</a></li>
+            <li><a href="#">إيذاء النفس</a></li>
+            <li><a href="#">التهاب الأذن الخارجية</a></li>
+            <li><a href="#">التهاب الأذن الوسطى</a></li>
+            <li><a href="#">التهاب الأوعية الدموية</a></li>
+            <li><a href="#">التهاب البنكرياس الحاد</a></li>
+            <li><a href="#">التهاب البنكرياس المزمن</a></li>
+            <li><a href="#">التهاب الثدي</a></li>
+            <li><a href="#">التهاب الجيوب الأنفية</a></li>
+            <li><a href="#">التهاب الحنجرة</a></li>
+            <li><a href="#">التهاب الحوض</a></li>
+            <li><a href="#">التهاب السحايا</a></li>
+            <li><a href="#">التهاب الشريان الصدغي</a></li>
+            <li><a href="#">التهاب العصب البصري</a></li>
+            <li><a href="#">التهاب العظم البكتيري</a></li>
+            <li><a href="#">التهاب الفقار اللاصق</a></li>
+            <li><a href="#">التهاب القصيبات</a></li>
+            <li><a href="#">التهاب الكبد الفيروسي</a></li>
+            <li><a href="#">التهاب الكلى</a></li>
+            <li><a href="#">التهاب اللوزتين</a></li>
+            <li><a href="#">التهاب المجاري (أطفال)</a></li>
+            <li><a href="#">التهاب المجاري (حوامل)</a></li>
+            <li><a href="#">التهاب المجاري (رجال)</a></li>
+            <li><a href="#">التهاب المجاري البولية</a></li>
+            <li><a href="#">التهاب المفاصل البكتيري</a></li>
+            <li><a href="#">التهاب المفاصل التفاعلي</a></li>
+            <li><a href="#">التهاب المفاصل الصدفي</a></li>
+            <li><a href="#">التهاب المفاصل العام</a></li>
+            <li><a href="#">التهاب النسيج الخلوي</a></li>
+            <li><a href="#">التهاب الوريد السطحي</a></li>
+            <li><a href="#">التهاب المهبل البكتيري</a></li>
+            <li><a href="#">التهاب شغاف القلب</a></li>
+            <li><a href="#">التهاب عضلة القلب</a></li>
+            <li><a href="#">التهاب غشاء القلب</a></li>
+            <li><a href="#">التهاب كبيبات الكلى</a></li>
+        </ul>
+    </div>
+
+    <div class="letter-section" id="letter-B">
+        <div class="letter-header">ب</div>
+        <ul class="condition-list">
+            <li><a href="#">بطانة الرحم المهاجرة</a></li>
+            <li><a href="#">بق الفراش</a></li>
+            <li><a href="#">بهاق</a></li>
+            <li><a href="#">بواسير</a></li>
+        </ul>
+    </div>
+
+    <div class="letter-section" id="letter-T">
+        <div class="letter-header">ت</div>
+        <ul class="condition-list">
+            <li><a href="#">تأخر الحمل والعقم</a></li>
+            <li><a href="#">تأخر الدورة</a></li>
+            <li><a href="#">تأخر النطق</a></li>
+            <li><a href="#">تبديل مفصل الركبة</a></li>
+            <li><a href="#">تبديل مفصل الورك</a></li>
+            <li><a href="#">تبول لاإرادي (أطفال)</a></li>
+            <li><a href="#">تثدي الرجال</a></li>
+            <li><a href="#">تخطيط للحمل</a></li>
+            <li><a href="#">تدرن (سل)</a></li>
+            <li><a href="#">تشتت الانتباه عند الكبار</a></li>
+            <li><a href="#">تشنجات (صرع)</a></li>
+            <li><a href="#">تشمع الكبد</a></li>
+            <li><a href="#">تصلب الجلد</a></li>
+            <li><a href="#">تصلب شرايين الأطراف</a></li>
+            <li><a href="#">تصلب لويحي متعدد</a></li>
+            <li><a href="#">تضخم البروستات الحميد</a></li>
+            <li><a href="#">تضخم الغدة الكظرية الخلقي</a></li>
+            <li><a href="#">تضخم الغدد اللمفاوية</a></li>
+            <li><a href="#">تضيق الشريان الأبهر</a></li>
+            <li><a href="#">تضيق القناة الشوكية</a></li>
+            <li><a href="#">تقرن شمسي</a></li>
+            <li><a href="#">تقليل وقت الشاشات</a></li>
+            <li><a href="#">تكيس الكلى</a></li>
+            <li><a href="#">تكيس المبايض</a></li>
+            <li><a href="#">تليف الرئة</a></li>
+            <li><a href="#">تليف كيسي</a></li>
+            <li><a href="#">تمدد الأبهر البطني</a></li>
+            <li><a href="#">تمارين القوة</a></li>
+            <li><a href="#">تمزق الغضروف الهلالي</a></li>
+            <li><a href="#">تمزق عضلي والتواء</a></li>
+            <li><a href="#">تنزيل الوزن</a></li>
+            <li><a href="#">تنكس بقعي</a></li>
+            <li><a href="#">توحد عند الكبار</a></li>
+            <li><a href="#">تورم الأصابع</a></li>
+            <li><a href="#">توسع القصبات</a></li>
+        </ul>
+    </div>
+
+    <div class="letter-section" id="letter-TH">
+        <div class="letter-header">ث</div>
+        <ul class="condition-list">
+            <li><a href="#">ثالول</a></li>
+            <li><a href="#">ثقب طبلة الأذن</a></li>
+            <li><a href="#">ثعلبة</a></li>
+            <li><a href="#">ثلاسيميا</a></li>
+        </ul>
+    </div>
+
+    <div class="letter-section" id="letter-J">
+        <div class="letter-header">ج</div>
+        <ul class="condition-list">
+            <li><a href="#">جدرة (كيلويد)</a></li>
+            <li><a href="#">جدري الماء</a></li>
+            <li><a href="#">جرثومة والتهاب المعدة</a></li>
+            <li><a href="#">جرب</a></li>
+            <li><a href="#">جفاف العين</a></li>
+            <li><a href="#">جفاف المهبل</a></li>
+            <li><a href="#">جلطة الساق</a></li>
+            <li><a href="#">جلطة رئوية</a></li>
+            <li><a href="#">جيوب قولونية</a></li>
+        </ul>
+    </div>
+
+    <div class="letter-section" id="letter-H">
+        <div class="letter-header">ح</div>
+        <ul class="condition-list">
+            <li><a href="#">حب الشباب والوردية</a></li>
+            <li><a href="#">حثل عضلي</a></li>
+            <li><a href="#">حروق</a></li>
+            <li><a href="#">حروق الشمس</a></li>
+            <li><a href="#">حزام ناري</a></li>
+            <li><a href="#">حساسية الأدوية</a></li>
+            <li><a href="#">حساسية الأنف</a></li>
+            <li><a href="#">حساسية الحشرات</a></li>
+            <li><a href="#">حساسية الحنطة</a></li>
+            <li><a href="#">حساسية الربيع</a></li>
+            <li><a href="#">حساسية الطعام</a></li>
+            <li><a href="#">حصى الكلى والحالب</a></li>
+            <li><a href="#">حصى اللوزتين</a></li>
+            <li><a href="#">حصى المرارة</a></li>
+            <li><a href="#">حصبة</a></li>
+            <li><a href="#">حصبة ألمانية</a></li>
+            <li><a href="#">حكة الحمل</a></li>
+            <li><a href="#">حكة المنطقة الحساسة</a></li>
+            <li><a href="#">حمامى عقدية</a></li>
+            <li><a href="#">حمى غدية</a></li>
+            <li><a href="#">حمى قرمزية</a></li>
+            <li><a href="#">حمل بتوأم</a></li>
+            <li><a href="#">حمل خارج الرحم</a></li>
+            <li><a href="#">حول</a></li>
+        </ul>
+    </div>
+
+    <div class="letter-section" id="letter-KH">
+        <div class="letter-header">خ</div>
+        <ul class="condition-list">
+            <li><a href="#">خريطة أوجاع البطن</a></li>
+            <li><a href="#">خشونة المفاصل / السوفان</a></li>
+            <li><a href="#">خفقان واضطراب النبض</a></li>
+            <li><a href="#">خلع الكتف</a></li>
+            <li><a href="#">خلع الورك الولادي</a></li>
+            <li><a href="#">خناق</a></li>
+        </ul>
+    </div>
+
+    <div class="letter-section" id="letter-D">
+        <div class="letter-header">د</div>
+        <ul class="condition-list">
+            <li><a href="#">داء الملوك (نقرس)</a></li>
+            <li><a href="#">دم بالبول</a></li>
+            <li><a href="#">دمامل</a></li>
+            <li><a href="#">دوار الأذن الداخلية</a></li>
+            <li><a href="#">دوالي الساقين</a></li>
+            <li><a href="#">دورة شهرية ومشاكل نسائية</a></li>
+            <li><a href="#">ديدان خيطية</a></li>
+        </ul>
+    </div>
+
+    <div class="letter-section" id="letter-DH">
+        <div class="letter-header">ذ</div>
+        <ul class="condition-list">
+            <li><a href="#">ذات الرئة</a></li>
+            <li><a href="#">ذباب طائر وومضات الضوء</a></li>
+            <li><a href="#">ذبحة صدرية</a></li>
+            <li><a href="#">ذئبة حمراء جهازية</a></li>
+            <li><a href="#">ذئبة قرصية</a></li>
+        </ul>
+    </div>
+
+    <div class="letter-section" id="letter-R">
+        <div class="letter-header">ر</div>
+        <ul class="condition-list">
+            <li><a href="#">ربو وحساسية الصدر</a></li>
+            <li><a href="#">رجفان أذيني</a></li>
+            <li><a href="#">رمد / التهاب الملتحمة</a></li>
+            <li><a href="#">روماتيزم</a></li>
+            <li><a href="#">روماتيزم الأطفال</a></li>
+            <li><a href="#">رهاب اجتماعي</a></li>
+        </ul>
+    </div>
+
+    <div class="letter-section" id="letter-Z">
+        <div class="letter-header">ز</div>
+        <ul class="condition-list">
+            <li><a href="#">زرق / ماء أسود</a></li>
+            <li><a href="#">زلال البول</a></li>
+            <li><a href="#">زهايمر وخرف</a></li>
+        </ul>
+    </div>
+
+    <div class="letter-section" id="letter-S">
+        <div class="letter-header">س</div>
+        <ul class="condition-list">
+            <li><a href="#">ساركويد</a></li>
+            <li><a href="#">سعال ديكي</a></li>
+            <li><a href="#">سعفة (تينيا)</a></li>
+            <li><a href="#">سكتة دماغية (جلطة)</a></li>
+            <li><a href="#">سكري الأطفال</a></li>
+            <li><a href="#">سكري الحمل</a></li>
+            <li><a href="#">سكري كاذب</a></li>
+            <li><a href="#">سكري من النوع الأول</a></li>
+            <li><a href="#">سكري من النوع الثاني</a></li>
+            <li><a href="#">سلس البول</a></li>
+            <li><a href="#">سلس البول والمثانة العصبية</a></li>
+            <li><a href="#">سن اليأس</a></li>
+            <li><a href="#">سخونة الأطفال</a></li>
+            <li><a href="#">سرعة القذف</a></li>
+            <li><a href="#">سرطان الثدي (توعية)</a></li>
+            <li><a href="#">سرطان الجلد</a></li>
+            <li><a href="#">سرطان الرحم</a></li>
+            <li><a href="#">سرطان الرئة</a></li>
+            <li><a href="#">سرطان الشبكية</a></li>
+            <li><a href="#">سرطان العظام</a></li>
+            <li><a href="#">سرطان القولون</a></li>
+            <li><a href="#">سرطان المبيض</a></li>
+            <li><a href="#">سرطان المعدة</a></li>
+            <li><a href="#">سرطان دم (لوكيميا)</a></li>
+            <li><a href="#">سرطانات الدم</a></li>
+            <li><a href="#">سفلس (زهري)</a></li>
+            <li><a href="#">سوفان الرقبة</a></li>
+        </ul>
+    </div>
+
+    <div class="letter-section" id="letter-SH">
+        <div class="letter-header">ش</div>
+        <ul class="condition-list">
+            <li><a href="#">شخير وانقطاع النفس</a></li>
+            <li><a href="#">شرى (آرتيكاريا)</a></li>
+            <li><a href="#">شعيرة ورملة بالجفن</a></li>
+            <li><a href="#">شفة أرنبية</a></li>
+            <li><a href="#">شق شرجي</a></li>
+            <li><a href="#">شلل دماغي</a></li>
+            <li><a href="#">شمرة الحرارة</a></li>
+        </ul>
+    </div>
+
+    <div class="letter-section" id="letter-SA">
+        <div class="letter-header">ص</div>
+        <ul class="condition-list">
+            <li><a href="#">صحة السفر</a></li>
+            <li><a href="#">صحة جنسية</a></li>
+            <li><a href="#">صداع التوتر</a></li>
+            <li><a href="#">صداع عنقودي</a></li>
+            <li><a href="#">صداع نصفي (شقيقة)</a></li>
+            <li><a href="#">صدفية</a></li>
+            <li><a href="#">صدمة تحسسية</a></li>
+            <li><a href="#">صلب مشقوق</a></li>
+            <li><a href="#">صلع وتساقط الشعر</a></li>
+        </ul>
+    </div>
+
+    <div class="letter-section" id="letter-DA">
+        <div class="letter-header">ض</div>
+        <ul class="condition-list">
+            <li><a href="#">ضخامة الأطراف</a></li>
+            <li><a href="#">ضغط وتسمم الحمل</a></li>
+            <li><a href="#">ضعف الانتصاب</a></li>
+            <li><a href="#">ضعف السمع</a></li>
+            <li><a href="#">ضعف النظر ويه العمر</a></li>
+        </ul>
+    </div>
+
+    <div class="letter-section" id="letter-TA">
+        <div class="letter-header">ط</div>
+        <ul class="condition-list">
+            <li><a href="#">طفح الحفاظ</a></li>
+            <li><a href="#">طفح حراري</a></li>
+            <li><a href="#">طنين الأذن</a></li>
+            <li><a href="#">طيف التوحد</a></li>
+        </ul>
+    </div>
+
+    <div class="letter-section" id="letter-ZA">
+        <div class="letter-header">ظ</div>
+        <ul class="condition-list">
+            <li><a href="#">ظاهرة رينود</a></li>
+        </ul>
+    </div>
+
+    <div class="letter-section" id="letter-AA">
+        <div class="letter-header">ع</div>
+        <ul class="condition-list">
+            <li><a href="#">عادات النوم الصحية</a></li>
+            <li><a href="#">عجز القلب</a></li>
+            <li><a href="#">عجز الكلى المزمن</a></li>
+            <li><a href="#">عرق النسا</a></li>
+            <li><a href="#">عقدة كيسية</a></li>
+            <li><a href="#">عقم عند الرجال</a></li>
+            <li><a href="#">علاج السكري النوع الثاني</a></li>
+            <li><a href="#">علاج معرفي سلوكي</a></li>
+            <li><a href="#">عملية قيصرية</a></li>
+            <li><a href="#">عناية بالقدم السكري</a></li>
+        </ul>
+    </div>
+
+    <div class="letter-section" id="letter-GH">
+        <div class="letter-header">غ</div>
+        <ul class="condition-list">
+            <li><a href="#">غزارة الدورة</a></li>
+            <li><a href="#">غصة البلعوم</a></li>
+        </ul>
+    </div>
+
+    <div class="letter-section" id="letter-F">
+        <div class="letter-header">ف</div>
+        <ul class="condition-list">
+            <li><a href="#">فتق مغبني</a></li>
+            <li><a href="#">فحوصات السرطان</a></li>
+            <li><a href="#">فصام</a></li>
+            <li><a href="#">فشل كلوي حاد</a></li>
+            <li><a href="#">فطريات الأظافر</a></li>
+            <li><a href="#">فطريات الأذن</a></li>
+            <li><a href="#">فطريات الرأس</a></li>
+            <li><a href="#">فطريات القدم</a></li>
+            <li><a href="#">فطريات المهبل</a></li>
+            <li><a href="#">فقد وحزن</a></li>
+            <li><a href="#">فقدان الشم والتذوق</a></li>
+            <li><a href="#">فقر الدم</a></li>
+            <li><a href="#">فقر الدم المنجلي</a></li>
+            <li><a href="#">فقاعات القدم</a></li>
+            <li><a href="#">فقاعات مناعية</a></li>
+            <li><a href="#">فهم ملصقات الأطعمة</a></li>
+            <li><a href="#">فوائد الرياضة</a></li>
+            <li><a href="#">فيبروميالجيا</a></li>
+            <li><a href="#">فيروس كورونا</a></li>
+        </ul>
+    </div>
+
+    <div class="letter-section" id="letter-Q">
+        <div class="letter-header">ق</div>
+        <ul class="condition-list">
+            <li><a href="#">قبعة المهد</a></li>
+            <li><a href="#">قرح الفراش</a></li>
+            <li><a href="#">قرحة الساق الوريدية</a></li>
+            <li><a href="#">قرحة المعدة</a></li>
+            <li><a href="#">قرصات الحشرات</a></li>
+            <li><a href="#">قصر القامة</a></li>
+            <li><a href="#">قصر وبعد النظر</a></li>
+            <li><a href="#">قصور الغدة الدرقية</a></li>
+            <li><a href="#">قلق عام</a></li>
+            <li><a href="#">قمل الرأس</a></li>
+            <li><a href="#">قوباء (حف)</a></li>
+            <li><a href="#">قولون تقرحي</a></li>
+            <li><a href="#">قولون عصبي</a></li>
+            <li><a href="#">قيلة مائية</a></li>
+        </ul>
+    </div>
+
+    <div class="letter-section" id="letter-K">
+        <div class="letter-header">ك</div>
+        <ul class="condition-list">
+            <li><a href="#">كآبة</a></li>
+            <li><a href="#">كآبة ما بعد الولادة</a></li>
+            <li><a href="#">كبد دهني</a></li>
+            <li><a href="#">كتف متجمد</a></li>
+            <li><a href="#">كتل الثدي</a></li>
+            <li><a href="#">كتل وأكياس</a></li>
+            <li><a href="#">كثرة الكريات الحمر</a></li>
+            <li><a href="#">كيس الأذن</a></li>
+        </ul>
+    </div>
+
+    <div class="letter-section" id="letter-L">
+        <div class="letter-header">ل</div>
+        <ul class="condition-list">
+            <li><a href="#">لحميات الأنف</a></li>
+            <li><a href="#">لقاحات للبالغين</a></li>
+            <li><a href="#">لوكيميا الأطفال</a></li>
+            <li><a href="#">لياقة للمبتدئين</a></li>
+        </ul>
+    </div>
+
+    <div class="letter-section" id="letter-M">
+        <div class="letter-header">م</div>
+        <ul class="condition-list">
+            <li><a href="#">ماء أبيض</a></li>
+            <li><a href="#">مانع الحمل الطارئ</a></li>
+            <li><a href="#">مثانة مؤلمة</a></li>
+            <li><a href="#">مثانة نشطة</a></li>
+            <li><a href="#">مخاوف مرضية</a></li>
+            <li><a href="#">مرحلة ما قبل السكري</a></li>
+            <li><a href="#">مرض أديسون</a></li>
+            <li><a href="#">مرض باجيت</a></li>
+            <li><a href="#">مرض باركنسون</a></li>
+            <li><a href="#">مرض بيرثيز</a></li>
+            <li><a href="#">مرض كاواساكي</a></li>
+            <li><a href="#">مرض كرونز</a></li>
+            <li><a href="#">مرض منيير</a></li>
+            <li><a href="#">مرفق التنس</a></li>
+            <li><a href="#">مسامير اللحم</a></li>
+            <li><a href="#">مسمار العظم</a></li>
+            <li><a href="#">مشي للصحة</a></li>
+            <li><a href="#">مغص الرضع</a></li>
+            <li><a href="#">مليساء معدية</a></li>
+            <li><a href="#">موانع الحمل</a></li>
+            <li><a href="#">موت المهد المفاجئ</a></li>
+            <li><a href="#">متلازمة جوجرن</a></li>
+            <li><a href="#">متلازمة داون</a></li>
+            <li><a href="#">متلازمة كلوية</a></li>
+            <li><a href="#">متلازمة كوشينغ</a></li>
+            <li><a href="#">ميلوما متعددة</a></li>
+        </ul>
+    </div>
+
+    <div class="letter-section" id="letter-N">
+        <div class="letter-header">ن</div>
+        <ul class="condition-list">
+            <li><a href="#">ناسور شرجي</a></li>
+            <li><a href="#">نخالية مبرقشة</a></li>
+            <li><a href="#">نزف الأنف</a></li>
+            <li><a href="#">نزلة معوية</a></li>
+            <li><a href="#">نسوة ولعبان النفس</a></li>
+            <li><a href="#">نشلة وسعال</a></li>
+            <li><a href="#">نقص B12</a></li>
+            <li><a href="#">نقص التستوستيرون</a></li>
+            <li><a href="#">نقص الحديد</a></li>
+            <li><a href="#">نقص الخميرة</a></li>
+            <li><a href="#">نقص الرغبة الجنسية</a></li>
+            <li><a href="#">نقص الصفائح المناعي</a></li>
+            <li><a href="#">نقرس / داء الملوك</a></li>
+            <li><a href="#">نقرس كاذب</a></li>
+            <li><a href="#">نكاف</a></li>
+            <li><a href="#">نوبات هلع</a></li>
+        </ul>
+    </div>
+
+    <div class="letter-section" id="letter-HA">
+        <div class="letter-header">هـ</div>
+        <ul class="condition-list">
+            <li><a href="#">هبوط السكر</a></li>
+            <li><a href="#">هبوط المستقيم</a></li>
+            <li><a href="#">هبوط ضغط الدم</a></li>
+            <li><a href="#">هشاشة العظام</a></li>
+        </ul>
+    </div>
+
+    <div class="letter-section" id="letter-W">
+        <div class="letter-header">و</div>
+        <ul class="condition-list">
+            <li><a href="#">وجع البلاعيم</a></li>
+            <li><a href="#">وجع بطن الأطفال</a></li>
+            <li><a href="#">ورم الخلايا العصبية</a></li>
+            <li><a href="#">ورم هرمون الحليب</a></li>
+            <li><a href="#">ورم ويلمز</a></li>
+            <li><a href="#">وسواس قهري</a></li>
+            <li><a href="#">وقاية من الشمس</a></li>
+            <li><a href="#">ولادة مبكرة</a></li>
+            <li><a href="#">وهن العضلات الوبيل</a></li>
+        </ul>
+    </div>
+
+    <div class="letter-section" id="letter-Y">
+        <div class="letter-header">ي</div>
+        <ul class="condition-list">
+            <li><a href="#">يد وقدم وفم</a></li>
+        </ul>
+    </div>
+
+</div>
