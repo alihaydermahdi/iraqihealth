@@ -1,6 +1,6 @@
 ---
 layout: default
-title: "الأسئلة الشائعة | كشفيّـة"
+title: "الأسئلة الشائعة"
 permalink: /faq/
 ---
 
@@ -85,17 +85,24 @@ permalink: /faq/
 </div>
 
 <script>
-    document.querySelectorAll('.faq-question').forEach(button => {
-        button.addEventListener('click', () => {
-            // فتح أو إغلاق السؤال الحالي
-            const answer = button.nextElementSibling;
-            button.classList.toggle('active');
-            
-            if (button.classList.contains('active')) {
-                answer.style.maxHeight = answer.scrollHeight + "px";
-            } else {
-                answer.style.maxHeight = 0;
-            }
+    // استخدمنا DOMContentLoaded حتى نضمن تحميل العناصر قبل تشغيل الكود
+    document.addEventListener('DOMContentLoaded', function() {
+        const faqButtons = document.querySelectorAll('.faq-question');
+        
+        faqButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                const answer = this.nextElementSibling;
+                
+                // إضافة أو إزالة كلاس active لتغيير اتجاه السهم
+                this.classList.toggle('active');
+                
+                // فتح أو إغلاق الإجابة بحركة انسيابية
+                if (this.classList.contains('active')) {
+                    answer.style.maxHeight = answer.scrollHeight + "px";
+                } else {
+                    answer.style.maxHeight = "0px";
+                }
+            });
         });
     });
 </script>
