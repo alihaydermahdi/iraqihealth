@@ -1,226 +1,183 @@
 ---
 layout: default
-title: "الأطباء والمراكز | كشفيّـة"
+title: "دليل الأطباء والمراكز | كشفيّـة"
 permalink: /doctors/index.html
 ---
 
 <style>
-    /* --- تنسيق شبكة الأطباء والمراكز --- */
-    .page-container { max-width: 1300px; margin: 40px auto 50px auto; padding: 0 20px; min-height: 50vh; }
-    .page-title { text-align: center; color: var(--nhs-dark-blue); font-size: 2.2rem; font-weight: 800; margin-bottom: 40px; position: relative; padding-bottom: 15px; }
-    .page-title::after { content: ''; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: 80px; height: 4px; background-color: var(--nhs-blue); border-radius: 2px; }
+    /* --- الإعدادات الأساسية لمنع مشاكل الأندرويد --- */
+    * {
+        box-sizing: border-box;
+        max-width: 100%;
+    }
 
-    .doctors-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; }
-    
-    /* فواصل التخصصات */
-    .specialty-divider { grid-column: 1 / -1; margin-top: 40px; margin-bottom: 10px; border-bottom: 3px solid #e2e8f0; padding-bottom: 15px; display: flex; align-items: center; gap: 15px; }
-    .specialty-divider h2 { margin: 0; color: var(--nhs-dark-blue); font-size: 1.6rem; font-weight: 800; }
-    .specialty-divider i { color: var(--nhs-blue); font-size: 1.8rem; background: var(--nhs-white); padding: 10px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.05); border: 1px solid #e2e8f0; }
+    /* --- تنسيق الهيدر --- */
+    .doctors-header {
+        text-align: center;
+        padding: 40px 20px;
+        background-color: var(--nhs-light-grey, #f0f4f5);
+        margin-bottom: 40px;
+        border-bottom: 1px solid #e2e8f0;
+    }
+    .doctors-title {
+        color: var(--nhs-dark-blue, #003087);
+        font-size: 2.2rem;
+        font-weight: 900;
+        margin-bottom: 10px;
+    }
+    .doctors-subtitle {
+        color: #4a5568;
+        font-size: 1.1rem;
+        max-width: 600px;
+        margin: 0 auto;
+    }
 
-    /* كروت الأطباء */
-    .doctor-card { background: var(--nhs-white); border-radius: 8px; border: 1px solid #e2e8f0; overflow: hidden; box-shadow: 0 2px 5px rgba(0,0,0,0.05); transition: transform 0.2s, box-shadow 0.2s; display: flex; flex-direction: column; }
-    .doctor-card:hover { transform: translateY(-5px); box-shadow: 0 8px 15px rgba(0,0,0,0.1); border-color: var(--nhs-blue); }
-    
-    .doctor-header { background-color: var(--nhs-blue); color: white; padding: 25px 20px; text-align: center; border-bottom: 4px solid #fb8500; }
-    .doctor-name { font-size: 1.3rem; font-weight: 800; margin: 0; }
-    .doctor-title { font-size: 0.95rem; color: #e2e8f0; margin-top: 5px; font-weight: 600; }
-    
-    .doctor-body { padding: 25px 20px; display: flex; flex-direction: column; flex-grow: 1; }
-    .doctor-info { display: flex; align-items: flex-start; gap: 12px; margin-bottom: 15px; font-size: 0.95rem; color: #4a5568; font-weight: 600; }
-    .doctor-info i { color: var(--nhs-blue); font-size: 1.1rem; width: 20px; text-align: center; margin-top: 3px; }
-    
-    .book-btn { display: block; width: 100%; text-align: center; background-color: #fb8500; color: white; padding: 12px; border-radius: 6px; text-decoration: none; font-weight: 800; margin-top: auto; transition: background 0.2s; }
-    .book-btn:hover { background-color: #e07600; }
+    /* --- شبكة الكروت (مضادة لمشاكل الشاشات) --- */
+    .doctors-grid {
+        display: grid;
+        /* هذا السطر يخلي الكروت تتعدل تلقائياً حسب حجم الشاشة */
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 30px;
+        max-width: 1200px;
+        margin: 0 auto 60px auto;
+        padding: 0 20px;
+    }
 
-    @media (max-width: 768px) {
-        .page-title { font-size: 1.8rem; }
-        .specialty-divider h2 { font-size: 1.4rem; }
-        .doctor-header { padding: 20px 15px; }
-        .doctor-name { font-size: 1.15rem; }
+    /* --- تنسيق كارت الطبيب --- */
+    .doctor-card {
+        background: #ffffff;
+        border: 1px solid #e2e8f0;
+        border-radius: 12px;
+        padding: 25px;
+        text-align: center;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+        transition: all 0.3s ease;
+    }
+    .doctor-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 15px rgba(0, 94, 184, 0.1);
+        border-color: var(--nhs-blue, #005eb8);
+    }
+
+    /* صورة الطبيب */
+    .doctor-img {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 3px solid var(--nhs-light-grey, #f0f4f5);
+        margin-bottom: 15px;
+        background-color: #e2e8f0; /* لون مؤقت في حال ماكو صورة */
+    }
+
+    /* اسم الطبيب وتخصصه */
+    .doc-name {
+        color: var(--nhs-dark-blue, #003087);
+        font-size: 1.4rem;
+        font-weight: 800;
+        margin-bottom: 5px;
+    }
+    .doc-spec {
+        display: inline-block;
+        color: var(--nhs-blue, #005eb8);
+        background-color: #e6f2fc;
+        font-size: 0.95rem;
+        font-weight: 700;
+        padding: 4px 12px;
+        border-radius: 20px;
+        margin-bottom: 15px;
+    }
+
+    /* معلومات العيادة */
+    .doc-info {
+        color: #4a5568;
+        font-size: 0.95rem;
+        margin-bottom: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+    }
+    .doc-info i {
+        color: #a0aec0;
+    }
+
+    /* زر الحجز */
+    .book-btn {
+        display: block;
+        width: 100%;
+        padding: 12px;
+        background-color: var(--nhs-blue, #005eb8);
+        color: white;
+        text-decoration: none;
+        border-radius: 8px;
+        font-weight: bold;
+        font-size: 1.1rem;
+        margin-top: 20px;
+        transition: background 0.2s;
+    }
+    .book-btn:hover {
+        background-color: var(--nhs-dark-blue, #003087);
+        color: white;
+    }
+
+    /* موبايل */
+    @media (max-width: 600px) {
+        .doctors-header { padding: 30px 15px; }
+        .doctors-title { font-size: 1.8rem; }
     }
 </style>
 
-<div class="page-container">
-    <h1 class="page-title">دليل الأطباء والمراكز</h1>
+<div class="doctors-header">
+    <h1 class="doctors-title">دليل الأطباء والمراكز</h1>
+    <p class="doctors-subtitle">نخبة من أفضل الأطباء والمراكز الطبية الموثوقة. ابحث عن طبيبك واحجز موعدك بسهولة.</p>
+</div>
 
-    <div class="doctors-grid">
+<div class="doctors-grid">
 
-        <div class="specialty-divider">
-            <i class="fas fa-kidneys"></i>
-            <h2>المسالك البولية وأمراض الذكورة</h2>
+    <div class="doctor-card">
+        <img src="https://ui-avatars.com/api/?name=د+أحمد&background=005eb8&color=fff&size=200" alt="صورة الطبيب" class="doctor-img">
+        <h2 class="doc-name">د. أحمد محمود</h2>
+        <div class="doc-spec">أخصائي الباطنية والقلبية</div>
+        
+        <div class="doc-info">
+            <i class="fas fa-map-marker-alt"></i> بغداد، الحارثية، شارع الكندي
+        </div>
+        <div class="doc-info">
+            <i class="fas fa-clock"></i> 4:00 عصراً - 8:00 مساءً
         </div>
 
-        <div class="doctor-card">
-            <div class="doctor-header">
-                <h3 class="doctor-name">د. علي الساعدي</h3>
-                <div class="doctor-title">استشاري جراحة المسالك البولية والذكورة</div>
-            </div>
-            <div class="doctor-body">
-                <div class="doctor-info"><i class="fas fa-location-dot"></i> النجف الأشرف - حي الإسكان - مجمع الحياة</div>
-                <div class="doctor-info"><i class="fas fa-clock"></i> 5:00 عصراً - 10:00 مساءً</div>
-                <div class="doctor-info"><i class="fas fa-calendar-check"></i> الحجز عبر الواتساب متوفر</div>
-                <a href="tel:0700000000" class="book-btn"><i class="fas fa-phone"></i> احجز الآن</a>
-            </div>
-        </div>
-
-        <div class="doctor-card">
-            <div class="doctor-header">
-                <h3 class="doctor-name">د. زيد الخالدي</h3>
-                <div class="doctor-title">أخصائي دقيق في العقم وضعف الانتصاب</div>
-            </div>
-            <div class="doctor-body">
-                <div class="doctor-info"><i class="fas fa-location-dot"></i> بغداد - الحارثية - شارع الأطباء</div>
-                <div class="doctor-info"><i class="fas fa-clock"></i> 3:00 عصراً - 8:00 مساءً</div>
-                <div class="doctor-info"><i class="fas fa-calendar-check"></i> متواجد من السبت للأربعاء</div>
-                <a href="tel:0700000000" class="book-btn"><i class="fas fa-phone"></i> احجز الآن</a>
-            </div>
-        </div>
-
-
-        <div class="specialty-divider">
-            <i class="fas fa-heart-pulse"></i>
-            <h2>أمراض القلب والأوعية الدموية</h2>
-        </div>
-
-        <div class="doctor-card">
-            <div class="doctor-header">
-                <h3 class="doctor-name">د. أحمد العراقي</h3>
-                <div class="doctor-title">استشاري أمراض القلب وقسطرة الشرايين</div>
-            </div>
-            <div class="doctor-body">
-                <div class="doctor-info"><i class="fas fa-location-dot"></i> بغداد - الحارثية - شارع الكندي</div>
-                <div class="doctor-info"><i class="fas fa-clock"></i> 4:00 عصراً - 9:00 مساءً</div>
-                <div class="doctor-info"><i class="fas fa-calendar-check"></i> الحجز المسبق مطلوب</div>
-                <a href="tel:0700000000" class="book-btn"><i class="fas fa-phone"></i> احجز الآن</a>
-            </div>
-        </div>
-
-        <div class="doctor-card">
-            <div class="doctor-header">
-                <h3 class="doctor-name">د. حسن الشمري</h3>
-                <div class="doctor-title">أخصائي باطنية وقلبية (إيكو وتخطيط)</div>
-            </div>
-            <div class="doctor-body">
-                <div class="doctor-info"><i class="fas fa-location-dot"></i> البصرة - العشار - مجمع الأطباء</div>
-                <div class="doctor-info"><i class="fas fa-clock"></i> 4:00 عصراً - 8:00 مساءً</div>
-                <div class="doctor-info"><i class="fas fa-calendar-check"></i> العيادة تستقبل الحالات الطارئة</div>
-                <a href="tel:0700000000" class="book-btn"><i class="fas fa-phone"></i> احجز الآن</a>
-            </div>
-        </div>
-
-
-        <div class="specialty-divider">
-            <i class="fas fa-notes-medical"></i>
-            <h2>الغدد الصم والسكري</h2>
-        </div>
-
-        <div class="doctor-card">
-            <div class="doctor-header">
-                <h3 class="doctor-name">د. عمر الحسن</h3>
-                <div class="doctor-title">استشاري الغدد الصم وهرمونات الذكورة</div>
-            </div>
-            <div class="doctor-body">
-                <div class="doctor-info"><i class="fas fa-location-dot"></i> الموصل - المجموعة الثقافية</div>
-                <div class="doctor-info"><i class="fas fa-clock"></i> 4:00 عصراً - 9:00 مساءً</div>
-                <div class="doctor-info"><i class="fas fa-calendar-check"></i> يتوفر جهاز فحص السكر التراكمي</div>
-                <a href="tel:0700000000" class="book-btn"><i class="fas fa-phone"></i> احجز الآن</a>
-            </div>
-        </div>
-
-
-        <div class="specialty-divider">
-            <i class="fas fa-spa"></i>
-            <h2>الأمراض الجلدية والتجميل</h2>
-        </div>
-
-        <div class="doctor-card">
-            <div class="doctor-header">
-                <h3 class="doctor-name">د. فاطمة الربيعي</h3>
-                <div class="doctor-title">أخصائية الأمراض الجلدية والتجميل</div>
-            </div>
-            <div class="doctor-body">
-                <div class="doctor-info"><i class="fas fa-location-dot"></i> بغداد - المنصور - قرب تقاطع الرواد</div>
-                <div class="doctor-info"><i class="fas fa-clock"></i> 2:00 ظهراً - 8:00 مساءً</div>
-                <div class="doctor-info"><i class="fas fa-calendar-check"></i> علاجات تساقط الشعر والأمراض التناسلية</div>
-                <a href="tel:0700000000" class="book-btn"><i class="fas fa-phone"></i> احجز الآن</a>
-            </div>
-        </div>
-
-
-        <div class="specialty-divider">
-            <i class="fas fa-brain"></i>
-            <h2>الطب النفسي والإرشاد السلوكي</h2>
-        </div>
-
-        <div class="doctor-card">
-            <div class="doctor-header">
-                <h3 class="doctor-name">د. ياسين محمد</h3>
-                <div class="doctor-title">أخصائي الطب النفسي والعلاج السلوكي</div>
-            </div>
-            <div class="doctor-body">
-                <div class="doctor-info"><i class="fas fa-location-dot"></i> السليمانية - شارع سالم</div>
-                <div class="doctor-info"><i class="fas fa-clock"></i> 3:00 عصراً - 7:00 مساءً</div>
-                <div class="doctor-info"><i class="fas fa-calendar-check"></i> سرية تامة ومتابعة لحالات الاكتئاب والقلق</div>
-                <a href="tel:0700000000" class="book-btn"><i class="fas fa-phone"></i> احجز الآن</a>
-            </div>
-        </div>
-
-
-        <div class="specialty-divider">
-            <i class="fas fa-user-nurse"></i>
-            <h2>النسائية والتوليد</h2>
-        </div>
-
-        <div class="doctor-card">
-            <div class="doctor-header">
-                <h3 class="doctor-name">د. سارة محمود</h3>
-                <div class="doctor-title">أخصائية النسائية والتوليد وتأخر الإنجاب</div>
-            </div>
-            <div class="doctor-body">
-                <div class="doctor-info"><i class="fas fa-location-dot"></i> البصرة - شارع الاستقلال - مجمع الشفاء</div>
-                <div class="doctor-info"><i class="fas fa-clock"></i> 3:00 عصراً - 8:00 مساءً</div>
-                <div class="doctor-info"><i class="fas fa-calendar-check"></i> الأحد إلى الأربعاء</div>
-                <a href="tel:0700000000" class="book-btn"><i class="fas fa-phone"></i> احجز الآن</a>
-            </div>
-        </div>
-
-
-        <div class="specialty-divider">
-            <i class="fas fa-tooth"></i>
-            <h2>طب وجراحة الأسنان</h2>
-        </div>
-
-        <div class="doctor-card">
-            <div class="doctor-header">
-                <h3 class="doctor-name">عيادات ابتسامة بغداد</h3>
-                <div class="doctor-title">طب وجراحة الأسنان وتقويم الفكين</div>
-            </div>
-            <div class="doctor-body">
-                <div class="doctor-info"><i class="fas fa-location-dot"></i> بغداد - الكرادة - شارع 62</div>
-                <div class="doctor-info"><i class="fas fa-clock"></i> 10:00 صباحاً - 10:00 مساءً</div>
-                <div class="doctor-info"><i class="fas fa-calendar-check"></i> استقبال كافة حالات الطوارئ السنية</div>
-                <a href="tel:0700000000" class="book-btn"><i class="fas fa-phone"></i> اتصل بالمركز</a>
-            </div>
-        </div>
-
-
-        <div class="specialty-divider">
-            <i class="fas fa-hospital"></i>
-            <h2>المستشفيات والمراكز الطبية</h2>
-        </div>
-
-        <div class="doctor-card">
-            <div class="doctor-header">
-                <h3 class="doctor-name">مركز النور الطبي</h3>
-                <div class="doctor-title">مجمع طبي متكامل - كافة التخصصات</div>
-            </div>
-            <div class="doctor-body">
-                <div class="doctor-info"><i class="fas fa-location-dot"></i> أربيل - شارع 100 - قرب المطار</div>
-                <div class="doctor-info"><i class="fas fa-clock"></i> مفتوح 24 ساعة (طوارئ وعيادات)</div>
-                <div class="doctor-info"><i class="fas fa-microscope"></i> يتوفر مختبر شامل، أشعة، وسونار</div>
-                <a href="tel:0700000000" class="book-btn"><i class="fas fa-phone"></i> اتصل بالمركز</a>
-            </div>
-        </div>
-
+        <a href="tel:07700000000" class="book-btn"><i class="fas fa-phone-alt" style="margin-left: 8px;"></i> اتصل للحجز</a>
     </div>
+
+    <div class="doctor-card">
+        <img src="https://ui-avatars.com/api/?name=د+سارة&background=005eb8&color=fff&size=200" alt="صورة الطبيب" class="doctor-img">
+        <h2 class="doc-name">د. سارة علي</h2>
+        <div class="doc-spec">أخصائية النسائية والتوليد</div>
+        
+        <div class="doc-info">
+            <i class="fas fa-map-marker-alt"></i> أربيل، شارع 40، مجمع الأطباء
+        </div>
+        <div class="doc-info">
+            <i class="fas fa-clock"></i> 3:00 عصراً - 7:00 مساءً
+        </div>
+
+        <a href="tel:07500000000" class="book-btn"><i class="fas fa-phone-alt" style="margin-left: 8px;"></i> اتصل للحجز</a>
+    </div>
+
+    <div class="doctor-card">
+        <img src="https://ui-avatars.com/api/?name=د+عمر&background=005eb8&color=fff&size=200" alt="صورة الطبيب" class="doctor-img">
+        <h2 class="doc-name">د. عمر فاروق</h2>
+        <div class="doc-spec">استشاري جراحة العظام</div>
+        
+        <div class="doc-info">
+            <i class="fas fa-map-marker-alt"></i> البصرة، العشار، مجمع الشفاء
+        </div>
+        <div class="doc-info">
+            <i class="fas fa-clock"></i> 5:00 عصراً - 9:00 مساءً
+        </div>
+
+        <a href="tel:07800000000" class="book-btn"><i class="fas fa-phone-alt" style="margin-left: 8px;"></i> اتصل للحجز</a>
+    </div>
+
 </div>
