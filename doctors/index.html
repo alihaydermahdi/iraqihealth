@@ -5,179 +5,214 @@ permalink: /doctors/index.html
 ---
 
 <style>
-    /* --- الإعدادات الأساسية لمنع مشاكل الأندرويد --- */
-    * {
-        box-sizing: border-box;
-        max-width: 100%;
-    }
-
-    /* --- تنسيق الهيدر --- */
-    .doctors-header {
-        text-align: center;
-        padding: 40px 20px;
-        background-color: var(--nhs-light-grey, #f0f4f5);
-        margin-bottom: 40px;
-        border-bottom: 1px solid #e2e8f0;
-    }
-    .doctors-title {
-        color: var(--nhs-dark-blue, #003087);
-        font-size: 2.2rem;
-        font-weight: 900;
-        margin-bottom: 10px;
-    }
-    .doctors-subtitle {
-        color: #4a5568;
-        font-size: 1.1rem;
-        max-width: 600px;
-        margin: 0 auto;
-    }
-
-    /* --- شبكة الكروت (مضادة لمشاكل الشاشات) --- */
-    .doctors-grid {
-        display: grid;
-        /* هذا السطر يخلي الكروت تتعدل تلقائياً حسب حجم الشاشة */
-        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-        gap: 30px;
+    /* --- الإعدادات العامة لمنع مشاكل العرض --- */
+    * { box-sizing: border-box; }
+    
+    .doctors-container {
         max-width: 1200px;
         margin: 0 auto 60px auto;
         padding: 0 20px;
     }
 
-    /* --- تنسيق كارت الطبيب --- */
+    /* --- الهيدر --- */
+    .doctors-header {
+        text-align: center;
+        padding: 40px 20px;
+        background-color: #f0f4f5;
+        margin-bottom: 30px;
+        border-bottom: 1px solid #e2e8f0;
+    }
+    .doctors-title {
+        color: #003087;
+        font-size: 2.2rem;
+        font-weight: 900;
+        margin-bottom: 10px;
+    }
+
+    /* --- أزرار الفلترة (التخصصات) --- */
+    .filter-wrapper {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+        margin-bottom: 40px;
+    }
+    .filter-btn {
+        padding: 10px 20px;
+        background-color: white;
+        border: 2px solid #005eb8;
+        color: #005eb8;
+        border-radius: 25px;
+        font-weight: 700;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        font-family: inherit;
+    }
+    .filter-btn.active, .filter-btn:hover {
+        background-color: #005eb8;
+        color: white;
+    }
+
+    /* --- شبكة الكروت (Grid) --- */
+    .doctors-grid {
+        display: grid;
+        /* هذا السطر يضمن عدم خروج الكروت عن الشاشة في الأندرويد */
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 25px;
+    }
+
+    /* --- كارت الطبيب --- */
     .doctor-card {
         background: #ffffff;
         border: 1px solid #e2e8f0;
         border-radius: 12px;
         padding: 25px;
         text-align: center;
-        box-shadow: 0 4px 6px rgba(0,0,0,0.02);
-        transition: all 0.3s ease;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+        transition: transform 0.3s ease;
+        display: block; /* يظهر بشكل افتراضي */
     }
     .doctor-card:hover {
         transform: translateY(-5px);
         box-shadow: 0 10px 15px rgba(0, 94, 184, 0.1);
-        border-color: var(--nhs-blue, #005eb8);
     }
 
-    /* صورة الطبيب */
     .doctor-img {
-        width: 100px;
-        height: 100px;
+        width: 90px;
+        height: 90px;
         border-radius: 50%;
-        object-fit: cover;
-        border: 3px solid var(--nhs-light-grey, #f0f4f5);
         margin-bottom: 15px;
-        background-color: #e2e8f0; /* لون مؤقت في حال ماكو صورة */
+        border: 3px solid #f0f4f5;
     }
 
-    /* اسم الطبيب وتخصصه */
-    .doc-name {
-        color: var(--nhs-dark-blue, #003087);
-        font-size: 1.4rem;
-        font-weight: 800;
-        margin-bottom: 5px;
-    }
-    .doc-spec {
+    .doc-name { color: #003087; font-size: 1.3rem; font-weight: 800; margin-bottom: 5px; }
+    
+    .doc-spec-label {
         display: inline-block;
-        color: var(--nhs-blue, #005eb8);
+        color: #005eb8;
         background-color: #e6f2fc;
-        font-size: 0.95rem;
+        font-size: 0.9rem;
         font-weight: 700;
-        padding: 4px 12px;
-        border-radius: 20px;
+        padding: 3px 12px;
+        border-radius: 15px;
         margin-bottom: 15px;
     }
 
-    /* معلومات العيادة */
-    .doc-info {
+    .doc-detail {
         color: #4a5568;
-        font-size: 0.95rem;
-        margin-bottom: 10px;
+        font-size: 0.9rem;
+        margin-bottom: 8px;
         display: flex;
         align-items: center;
         justify-content: center;
-        gap: 8px;
-    }
-    .doc-info i {
-        color: #a0aec0;
+        gap: 6px;
     }
 
-    /* زر الحجز */
-    .book-btn {
+    .call-btn {
         display: block;
         width: 100%;
         padding: 12px;
-        background-color: var(--nhs-blue, #005eb8);
+        background-color: #005eb8;
         color: white;
         text-decoration: none;
         border-radius: 8px;
-        font-weight: bold;
-        font-size: 1.1rem;
-        margin-top: 20px;
-        transition: background 0.2s;
-    }
-    .book-btn:hover {
-        background-color: var(--nhs-dark-blue, #003087);
-        color: white;
+        font-weight: 700;
+        margin-top: 15px;
     }
 
-    /* موبايل */
-    @media (max-width: 600px) {
-        .doctors-header { padding: 30px 15px; }
-        .doctors-title { font-size: 1.8rem; }
+    /* أنيميشن بسيط عند الفلترة */
+    .fade-in {
+        animation: fadeIn 0.4s ease forwards;
+    }
+    @keyframes fadeIn {
+        from { opacity: 0; transform: scale(0.95); }
+        to { opacity: 1; transform: scale(1); }
+    }
+
+    @media (max-width: 768px) {
+        .doctors-title { font-size: 1.7rem; }
+        .filter-btn { padding: 8px 15px; font-size: 0.9rem; }
     }
 </style>
 
 <div class="doctors-header">
     <h1 class="doctors-title">دليل الأطباء والمراكز</h1>
-    <p class="doctors-subtitle">نخبة من أفضل الأطباء والمراكز الطبية الموثوقة. ابحث عن طبيبك واحجز موعدك بسهولة.</p>
+    <p style="color: #4a5568;">اختر التخصص المناسب لعرض الأطباء المتاحين</p>
 </div>
 
-<div class="doctors-grid">
-
-    <div class="doctor-card">
-        <img src="https://ui-avatars.com/api/?name=د+أحمد&background=005eb8&color=fff&size=200" alt="صورة الطبيب" class="doctor-img">
-        <h2 class="doc-name">د. أحمد محمود</h2>
-        <div class="doc-spec">أخصائي الباطنية والقلبية</div>
-        
-        <div class="doc-info">
-            <i class="fas fa-map-marker-alt"></i> بغداد، الحارثية، شارع الكندي
-        </div>
-        <div class="doc-info">
-            <i class="fas fa-clock"></i> 4:00 عصراً - 8:00 مساءً
-        </div>
-
-        <a href="tel:07700000000" class="book-btn"><i class="fas fa-phone-alt" style="margin-left: 8px;"></i> اتصل للحجز</a>
+<div class="doctors-container">
+    
+    <div class="filter-wrapper">
+        <button class="filter-btn active" onclick="filterDoctors('all')">الكل</button>
+        <button class="filter-btn" onclick="filterDoctors('internal')">باطنية وقلبية</button>
+        <button class="filter-btn" onclick="filterDoctors('ortho')">مفاصل وعظام</button>
+        <button class="filter-btn" onclick="filterDoctors('gynae')">نسائية وتوليد</button>
+        <button class="filter-btn" onclick="filterDoctors('peds')">أطفال</button>
     </div>
 
-    <div class="doctor-card">
-        <img src="https://ui-avatars.com/api/?name=د+سارة&background=005eb8&color=fff&size=200" alt="صورة الطبيب" class="doctor-img">
-        <h2 class="doc-name">د. سارة علي</h2>
-        <div class="doc-spec">أخصائية النسائية والتوليد</div>
-        
-        <div class="doc-info">
-            <i class="fas fa-map-marker-alt"></i> أربيل، شارع 40، مجمع الأطباء
-        </div>
-        <div class="doc-info">
-            <i class="fas fa-clock"></i> 3:00 عصراً - 7:00 مساءً
+    <div class="doctors-grid" id="doctorsGrid">
+
+        <div class="doctor-card fade-in" data-specialty="internal">
+            <img src="https://ui-avatars.com/api/?name=د+احمد&background=005eb8&color=fff" class="doctor-img">
+            <h2 class="doc-name">د. أحمد محمود</h2>
+            <span class="doc-spec-label">أخصائي باطنية وقلبية</span>
+            <div class="doc-detail"><i class="fas fa-map-marker-alt"></i> بغداد - الحارثية</div>
+            <div class="doc-detail"><i class="fas fa-clock"></i> 4:00 م - 8:00 م</div>
+            <a href="tel:07700000000" class="call-btn">اتصل للحجز</a>
         </div>
 
-        <a href="tel:07500000000" class="book-btn"><i class="fas fa-phone-alt" style="margin-left: 8px;"></i> اتصل للحجز</a>
+        <div class="doctor-card fade-in" data-specialty="gynae">
+            <img src="https://ui-avatars.com/api/?name=د+سارة&background=005eb8&color=fff" class="doctor-img">
+            <h2 class="doc-name">د. سارة علي</h2>
+            <span class="doc-spec-label">أخصائية نسائية وتوليد</span>
+            <div class="doc-detail"><i class="fas fa-map-marker-alt"></i> أربيل - شارع 40</div>
+            <div class="doc-detail"><i class="fas fa-clock"></i> 3:00 م - 7:00 م</div>
+            <a href="tel:07500000000" class="call-btn">اتصل للحجز</a>
+        </div>
+
+        <div class="doctor-card fade-in" data-specialty="ortho">
+            <img src="https://ui-avatars.com/api/?name=د+عمر&background=005eb8&color=fff" class="doctor-img">
+            <h2 class="doc-name">د. عمر فاروق</h2>
+            <span class="doc-spec-label">استشاري جراحة العظام</span>
+            <div class="doc-detail"><i class="fas fa-map-marker-alt"></i> البصرة - العشار</div>
+            <div class="doc-detail"><i class="fas fa-clock"></i> 5:00 م - 9:00 م</div>
+            <a href="tel:07800000000" class="call-btn">اتصل للحجز</a>
+        </div>
+
+        <div class="doctor-card fade-in" data-specialty="peds">
+            <img src="https://ui-avatars.com/api/?name=د+ليلى&background=005eb8&color=fff" class="doctor-img">
+            <h2 class="doc-name">د. ليلى حسن</h2>
+            <span class="doc-spec-label">أخصائية طب الأطفال</span>
+            <div class="doc-detail"><i class="fas fa-map-marker-alt"></i> الموصل - حي الزهور</div>
+            <div class="doc-detail"><i class="fas fa-clock"></i> 10:00 ص - 2:00 م</div>
+            <a href="tel:07711111111" class="call-btn">اتصل للحجز</a>
+        </div>
+
     </div>
-
-    <div class="doctor-card">
-        <img src="https://ui-avatars.com/api/?name=د+عمر&background=005eb8&color=fff&size=200" alt="صورة الطبيب" class="doctor-img">
-        <h2 class="doc-name">د. عمر فاروق</h2>
-        <div class="doc-spec">استشاري جراحة العظام</div>
-        
-        <div class="doc-info">
-            <i class="fas fa-map-marker-alt"></i> البصرة، العشار، مجمع الشفاء
-        </div>
-        <div class="doc-info">
-            <i class="fas fa-clock"></i> 5:00 عصراً - 9:00 مساءً
-        </div>
-
-        <a href="tel:07800000000" class="book-btn"><i class="fas fa-phone-alt" style="margin-left: 8px;"></i> اتصل للحجز</a>
-    </div>
-
 </div>
+
+<script>
+    function filterDoctors(category) {
+        const cards = document.querySelectorAll('.doctor-card');
+        const buttons = document.querySelectorAll('.filter-btn');
+
+        // تحديث شكل الأزرار (Active)
+        buttons.forEach(btn => {
+            btn.classList.remove('active');
+            if (btn.getAttribute('onclick').includes(category)) {
+                btn.classList.add('active');
+            }
+        });
+
+        // فلترة الكروت
+        cards.forEach(card => {
+            if (category === 'all' || card.getAttribute('data-specialty') === category) {
+                card.style.display = 'block';
+                card.classList.add('fade-in');
+            } else {
+                card.style.display = 'none';
+                card.classList.remove('fade-in');
+            }
+        });
+    }
+</script>
