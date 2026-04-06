@@ -6,28 +6,49 @@ permalink: /topic/index.html
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-<div id="loading" style="text-align: center; padding: 100px;">
+<style>
+    /* تحسين مظهر المسار لضمان عدم التصاق الكلمات */
+    .breadcrumb { display: flex; align-items: center; gap: 12px; margin-bottom: 25px; flex-wrap: wrap; color: #64748b; font-size: 0.9rem; }
+    .breadcrumb a { color: #005eb8; text-decoration: none; font-weight: bold; }
+    .breadcrumb i { font-size: 0.7rem; color: #cbd5e0; }
+
+    /* ضمان تباعد المحتوى وتنسيقه داخل الكارت */
+    .article-card { background: white; border-radius: 20px; padding: 40px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
+    .article-title { color: #003087; font-size: 2.2rem; font-weight: 900; margin-bottom: 20px; line-height: 1.3; }
+    .loading-spinner { text-align: center; padding: 100px; }
+
+    /* تنسيقات إضافية لضمان تجربة موبايل مثالية */
+    @media (max-width: 768px) {
+        .article-card { padding: 25px; }
+        .article-title { font-size: 1.7rem; }
+        .breadcrumb { gap: 8px; }
+    }
+</style>
+
+<div id="loading" class="loading-spinner">
     <i class="fas fa-spinner fa-spin fa-3x" style="color: #005eb8;"></i>
-    <h3 style="margin-top:20px; color:#003087;">جاري تحميل المقال...</h3>
+    <h3 style="margin-top:20px; color:#003087;">جاري تحميل المعلومات...</h3>
 </div>
 
 <div id="errorState" style="display: none; text-align: center; padding: 100px;">
-    <h2 style="color: #dc2626;">عذراً، هذا المقال غير موجود</h2>
-    <a href="/" style="display: inline-block; margin-top: 20px; background: #005eb8; color: white; padding: 10px 20px; border-radius: 8px; text-decoration: none;">العودة للرئيسية</a>
+    <h2 style="color: #dc2626;">عذراً، هذا المقال غير موجود حالياً</h2>
+    <a href="/" style="display: inline-block; margin-top: 20px; background: #005eb8; color: white; padding: 12px 25px; border-radius: 8px; text-decoration: none; font-weight: bold;">العودة للرئيسية</a>
 </div>
 
 <div id="articleState" style="display: none;">
     
-    <div class="breadcrumb">
-        <a href="/">الرئيسية</a> <i class="fas fa-chevron-left" style="font-size: 0.7rem;"></i> 
-        <a id="bcCategoryLink" href="/doctors/index.html">الموسوعة الطبية</a> <i class="fas fa-chevron-left" style="font-size: 0.7rem;"></i> 
-        <span id="bcTitle"></span>
-    </div>
+    <nav class="breadcrumb">
+        <a href="/">الرئيسية</a> 
+        <i class="fas fa-chevron-left"></i> 
+        <a id="bcCategoryLink" href="/doctors/index.html">الموسوعة الطبية</a> 
+        <i class="fas fa-chevron-left"></i> 
+        <span id="bcTitle" style="color: #1e293b; font-weight: 600;"></span>
+    </nav>
 
     <div class="article-card">
         <h1 id="mainTitle" class="article-title"></h1>
         
-        <div class="article-meta">
+        <div class="article-meta" style="margin-bottom: 25px; color: #64748b;">
             <span><i class="fas fa-user-md"></i> مراجعة: فريق كشفيّة الطبي</span>
         </div>
 
@@ -53,6 +74,14 @@ permalink: /topic/index.html
     const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNidHNmamNia3V2aGp5bHZ0ZXp2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzU0MTkzNDksImV4cCI6MjA5MDk5NTM0OX0.GqsPOGcntVxKtLr56iG9IHfwqlPtdAtNVRGd2ztGkrU';
     const supabaseClient = supabase.createClient(supabaseUrl, supabaseKey);
 
+    // 💡 خريطة الأقسام: هنا نترجم الكود الإنجليزي إلى اسم عربي ورابط مخصص
+    const categoryMap = {
+        'neurology': { name: 'أمراض المخ والأعصاب', url: '/neurology/' },
+        'endocrinology': { name: 'الغدد الصماء والسكري', url: '/endocrinology/' },
+        'cardiology': { name: 'أمراض القلب', url: '/cardiology/' },
+        // يمكنك إضافة بقية الأقسام هنا مستقبلاً بنفس الطريقة...
+    };
+
     async function loadArticle() {
         const params = new URLSearchParams(window.location.search);
         const slug = params.get('id');
@@ -67,26 +96,34 @@ permalink: /topic/index.html
             const { data, error } = await supabaseClient.from('topics').select('*').eq('slug', slug).single();
             if (error || !data) throw error;
 
-            // تعبئة العناوين
+            // تحديث العناوين في الصفحة
             document.title = data.title + " | كشفيّـة";
             document.getElementById('bcTitle').innerText = data.title;
             document.getElementById('mainTitle').innerText = data.title;
             
-            // حقن محتوى المرض القادم من قاعدة البيانات
+            // وضع المحتوى النصي
             document.getElementById('mainContent').innerHTML = data.content;
 
-            // توجيه زر الحجز حسب تخصص المرض
+            // تخصيص الأزرار والروابط بناءً على القسم
             if(data.category_id) {
+                // 1. زر الحجز يذهب دائماً لصفحة الأطباء ويفلتر حسب التخصص
                 document.getElementById('ctaBtn').href = `/doctors/index.html?spec=${data.category_id}`;
-                document.getElementById('bcCategoryLink').href = `/doctors/index.html?spec=${data.category_id}`;
+
+                // 2. تحديث مسار التنقل (Breadcrumb) ليعود لصفحة القسم
+                const catInfo = categoryMap[data.category_id];
+                if(catInfo) {
+                    const bcLink = document.getElementById('bcCategoryLink');
+                    bcLink.innerText = catInfo.name; // يكتب: أمراض المخ والأعصاب
+                    bcLink.href = catInfo.url;       // الرابط: /neurology/
+                }
             }
 
-            // إخفاء التحميل وإظهار المقال
+            // إظهار المحتوى النهائي
             document.getElementById('loading').style.display = 'none';
             document.getElementById('articleState').style.display = 'block';
 
         } catch (e) {
-            console.error(e);
+            console.error("Supabase Error:", e);
             document.getElementById('loading').style.display = 'none';
             document.getElementById('errorState').style.display = 'block';
         }
