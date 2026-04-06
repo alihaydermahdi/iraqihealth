@@ -1,218 +1,127 @@
 ---
 layout: default
-title: "دليل الأطباء والمراكز | كشفيّـة"
+title: "دليل الأطباء الذكي | كشفيّـة"
 permalink: /doctors/index.html
 ---
 
+<script src="/doctorsData.js"></script>
+
 <style>
-    /* --- الإعدادات العامة لمنع مشاكل العرض --- */
-    * { box-sizing: border-box; }
-    
-    .doctors-container {
-        max-width: 1200px;
-        margin: 0 auto 60px auto;
-        padding: 0 20px;
-    }
-
-    /* --- الهيدر --- */
-    .doctors-header {
-        text-align: center;
-        padding: 40px 20px;
-        background-color: #f0f4f5;
-        margin-bottom: 30px;
-        border-bottom: 1px solid #e2e8f0;
-    }
-    .doctors-title {
-        color: #003087;
-        font-size: 2.2rem;
-        font-weight: 900;
-        margin-bottom: 10px;
-    }
-
-    /* --- أزرار الفلترة (التخصصات) --- */
-    .filter-wrapper {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 10px;
-        margin-bottom: 40px;
-    }
-    .filter-btn {
-        padding: 10px 20px;
-        background-color: white;
-        border: 2px solid #005eb8;
-        color: #005eb8;
-        border-radius: 25px;
-        font-weight: 700;
-        cursor: pointer;
-        transition: all 0.2s ease;
-        font-family: inherit;
-    }
-    .filter-btn.active, .filter-btn:hover {
-        background-color: #005eb8;
-        color: white;
-    }
-
-    /* --- شبكة الكروت (Grid) --- */
-    .doctors-grid {
-        display: grid;
-        /* هذا السطر يضمن عدم خروج الكروت عن الشاشة في الأندرويد */
-        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-        gap: 25px;
-    }
-
-    /* --- كارت الطبيب --- */
-    .doctor-card {
-        background: #ffffff;
-        border: 1px solid #e2e8f0;
-        border-radius: 12px;
-        padding: 25px;
-        text-align: center;
-        box-shadow: 0 2px 4px rgba(0,0,0,0.02);
-        transition: transform 0.3s ease;
-        display: block; /* يظهر بشكل افتراضي */
-    }
-    .doctor-card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 10px 15px rgba(0, 94, 184, 0.1);
-    }
-
-    .doctor-img {
-        width: 90px;
-        height: 90px;
-        border-radius: 50%;
-        margin-bottom: 15px;
-        border: 3px solid #f0f4f5;
-    }
-
-    .doc-name { color: #003087; font-size: 1.3rem; font-weight: 800; margin-bottom: 5px; }
-    
-    .doc-spec-label {
-        display: inline-block;
-        color: #005eb8;
-        background-color: #e6f2fc;
-        font-size: 0.9rem;
-        font-weight: 700;
-        padding: 3px 12px;
-        border-radius: 15px;
-        margin-bottom: 15px;
-    }
-
-    .doc-detail {
-        color: #4a5568;
-        font-size: 0.9rem;
-        margin-bottom: 8px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 6px;
-    }
-
-    .call-btn {
-        display: block;
-        width: 100%;
-        padding: 12px;
-        background-color: #005eb8;
-        color: white;
-        text-decoration: none;
-        border-radius: 8px;
-        font-weight: 700;
-        margin-top: 15px;
-    }
-
-    /* أنيميشن بسيط عند الفلترة */
-    .fade-in {
-        animation: fadeIn 0.4s ease forwards;
-    }
-    @keyframes fadeIn {
-        from { opacity: 0; transform: scale(0.95); }
-        to { opacity: 1; transform: scale(1); }
-    }
-
-    @media (max-width: 768px) {
-        .doctors-title { font-size: 1.7rem; }
-        .filter-btn { padding: 8px 15px; font-size: 0.9rem; }
-    }
+    .doctors-header { text-align: center; padding: 40px 20px; background: #f8f9fa; border-bottom: 1px solid #e9ecef; }
+    .search-filter-section { max-width: 1100px; margin: -30px auto 40px auto; background: white; padding: 25px; border-radius: 15px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; z-index: 10; position: relative; }
+    .filter-group select, .near-me-btn { width: 100%; padding: 12px; border: 2px solid #e2e8f0; border-radius: 8px; font-family: inherit; font-size: 1rem; }
+    .near-me-btn { background: #005eb8; color: white; border: none; cursor: pointer; font-weight: bold; display: flex; align-items: center; justify-content: center; gap: 8px; }
+    .near-me-btn:hover { background: #003087; }
+    .doctors-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 25px; max-width: 1200px; margin: 0 auto 50px auto; padding: 0 20px; }
+    .doc-card { background: white; border-radius: 12px; border: 1px solid #e2e8f0; padding: 20px; transition: all 0.3s; }
+    .doc-card:hover { transform: translateY(-5px); box-shadow: 0 12px 20px rgba(0,0,0,0.08); }
+    .map-link { color: #2d3748; text-decoration: none; font-size: 0.9rem; display: flex; align-items: center; gap: 5px; margin-top: 10px; padding: 8px; background: #f7fafc; border-radius: 6px; }
+    .map-link:hover { background: #edf2f7; color: #005eb8; }
 </style>
 
 <div class="doctors-header">
-    <h1 class="doctors-title">دليل الأطباء والمراكز</h1>
-    <p style="color: #4a5568;">اختر التخصص المناسب لعرض الأطباء المتاحين</p>
+    <h1 style="color: #003087; font-weight: 900;">دليل أطباء كشفيّـة</h1>
+    <p>ابحث عن أقرب طبيب إليك واحجز موعدك فوراً</p>
 </div>
 
 <div class="doctors-container">
-    
-    <div class="filter-wrapper">
-        <button class="filter-btn active" onclick="filterDoctors('all')">الكل</button>
-        <button class="filter-btn" onclick="filterDoctors('internal')">باطنية وقلبية</button>
-        <button class="filter-btn" onclick="filterDoctors('ortho')">مفاصل وعظام</button>
-        <button class="filter-btn" onclick="filterDoctors('gynae')">نسائية وتوليد</button>
-        <button class="filter-btn" onclick="filterDoctors('peds')">أطفال</button>
+    <div class="search-filter-section">
+        <div class="filter-group">
+            <select id="provinceFilter" onchange="runFilter()">
+                <option value="all">كل المحافظات</option>
+                <option value="baghdad">بغداد</option>
+                <option value="erbil">أربيل</option>
+                <option value="basra">البصرة</option>
+                <option value="mosul">الموصل</option>
+            </select>
+        </div>
+        <div class="filter-group">
+            <select id="specialtyFilter" onchange="runFilter()">
+                <option value="all">كل التخصصات</option>
+                <option value="internal">باطنية وقلبية</option>
+                <option value="gynae">نسائية وتوليد</option>
+                <option value="peds">أطفال</option>
+                <option value="ortho">مفاصل وعظام</option>
+            </select>
+        </div>
+        <button class="near-me-btn" onclick="findNearest()"><i class="fas fa-location-arrow"></i> الأقرب إليّ الآن</button>
     </div>
 
     <div class="doctors-grid" id="doctorsGrid">
-
-        <div class="doctor-card fade-in" data-specialty="internal">
-            <img src="https://ui-avatars.com/api/?name=د+احمد&background=005eb8&color=fff" class="doctor-img">
-            <h2 class="doc-name">د. أحمد محمود</h2>
-            <span class="doc-spec-label">أخصائي باطنية وقلبية</span>
-            <div class="doc-detail"><i class="fas fa-map-marker-alt"></i> بغداد - الحارثية</div>
-            <div class="doc-detail"><i class="fas fa-clock"></i> 4:00 م - 8:00 م</div>
-            <a href="tel:07700000000" class="call-btn">اتصل للحجز</a>
         </div>
-
-        <div class="doctor-card fade-in" data-specialty="gynae">
-            <img src="https://ui-avatars.com/api/?name=د+سارة&background=005eb8&color=fff" class="doctor-img">
-            <h2 class="doc-name">د. سارة علي</h2>
-            <span class="doc-spec-label">أخصائية نسائية وتوليد</span>
-            <div class="doc-detail"><i class="fas fa-map-marker-alt"></i> أربيل - شارع 40</div>
-            <div class="doc-detail"><i class="fas fa-clock"></i> 3:00 م - 7:00 م</div>
-            <a href="tel:07500000000" class="call-btn">اتصل للحجز</a>
-        </div>
-
-        <div class="doctor-card fade-in" data-specialty="ortho">
-            <img src="https://ui-avatars.com/api/?name=د+عمر&background=005eb8&color=fff" class="doctor-img">
-            <h2 class="doc-name">د. عمر فاروق</h2>
-            <span class="doc-spec-label">استشاري جراحة العظام</span>
-            <div class="doc-detail"><i class="fas fa-map-marker-alt"></i> البصرة - العشار</div>
-            <div class="doc-detail"><i class="fas fa-clock"></i> 5:00 م - 9:00 م</div>
-            <a href="tel:07800000000" class="call-btn">اتصل للحجز</a>
-        </div>
-
-        <div class="doctor-card fade-in" data-specialty="peds">
-            <img src="https://ui-avatars.com/api/?name=د+ليلى&background=005eb8&color=fff" class="doctor-img">
-            <h2 class="doc-name">د. ليلى حسن</h2>
-            <span class="doc-spec-label">أخصائية طب الأطفال</span>
-            <div class="doc-detail"><i class="fas fa-map-marker-alt"></i> الموصل - حي الزهور</div>
-            <div class="doc-detail"><i class="fas fa-clock"></i> 10:00 ص - 2:00 م</div>
-            <a href="tel:07711111111" class="call-btn">اتصل للحجز</a>
-        </div>
-
-    </div>
 </div>
 
 <script>
-    function filterDoctors(category) {
-        const cards = document.querySelectorAll('.doctor-card');
-        const buttons = document.querySelectorAll('.filter-btn');
+    const grid = document.getElementById('doctorsGrid');
 
-        // تحديث شكل الأزرار (Active)
-        buttons.forEach(btn => {
-            btn.classList.remove('active');
-            if (btn.getAttribute('onclick').includes(category)) {
-                btn.classList.add('active');
-            }
-        });
-
-        // فلترة الكروت
-        cards.forEach(card => {
-            if (category === 'all' || card.getAttribute('data-specialty') === category) {
-                card.style.display = 'block';
-                card.classList.add('fade-in');
-            } else {
-                card.style.display = 'none';
-                card.classList.remove('fade-in');
-            }
+    // 1. وظيفة عرض الكروت
+    function displayDoctors(data) {
+        grid.innerHTML = '';
+        if(data.length === 0) {
+            grid.innerHTML = '<p style="text-align:center; grid-column: 1/-1; padding: 40px;">عذراً، لم نجد نتائج تطابق بحثك.</p>';
+            return;
+        }
+        data.forEach(doc => {
+            const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=${doc.lat},${doc.lng}`;
+            grid.innerHTML += `
+                <div class="doc-card">
+                    <img src="${doc.img}" style="width:70px; border-radius:50%; margin-bottom:10px;">
+                    <h3 style="margin:0; color:#003087;">${doc.name}</h3>
+                    <span style="color:#005eb8; font-weight:bold; font-size:0.9rem;">${doc.specialtyAr}</span>
+                    <div style="margin-top:10px; font-size:0.9rem; color:#4a5568;">
+                        <div><i class="fas fa-city"></i> ${doc.provinceAr}</div>
+                        <a href="${googleMapsUrl}" target="_blank" class="map-link">
+                            <i class="fas fa-map-marker-alt" style="color:red;"></i> ${doc.address}
+                        </a>
+                    </div>
+                    <a href="tel:${doc.phone}" style="display:block; background:#005eb8; color:white; text-align:center; padding:10px; border-radius:8px; margin-top:15px; text-decoration:none; font-weight:bold;">اتصل للحجز</a>
+                </div>
+            `;
         });
     }
+
+    // 2. الفلترة العادية (المحافظة والتخصص)
+    function runFilter() {
+        const prov = document.getElementById('provinceFilter').value;
+        const spec = document.getElementById('specialtyFilter').value;
+        
+        const filtered = doctorsData.filter(d => {
+            return (prov === 'all' || d.province === prov) && 
+                   (spec === 'all' || d.specialty === spec);
+        });
+        displayDoctors(filtered);
+    }
+
+    // 3. ميزة الأقرب إليك (Geolocation)
+    function findNearest() {
+        if (!navigator.geolocation) {
+            alert("متصفحك لا يدعم ميزة تحديد الموقع.");
+            return;
+        }
+
+        navigator.geolocation.getCurrentPosition(position => {
+            const userLat = position.coords.latitude;
+            const userLng = position.coords.longitude;
+
+            // حساب المسافة لكل طبيب وترتيبهم
+            const sorted = [...doctorsData].sort((a, b) => {
+                const distA = Math.sqrt(Math.pow(a.lat - userLat, 2) + Math.pow(a.lng - userLng, 2));
+                const distB = Math.sqrt(Math.pow(b.lat - userLat, 2) + Math.pow(b.lng - userLng, 2));
+                return distA - distB;
+            });
+
+            displayDoctors(sorted);
+            alert("تم ترتيب الأطباء حسب الأقرب إلى موقعك الحالي.");
+        }, () => {
+            alert("يرجى السماح بالوصول للموقع لتفعيل هذه الميزة.");
+        });
+    }
+
+    // تشغيل الفلترة التلقائية عند فتح الصفحة (لقراءة البحث من الصفحة الرئيسية)
+    window.onload = () => {
+        const urlParams = new URLSearchParams(window.location.search);
+        if(urlParams.has('spec')) document.getElementById('specialtyFilter').value = urlParams.get('spec');
+        if(urlParams.has('city')) document.getElementById('provinceFilter').value = urlParams.get('city');
+        runFilter();
+    };
 </script>
