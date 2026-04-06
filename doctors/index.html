@@ -11,13 +11,11 @@ permalink: /doctors/index.html
     .search-filter-section { max-width: 1000px; margin: -40px auto 40px auto; background: white; padding: 30px; border-radius: 12px; box-shadow: 0 15px 35px rgba(0,0,0,0.1); display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; position: relative; z-index: 10; }
     .filter-group label { display: block; margin-bottom: 8px; font-weight: bold; color: #003087; font-size: 0.9rem; }
     .filter-group select, .near-me-btn { width: 100%; padding: 12px; border: 2px solid #e2e8f0; border-radius: 8px; font-family: inherit; font-size: 1rem; cursor: pointer; }
-    .near-me-btn { background: #005eb8; color: white; border: none; font-weight: 800; display: flex; align-items: center; justify-content: center; gap: 10px; transition: 0.3s; }
+    .near-me-btn { background: #005eb8; color: white; border: none; font-weight: 800; display: flex; align-items: center; justify-content: center; gap: 10px; transition: 0.3s; margin-top: 26px; }
     .near-me-btn:hover { background: #003087; }
     .doctors-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 25px; max-width: 1200px; margin: 0 auto 60px auto; padding: 0 20px; }
     .doc-card { background: white; border-radius: 12px; border: 1px solid #e2e8f0; padding: 25px; text-align: center; transition: 0.3s; }
     .doc-card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.05); border-color: #005eb8; }
-    .map-link { color: #4a5568; text-decoration: none; font-size: 0.85rem; display: flex; align-items: center; justify-content: center; gap: 6px; margin-top: 12px; padding: 10px; background: #f8f9fa; border-radius: 6px; border: 1px dashed #cbd5e0; }
-    .map-link:hover { color: #005eb8; background: #e6f2fc; }
 </style>
 
 <div class="doctors-header">
@@ -27,48 +25,67 @@ permalink: /doctors/index.html
 
 <div class="doctors-container">
     <div class="search-filter-section">
+        
+        <div class="filter-group">
+            <label>التخصص الطبي</label>
+            <select id="specialtyFilter" onchange="runFilter()">
+                <option value="all" selected>كل التخصصات</option>
+                <option value="radiology">الأشعة</option>
+                <option value="dermatology">الأمراض الجلدية</option>
+                <option value="ent">الأنف والأذن والحنجرة</option>
+                <option value="laboratory">التحاليل الطبية</option>
+                <option value="allergy_immunology">الحساسية والمناعة</option>
+                <option value="andrology_infertility">الذكورة والعقم</option>
+                <option value="diabetes-endocrinology">السكري والغدد الصماء</option>
+                <option value="physiotherapy">العلاج الطبيعي</option>
+                <option value="obstetrics_gynecology">النسائية والتوليد</option>
+                <option value="pulmonology">أمراض الجهاز التنفسي</option>
+                <option value="gastroenterology">أمراض الجهاز الهضمي والكبد</option>
+                <option value="blood-immune">أمراض الدم والأورام</option>
+                <option value="orthopedics_rheumatology">أمراض العظام والمفاصل</option>
+                <option value="cardiology">أمراض القلب والأوعية الدموية</option>
+                <option value="nephrology_urology">أمراض الكلى والمسالك البولية</option>
+                <option value="neurology">أمراض المخ والأعصاب</option>
+                <option value="pediatric_surgery">جراحة الأطفال</option>
+                <option value="plastic_surgery">جراحة التجميل</option>
+                <option value="bariatric_surgery">جراحة السمنة</option>
+                <option value="cardiothoracic_surgery">جراحة القلب والصدر</option>
+                <option value="neurosurgery">جراحة المخ والأعصاب</option>
+                <option value="general_surgery">جراحة عامة وجراحة المناظير</option>
+                <option value="family_medicine">طب الأسرة</option>
+                <option value="dentistry">طب الأسنان</option>
+                <option value="pediatrics">طب الأطفال والخدج</option>
+                <option value="eyes">طب وجراحة العيون</option>
+                <option value="mental-health">الطب النفسي والصحة النفسية</option>
+            </select>
+        </div>
+
         <div class="filter-group">
             <label>المحافظة</label>
             <select id="provinceFilter" onchange="runFilter()">
                 <option value="all">كل العراق</option>
                 <option value="baghdad">بغداد</option>
-                <option value="basra">البصرة</option>
-                <option value="nineveh">نينوى (الموصل)</option>
                 <option value="erbil">أربيل</option>
-                <option value="najaf">النجف الأشرف</option>
-                <option value="karbala">كربلاء المقدسة</option>
-                <option value="sulaymaniyah">السليمانية</option>
-                <option value="kirkuk">كركوك</option>
-                <option value="babil">بابل (الحلة)</option>
                 <option value="anbar">الأنبار</option>
-                <option value="diyala">ديالى</option>
-                <option value="dhi-qar">ذي قار (الناصرية)</option>
-                <option value="qadisiyah">القادسية (الديوانية)</option>
-                <option value="maysan">ميسان (العمارة)</option>
-                <option value="wasit">واسط (الكوت)</option>
-                <option value="muthanna">المثنى (السماوة)</option>
+                <option value="basra">البصرة</option>
+                <option value="diwaniya">الديوانية</option>
+                <option value="sulaymaniyah">السليمانية</option>
+                <option value="muthanna">المثنى</option>
+                <option value="najaf">النجف</option>
+                <option value="babil">بابل</option>
                 <option value="duhok">دهوك</option>
-                <option value="saladin">صلاح الدين</option>
+                <option value="diyala">ديالى</option>
+                <option value="dhi_qar">ذي قار</option>
+                <option value="salah_al_din">صلاح الدين</option>
+                <option value="karbala">كربلاء</option>
+                <option value="kirkuk">كركوك</option>
+                <option value="maysan">ميسان</option>
+                <option value="nineveh">نينوى</option>
+                <option value="wasit">واسط</option>
             </select>
         </div>
+
         <div class="filter-group">
-            <label>التخصص</label>
-            <select id="specialtyFilter" onchange="runFilter()">
-                <option value="all">كل التخصصات</option>
-                <option value="internal">باطنية وقلبية</option>
-                <option value="peds">أطفال وسونار أطفال</option>
-                <option value="gynae">نسائية وتوليد</option>
-                <option value="ortho">مفاصل وعظام</option>
-                <option value="derma">جلدية وليزر</option>
-                <option value="eyes">عيون وجراحة ليزك</option>
-                <option value="ent">أنف وأذن وحنجرة</option>
-                <option value="neuro">جملة عصبية</option>
-                <option value="psych">نفسية وعصبية</option>
-                <option value="surgery">جراحة عامة</option>
-                <option value="urology">مسالك بولية وعقم</option>
-            </select>
-        </div>
-        <div class="filter-group" style="display: flex; align-items: flex-end;">
             <button class="near-me-btn" onclick="findNearest()">
                 <i class="fas fa-location-arrow"></i> الأقرب إليّ
             </button>
@@ -98,7 +115,7 @@ permalink: /doctors/index.html
                         <p style="margin:5px 0;"><i class="fas fa-city" style="color:#a0aec0; width:20px;"></i> ${doc.provinceAr}</p>
                         <p style="margin:5px 0;"><i class="fas fa-clock" style="color:#a0aec0; width:20px;"></i> ${doc.hours}</p>
                     </div>
-                    <a href="${googleMapsUrl}" target="_blank" class="map-link">
+                    <a href="${googleMapsUrl}" target="_blank" style="color: #4a5568; text-decoration: none; font-size: 0.85rem; display: flex; align-items: center; justify-content: center; gap: 6px; margin-top: 12px; padding: 10px; background: #f8f9fa; border-radius: 6px; border: 1px dashed #cbd5e0;">
                         <i class="fas fa-map-marked-alt"></i> عرض الموقع على الخارطة
                     </a>
                     <a href="tel:${doc.phone}" style="display:block; background:#005eb8; color:white; text-align:center; padding:12px; border-radius:8px; margin-top:20px; text-decoration:none; font-weight:bold;">
