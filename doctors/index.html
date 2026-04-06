@@ -5,114 +5,228 @@ permalink: /doctors/index.html
 ---
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
 <style>
-    .doctors-header { text-align: center; padding: 60px 20px; background: #f0f4f5; border-bottom: 1px solid #d8dde0; }
-    .search-filter-section { max-width: 1000px; margin: -40px auto 40px auto; background: white; padding: 30px; border-radius: 12px; box-shadow: 0 15px 35px rgba(0,0,0,0.1); display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; position: relative; z-index: 10; }
-    .filter-group label { display: block; margin-bottom: 8px; font-weight: bold; color: #003087; font-size: 0.9rem; }
-    .filter-group select, .near-me-btn { width: 100%; padding: 12px; border: 2px solid #e2e8f0; border-radius: 8px; font-family: inherit; font-size: 1rem; cursor: pointer; }
-    .near-me-btn { background: #005eb8; color: white; border: none; font-weight: 800; display: flex; align-items: center; justify-content: center; gap: 10px; transition: 0.3s; margin-top: 26px; }
-    .near-me-btn:hover { background: #003087; }
-    .doctors-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 25px; max-width: 1200px; margin: 0 auto 60px auto; padding: 0 20px; }
-    .doc-card { background: white; border-radius: 12px; border: 1px solid #e2e8f0; padding: 25px; text-align: center; transition: 0.3s; }
-    .doc-card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.05); border-color: #005eb8; }
-    .loading-msg { grid-column: 1/-1; text-align: center; padding: 50px; color: #005eb8; font-size: 1.2rem; font-weight: bold; }
+    :root {
+        --primary: #005eb8;
+        --secondary: #003087;
+        --accent: #00b2a9;
+        --bg: #f8fafc;
+        --text: #1e293b;
+    }
+
+    body { background-color: var(--bg); color: var(--text); font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+
+    .hero-section {
+        background: linear-gradient(135deg, var(--primary), var(--secondary));
+        color: white;
+        padding: 80px 20px;
+        text-align: center;
+        border-radius: 0 0 50px 50px;
+        margin-bottom: -50px;
+    }
+
+    .search-container {
+        max-width: 1100px;
+        margin: 0 auto;
+        background: white;
+        padding: 25px;
+        border-radius: 20px;
+        box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+        display: flex;
+        flex-wrap: wrap;
+        gap: 15px;
+        position: relative;
+        z-index: 100;
+    }
+
+    .search-box { flex: 2; position: relative; min-width: 250px; }
+    .search-box i { position: absolute; right: 15px; top: 15px; color: #94a3b8; }
+    .search-box input { width: 100%; padding: 12px 45px 12px 15px; border: 2px solid #f1f5f9; border-radius: 12px; outline: none; transition: 0.3s; font-size: 1rem; }
+    .search-box input:focus { border-color: var(--primary); background: #fdfdfd; }
+
+    .filter-item { flex: 1; min-width: 180px; }
+    .filter-item select { width: 100%; padding: 12px; border: 2px solid #f1f5f9; border-radius: 12px; cursor: pointer; font-size: 0.95rem; }
+
+    .near-btn { 
+        background: var(--accent); color: white; border: none; padding: 12px 25px; 
+        border-radius: 12px; font-weight: bold; cursor: pointer; transition: 0.3s;
+        display: flex; align-items: center; gap: 8px;
+    }
+    .near-btn:hover { background: #00968e; transform: translateY(-2px); }
+
+    .doctors-grid { 
+        display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); 
+        gap: 30px; max-width: 1200px; margin: 80px auto; padding: 0 20px; 
+    }
+
+    .doctor-card {
+        background: white; border-radius: 20px; overflow: hidden;
+        border: 1px solid #eef2f6; transition: 0.4s; position: relative;
+        display: flex; flex-direction: column;
+    }
+    .doctor-card:hover { transform: translateY(-10px); box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); }
+
+    .card-top { background: #f8fafc; padding: 30px 20px; text-align: center; border-bottom: 1px solid #f1f5f9; position: relative; }
+    .spec-badge {
+        position: absolute; top: 15px; left: 15px; background: white;
+        padding: 5px 12px; border-radius: 30px; font-size: 0.75rem;
+        font-weight: 700; color: var(--primary); box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        display: flex; align-items: center; gap: 5px;
+    }
+
+    .doc-img { width: 100px; height: 100px; border-radius: 50%; object-fit: cover; border: 4px solid white; box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
+
+    .card-body { padding: 25px; flex-grow: 1; }
+    .doc-name { margin: 0 0 10px 0; font-size: 1.3rem; color: var(--secondary); font-weight: 800; }
+    .doc-info { font-size: 0.9rem; color: #64748b; margin-bottom: 8px; display: flex; align-items: center; gap: 10px; }
+    .doc-info i { color: var(--primary); width: 16px; }
+
+    .card-footer { padding: 20px; display: flex; gap: 10px; background: #fafafa; }
+    .btn-call { flex: 2; background: var(--primary); color: white; text-decoration: none; text-align: center; padding: 12px; border-radius: 10px; font-weight: bold; transition: 0.3s; }
+    .btn-map { flex: 1; background: #f1f5f9; color: #475569; text-decoration: none; text-align: center; padding: 12px; border-radius: 10px; transition: 0.3s; }
+    .btn-call:hover { background: var(--secondary); }
+    .btn-map:hover { background: #e2e8f0; }
+
+    .loading-state { grid-column: 1/-1; text-align: center; padding: 100px; }
 </style>
 
-<div class="doctors-header">
-    <h1 style="color: #003087; font-size: 2.5rem; font-weight: 900;">دليل أطباء كشفيّـة</h1>
-    <p style="font-size: 1.2rem; color: #4a5568;">ابحث عن أفضل الأطباء والمراكز الطبية في محافظتك</p>
+<div class="hero-section">
+    <h1 style="font-size: 2.8rem; font-weight: 900; margin-bottom: 10px;">دليل أطباء كشفيّـة</h1>
+    <p style="opacity: 0.9; font-size: 1.1rem;">نخبة أطباء العراق بين يديك</p>
 </div>
 
-<div class="doctors-container">
-    <div class="search-filter-section">
-        
-        <div class="filter-group">
-            <label>التخصص الطبي</label>
-            <select id="specialtyFilter" onchange="runFilter()">
-                <option value="all" selected>كل التخصصات</option>
-                <option value="radiology">الأشعة</option>
-                <option value="dermatology">الأمراض الجلدية</option>
-                <option value="ent">الأنف والأذن والحنجرة</option>
-                <option value="laboratory">التحاليل الطبية</option>
-                <option value="allergy_immunology">الحساسية والمناعة</option>
-                <option value="andrology_infertility">الذكورة والعقم</option>
-                <option value="diabetes-endocrinology">السكري والغدد الصماء</option>
-                <option value="physiotherapy">العلاج الطبيعي</option>
-                <option value="obstetrics_gynecology">النسائية والتوليد</option>
-                <option value="pulmonology">أمراض الجهاز التنفسي</option>
-                <option value="gastroenterology">أمراض الجهاز الهضمي والكبد</option>
-                <option value="blood-immune">أمراض الدم والأورام</option>
-                <option value="orthopedics_rheumatology">أمراض العظام والمفاصل</option>
-                <option value="cardiology">أمراض القلب والأوعية الدموية</option>
-                <option value="nephrology_urology">أمراض الكلى والمسالك البولية</option>
-                <option value="neurology">أمراض المخ والأعصاب</option>
-                <option value="pediatric_surgery">جراحة الأطفال</option>
-                <option value="plastic_surgery">جراحة التجميل</option>
-                <option value="bariatric_surgery">جراحة السمنة</option>
-                <option value="cardiothoracic_surgery">جراحة القلب والصدر</option>
-                <option value="neurosurgery">جراحة المخ والأعصاب</option>
-                <option value="general_surgery">جراحة عامة وجراحة المناظير</option>
-                <option value="family_medicine">طب الأسرة</option>
-                <option value="dentistry">طب الأسنان</option>
-                <option value="pediatrics">طب الأطفال والخدج</option>
-                <option value="eyes">طب وجراحة العيون</option>
-                <option value="mental-health">الطب النفسي والصحة النفسية</option>
-            </select>
-        </div>
-
-        <div class="filter-group">
-            <label>المحافظة</label>
-            <select id="provinceFilter" onchange="runFilter()">
-                <option value="all">كل العراق</option>
-                <option value="baghdad">بغداد</option>
-                <option value="erbil">أربيل</option>
-                <option value="anbar">الأنبار</option>
-                <option value="basra">البصرة</option>
-                <option value="diwaniya">الديوانية</option>
-                <option value="sulaymaniyah">السليمانية</option>
-                <option value="muthanna">المثنى</option>
-                <option value="najaf">النجف</option>
-                <option value="babil">بابل</option>
-                <option value="duhok">دهوك</option>
-                <option value="diyala">ديالى</option>
-                <option value="dhi_qar">ذي قار</option>
-                <option value="salah_al_din">صلاح الدين</option>
-                <option value="karbala">كربلاء</option>
-                <option value="kirkuk">كركوك</option>
-                <option value="maysan">ميسان</option>
-                <option value="nineveh">نينوى</option>
-                <option value="wasit">واسط</option>
-            </select>
-        </div>
-
-        <div class="filter-group">
-            <button class="near-me-btn" onclick="findNearest()">
-                <i class="fas fa-location-arrow"></i> الأقرب إليّ
-            </button>
-        </div>
+<div class="search-container">
+    <div class="search-box">
+        <i class="fa-solid fa-magnifying-glass"></i>
+        <input type="text" id="nameSearch" placeholder="ابحث عن اسم الطبيب..." oninput="runFilter()">
     </div>
+    <div class="filter-item">
+        <select id="specialtyFilter" onchange="runFilter()">
+            <option value="all">كل التخصصات</option>
+            <option value="cardiology">أمراض القلب</option>
+            <option value="dentistry">طب الأسنان</option>
+            <option value="pediatrics">طب الأطفال</option>
+            </select>
+    </div>
+    <div class="filter-item">
+        <select id="provinceFilter" onchange="runFilter()">
+            <option value="all">كل العراق</option>
+            <option value="baghdad">بغداد</option>
+            <option value="erbil">أربيل</option>
+            </select>
+    </div>
+    <button class="near-btn" onclick="findNearest()">
+        <i class="fa-solid fa-location-crosshairs"></i> الأقرب لي
+    </button>
+</div>
 
-    <div class="doctors-grid" id="doctorsGrid">
-        <div class="loading-msg"><i class="fas fa-spinner fa-spin"></i> جاري تحميل بيانات الأطباء...</div>
+<div class="doctors-grid" id="doctorsGrid">
+    <div class="loading-state">
+        <i class="fas fa-circle-notch fa-spin fa-3x" style="color: var(--primary)"></i>
+        <p style="margin-top: 20px; font-weight: bold;">جاري جلب نخبة الأطباء...</p>
     </div>
 </div>
 
 <script>
-    // 1. إعداد الاتصال بـ Supabase
+    // 1. الإعدادات والاتصال
     const supabaseUrl = 'https://sbtsfjcbkuvhjylvtezv.supabase.co';
     const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNidHNmamNia3V2aGp5bHZ0ZXp2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzU0MTkzNDksImV4cCI6MjA5MDk5NTM0OX0.GqsPOGcntVxKtLr56iG9IHfwqlPtdAtNVRGd2ztGkrU';
     const supabaseClient = supabase.createClient(supabaseUrl, supabaseKey);
 
-    // متغير لتخزين البيانات القادمة من السحابة
     let doctorsData = [];
-    const grid = document.getElementById('doctorsGrid');
 
-    // 2. دالة جلب البيانات من السحابة
-    async function fetchDoctorsFromCloud() {
+    // خريطة الأيقونات الذكية حسب التخصص
+    const specialtyIcons = {
+        cardiology: 'fa-heart-pulse',
+        dentistry: 'fa-tooth',
+        pediatrics: 'fa-baby',
+        dermatology: 'fa-hand-dots',
+        eyes: 'fa-eye',
+        default: 'fa-user-doctor'
+    };
+
+    async function fetchDoctors() {
         try {
-            console.log("⏳ جاري الاتصال بقاعدة بيانات Supabase...");
+            const { data, error } = await supabaseClient.from('doctors').select('*');
+            if (error) throw error;
             
+            doctorsData = data.map(doc => ({
+                ...doc,
+                icon: specialtyIcons[doc.specialty_id] || specialtyIcons.default
+            }));
+            
+            runFilter();
+        } catch (e) {
+            document.getElementById('doctorsGrid').innerHTML = "<p>تعذر الاتصال بقاعدة البيانات</p>";
+        }
+    }
+
+    function displayDoctors(data) {
+        const grid = document.getElementById('doctorsGrid');
+        grid.innerHTML = '';
+
+        if(data.length === 0) {
+            grid.innerHTML = `<div style="grid-column: 1/-1; text-align:center; padding:50px;">
+                <img src="https://illustrations.popsy.co/gray/falling-guy.svg" style="width:200px; margin-bottom:20px;">
+                <h3>لم نجد أي طبيب بهذا الاسم أو التخصص</h3>
+            </div>`;
+            return;
+        }
+
+        data.forEach(doc => {
+            const img = doc.image_url || `https://ui-avatars.com/api/?name=${doc.name}&background=005eb8&color=fff`;
+            grid.innerHTML += `
+                <div class="doctor-card">
+                    <div class="card-top">
+                        <div class="spec-badge"><i class="fa-solid ${doc.icon}"></i> ${doc.specialty_ar}</div>
+                        <img src="${img}" class="doc-img" alt="${doc.name}">
+                    </div>
+                    <div class="card-body">
+                        <h3 class="doc-name">${doc.name}</h3>
+                        <div class="doc-info"><i class="fa-solid fa-location-dot"></i> ${doc.province_ar} - ${doc.address}</div>
+                        <div class="doc-info"><i class="fa-solid fa-clock"></i> ${doc.hours || 'اتصل لمعرفة الأوقات'}</div>
+                    </div>
+                    <div class="card-footer">
+                        <a href="tel:${doc.phone}" class="btn-call"><i class="fa-solid fa-phone"></i> احجز الآن</a>
+                        <a href="https://www.google.com/maps?q=${doc.lat},${doc.lng}" target="_blank" class="btn-map"><i class="fa-solid fa-map-location-dot"></i> الموقع</a>
+                    </div>
+                </div>
+            `;
+        });
+    }
+
+    function runFilter() {
+        const nameQ = document.getElementById('nameSearch').value.toLowerCase();
+        const specQ = document.getElementById('specialtyFilter').value;
+        const provQ = document.getElementById('provinceFilter').value;
+
+        const filtered = doctorsData.filter(d => {
+            const matchName = d.name.toLowerCase().includes(nameQ);
+            const matchSpec = specQ === 'all' || d.specialty_id === specQ;
+            const matchProv = provQ === 'all' || d.province_id === provQ;
+            return matchName && matchSpec && matchProv;
+        });
+
+        displayDoctors(filtered);
+    }
+
+    function findNearest() {
+        if (!navigator.geolocation) return alert("متصفحك لا يدعم تحديد الموقع");
+        navigator.geolocation.getCurrentPosition(pos => {
+            const { latitude, longitude } = pos.coords;
+            const sorted = [...doctorsData].sort((a,b) => {
+                const distA = Math.hypot(a.lat - latitude, a.lng - longitude);
+                const distB = Math.hypot(b.lat - latitude, b.lng - longitude);
+                return distA - distB;
+            });
+            displayDoctors(sorted);
+        });
+    }
+
+    window.onload = fetchDoctors;
+</script>            
             const { data, error } = await supabaseClient
                 .from('doctors')
                 .select('*');
