@@ -3,7 +3,7 @@ const doctorsData = [
     {
         id: 1,
         name: "د. أحمد محمود",
-        specialty: "internal",
+        specialty: "cardiology",
         specialtyAr: "أمراض القلب والأوعية الدموية",
         province: "baghdad",
         provinceAr: "بغداد",
