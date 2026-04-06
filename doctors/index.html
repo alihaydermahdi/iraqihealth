@@ -4,7 +4,7 @@ title: "دليل الأطباء والمراكز | كشفيّـة"
 permalink: /doctors/index.html
 ---
 
-<script src="/doctorsData.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <style>
     .doctors-header { text-align: center; padding: 60px 20px; background: #f0f4f5; border-bottom: 1px solid #d8dde0; }
@@ -16,6 +16,7 @@ permalink: /doctors/index.html
     .doctors-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 25px; max-width: 1200px; margin: 0 auto 60px auto; padding: 0 20px; }
     .doc-card { background: white; border-radius: 12px; border: 1px solid #e2e8f0; padding: 25px; text-align: center; transition: 0.3s; }
     .doc-card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.05); border-color: #005eb8; }
+    .loading-msg { grid-column: 1/-1; text-align: center; padding: 50px; color: #005eb8; font-size: 1.2rem; font-weight: bold; }
 </style>
 
 <div class="doctors-header">
@@ -92,12 +93,61 @@ permalink: /doctors/index.html
         </div>
     </div>
 
-    <div class="doctors-grid" id="doctorsGrid"></div>
+    <div class="doctors-grid" id="doctorsGrid">
+        <div class="loading-msg"><i class="fas fa-spinner fa-spin"></i> جاري تحميل بيانات الأطباء...</div>
+    </div>
 </div>
 
 <script>
+    // 1. إعداد الاتصال بـ Supabase
+    const supabaseUrl = 'https://sbtsfjcbkuvhjylvtezv.supabase.co';
+    const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNidHNmamNia3V2aGp5bHZ0ZXp2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzU0MTkzNDksImV4cCI6MjA5MDk5NTM0OX0.GqsPOGcntVxKtLr56iG9IHfwqlPtdAtNVRGd2ztGkrU';
+    const supabase = supabase.createClient(supabaseUrl, supabaseKey);
+
+    // متغير لتخزين البيانات القادمة من السحابة
+    let doctorsData = [];
     const grid = document.getElementById('doctorsGrid');
 
+    // 2. دالة جلب البيانات من السحابة
+    async function fetchDoctorsFromCloud() {
+        try {
+            const { data, error } = await supabase
+                .from('doctors')
+                .select('*');
+
+            if (error) throw error;
+
+            // تحويل أسماء الأعمدة لتطابق الكود القديم حتى تعمل الخرائط والفلاتر بدون مشاكل
+            doctorsData = data.map(doc => ({
+                id: doc.id,
+                name: doc.name,
+                specialty: doc.specialty_id,
+                specialtyAr: doc.specialty_ar,
+                province: doc.province_id,
+                provinceAr: doc.province_ar,
+                address: doc.address,
+                lat: doc.lat,
+                lng: doc.lng,
+                phone: doc.phone,
+                hours: doc.hours,
+                img: doc.image_url || 'https://ui-avatars.com/api/?name=' + doc.name + '&background=005eb8&color=fff' // صورة افتراضية إذا كان الرابط فارغاً
+            }));
+
+            // قراءة الفلاتر من الرابط (إذا جاء الزائر من الصفحة الرئيسية)
+            const params = new URLSearchParams(window.location.search);
+            if(params.has('spec')) document.getElementById('specialtyFilter').value = params.get('spec');
+            if(params.has('city')) document.getElementById('provinceFilter').value = params.get('city');
+            
+            // تشغيل الفلتر لعرض البيانات
+            runFilter();
+
+        } catch (error) {
+            console.error("Error fetching data:", error);
+            grid.innerHTML = '<div style="grid-column: 1/-1; text-align:center; padding:50px; color:red;"><h3>حدث خطأ أثناء جلب البيانات. يرجى المحاولة لاحقاً.</h3></div>';
+        }
+    }
+
+    // 3. دالة رسم كروت الأطباء
     function displayDoctors(data) {
         grid.innerHTML = '';
         if(data.length === 0) {
@@ -105,14 +155,14 @@ permalink: /doctors/index.html
             return;
         }
         data.forEach(doc => {
-            const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=${doc.lat},${doc.lng}`;
+            const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=$${doc.lat},${doc.lng}`;
             grid.innerHTML += `
                 <div class="doc-card">
-                    <img src="${doc.img}" style="width:80px; height:80px; border-radius:50%; margin-bottom:15px; border: 3px solid #f0f4f5;">
+                    <img src="${doc.img}" style="width:80px; height:80px; border-radius:50%; object-fit:cover; margin-bottom:15px; border: 3px solid #f0f4f5;">
                     <h3 style="margin:0 0 5px 0; color:#003087;">${doc.name}</h3>
                     <span style="background:#e6f2fc; color:#005eb8; padding:4px 12px; border-radius:20px; font-size:0.85rem; font-weight:bold;">${doc.specialtyAr}</span>
                     <div style="margin-top:15px; text-align:right; font-size:0.9rem;">
-                        <p style="margin:5px 0;"><i class="fas fa-city" style="color:#a0aec0; width:20px;"></i> ${doc.provinceAr}</p>
+                        <p style="margin:5px 0;"><i class="fas fa-city" style="color:#a0aec0; width:20px;"></i> ${doc.provinceAr} - ${doc.address || ''}</p>
                         <p style="margin:5px 0;"><i class="fas fa-clock" style="color:#a0aec0; width:20px;"></i> ${doc.hours}</p>
                     </div>
                     <a href="${googleMapsUrl}" target="_blank" style="color: #4a5568; text-decoration: none; font-size: 0.85rem; display: flex; align-items: center; justify-content: center; gap: 6px; margin-top: 12px; padding: 10px; background: #f8f9fa; border-radius: 6px; border: 1px dashed #cbd5e0;">
@@ -126,6 +176,7 @@ permalink: /doctors/index.html
         });
     }
 
+    // 4. دالة الفلترة التلقائية
     function runFilter() {
         const prov = document.getElementById('provinceFilter').value;
         const spec = document.getElementById('specialtyFilter').value;
@@ -133,8 +184,11 @@ permalink: /doctors/index.html
         displayDoctors(filtered);
     }
 
+    // 5. دالة تحديد الأقرب
     function findNearest() {
         if (!navigator.geolocation) { alert("متصفحك لا يدعم تحديد الموقع."); return; }
+        grid.innerHTML = '<div class="loading-msg"><i class="fas fa-spinner fa-spin"></i> جاري البحث عن الأقرب...</div>';
+        
         navigator.geolocation.getCurrentPosition(pos => {
             const sorted = [...doctorsData].sort((a,b) => {
                 const dA = Math.sqrt(Math.pow(a.lat-pos.coords.latitude,2)+Math.pow(a.lng-pos.coords.longitude,2));
@@ -142,13 +196,12 @@ permalink: /doctors/index.html
                 return dA - dB;
             });
             displayDoctors(sorted);
-        }, () => alert("يرجى تفعيل الموقع الجغرافي."));
+        }, () => {
+            alert("يرجى تفعيل الموقع الجغرافي.");
+            runFilter();
+        });
     }
 
-    window.onload = () => {
-        const params = new URLSearchParams(window.location.search);
-        if(params.has('spec')) document.getElementById('specialtyFilter').value = params.get('spec');
-        if(params.has('city')) document.getElementById('provinceFilter').value = params.get('city');
-        runFilter();
-    };
+    // تشغيل جلب البيانات بمجرد فتح الصفحة
+    window.onload = fetchDoctorsFromCloud;
 </script>
