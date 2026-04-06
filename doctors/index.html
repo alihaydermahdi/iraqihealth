@@ -99,7 +99,7 @@ permalink: /doctors/index.html
 </div>
 
 <script>
-    // 1. إعداد الاتصال بـ Supabase (تم حل التعارض بتغيير اسم المتغير إلى supabaseClient)
+    // 1. إعداد الاتصال بـ Supabase
     const supabaseUrl = 'https://sbtsfjcbkuvhjylvtezv.supabase.co';
     const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNidHNmamNia3V2aGp5bHZ0ZXp2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzU0MTkzNDksImV4cCI6MjA5MDk5NTM0OX0.GqsPOGcntVxKtLr56iG9IHfwqlPtdAtNVRGd2ztGkrU';
     const supabaseClient = supabase.createClient(supabaseUrl, supabaseKey);
@@ -111,12 +111,19 @@ permalink: /doctors/index.html
     // 2. دالة جلب البيانات من السحابة
     async function fetchDoctorsFromCloud() {
         try {
-            // نستخدم supabaseClient هنا
+            console.log("⏳ جاري الاتصال بقاعدة بيانات Supabase...");
+            
             const { data, error } = await supabaseClient
                 .from('doctors')
                 .select('*');
 
             if (error) throw error;
+
+            console.log("✅ البيانات التي وصلت من السيرفر:", data);
+
+            if (data.length === 0) {
+                console.warn("⚠️ تحذير: السيرفر متصل ولكن الجدول فارغ أو محمي!");
+            }
 
             // تحويل البيانات لتطابق الخرائط والفلاتر
             doctorsData = data.map(doc => ({
@@ -143,7 +150,7 @@ permalink: /doctors/index.html
             runFilter();
 
         } catch (error) {
-            console.error("Error fetching data:", error);
+            console.error("❌ خطأ قادم من Supabase:", error.message);
             grid.innerHTML = '<div style="grid-column: 1/-1; text-align:center; padding:50px; color:red;"><h3>حدث خطأ أثناء جلب البيانات. تأكد من إعدادات قاعدة البيانات.</h3></div>';
         }
     }
@@ -156,7 +163,7 @@ permalink: /doctors/index.html
             return;
         }
         data.forEach(doc => {
-            // رابط خرائط جوجل المحدث
+            // تصحيح رابط خرائط جوجل
             const googleMapsUrl = `https://www.google.com/maps?q=${doc.lat},${doc.lng}`;
             grid.innerHTML += `
                 <div class="doc-card">
