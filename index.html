@@ -49,15 +49,14 @@ title: دليلك الطبي
         .tile span { font-size: 0.95rem; } 
     }
 </style>
-
 <section class="hero-section">
     <h1>دليل أطباء العراق – بحث سريع حسب التخصص</h1>
     
-    <form class="search-box-container" id="search-form">
+    <form class="search-box-container" id="search-form" onsubmit="handleHeroSearch(event)">
         <div class="search-field">
             <i class="fas fa-stethoscope"></i>
             <select id="search-specialty">
-                <option value="" disabled selected>اختر التخصص الطبي...</option>
+                <option value="all" selected>كل التخصصات الطبية...</option>
                 <option value="general_surgery">جراحة عامة وجراحة المناظير</option>
                 <option value="bariatric_surgery">جراحة السمنة</option>
                 <option value="neurosurgery">جراحة المخ والأعصاب</option>
@@ -92,7 +91,7 @@ title: دليلك الطبي
         <div class="search-field">
             <i class="fas fa-map-marker-alt"></i>
             <select id="search-city">
-                <option value="" disabled selected>اختار المحافظة...</option>
+                <option value="all" selected>كل المحافظات...</option>
                 <option value="baghdad">بغداد</option>
                 <option value="nineveh">نينوى</option>
                 <option value="basra">البصرة</option>
@@ -114,16 +113,22 @@ title: دليلك الطبي
             </select>
         </div>
 
-        <div class="search-field">
-            <i class="fas fa-user-doctor"></i>
-            <input type="text" id="search-name" placeholder="اسم الدكتور أو العيادة (اختياري)">
-        </div>
-
         <button type="submit" class="search-btn">
             <i class="fas fa-search"></i> ابحث الآن
         </button>
     </form>
 </section>
+
+<script>
+function handleHeroSearch(event) {
+    event.preventDefault(); // منع الصفحة من إعادة التحميل
+    const spec = document.getElementById('search-specialty').value;
+    const city = document.getElementById('search-city').value;
+    
+    // التوجيه إلى صفحة الأطباء مع إرسال الاختيارات في الرابط
+    window.location.href = `/doctors/index.html?spec=${spec}&city=${city}`;
+}
+</script>
 
 <main class="clinical-grid">
     <div class="grid-row">
