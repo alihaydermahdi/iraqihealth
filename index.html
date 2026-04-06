@@ -111,7 +111,7 @@ title: دليلك الطبي
                 <option value="nineveh">نينوى</option>
                 <option value="wasit">واسط</option>
             </select>
-        </div>
+</div>
 
         <button type="submit" class="search-btn">
             <i class="fas fa-search"></i> ابحث الآن
@@ -121,19 +121,12 @@ title: دليلك الطبي
 
 <script>
 function handleHeroSearch(event) {
-    event.preventDefault();
-    const spec = document.getElementById('search-specialty').value;
-    const city = document.getElementById('search-city').value;
-    window.location.href = `/doctors/index.html?spec=${spec}&city=${city}`;
-}
-</script>
-
-function handleHeroSearch(event) {
-    event.preventDefault(); // منع الصفحة من إعادة التحميل
+    event.preventDefault(); // يمنع الصفحة من التحديث المفاجئ
+    
     const spec = document.getElementById('search-specialty').value;
     const city = document.getElementById('search-city').value;
     
-    // التوجيه إلى صفحة الأطباء مع إرسال الاختيارات في الرابط
+    // التوجيه إلى صفحة الأطباء وإرسال الفلاتر في الرابط
     window.location.href = `/doctors/index.html?spec=${spec}&city=${city}`;
 }
 </script>
