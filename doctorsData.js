@@ -4,7 +4,7 @@ const doctorsData = [
         id: 1,
         name: "د. أحمد محمود",
         specialty: "internal",
-        specialtyAr: "أخصائي باطنية وقلبية",
+        specialtyAr: "أمراض القلب والأوعية الدموية",
         province: "baghdad",
         provinceAr: "بغداد",
         address: "الحارثية - شارع الكندي",
