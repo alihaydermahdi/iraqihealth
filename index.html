@@ -5,17 +5,17 @@ title: دليلك الطبي
 
 <style>
     /* Homepage Specific CSS */
-    .hero-section { background-color: var(--nhs-blue); background-image: linear-gradient(135deg, var(--nhs-blue) 0%, var(--nhs-dark-blue) 100%); padding: 50px 20px; text-align: center; color: white; margin-bottom: 40px; width: 100%; }
+    .hero-section { background-color: #005eb8; background-image: linear-gradient(135deg, #005eb8 0%, #003087 100%); padding: 50px 20px; text-align: center; color: white; margin-bottom: 40px; width: 100%; }
     .hero-section h1 { font-family: "Cairo", sans-serif; font-size: 1.8rem; margin-top: 0; margin-bottom: 15px; font-weight: 800; letter-spacing: -0.3px; line-height: 1.4; }
     .hero-section p { font-size: 1.1rem; margin-bottom: 30px; opacity: 0.95; font-weight: 400; }
     
     .search-box-container { background: white; max-width: 1000px; margin: 0 auto; border-radius: 12px; padding: 10px; box-shadow: 0 10px 25px rgba(0,0,0,0.2); display: flex; gap: 10px; }
     .search-field { flex: 1; display: flex; align-items: center; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 0 15px; transition: border-color 0.2s; }
-    .search-field:focus-within { border-color: var(--nhs-blue); box-shadow: 0 0 0 2px rgba(0,94,184,0.1); }
-    .search-field i { color: var(--nhs-blue); font-size: 1.1rem; margin-left: 10px; }
-    .search-field select, .search-field input { width: 100%; border: none; background: transparent; padding: 15px 0; font-size: 1rem; font-family: "Cairo", sans-serif; font-weight: 600; color: var(--nhs-text); outline: none; }
+    .search-field:focus-within { border-color: #005eb8; box-shadow: 0 0 0 2px rgba(0,94,184,0.1); }
+    .search-field i { color: #005eb8; font-size: 1.1rem; margin-left: 10px; }
+    .search-field select, .search-field input { width: 100%; border: none; background: transparent; padding: 15px 0; font-size: 1rem; font-family: "Cairo", sans-serif; font-weight: 600; color: #1e293b; outline: none; }
     
-    .search-btn { background-color: var(--nhs-dark-blue); color: white; border: none; border-radius: 8px; padding: 0 30px; font-size: 1.1rem; font-family: "Cairo", sans-serif; font-weight: 800; cursor: pointer; transition: background-color 0.2s; display: flex; align-items: center; gap: 8px; }
+    .search-btn { background-color: #003087; color: white; border: none; border-radius: 8px; padding: 0 30px; font-size: 1.1rem; font-family: "Cairo", sans-serif; font-weight: 800; cursor: pointer; transition: background-color 0.2s; display: flex; align-items: center; gap: 8px; }
     .search-btn:hover { background-color: #00225e; }
 
     .clinical-grid { max-width: 1300px; margin: 0 auto 50px auto; padding: 0 20px; width: 100%; }
@@ -27,9 +27,9 @@ title: دليلك الطبي
     
     .mega-dropdown { display: none; grid-template-columns: 1fr 1fr; width: 100%; margin-bottom: 6px; animation: fadeIn 0.2s ease; grid-column: 1 / -1; border-radius: 6px; }
     @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-    .drop-section { padding: 15px; text-align: center; color: white; font-weight: 700; font-size: 1.1rem; border: 1px solid rgba(255,255,255,0.15); }
+    .drop-section { padding: 15px; text-align: center; color: white; font-weight: 700; font-size: 1.1rem; border: 1px solid rgba(255,255,255,0.15); transition: 0.3s; }
     .drop-section a { color: white; text-decoration: none; display: block; width: 100%; height: 100%; font-family: "Cairo", sans-serif; }
-    .drop-section:hover { background: rgba(0,0,0,0.1); }
+    .drop-section:hover { background: rgba(0,0,0,0.2); }
 
     /* Tile Colors */
     .neuro { background-color: #7cb342; } .eyes { background-color: #d32f2f; } .ent { background-color: #d32f2f; } .resp { background-color: #1976d2; } .cardio { background-color: #afb42b; } .diabetes { background-color: #0288d1; } .gastro { background-color: #388e3c; } .renal { background-color: #1565c0; } .mens-health { background-color: #1565c0; } .women { background-color: #8e24aa; } .paeds { background-color: #4a148c; } .derm { background-color: #1b5e20; } .msk { background-color: #1b5e20; } .cancer { background-color: #b71c1c; } .mental { background-color: #7cb342; } .healthy-living { background-color: #f57c00; }
@@ -49,6 +49,7 @@ title: دليلك الطبي
         .tile span { font-size: 0.95rem; } 
     }
 </style>
+
 <section class="hero-section">
     <h1>دليل أطباء العراق – بحث سريع حسب التخصص</h1>
     
@@ -62,25 +63,14 @@ title: دليلك الطبي
                 <option value="dermatology">الأمراض الجلدية</option>
                 <option value="ent">الأنف والأذن والحنجرة</option>
                 <option value="laboratory">التحاليل الطبية</option>
-                <option value="allergy_immunology">الحساسية والمناعة</option>
-                <option value="andrology_infertility">الذكورة والعقم</option>
                 <option value="diabetes-endocrinology">السكري والغدد الصماء</option>
-                <option value="physiotherapy">العلاج الطبيعي</option>
                 <option value="obstetrics_gynecology">النسائية والتوليد</option>
                 <option value="pulmonology">أمراض الجهاز التنفسي</option>
                 <option value="gastroenterology">أمراض الجهاز الهضمي والكبد</option>
-                <option value="blood-immune">أمراض الدم والأورام</option>
                 <option value="orthopedics_rheumatology">أمراض العظام والمفاصل</option>
                 <option value="cardiology">أمراض القلب والأوعية الدموية</option>
-                <option value="nephrology_urology">أمراض الكلى والمسالك البولية</option>
                 <option value="neurology">أمراض المخ والأعصاب</option>
-                <option value="pediatric_surgery">جراحة الأطفال</option>
-                <option value="plastic_surgery">جراحة التجميل</option>
-                <option value="bariatric_surgery">جراحة السمنة</option>
-                <option value="cardiothoracic_surgery">جراحة القلب والصدر</option>
-                <option value="neurosurgery">جراحة المخ والأعصاب</option>
-                <option value="general_surgery">جراحة عامة وجراحة المناظير</option>
-                <option value="family_medicine">طب الأسرة</option>
+                <option value="general_surgery">جراحة عامة</option>
                 <option value="dentistry">طب الأسنان</option>
                 <option value="pediatrics">طب الأطفال والخدج</option>
                 <option value="eyes">طب وجراحة العيون</option>
@@ -94,42 +84,16 @@ title: دليلك الطبي
                 <option value="all" selected>كل العراق...</option>
                 <option value="baghdad">بغداد</option>
                 <option value="erbil">أربيل</option>
-                <option value="anbar">الأنبار</option>
                 <option value="basra">البصرة</option>
-                <option value="diwaniya">الديوانية</option>
-                <option value="sulaymaniyah">السليمانية</option>
-                <option value="muthanna">المثنى</option>
                 <option value="najaf">النجف</option>
-                <option value="babil">بابل</option>
-                <option value="duhok">دهوك</option>
-                <option value="diyala">ديالى</option>
-                <option value="dhi_qar">ذي قار</option>
-                <option value="salah_al_din">صلاح الدين</option>
-                <option value="karbala">كربلاء</option>
-                <option value="kirkuk">كركوك</option>
-                <option value="maysan">ميسان</option>
-                <option value="nineveh">نينوى</option>
-                <option value="wasit">واسط</option>
-            </select>
-</div>
+                </select>
+        </div>
 
         <button type="submit" class="search-btn">
             <i class="fas fa-search"></i> ابحث الآن
         </button>
     </form>
 </section>
-
-<script>
-function handleHeroSearch(event) {
-    event.preventDefault(); // يمنع الصفحة من التحديث المفاجئ
-    
-    const spec = document.getElementById('search-specialty').value;
-    const city = document.getElementById('search-city').value;
-    
-    // التوجيه إلى صفحة الأطباء وإرسال الفلاتر في الرابط
-    window.location.href = `/doctors/index.html?spec=${spec}&city=${city}`;
-}
-</script>
 
 <main class="clinical-grid">
     <div class="grid-row">
@@ -150,8 +114,8 @@ function handleHeroSearch(event) {
             <span>أمراض القلب والأوعية</span>
         </div>
         <div id="drop1" class="mega-dropdown">
-            <div class="drop-section"><a href="#" class="dynamic-link">الأمراض الشائعة</a></div>
-            <div class="drop-section"><a href="#">أطباء الاختصاص</a></div>
+            <div class="drop-section"><a href="#" class="disease-link">الأمراض الشائعة</a></div>
+            <div class="drop-section"><a href="#" class="doctor-link">أطباء الاختصاص</a></div>
         </div>
     </div>
 
@@ -173,8 +137,8 @@ function handleHeroSearch(event) {
             <span>النسائية والتوليد</span>
         </div>
         <div id="drop2" class="mega-dropdown">
-            <div class="drop-section"><a href="#" class="dynamic-link">الأمراض الشائعة</a></div>
-            <div class="drop-section"><a href="#">أطباء الاختصاص</a></div>
+            <div class="drop-section"><a href="#" class="disease-link">الأمراض الشائعة</a></div>
+            <div class="drop-section"><a href="#" class="doctor-link">أطباء الاختصاص</a></div>
         </div>
     </div>
 
@@ -196,8 +160,8 @@ function handleHeroSearch(event) {
             <span>أمراض الدم والمناعة</span>
         </div>
         <div id="drop3" class="mega-dropdown">
-            <div class="drop-section"><a href="#" class="dynamic-link">الأمراض الشائعة</a></div>
-            <div class="drop-section"><a href="#">أطباء الاختصاص</a></div>
+            <div class="drop-section"><a href="#" class="disease-link">الأمراض الشائعة</a></div>
+            <div class="drop-section"><a href="#" class="doctor-link">أطباء الاختصاص</a></div>
         </div>
     </div>
 
@@ -219,51 +183,58 @@ function handleHeroSearch(event) {
             <span>الذكورة والعقم</span>
         </div>
         <div id="drop4" class="mega-dropdown">
-            <div class="drop-section"><a href="#" class="dynamic-link">الأمراض الشائعة</a></div>
-            <div class="drop-section"><a href="#">أطباء الاختصاص</a></div>
+            <div class="drop-section"><a href="#" class="disease-link">الأمراض الشائعة</a></div>
+            <div class="drop-section"><a href="#" class="doctor-link">أطباء الاختصاص</a></div>
         </div>
     </div>
 </main>
 
 <script>
-    // Homepage Specific Scripts
-    document.getElementById('search-form').addEventListener('submit', function(e) {
-        e.preventDefault();
-        const specialty = document.getElementById('search-specialty').value;
+    // برمجة شريط البحث
+    function handleHeroSearch(event) {
+        event.preventDefault(); 
+        const spec = document.getElementById('search-specialty').value;
         const city = document.getElementById('search-city').value;
-        const docName = document.getElementById('search-name').value;
-        window.location.href = '/search-results/';
-    });
+        window.location.href = `/doctors/index.html?spec=${spec}&city=${city}`;
+    }
 
-    // Translation Map for Professional Folder Names
+    // خريطة التخصصات (لربط الأمراض والأطباء)
     const categoryMap = {
         'neuro': 'neurology',
         'ent': 'ent',
         'resp': 'pulmonology',
         'cardio': 'cardiology',
-        // تم تعديل هذا السطر ليفتح المسار الصحيح عند الضغط على مربع السكري
         'diabetes': 'diabetes-endocrinology', 
         'gastro': 'gastroenterology',
         'renal': 'nephrology',
-        'women': 'gynecology',
+        'women': 'obstetrics_gynecology',
         'paeds': 'pediatrics',
         'derm': 'dermatology',
-        'msk': 'msk',
+        'msk': 'orthopedics_rheumatology',
         'cancer': 'blood-immune',
         'eyes': 'eyes',
         'mental': 'mental-health',
         'healthy-living': 'healthy-living',
-        'mens-health': 'mens-health'
+        'mens-health': 'andrology_infertility'
     };
 
+    // برمجة القوائم المنسدلة (Mega Dropdown)
     function toggleDrop(dropId, colorClass) {
         const drop = document.getElementById(dropId);
         const tile = document.querySelector('.' + colorClass);
         const bgColor = window.getComputedStyle(tile).backgroundColor;
-        const link = drop.querySelector('.dynamic-link');
         
-        // This generates the clean folder link based on the map above
-        link.href = '/' + categoryMap[colorClass] + '/';
+        // استهداف روابط الأمراض والأطباء
+        const diseaseLink = drop.querySelector('.disease-link');
+        const doctorLink = drop.querySelector('.doctor-link');
+        
+        const specialtyID = categoryMap[colorClass];
+
+        // 1. رابط الأمراض يأخذنا إلى المجلد (مثلاً /neurology/)
+        diseaseLink.href = '/' + specialtyID + '/';
+        
+        // 2. رابط الأطباء يأخذنا إلى صفحة الأطباء مع الفلتر (مثلاً /doctors/index.html?spec=neurology)
+        doctorLink.href = '/doctors/index.html?spec=' + specialtyID;
         
         const gridRow = tile.closest('.grid-row');
         const tiles = Array.from(gridRow.children).filter(c => c.classList.contains('tile'));
