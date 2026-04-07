@@ -7,29 +7,44 @@ permalink: /topic/index.html
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <style>
-    /* تحسين مظهر المسار */
     .breadcrumb { display: flex; align-items: center; gap: 12px; margin-bottom: 25px; flex-wrap: wrap; color: #64748b; font-size: 0.9rem; }
     .breadcrumb a { color: #005eb8; text-decoration: none; font-weight: bold; }
     .breadcrumb i { font-size: 0.7rem; color: #cbd5e0; }
 
-    /* تنسيق الكارت */
     .article-card { background: white; border-radius: 20px; padding: 40px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
     .article-title { color: #003087; font-size: 2.2rem; font-weight: 900; margin-bottom: 20px; line-height: 1.3; }
     .loading-spinner { text-align: center; padding: 100px; }
 
     /* =========================================
-       تنسيقات قسم المراجع الجديد (Accordion)
+       تنسيقات المراجع (تم حل مشكلة النقرة هنا)
        ========================================= */
-    .references-wrapper { margin-top: 40px; background: #f8fafc; border-radius: 12px; border: 1px solid #e2e8f0; overflow: hidden; }
-    .references-details summary { padding: 15px 20px; font-weight: bold; color: #003087; cursor: pointer; list-style: none; display: flex; justify-content: space-between; align-items: center; font-size: 1.05rem; }
-    .references-details summary::-webkit-details-marker { display: none; } /* إخفاء سهم المتصفح الافتراضي */
-    .references-details summary i { transition: transform 0.3s ease; color: #005eb8; }
+    .references-wrapper { margin-top: 40px; background: #f8fafc; border-radius: 12px; border: 1px solid #e2e8f0; overflow: hidden; position: relative; z-index: 10; transition: border-color 0.2s; }
+    .references-wrapper:hover { border-color: #005eb8; }
     
-    /* حركة دوران علامة الزائد عند الفتح */
-    .references-details[open] summary i { transform: rotate(45deg); color: #dc2626; } 
+    .references-details summary { 
+        padding: 15px 20px; 
+        font-weight: bold; 
+        color: #003087; 
+        cursor: pointer; 
+        list-style: none; 
+        display: block; /* الحل الجذري لمشكلة سفاري */
+        position: relative; 
+        font-size: 1.05rem; 
+        outline: none;
+    }
+    .references-details summary::-webkit-details-marker { display: none; }
+    
+    .references-details summary i { 
+        position: absolute; 
+        left: 20px; /* تثبيت الزائد على أقصى اليسار */
+        top: 50%;
+        transform: translateY(-50%);
+        transition: transform 0.3s ease; 
+        color: #005eb8; 
+    }
+    .references-details[open] summary i { transform: translateY(-50%) rotate(45deg); color: #dc2626; } 
     
     .references-content { padding: 0 20px 20px 20px; font-size: 0.9rem; color: #64748b; line-height: 1.6; border-top: 1px solid #e2e8f0; margin-top: 10px; padding-top: 15px; }
-    /* جعل النصوص باللغة الإنجليزية من اليسار لليمين */
     .references-content ul, .references-content ol { margin: 0; padding-left: 20px; direction: ltr; text-align: left; }
     .references-content li { margin-bottom: 8px; word-break: break-word; }
     .references-content a { color: #005eb8; text-decoration: none; }
@@ -52,12 +67,9 @@ permalink: /topic/index.html
 </div>
 
 <div id="articleState" style="display: none;">
-    
     <nav class="breadcrumb">
-        <a href="/">الرئيسية</a> 
-        <i class="fas fa-chevron-left"></i> 
-        <a id="bcCategoryLink" href="/doctors/index.html">الموسوعة الطبية</a> 
-        <i class="fas fa-chevron-left"></i> 
+        <a href="/">الرئيسية</a> <i class="fas fa-chevron-left"></i> 
+        <a id="bcCategoryLink" href="/doctors/index.html">الموسوعة الطبية</a> <i class="fas fa-chevron-left"></i> 
         <span id="bcTitle" style="color: #1e293b; font-weight: 600;"></span>
     </nav>
 
@@ -70,18 +82,17 @@ permalink: /topic/index.html
 
         <div class="medical-disclaimer">
             <i class="fas fa-circle-info"></i>
-            <div>
-                <strong>ملاحظة مهمة:</strong> هاي المعلومات مخصصة للتوعية والتثقيف الصحي فقط، وما تعوض أبد عن استشارة الطبيب المختص أو الفحص السريري.
-            </div>
+            <div><strong>ملاحظة مهمة:</strong> هاي المعلومات مخصصة للتوعية والتثقيف الصحي فقط، وما تعوض أبد عن استشارة الطبيب المختص أو الفحص السريري.</div>
         </div>
 
         <div id="mainContent" class="article-content"></div>
 
-        <div id="referencesWrapper" class="references-wrapper>
+        <div id="referencesWrapper" class="references-wrapper">
             <details class="references-details">
                 <summary>المصادر والمراجع الطبية <i class="fas fa-plus"></i></summary>
                 <div id="referencesContent" class="references-content">
-                    </div>
+                    لم يتم إضافة نص المراجع في جدول Supabase بعد. يرجى إضافتها في الخلية الخاصة بالمرض.
+                </div>
             </details>
         </div>
 
@@ -123,10 +134,9 @@ permalink: /topic/index.html
             document.getElementById('mainTitle').innerText = data.title;
             document.getElementById('mainContent').innerHTML = data.content;
 
-            // التحقق من وجود مراجع وعرضها
+            // جلب المراجع من قاعدة البيانات (إن وجدت)
             if (data.references && data.references.trim() !== "") {
                 document.getElementById('referencesContent').innerHTML = data.references;
-                document.getElementById('referencesWrapper').style.display = 'block';
             }
 
             if(data.category_id) {
