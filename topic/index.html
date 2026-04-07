@@ -7,21 +7,37 @@ permalink: /topic/index.html
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <style>
-    /* تحسين مظهر المسار لضمان عدم التصاق الكلمات */
+    /* تحسين مظهر المسار */
     .breadcrumb { display: flex; align-items: center; gap: 12px; margin-bottom: 25px; flex-wrap: wrap; color: #64748b; font-size: 0.9rem; }
     .breadcrumb a { color: #005eb8; text-decoration: none; font-weight: bold; }
     .breadcrumb i { font-size: 0.7rem; color: #cbd5e0; }
 
-    /* ضمان تباعد المحتوى وتنسيقه داخل الكارت */
+    /* تنسيق الكارت */
     .article-card { background: white; border-radius: 20px; padding: 40px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
     .article-title { color: #003087; font-size: 2.2rem; font-weight: 900; margin-bottom: 20px; line-height: 1.3; }
     .loading-spinner { text-align: center; padding: 100px; }
 
-    /* تنسيقات إضافية لضمان تجربة موبايل مثالية */
+    /* =========================================
+       تنسيقات قسم المراجع الجديد (Accordion)
+       ========================================= */
+    .references-wrapper { margin-top: 40px; background: #f8fafc; border-radius: 12px; border: 1px solid #e2e8f0; overflow: hidden; }
+    .references-details summary { padding: 15px 20px; font-weight: bold; color: #003087; cursor: pointer; list-style: none; display: flex; justify-content: space-between; align-items: center; font-size: 1.05rem; }
+    .references-details summary::-webkit-details-marker { display: none; } /* إخفاء سهم المتصفح الافتراضي */
+    .references-details summary i { transition: transform 0.3s ease; color: #005eb8; }
+    
+    /* حركة دوران علامة الزائد عند الفتح */
+    .references-details[open] summary i { transform: rotate(45deg); color: #dc2626; } 
+    
+    .references-content { padding: 0 20px 20px 20px; font-size: 0.9rem; color: #64748b; line-height: 1.6; border-top: 1px solid #e2e8f0; margin-top: 10px; padding-top: 15px; }
+    /* جعل النصوص باللغة الإنجليزية من اليسار لليمين */
+    .references-content ul, .references-content ol { margin: 0; padding-left: 20px; direction: ltr; text-align: left; }
+    .references-content li { margin-bottom: 8px; word-break: break-word; }
+    .references-content a { color: #005eb8; text-decoration: none; }
+    .references-content a:hover { text-decoration: underline; }
+
     @media (max-width: 768px) {
         .article-card { padding: 25px; }
         .article-title { font-size: 1.7rem; }
-        .breadcrumb { gap: 8px; }
     }
 </style>
 
@@ -61,6 +77,14 @@ permalink: /topic/index.html
 
         <div id="mainContent" class="article-content"></div>
 
+        <div id="referencesWrapper" class="references-wrapper" style="display: none;">
+            <details class="references-details">
+                <summary>المصادر والمراجع الطبية <i class="fas fa-plus"></i></summary>
+                <div id="referencesContent" class="references-content">
+                    </div>
+            </details>
+        </div>
+
         <div class="cta-box">
             <h3>تحتاج متابعة أو استشارة طبية؟</h3>
             <p>لا تخلي المرض يأثر على يومك وعملك وحياتك. احجز موعد هسه وي أفضل الأطباء للفحص والتشخيص الصحيح.</p>
@@ -74,12 +98,10 @@ permalink: /topic/index.html
     const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNidHNmamNia3V2aGp5bHZ0ZXp2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzU0MTkzNDksImV4cCI6MjA5MDk5NTM0OX0.GqsPOGcntVxKtLr56iG9IHfwqlPtdAtNVRGd2ztGkrU';
     const supabaseClient = supabase.createClient(supabaseUrl, supabaseKey);
 
-    // 💡 خريطة الأقسام: هنا نترجم الكود الإنجليزي إلى اسم عربي ورابط مخصص
     const categoryMap = {
         'neurology': { name: 'أمراض المخ والأعصاب', url: '/neurology/' },
         'endocrinology': { name: 'الغدد الصماء والسكري', url: '/endocrinology/' },
-        'cardiology': { name: 'أمراض القلب', url: '/cardiology/' },
-        // يمكنك إضافة بقية الأقسام هنا مستقبلاً بنفس الطريقة...
+        'cardiology': { name: 'أمراض القلب', url: '/cardiology/' }
     };
 
     async function loadArticle() {
@@ -96,34 +118,31 @@ permalink: /topic/index.html
             const { data, error } = await supabaseClient.from('topics').select('*').eq('slug', slug).single();
             if (error || !data) throw error;
 
-            // تحديث العناوين في الصفحة
             document.title = data.title + " | كشفيّـة";
             document.getElementById('bcTitle').innerText = data.title;
             document.getElementById('mainTitle').innerText = data.title;
-            
-            // وضع المحتوى النصي
             document.getElementById('mainContent').innerHTML = data.content;
 
-            // تخصيص الأزرار والروابط بناءً على القسم
-            if(data.category_id) {
-                // 1. زر الحجز يذهب دائماً لصفحة الأطباء ويفلتر حسب التخصص
-                document.getElementById('ctaBtn').href = `/doctors/index.html?spec=${data.category_id}`;
+            // التحقق من وجود مراجع وعرضها
+            if (data.references && data.references.trim() !== "") {
+                document.getElementById('referencesContent').innerHTML = data.references;
+                document.getElementById('referencesWrapper').style.display = 'block';
+            }
 
-                // 2. تحديث مسار التنقل (Breadcrumb) ليعود لصفحة القسم
+            if(data.category_id) {
+                document.getElementById('ctaBtn').href = `/doctors/index.html?spec=${data.category_id}`;
                 const catInfo = categoryMap[data.category_id];
                 if(catInfo) {
                     const bcLink = document.getElementById('bcCategoryLink');
-                    bcLink.innerText = catInfo.name; // يكتب: أمراض المخ والأعصاب
-                    bcLink.href = catInfo.url;       // الرابط: /neurology/
+                    bcLink.innerText = catInfo.name;
+                    bcLink.href = catInfo.url;
                 }
             }
 
-            // إظهار المحتوى النهائي
             document.getElementById('loading').style.display = 'none';
             document.getElementById('articleState').style.display = 'block';
 
         } catch (e) {
-            console.error("Supabase Error:", e);
             document.getElementById('loading').style.display = 'none';
             document.getElementById('errorState').style.display = 'block';
         }
