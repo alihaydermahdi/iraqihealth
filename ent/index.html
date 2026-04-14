@@ -3,24 +3,28 @@ layout: default
 title: أمراض الأنف والأذن والحنجرة
 ---
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
 <style>
-    /* Grid specific styling */
-    .page-header { max-width: 1300px; margin: 25px auto 30px auto; padding: 0 20px; display: flex; align-items: center; justify-content: flex-start; gap: 15px; }
-    .back-btn { display: inline-flex; align-items: center; gap: 8px; background-color: var(--nhs-white); color: var(--nhs-text); padding: 8px 16px; border-radius: 6px; text-decoration: none; font-size: 0.95rem; font-weight: 700; border: 1px solid #d1d5d8; transition: all 0.2s; box-shadow: 0 1px 2px rgba(0,0,0,0.05); }
-    .back-btn:hover { background-color: var(--nhs-blue); color: var(--nhs-white); border-color: var(--nhs-blue); }
-    .page-header h1 { margin: 0; font-size: 1.6rem; color: var(--nhs-blue); font-weight: 800; line-height: 1.2; }
-    
+    /* التصميم الأصلي الموحد */
+    .page-header { max-width: 1300px; margin: 25px auto 30px auto; padding: 0 20px; display: flex; align-items: center; justify-content: flex-end; gap: 20px; }
+    .back-btn { display: inline-flex; align-items: center; gap: 8px; background-color: #ffffff; color: #1e293b; padding: 8px 16px; border-radius: 6px; text-decoration: none; font-size: 0.95rem; font-weight: 700; border: 1px solid #d1d5d8; transition: all 0.2s; box-shadow: 0 1px 2px rgba(0,0,0,0.05); }
+    .back-btn:hover { background-color: #005eb8; color: #ffffff; border-color: #005eb8; }
+    .page-header h1 { margin: 0; font-size: 1.6rem; color: #005eb8; font-weight: 800; line-height: 1.2; }
+
     .disease-grid { max-width: 1300px; margin: 0 auto 50px auto; padding: 0 20px; display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 15px; }
-    .disease-card { background-color: var(--nhs-white); border: 1px solid #e2e8f0; border-radius: 8px; padding: 20px 15px; text-align: center; color: var(--nhs-text); text-decoration: none; font-weight: 700; font-size: 1.05rem; transition: all 0.2s ease; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 90px; box-shadow: 0 2px 4px rgba(0,0,0,0.04); gap: 8px; }
-    .disease-card:hover { background-color: var(--nhs-blue); color: var(--nhs-white); border-color: var(--nhs-blue); transform: translateY(-3px); box-shadow: 0 6px 12px rgba(0,0,0,0.15); }
-    .disease-card span { font-size: 0.8rem; color: #718096; font-weight: 600; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
-    .disease-card:hover span { color: #e2e8f0; }
     
-    @media (max-width: 768px) {
+    .disease-card { background-color: #ffffff; border: 1px solid #e2e8f0; border-radius: 8px; padding: 20px 15px; text-align: center; color: #1e293b; text-decoration: none; font-weight: 700; font-size: 1.05rem; transition: all 0.2s ease; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 90px; box-shadow: 0 2px 4px rgba(0,0,0,0.04); gap: 8px; }
+    .disease-card:hover { background-color: #005eb8; color: #ffffff; border-color: #005eb8; transform: translateY(-3px); box-shadow: 0 6px 12px rgba(0,0,0,0.15); }
+    
+    .disease-card span { font-size: 0.8rem; color: #718096; font-weight: 600; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; direction: ltr; }
+    .disease-card:hover span { color: #e2e8f0; }
+
+    .loading-state { grid-column: 1/-1; text-align: center; padding: 50px; color: #005eb8; }
+
+    @media (max-width: 768px) { 
         .page-header { flex-direction: column; align-items: center; gap: 12px; }
-        .page-header h1 { font-size: 1.6rem; text-align: center; }
-        .disease-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
-        .disease-card { min-height: 80px; font-size: 0.9rem; padding: 15px 5px; }
+        .disease-grid { grid-template-columns: repeat(2, 1fr); }
     }
 </style>
 
@@ -29,33 +33,54 @@ title: أمراض الأنف والأذن والحنجرة
     <h1>أمراض الأنف والأذن والحنجرة</h1>
 </div>
 
-<div class="disease-grid">
-    <a href="/ent/earache/" class="disease-card">ألم ووجع الأذن <span>(Earache)</span></a>
-    <a href="/ent/otitis-media/" class="disease-card">التهاب الأذن الوسطى <span>(Otitis Media)</span></a>
-    <a href="/ent/otitis-externa/" class="disease-card">التهاب الأذن الخارجية <span>(Otitis Externa)</span></a>
-    <a href="/ent/earwax/" class="disease-card">تراكم الشمع <span>(Earwax Build-up)</span></a>
-    <a href="/ent/fungal-ear-infection/" class="disease-card">فطريات الأذن <span>(Otomycosis)</span></a>
-    <a href="/ent/perforated-eardrum/" class="disease-card">ثقب طبلة الأذن <span>(Perforated Eardrum)</span></a>
-    <a href="/ent/hearing-problems/" class="disease-card">ضعف السمع <span>(Hearing Loss)</span></a>
-    <a href="/ent/tinnitus/" class="disease-card">طنين الأذن (الوشة) <span>(Tinnitus)</span></a>
-    <a href="/ent/glue-ear/" class="disease-card">الأذن الصمغية <span>(Glue Ear)</span></a>
-    <a href="/ent/eustachian-tube-dysfunction/" class="disease-card">انسداد قناة استاكيوس <span>(Eustachian Tube Dysfunction)</span></a>
-    <a href="/ent/vestibular-neuritis/" class="disease-card">دوار الأذن الداخلية <span>(Labyrinthitis)</span></a>
-    <a href="/ent/menieres-disease/" class="disease-card">مرض منيير <span>(Meniere's Disease)</span></a>
-    <a href="/ent/cholesteatoma/" class="disease-card">كيس الأذن <span>(Cholesteatoma)</span></a>
+<main class="disease-grid" id="diseasesContainer">
+    <div class="loading-state">
+        <i class="fas fa-circle-notch fa-spin fa-2x"></i>
+        <p>جاري جلب قائمة الأمراض...</p>
+    </div>
+</main>
 
-    <a href="/ent/nasal-congestion/" class="disease-card">احتقان الأنف <span>(Nasal Congestion)</span></a>
-    <a href="/ent/sinusitis/" class="disease-card">التهاب الجيوب الأنفية <span>(Sinusitis)</span></a>
-    <a href="/ent/hay-fever/" class="disease-card">حساسية الربيع <span>(Hay Fever)</span></a>
-    <a href="/ent/nosebleed/" class="disease-card">نزيف الأنف (الرعاف) <span>(Nosebleeds)</span></a>
-    <a href="/ent/nasal-polyps/" class="disease-card">لحميات الأنف <span>(Nasal Polyps)</span></a>
-    <a href="/ent/smell-taste-disorders/" class="disease-card">فقدان الشم والتذوق <span>(Smell & Taste Disorders)</span></a>
+<script>
+    const supabaseUrl = 'https://sbtsfjcbkuvhjylvtezv.supabase.co';
+    const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNidHNmamNia3V2aGp5bHZ0ZXp2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzU0MTkzNDksImV4cCI6MjA5MDk5NTM0OX0.GqsPOGcntVxKtLr56iG9IHfwqlPtdAtNVRGd2ztGkrU';
+    const supabaseClient = supabase.createClient(supabaseUrl, supabaseKey);
 
-    <a href="/ent/sore-throat/" class="disease-card">وجع البلاعيم <span>(Sore Throat)</span></a>
-    <a href="/ent/tonsillitis-tonsillectomy/" class="disease-card">التهاب اللوزتين <span>(Tonsillitis)</span></a>
-    <a href="/ent/tonsil-stones/" class="disease-card">حصى اللوزتين <span>(Tonsil Stones)</span></a>
-    <a href="/ent/laryngitis/" class="disease-card">التهاب الحنجرة <span>(Laryngitis)</span></a>
-    <a href="/ent/globus-sensation/" class="disease-card">غصة البلعوم <span>(Globus Sensation)</span></a>
-    <a href="/ent/snoring/" class="disease-card">الشخير وانقطاع النفس <span>(Snoring / Sleep Apnea)</span></a>
-    <a href="/ent/glandular-fever/" class="disease-card">الحمى الغدية <span>(Glandular Fever)</span></a>
-</div>
+    async function loadENTDiseases() {
+        try {
+            // نطلب من قاعدة البيانات فقط المواضيع التابعة لقسم الأنف والأذن والحنجرة (ent)
+            const { data, error } = await supabaseClient
+                .from('topics')
+                .select('slug, title, english_name') 
+                .eq('category_id', 'ent'); // ⚠️ تأكد أن التصنيف في قاعدة البيانات هو 'ent'
+
+            if (error) throw error;
+
+            const container = document.getElementById('diseasesContainer');
+            container.innerHTML = ''; // مسح علامة التحميل
+
+            if (data.length === 0) {
+                container.innerHTML = '<p style="grid-column: 1/-1; text-align:center;">لم يتم إضافة مواضيع في هذا القسم بعد.</p>';
+                return;
+            }
+
+            // رسم الكروت بروابطها الصحيحة الجديدة
+            data.forEach(disease => {
+                // إذا لم يكن هناك اسم إنجليزي في قاعدة البيانات، لا تطبعه
+                const engSpan = disease.english_name ? `<span>(${disease.english_name})</span>` : '';
+                
+                container.innerHTML += `
+                    <a href="/topic/?id=${disease.slug}" class="disease-card">
+                        ${disease.title}
+                        ${engSpan}
+                    </a>
+                `;
+            });
+
+        } catch (e) {
+            console.error(e);
+            document.getElementById('diseasesContainer').innerHTML = '<p style="grid-column: 1/-1; text-align:center; color: red;">حدث خطأ في جلب البيانات.</p>';
+        }
+    }
+
+    window.onload = loadENTDiseases;
+</script>
