@@ -3,9 +3,9 @@ layout: default
 title: أمراض القلب والأوعية الدموية
 ---
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
 <style>
-    /* --- Specific styling for the Category Page --- */
-    
     /* Page Header */
     .page-header { 
         max-width: 1300px; 
@@ -90,10 +90,18 @@ title: أمراض القلب والأوعية الدموية
         color: #718096;
         font-weight: 600;
         font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        direction: ltr;
     }
     
     .disease-card:hover span {
         color: #e2e8f0;
+    }
+
+    .loading-state { 
+        grid-column: 1/-1; 
+        text-align: center; 
+        padding: 50px; 
+        color: #005eb8; 
     }
 
     /* Mobile adjustments */
@@ -114,35 +122,53 @@ title: أمراض القلب والأوعية الدموية
     <h1>أمراض القلب والأوعية الدموية</h1>
 </div>
 
-<main class="disease-grid">
-    <a href="/cardiology/low-blood-pressure/" class="disease-card">هبوط ضغط الدم <span>(Hypotension)</span></a>
-    <a href="/cardiology/high-blood-pressure/" class="disease-card">ارتفاع ضغط الدم <span>(Hypertension)</span></a>
-    <a href="/cardiology/pregnancy-high-blood-pressure/" class="disease-card">ضغط وتسمم الحمل <span>(Pre-eclampsia)</span></a>
-    <a href="/cardiology/high-cholesterol/" class="disease-card">ارتفاع الكوليسترول <span>(Hypercholesterolemia)</span></a>
-
-    <a href="/cardiology/aortic-coarctation/" class="disease-card">تضيق الشريان الأبهر <span>(Aortic Coarctation)</span></a>
-    <a href="/cardiology/abdominal-aortic-aneurysm/" class="disease-card">تمدد الأبهر البطني <span>(AAA)</span></a>
-    <a href="/cardiology/aortic-dissection/" class="disease-card">تسلخ الشريان الأبهر <span>(Aortic Dissection)</span></a>
-    <a href="/cardiology/temporal-arteritis/" class="disease-card">التهاب الشريان الصدغي <span>(Giant Cell Arteritis)</span></a>
-    <a href="/cardiology/peripheral-arterial-disease/" class="disease-card">تصلب شرايين الأطراف <span>(PAD)</span></a>
-    <a href="/cardiology/raynauds-phenomenon/" class="disease-card">ظاهرة رينود <span>(Raynaud's Phenomenon)</span></a>
-    <a href="/cardiology/deep-vein-thrombosis/" class="disease-card">جلطة الساق <span>(DVT)</span></a>
-    <a href="/cardiology/superficial-thrombophlebitis/" class="disease-card">التهاب الوريد السطحي <span>(Thrombophlebitis)</span></a>
-    <a href="/cardiology/varicose-veins/" class="disease-card">دوالي الساقين <span>(Varicose Veins)</span></a>
-    <a href="/cardiology/varicose-eczema/" class="disease-card">إكزيما الدوالي <span>(Varicose Eczema)</span></a>
-    <a href="/cardiology/venous-leg-ulcers/" class="disease-card">قرحة الساق الوريدية <span>(Venous Leg Ulcers)</span></a>
-
-    <a href="/cardiology/heart-attack-acs/" class="disease-card">الجلطة القلبية <span>(Heart Attack / ACS)</span></a>
-    <a href="/cardiology/angina/" class="disease-card">الذبحة الصدرية <span>(Angina)</span></a>
-    <a href="/cardiology/heart-failure/" class="disease-card">عجز القلب <span>(Heart Failure)</span></a>
-    <a href="/cardiology/aortic-valve-disease/" class="disease-card">أمراض الصمام الأبهر <span>(Aortic Valve Disease)</span></a>
-    <a href="/cardiology/mitral-valve-disease/" class="disease-card">أمراض الصمام الميترالي <span>(Mitral Valve Disease)</span></a>
-    <a href="/cardiology/dilated-cardiomyopathy/" class="disease-card">اعتلال القلب التوسعي <span>(Dilated Cardiomyopathy)</span></a>
-    <a href="/cardiology/hypertrophic-cardiomyopathy/" class="disease-card">اعتلال القلب التضخمي <span>(HCM)</span></a>
-    
-    <a href="/cardiology/infective-endocarditis/" class="disease-card">التهاب شغاف القلب <span>(Endocarditis)</span></a>
-    <a href="/cardiology/myocarditis/" class="disease-card">التهاب عضلة القلب <span>(Myocarditis)</span></a>
-    <a href="/cardiology/pericarditis/" class="disease-card">التهاب غشاء القلب <span>(Pericarditis)</span></a>
-    <a href="/cardiology/atrial-fibrillation/" class="disease-card">الرجفان الأذيني <span>(Atrial Fibrillation)</span></a>
-    <a href="/cardiology/palpitations-arrhythmias/" class="disease-card">الخفقان واضطراب النبض <span>(Arrhythmias)</span></a>
+<main class="disease-grid" id="diseasesContainer">
+    <div class="loading-state">
+        <i class="fas fa-circle-notch fa-spin fa-2x"></i>
+        <p>جاري جلب قائمة الأمراض...</p>
+    </div>
 </main>
+
+<script>
+    const supabaseUrl = 'https://sbtsfjcbkuvhjylvtezv.supabase.co';
+    const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNidHNmamNia3V2aGp5bHZ0ZXp2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzU0MTkzNDksImV4cCI6MjA5MDk5NTM0OX0.GqsPOGcntVxKtLr56iG9IHfwqlPtdAtNVRGd2ztGkrU';
+    const supabaseClient = supabase.createClient(supabaseUrl, supabaseKey);
+
+    async function loadCardiologyDiseases() {
+        try {
+            // جلب مواضيع أمراض القلب وترتيبها أبجدياً
+            const { data, error } = await supabaseClient
+                .from('topics')
+                .select('slug, title, english_name') 
+                .eq('category_id', 'cardiology')
+                .order('title', { ascending: true });
+
+            if (error) throw error;
+
+            const container = document.getElementById('diseasesContainer');
+            container.innerHTML = ''; // إزالة علامة التحميل
+
+            if (data.length === 0) {
+                container.innerHTML = '<p style="grid-column: 1/-1; text-align:center;">لم يتم إضافة مواضيع في هذا القسم بعد.</p>';
+                return;
+            }
+
+            data.forEach(disease => {
+                const engSpan = disease.english_name ? `<span>(${disease.english_name})</span>` : '';
+                
+                container.innerHTML += `
+                    <a href="/topic/?id=${disease.slug}" class="disease-card">
+                        ${disease.title}
+                        ${engSpan}
+                    </a>
+                `;
+            });
+
+        } catch (e) {
+            console.error(e);
+            document.getElementById('diseasesContainer').innerHTML = '<p style="grid-column: 1/-1; text-align:center; color: red;">حدث خطأ في جلب البيانات.</p>';
+        }
+    }
+
+    window.onload = loadCardiologyDiseases;
+</script>
