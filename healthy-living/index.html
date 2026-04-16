@@ -1,29 +1,120 @@
 ---
 layout: default
-title: "نمط الحياة الصحي | كشفيّـة"
+title: نمط الحياة الصحي
 permalink: /healthy-living/
 ---
 
-<style>
-    .page-header { max-width: 1300px; margin: 25px auto 30px auto; padding: 0 20px; display: flex; align-items: center; justify-content: flex-end; gap: 20px; }
-    .back-btn { display: inline-flex; align-items: center; gap: 8px; background-color: var(--nhs-white); color: var(--nhs-text); padding: 8px 16px; border-radius: 6px; text-decoration: none; font-size: 0.95rem; font-weight: 700; border: 1px solid #d1d5d8; transition: all 0.2s; box-shadow: 0 1px 2px rgba(0,0,0,0.05); }
-    .back-btn:hover { background-color: var(--nhs-blue); color: var(--nhs-white); border-color: var(--nhs-blue); }
-    .page-header h1 { margin: 0; font-size: 1.6rem; color: var(--nhs-blue); font-weight: 800; line-height: 1.2; }
-    
-    /* Grid System */
-    .disease-grid { max-width: 1300px; margin: 0 auto 50px auto; padding: 0 20px; display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 15px; }
-    .disease-card { background-color: var(--nhs-white); border: 1px solid #e2e8f0; border-radius: 8px; padding: 20px 15px; text-align: center; color: var(--nhs-text); text-decoration: none; font-weight: 700; font-size: 1.05rem; transition: all 0.2s ease; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 90px; box-shadow: 0 2px 4px rgba(0,0,0,0.04); gap: 8px; }
-    .disease-card:hover { background-color: var(--nhs-blue); color: var(--nhs-white); border-color: var(--nhs-blue); transform: translateY(-3px); box-shadow: 0 6px 12px rgba(0,0,0,0.15); }
-    .disease-card span { font-size: 0.8rem; color: #718096; font-weight: 600; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
-    .disease-card:hover span { color: #e2e8f0; }
-    
-    /* Section Dividers */
-    .grid-divider { grid-column: 1 / -1; margin-top: 30px; margin-bottom: 15px; border-bottom: 2px solid #e2e8f0; padding-bottom: 10px; }
-    .grid-divider h3 { color: var(--nhs-dark-blue); margin: 0; font-size: 1.3rem; font-weight: 800; }
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
+<style>
+    /* Page Header */
+    .page-header { 
+        max-width: 1300px; 
+        margin: 25px auto 30px auto; 
+        padding: 0 20px; 
+        display: flex; 
+        align-items: center; 
+        justify-content: flex-end; 
+        gap: 20px; 
+    }
+
+    .back-btn { 
+        display: inline-flex; 
+        align-items: center; 
+        gap: 8px; 
+        background-color: #ffffff; 
+        color: #212b32; 
+        padding: 8px 16px; 
+        border-radius: 6px; 
+        text-decoration: none; 
+        font-size: 0.95rem; 
+        font-weight: 700; 
+        border: 1px solid #d1d5d8; 
+        transition: all 0.2s; 
+        box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+    }
+
+    .back-btn:hover { 
+        background-color: #005eb8; 
+        color: #ffffff; 
+        border-color: #005eb8; 
+    }
+
+    .page-header h1 { 
+        margin: 0; 
+        font-size: 1.6rem; 
+        color: #005eb8; 
+        font-weight: 800; 
+        line-height: 1.2;
+    }
+
+    /* Disease Grid */
+    .disease-grid { 
+        max-width: 1300px; 
+        margin: 0 auto 50px auto; 
+        padding: 0 20px; 
+        display: grid; 
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); 
+        gap: 15px; 
+    }
+    
+    .disease-card { 
+        background-color: #ffffff; 
+        border: 1px solid #e2e8f0; 
+        border-radius: 8px; 
+        padding: 20px 15px; 
+        text-align: center; 
+        color: #212b32; 
+        text-decoration: none; 
+        font-weight: 700; 
+        font-size: 1.05rem; 
+        transition: all 0.2s ease; 
+        display: flex; 
+        flex-direction: column;
+        align-items: center; 
+        justify-content: center; 
+        min-height: 90px; 
+        box-shadow: 0 2px 4px rgba(0,0,0,0.04); 
+        gap: 8px;
+    }
+    
+    .disease-card:hover { 
+        background-color: #005eb8; 
+        color: #ffffff; 
+        border-color: #005eb8; 
+        transform: translateY(-3px); 
+        box-shadow: 0 6px 12px rgba(0,0,0,0.15); 
+    }
+    
+    .disease-card span {
+        font-size: 0.8rem;
+        color: #718096;
+        font-weight: 600;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        direction: ltr;
+    }
+    
+    .disease-card:hover span {
+        color: #e2e8f0;
+    }
+
+    .loading-state { 
+        grid-column: 1/-1; 
+        text-align: center; 
+        padding: 50px; 
+        color: #005eb8; 
+    }
+
+    /* Mobile adjustments */
     @media (max-width: 768px) { 
-        .page-header { flex-direction: column; align-items: center; gap: 12px; } 
-        .disease-grid { grid-template-columns: repeat(2, 1fr); } 
+        .page-header { 
+            flex-direction: column; 
+            align-items: center;
+            gap: 12px; 
+        }
+        .disease-grid { 
+            grid-template-columns: repeat(2, 1fr); 
+        }
     }
 </style>
 
@@ -32,33 +123,53 @@ permalink: /healthy-living/
     <h1>نمط الحياة الصحي</h1>
 </div>
 
-<main class="disease-grid">
-    
-    <div class="grid-divider"><h3>التغذية والوزن</h3></div>
-    <a href="/healthy-living/healthy-eating/" class="disease-card">الأكل الصحي <span>(Healthy Eating)</span></a>
-    <a href="/healthy-living/weight-loss/" class="disease-card">تنزيل الوزن <span>(Weight Loss)</span></a>
-    <a href="/healthy-living/mediterranean-diet/" class="disease-card">حمية البحر المتوسط <span>(Mediterranean Diet)</span></a>
-    <a href="/healthy-living/vitamins-minerals/" class="disease-card">الفيتامينات والمعادن <span>(Vitamins)</span></a>
-    <a href="/healthy-living/food-labelling/" class="disease-card">فهم ملصقات الأطعمة <span>(Food Labels)</span></a>
-    <a href="/healthy-living/drinking-water/" class="disease-card">أهمية شرب الماء <span>(Drinking Water)</span></a>
-
-    <div class="grid-divider"><h3>اللياقة والنشاط البدني</h3></div>
-    <a href="/healthy-living/benefits-of-exercise/" class="disease-card">فوائد الرياضة <span>(Benefits of Exercise)</span></a>
-    <a href="/healthy-living/fitness-beginners/" class="disease-card">اللياقة للمبتدئين <span>(Fitness for Beginners)</span></a>
-    <a href="/healthy-living/walking-for-health/" class="disease-card">المشي للصحة <span>(Walking)</span></a>
-    <a href="/healthy-living/strength-training/" class="disease-card">تمارين القوة <span>(Strength Training)</span></a>
-
-    <div class="grid-divider"><h3>العادات ونمط الحياة</h3></div>
-    <a href="/healthy-living/smoking-cessation/" class="disease-card">الإقلأع عن التدخين <span>(Stop Smoking)</span></a>
-    <a href="/healthy-living/sleep-hygiene/" class="disease-card">عادات النوم الصحية <span>(Sleep Hygiene)</span></a>
-    <a href="/healthy-living/screen-time/" class="disease-card">تقليل وقت الشاشات <span>(Screen Time)</span></a>
-    <a href="/healthy-living/sun-safety/" class="disease-card">الوقاية من الشمس <span>(Sun Safety)</span></a>
-    <a href="/healthy-living/stress-management/" class="disease-card">إدارة التوتر <span>(Stress Management)</span></a>
-
-    <div class="grid-divider"><h3>الصحة العامة والوقاية</h3></div>
-    <a href="/healthy-living/cancer-screening/" class="disease-card">فحوصات السرطان <span>(Cancer Screening)</span></a>
-    <a href="/healthy-living/sexual-health/" class="disease-card">الصحة الجنسية <span>(Sexual Health)</span></a>
-    <a href="/healthy-living/travel-health/" class="disease-card">صحة السفر <span>(Travel Health)</span></a>
-    <a href="/healthy-living/vaccinations/" class="disease-card">اللقاحات للبالغين <span>(Vaccinations)</span></a>
-    <a href="/healthy-living/oral-health/" class="disease-card">صحة الفم والأسنان <span>(Oral Health)</span></a>
+<main class="disease-grid" id="diseasesContainer">
+    <div class="loading-state">
+        <i class="fas fa-circle-notch fa-spin fa-2x"></i>
+        <p>جاري جلب قائمة المواضيع...</p>
+    </div>
 </main>
+
+<script>
+    const supabaseUrl = 'https://sbtsfjcbkuvhjylvtezv.supabase.co';
+    const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNidHNmamNia3V2aGp5bHZ0ZXp2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzU0MTkzNDksImV4cCI6MjA5MDk5NTM0OX0.GqsPOGcntVxKtLr56iG9IHfwqlPtdAtNVRGd2ztGkrU';
+    const supabaseClient = supabase.createClient(supabaseUrl, supabaseKey);
+
+    async function loadHealthyLivingTopics() {
+        try {
+            // جلب مواضيع نمط الحياة الصحي وترتيبها أبجدياً
+            const { data, error } = await supabaseClient
+                .from('topics')
+                .select('slug, title, english_name') 
+                .eq('category_id', 'healthy-living')
+                .order('title', { ascending: true });
+
+            if (error) throw error;
+
+            const container = document.getElementById('diseasesContainer');
+            container.innerHTML = ''; // إزالة علامة التحميل
+
+            if (data.length === 0) {
+                container.innerHTML = '<p style="grid-column: 1/-1; text-align:center;">لم يتم إضافة مواضيع في هذا القسم بعد.</p>';
+                return;
+            }
+
+            data.forEach(topic => {
+                const engSpan = topic.english_name ? `<span>(${topic.english_name})</span>` : '';
+                
+                container.innerHTML += `
+                    <a href="/topic/?id=${topic.slug}" class="disease-card">
+                        ${topic.title}
+                        ${engSpan}
+                    </a>
+                `;
+            });
+
+        } catch (e) {
+            console.error(e);
+            document.getElementById('diseasesContainer').innerHTML = '<p style="grid-column: 1/-1; text-align:center; color: red;">حدث خطأ في جلب البيانات.</p>';
+        }
+    }
+
+    window.onload = loadHealthyLivingTopics;
+</script>
