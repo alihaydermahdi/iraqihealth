@@ -1,29 +1,30 @@
 ---
 layout: default
-title: "أمراض الدم والمناعة والحساسية | كشفيّـة"
-permalink: /blood-immune/
+title: أمراض الدم والمناعة والحساسية
 ---
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
 <style>
+    /* نفس التصميم الأصلي الموحد */
     .page-header { max-width: 1300px; margin: 25px auto 30px auto; padding: 0 20px; display: flex; align-items: center; justify-content: flex-end; gap: 20px; }
-    .back-btn { display: inline-flex; align-items: center; gap: 8px; background-color: var(--nhs-white); color: var(--nhs-text); padding: 8px 16px; border-radius: 6px; text-decoration: none; font-size: 0.95rem; font-weight: 700; border: 1px solid #d1d5d8; transition: all 0.2s; box-shadow: 0 1px 2px rgba(0,0,0,0.05); }
-    .back-btn:hover { background-color: var(--nhs-blue); color: var(--nhs-white); border-color: var(--nhs-blue); }
-    .page-header h1 { margin: 0; font-size: 1.6rem; color: var(--nhs-blue); font-weight: 800; line-height: 1.2; }
-    
-    /* Grid System */
+    .back-btn { display: inline-flex; align-items: center; gap: 8px; background-color: #ffffff; color: #1e293b; padding: 8px 16px; border-radius: 6px; text-decoration: none; font-size: 0.95rem; font-weight: 700; border: 1px solid #d1d5d8; transition: all 0.2s; box-shadow: 0 1px 2px rgba(0,0,0,0.05); }
+    .back-btn:hover { background-color: #005eb8; color: #ffffff; border-color: #005eb8; }
+    .page-header h1 { margin: 0; font-size: 1.6rem; color: #005eb8; font-weight: 800; line-height: 1.2; }
+
     .disease-grid { max-width: 1300px; margin: 0 auto 50px auto; padding: 0 20px; display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 15px; }
-    .disease-card { background-color: var(--nhs-white); border: 1px solid #e2e8f0; border-radius: 8px; padding: 20px 15px; text-align: center; color: var(--nhs-text); text-decoration: none; font-weight: 700; font-size: 1.05rem; transition: all 0.2s ease; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 90px; box-shadow: 0 2px 4px rgba(0,0,0,0.04); gap: 8px; }
-    .disease-card:hover { background-color: var(--nhs-blue); color: var(--nhs-white); border-color: var(--nhs-blue); transform: translateY(-3px); box-shadow: 0 6px 12px rgba(0,0,0,0.15); }
-    .disease-card span { font-size: 0.8rem; color: #718096; font-weight: 600; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
-    .disease-card:hover span { color: #e2e8f0; }
     
-    /* Section Dividers */
-    .grid-divider { grid-column: 1 / -1; margin-top: 30px; margin-bottom: 15px; border-bottom: 2px solid #e2e8f0; padding-bottom: 10px; }
-    .grid-divider h3 { color: var(--nhs-dark-blue); margin: 0; font-size: 1.3rem; font-weight: 800; }
+    .disease-card { background-color: #ffffff; border: 1px solid #e2e8f0; border-radius: 8px; padding: 20px 15px; text-align: center; color: #1e293b; text-decoration: none; font-weight: 700; font-size: 1.05rem; transition: all 0.2s ease; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 90px; box-shadow: 0 2px 4px rgba(0,0,0,0.04); gap: 8px; }
+    .disease-card:hover { background-color: #005eb8; color: #ffffff; border-color: #005eb8; transform: translateY(-3px); box-shadow: 0 6px 12px rgba(0,0,0,0.15); }
+    
+    .disease-card span { font-size: 0.8rem; color: #718096; font-weight: 600; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; direction: ltr; }
+    .disease-card:hover span { color: #e2e8f0; }
+
+    .loading-state { grid-column: 1/-1; text-align: center; padding: 50px; color: #005eb8; }
 
     @media (max-width: 768px) { 
-        .page-header { flex-direction: column; align-items: center; gap: 12px; } 
-        .disease-grid { grid-template-columns: repeat(2, 1fr); } 
+        .page-header { flex-direction: column; align-items: center; gap: 12px; }
+        .disease-grid { grid-template-columns: repeat(2, 1fr); }
     }
 </style>
 
@@ -32,35 +33,55 @@ permalink: /blood-immune/
     <h1>أمراض الدم والمناعة والحساسية</h1>
 </div>
 
-<main class="disease-grid">
-    
-    <div class="grid-divider"><h3>فقر الدم (الأنيميا)</h3></div>
-    <a href="/blood-immune/anaemia/" class="disease-card">فقر الدم (بشكل عام) <span>(Anaemia)</span></a>
-    <a href="/blood-immune/iron-deficiency/" class="disease-card">نقص الحديد <span>(Iron Deficiency)</span></a>
-    <a href="/blood-immune/vitamin-b12-deficiency/" class="disease-card">نقص B12 والفوليك أسيد <span>(B12/Folate)</span></a>
-    <a href="/blood-immune/sickle-cell/" class="disease-card">فقر الدم المنجلي <span>(Sickle Cell)</span></a>
-    <a href="/blood-immune/thalassaemia/" class="disease-card">الثلاسيميا <span>(Thalassaemia)</span></a>
-
-    <div class="grid-divider"><h3>أنواع الحساسية الشائعة</h3></div>
-    <a href="/blood-immune/anaphylaxis/" class="disease-card">الصدمة التحسسية (حالة طارئة) <span>(Anaphylaxis)</span></a>
-    <a href="/blood-immune/hay-fever/" class="disease-card">حساسية الأنف (حمى القش) <span>(Hay Fever)</span></a>
-    <a href="/blood-immune/food-allergy/" class="disease-card">حساسية الطعام <span>(Food Allergy)</span></a>
-    <a href="/blood-immune/drug-allergy/" class="disease-card">حساسية الأدوية <span>(Drug Allergy)</span></a>
-    <a href="/blood-immune/hives-urticaria/" class="disease-card">الشرى (الآرتيكاريا) <span>(Hives)</span></a>
-    <a href="/blood-immune/insect-stings/" class="disease-card">حساسية الحشرات <span>(Insect Stings)</span></a>
-
-    <div class="grid-divider"><h3>أمراض المناعة والدم المعقدة</h3></div>
-    <a href="/blood-immune/lupus/" class="disease-card">الذئبة الحمراء الجهازية <span>(Systemic Lupus - SLE)</span></a>
-    <a href="/blood-immune/sarcoidosis/" class="disease-card">مرض الساركويد <span>(Sarcoidosis)</span></a>
-    <a href="/blood-immune/sjogrens-syndrome/" class="disease-card">متلازمة جوجرن (الجفاف) <span>(Sjögren's)</span></a>
-    <a href="/blood-immune/vasculitis/" class="disease-card">التهاب الأوعية الدموية <span>(Vasculitis)</span></a>
-    <a href="/blood-immune/itp-platelets/" class="disease-card">نقص الصفائح المناعي <span>(ITP)</span></a>
-    <a href="/blood-immune/myasthenia-gravis/" class="disease-card">وهن العضلات الوبيل <span>(Myasthenia)</span></a>
-
-    <div class="grid-divider"><h3>أورام الدم والغدد اللمفاوية</h3></div>
-    <a href="/blood-immune/swollen-glands/" class="disease-card">تضخم الغدد اللمفاوية <span>(Swollen Glands)</span></a>
-    <a href="/blood-immune/leukaemia/" class="disease-card">سرطان الدم (اللوكيميا) <span>(Leukaemia)</span></a>
-    <a href="/blood-immune/blood-cancers/" class="disease-card">سرطانات الدم <span>(blood-cancers)</span></a>
-    <a href="/blood-immune/myeloma/" class="disease-card">الميلوما المتعددة <span>(Myeloma)</span></a>
-    <a href="/blood-immune/polycythaemia/" class="disease-card">كثرة الكريات الحمر (اللزوجة) <span>(Polycythaemia)</span></a>
+<main class="disease-grid" id="diseasesContainer">
+    <div class="loading-state">
+        <i class="fas fa-circle-notch fa-spin fa-2x"></i>
+        <p>جاري جلب قائمة الأمراض...</p>
+    </div>
 </main>
+
+<script>
+    const supabaseUrl = 'https://sbtsfjcbkuvhjylvtezv.supabase.co';
+    const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNidHNmamNia3V2aGp5bHZ0ZXp2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzU0MTkzNDksImV4cCI6MjA5MDk5NTM0OX0.GqsPOGcntVxKtLr56iG9IHfwqlPtdAtNVRGd2ztGkrU';
+    const supabaseClient = supabase.createClient(supabaseUrl, supabaseKey);
+
+    async function loadBloodImmuneDiseases() {
+        try {
+            // نطلب من قاعدة البيانات فقط المواضيع التابعة لقسم الدم والمناعة
+            const { data, error } = await supabaseClient
+                .from('topics')
+                .select('slug, title, english_name') 
+                .eq('category_id', 'blood-immune') // ⚠️ تأكد من استخدام هذا التصنيف في Supabase
+                .order('title', { ascending: true }); // ترتيب أبجدي تلقائي
+
+            if (error) throw error;
+
+            const container = document.getElementById('diseasesContainer');
+            container.innerHTML = ''; // مسح علامة التحميل
+
+            if (data.length === 0) {
+                container.innerHTML = '<p style="grid-column: 1/-1; text-align:center;">لم يتم إضافة مواضيع في هذا القسم بعد.</p>';
+                return;
+            }
+
+            // رسم الكروت بروابطها الصحيحة الجديدة
+            data.forEach(disease => {
+                // إذا لم يكن هناك اسم إنجليزي في قاعدة البيانات، لا تطبعه
+                const engSpan = disease.english_name ? `<span>(${disease.english_name})</span>` : '';
+                
+                container.innerHTML += `
+                    <a href="/topic/?id=${disease.slug}" class="disease-card">
+                        ${disease.title}
+                        ${engSpan}
+                    </a>
+                `;
+            });
+
+        } catch (e) {
+            console.error(e);
+            document.getElementById('diseasesContainer').innerHTML = '<p style="grid-column: 1/-1; text-align:center; color: red;">حدث خطأ في جلب البيانات.</p>';
+        }
+    }
+
+    window.onload = loadBloodImmuneDiseases;
+</script>
