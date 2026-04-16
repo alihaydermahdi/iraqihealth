@@ -1,29 +1,119 @@
 ---
 layout: default
-title: صحة المرأة والحمل | كشفيّـة
-permalink: /gynecology/
+title: صحة المرأة والحمل
 ---
 
-<style>
-    .page-header { max-width: 1300px; margin: 25px auto 30px auto; padding: 0 20px; display: flex; align-items: center; justify-content: flex-end; gap: 20px; }
-    .back-btn { display: inline-flex; align-items: center; gap: 8px; background-color: var(--nhs-white); color: var(--nhs-text); padding: 8px 16px; border-radius: 6px; text-decoration: none; font-size: 0.95rem; font-weight: 700; border: 1px solid #d1d5d8; transition: all 0.2s; box-shadow: 0 1px 2px rgba(0,0,0,0.05); }
-    .back-btn:hover { background-color: var(--nhs-blue); color: var(--nhs-white); border-color: var(--nhs-blue); }
-    .page-header h1 { margin: 0; font-size: 1.6rem; color: var(--nhs-blue); font-weight: 800; line-height: 1.2; }
-    
-    /* Grid System */
-    .disease-grid { max-width: 1300px; margin: 0 auto 50px auto; padding: 0 20px; display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 15px; }
-    .disease-card { background-color: var(--nhs-white); border: 1px solid #e2e8f0; border-radius: 8px; padding: 20px 15px; text-align: center; color: var(--nhs-text); text-decoration: none; font-weight: 700; font-size: 1.05rem; transition: all 0.2s ease; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 90px; box-shadow: 0 2px 4px rgba(0,0,0,0.04); gap: 8px; }
-    .disease-card:hover { background-color: var(--nhs-blue); color: var(--nhs-white); border-color: var(--nhs-blue); transform: translateY(-3px); box-shadow: 0 6px 12px rgba(0,0,0,0.15); }
-    .disease-card span { font-size: 0.8rem; color: #718096; font-weight: 600; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
-    .disease-card:hover span { color: #e2e8f0; }
-    
-    /* Section Dividers */
-    .grid-divider { grid-column: 1 / -1; margin-top: 20px; margin-bottom: 10px; border-bottom: 2px solid #e2e8f0; padding-bottom: 10px; }
-    .grid-divider h3 { color: var(--nhs-dark-blue); margin: 0; font-size: 1.2rem; }
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
+<style>
+    /* Page Header */
+    .page-header { 
+        max-width: 1300px; 
+        margin: 25px auto 30px auto; 
+        padding: 0 20px; 
+        display: flex; 
+        align-items: center; 
+        justify-content: flex-end; 
+        gap: 20px; 
+    }
+
+    .back-btn { 
+        display: inline-flex; 
+        align-items: center; 
+        gap: 8px; 
+        background-color: #ffffff; 
+        color: #212b32; 
+        padding: 8px 16px; 
+        border-radius: 6px; 
+        text-decoration: none; 
+        font-size: 0.95rem; 
+        font-weight: 700; 
+        border: 1px solid #d1d5d8; 
+        transition: all 0.2s; 
+        box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+    }
+
+    .back-btn:hover { 
+        background-color: #005eb8; 
+        color: #ffffff; 
+        border-color: #005eb8; 
+    }
+
+    .page-header h1 { 
+        margin: 0; 
+        font-size: 1.6rem; 
+        color: #005eb8; 
+        font-weight: 800; 
+        line-height: 1.2;
+    }
+
+    /* Disease Grid */
+    .disease-grid { 
+        max-width: 1300px; 
+        margin: 0 auto 50px auto; 
+        padding: 0 20px; 
+        display: grid; 
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); 
+        gap: 15px; 
+    }
+    
+    .disease-card { 
+        background-color: #ffffff; 
+        border: 1px solid #e2e8f0; 
+        border-radius: 8px; 
+        padding: 20px 15px; 
+        text-align: center; 
+        color: #212b32; 
+        text-decoration: none; 
+        font-weight: 700; 
+        font-size: 1.05rem; 
+        transition: all 0.2s ease; 
+        display: flex; 
+        flex-direction: column;
+        align-items: center; 
+        justify-content: center; 
+        min-height: 90px; 
+        box-shadow: 0 2px 4px rgba(0,0,0,0.04); 
+        gap: 8px;
+    }
+    
+    .disease-card:hover { 
+        background-color: #005eb8; 
+        color: #ffffff; 
+        border-color: #005eb8; 
+        transform: translateY(-3px); 
+        box-shadow: 0 6px 12px rgba(0,0,0,0.15); 
+    }
+    
+    .disease-card span {
+        font-size: 0.8rem;
+        color: #718096;
+        font-weight: 600;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        direction: ltr;
+    }
+    
+    .disease-card:hover span {
+        color: #e2e8f0;
+    }
+
+    .loading-state { 
+        grid-column: 1/-1; 
+        text-align: center; 
+        padding: 50px; 
+        color: #005eb8; 
+    }
+
+    /* Mobile adjustments */
     @media (max-width: 768px) { 
-        .page-header { flex-direction: column; align-items: center; gap: 12px; } 
-        .disease-grid { grid-template-columns: repeat(2, 1fr); } 
+        .page-header { 
+            flex-direction: column; 
+            align-items: center;
+            gap: 12px; 
+        }
+        .disease-grid { 
+            grid-template-columns: repeat(2, 1fr); 
+        }
     }
 </style>
 
@@ -32,48 +122,53 @@ permalink: /gynecology/
     <h1>صحة المرأة والحمل</h1>
 </div>
 
-<main class="disease-grid">
-    <div class="grid-divider"><h3>الحمل والخصوبة</h3></div>
-    <a href="/gynecology/infertility/" class="disease-card">تأخر الحمل والعقم <span>(Infertility)</span></a>
-    <a href="/gynecology/planning-pregnancy/" class="disease-card">التخطيط للحمل <span>(Planning Pregnancy)</span></a>
-    <a href="/gynecology/ectopic-pregnancy/" class="disease-card">الحمل خارج الرحم <span>(Ectopic Pregnancy)</span></a>
-    <a href="/gynecology/miscarriage/" class="disease-card">الإسقاط <span>(Miscarriage)</span></a>
-    <a href="/gynecology/morning-sickness/" class="disease-card">النسوة ولعبان النفس <span>(Morning Sickness)</span></a>
-    <a href="/gynecology/multiple-pregnancy/" class="disease-card">الحمل بتوأم <span>(Twins)</span></a>
-
-    <div class="grid-divider"><h3>الدورة الشهرية والمشاكل النسائية</h3></div>
-    <a href="/gynecology/polycystic-ovary-syndrome/" class="disease-card">تكيس المبايض <span>(PCOS)</span></a>
-    <a href="/gynecology/heavy-periods/" class="disease-card">غزارة الدورة <span>(Heavy Periods)</span></a>
-    <a href="/gynecology/period-pain/" class="disease-card">ألم الدورة <span>(Dysmenorrhoea)</span></a>
-    <a href="/gynecology/missed-periods/" class="disease-card">تأخر الدورة <span>(Missed Periods)</span></a>
-    <a href="/gynecology/menopause/" class="disease-card">سن اليأس <span>(Menopause)</span></a>
-    <a href="/gynecology/fibroids/" class="disease-card">ألياف الرحم <span>(Fibroids)</span></a>
-    <a href="/gynecology/endometriosis/" class="disease-card">بطانة الرحم المهاجرة <span>(Endometriosis)</span></a>
-    <a href="/gynecology/ovarian-cyst/" class="disease-card">أكياس المبيض <span>(Ovarian Cysts)</span></a>
-    <a href="/gynecology/pelvic-pain/" class="disease-card">ألم الحوض المزمن <span>(Pelvic Pain)</span></a>
-
-    <div class="grid-divider"><h3>الالتهابات والصحة الجنسية</h3></div>
-    <a href="/gynecology/vaginal-discharge/" class="disease-card">الإفرازات المهبلية <span>(Discharge)</span></a>
-    <a href="/gynecology/vaginal-thrush/" class="disease-card">فطريات المهبل <span>(Thrush)</span></a>
-    <a href="/gynecology/bacterial-vaginosis/" class="disease-card">التهاب المهبل البكتيري <span>(BV)</span></a>
-    <a href="/gynecology/pelvic-inflammatory-disease/" class="disease-card">التهاب الحوض <span>(PID)</span></a>
-    <a href="/gynecology/itchy-vulva/" class="disease-card">حكة المنطقة الحساسة <span>(Itchy Vulva)</span></a>
-    <a href="/gynecology/vaginal-dryness/" class="disease-card">جفاف المهبل <span>(Vaginal Dryness)</span></a>
-
-    <div class="grid-divider"><h3>صحة الثدي والأورام (توعية)</h3></div>
-    <a href="/gynecology/breast-lumps/" class="disease-card">كتل الثدي <span>(Breast Lumps)</span></a>
-    <a href="/gynecology/breast-pain/" class="disease-card">ألم الثدي <span>(Breast Pain)</span></a>
-    <a href="/gynecology/cervical-cancer/" class="disease-card">سرطان عنق الرحم <span>(Cervical Cancer)</span></a>
-    <a href="/gynecology/ovarian-cancer/" class="disease-card">سرطان المبيض <span>(Ovarian Cancer)</span></a>
-    <a href="/gynecology/endometrial-cancer/" class="disease-card">سرطان الرحم <span>(Endometrial Cancer)</span></a>
-
-    <div class="grid-divider"><h3>الولادة، ما بعد الولادة، وتنظيم الأسرة</h3></div>
-    <a href="/gynecology/caesarean-section/" class="disease-card">العملية القيصرية <span>(C-Section)</span></a>
-    <a href="/gynecology/premature-labour/" class="disease-card">الولادة المبكرة <span>(Premature Labour)</span></a>
-    <a href="/gynecology/pre-eclampsia/" class="disease-card">ضغط وتسمم الحمل <span>(Pre-eclampsia)</span></a>
-    <a href="/gynecology/obstetric-cholestasis/" class="disease-card">حكة الحمل (ركود الصفراء) <span>(Cholestasis)</span></a>
-    <a href="/gynecology/postnatal-depression/" class="disease-card">اكتئاب ما بعد الولادة <span>(Postnatal Depression)</span></a>
-    <a href="/gynecology/mastitis/" class="disease-card">التهاب الثدي <span>(Mastitis)</span></a>
-    <a href="/gynecology/contraception/" class="disease-card">موانع الحمل <span>(Contraception)</span></a>
-    <a href="/gynecology/emergency-contraception/" class="disease-card">مانع الحمل الطارئ <span>(Emergency Pill)</span></a>
+<main class="disease-grid" id="diseasesContainer">
+    <div class="loading-state">
+        <i class="fas fa-circle-notch fa-spin fa-2x"></i>
+        <p>جاري جلب قائمة الأمراض...</p>
+    </div>
 </main>
+
+<script>
+    const supabaseUrl = 'https://sbtsfjcbkuvhjylvtezv.supabase.co';
+    const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNidHNmamNia3V2aGp5bHZ0ZXp2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzU0MTkzNDksImV4cCI6MjA5MDk5NTM0OX0.GqsPOGcntVxKtLr56iG9IHfwqlPtdAtNVRGd2ztGkrU';
+    const supabaseClient = supabase.createClient(supabaseUrl, supabaseKey);
+
+    async function loadGynecologyDiseases() {
+        try {
+            // جلب مواضيع النسائية والتوليد وترتيبها أبجدياً
+            const { data, error } = await supabaseClient
+                .from('topics')
+                .select('slug, title, english_name') 
+                .eq('category_id', 'gynecology')
+                .order('title', { ascending: true });
+
+            if (error) throw error;
+
+            const container = document.getElementById('diseasesContainer');
+            container.innerHTML = ''; // إزالة علامة التحميل
+
+            if (data.length === 0) {
+                container.innerHTML = '<p style="grid-column: 1/-1; text-align:center;">لم يتم إضافة مواضيع في هذا القسم بعد.</p>';
+                return;
+            }
+
+            data.forEach(disease => {
+                const engSpan = disease.english_name ? `<span>(${disease.english_name})</span>` : '';
+                
+                container.innerHTML += `
+                    <a href="/topic/?id=${disease.slug}" class="disease-card">
+                        ${disease.title}
+                        ${engSpan}
+                    </a>
+                `;
+            });
+
+        } catch (e) {
+            console.error(e);
+            document.getElementById('diseasesContainer').innerHTML = '<p style="grid-column: 1/-1; text-align:center; color: red;">حدث خطأ في جلب البيانات.</p>';
+        }
+    }
+
+    window.onload = loadGynecologyDiseases;
+</script>
