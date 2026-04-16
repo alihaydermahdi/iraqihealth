@@ -1,16 +1,12 @@
 ---
 layout: default
-title: أمراض السكري والغدد الصماء | كشفيّـة
-permalink: /diabetes-endocrinology/
+title: أمراض السكري والغدد الصماء
 ---
 
-<style>
-    /* الخط المخصص لهذه الصفحة */
-    @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800;900&display=swap');
-    
-    body { font-family: "Cairo", sans-serif; }
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-    /* --- Page Header --- */
+<style>
+    /* Page Header */
     .page-header { 
         max-width: 1300px; 
         margin: 25px auto 30px auto; 
@@ -18,15 +14,15 @@ permalink: /diabetes-endocrinology/
         display: flex; 
         align-items: center; 
         justify-content: flex-end; 
-        gap: 20px;
+        gap: 20px; 
     }
 
     .back-btn { 
         display: inline-flex; 
         align-items: center; 
         gap: 8px; 
-        background-color: var(--nhs-white); 
-        color: var(--nhs-text); 
+        background-color: #ffffff; 
+        color: #212b32; 
         padding: 8px 16px; 
         border-radius: 6px; 
         text-decoration: none; 
@@ -34,22 +30,24 @@ permalink: /diabetes-endocrinology/
         font-weight: 700; 
         border: 1px solid #d1d5d8; 
         transition: all 0.2s; 
+        box-shadow: 0 1px 2px rgba(0,0,0,0.05);
     }
 
     .back-btn:hover { 
-        background-color: var(--nhs-blue); 
-        color: var(--nhs-white); 
-        border-color: var(--nhs-blue); 
+        background-color: #005eb8; 
+        color: #ffffff; 
+        border-color: #005eb8; 
     }
 
     .page-header h1 { 
         margin: 0; 
         font-size: 1.6rem; 
-        color: var(--nhs-blue); 
+        color: #005eb8; 
         font-weight: 800; 
+        line-height: 1.2;
     }
 
-    /* --- شبكة الأمراض --- */
+    /* Disease Grid */
     .disease-grid { 
         max-width: 1300px; 
         margin: 0 auto 50px auto; 
@@ -60,12 +58,12 @@ permalink: /diabetes-endocrinology/
     }
     
     .disease-card { 
-        background-color: var(--nhs-white); 
+        background-color: #ffffff; 
         border: 1px solid #e2e8f0; 
         border-radius: 8px; 
         padding: 20px 15px; 
         text-align: center; 
-        color: var(--nhs-text); 
+        color: #212b32; 
         text-decoration: none; 
         font-weight: 700; 
         font-size: 1.05rem; 
@@ -80,9 +78,9 @@ permalink: /diabetes-endocrinology/
     }
     
     .disease-card:hover { 
-        background-color: var(--nhs-blue); 
-        color: var(--nhs-white); 
-        border-color: var(--nhs-blue); 
+        background-color: #005eb8; 
+        color: #ffffff; 
+        border-color: #005eb8; 
         transform: translateY(-3px); 
         box-shadow: 0 6px 12px rgba(0,0,0,0.15); 
     }
@@ -91,16 +89,31 @@ permalink: /diabetes-endocrinology/
         font-size: 0.8rem;
         color: #718096;
         font-weight: 600;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        direction: ltr;
     }
     
     .disease-card:hover span {
         color: #e2e8f0;
     }
 
-    @media (max-width: 768px) {
-        .page-header { flex-direction: column; align-items: center; }
-        .disease-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
-        .disease-card { font-size: 0.9rem; min-height: 80px; }
+    .loading-state { 
+        grid-column: 1/-1; 
+        text-align: center; 
+        padding: 50px; 
+        color: #005eb8; 
+    }
+
+    /* Mobile adjustments */
+    @media (max-width: 768px) { 
+        .page-header { 
+            flex-direction: column; 
+            align-items: center;
+            gap: 12px; 
+        }
+        .disease-grid { 
+            grid-template-columns: repeat(2, 1fr); 
+        }
     }
 </style>
 
@@ -109,35 +122,53 @@ permalink: /diabetes-endocrinology/
     <h1>أمراض السكري والغدد الصماء</h1>
 </div>
 
-<main class="disease-grid">
-    <a href="/diabetes-endocrinology/type1-diabetes/" class="disease-card">السكري من النوع الأول <span>(Type 1 Diabetes)</span></a>
-    <a href="/diabetes-endocrinology/type2-diabetes/" class="disease-card">السكري من النوع الثاني <span>(Type 2 Diabetes)</span></a>
-    <a href="/diabetes-endocrinology/prediabetes/" class="disease-card">مرحلة ما قبل السكري <span>(Prediabetes)</span></a>
-    <a href="/diabetes-endocrinology/gestational-diabetes/" class="disease-card">سكري الحمل <span>(Gestational Diabetes)</span></a>
-    <a href="/diabetes-endocrinology/type2-treatment/" class="disease-card">علاج السكري النوع الثاني <span>(Type 2 Treatment)</span></a>
-    <a href="/diabetes-endocrinology/insulin-types/" class="disease-card">الأنسولين وأنواعه <span>(Insulin Types)</span></a>
-    <a href="/diabetes-endocrinology/hypoglycemia/" class="disease-card">هبوط السكر <span>(Hypoglycemia)</span></a>
-    <a href="/diabetes-endocrinology/hyperglycemia/" class="disease-card">ارتفاع السكر <span>(Hyperglycemia)</span></a>
-    
-    <a href="/diabetes-endocrinology/diabetic-foot/" class="disease-card">العناية بالقدم السكري <span>(Diabetic Foot Care)</span></a>
-    <a href="/diabetes-endocrinology/diabetic-kidney/" class="disease-card">اعتلال الكلية السكري <span>(Diabetic Kidney Disease)</span></a>
-    <a href="/diabetes-endocrinology/diabetic-retinopathy/" class="disease-card">اعتلال الشبكية السكري <span>(Diabetic Retinopathy)</span></a>
-
-    <a href="/diabetes-endocrinology/hypothyroidism/" class="disease-card">قصور الغدة الدرقية <span>(Hypothyroidism)</span></a>
-    <a href="/diabetes-endocrinology/hyperthyroidism/" class="disease-card">فرط نشاط الغدة الدرقية <span>(Hyperthyroidism)</span></a>
-    <a href="/diabetes-endocrinology/thyroid-eye-disease/" class="disease-card">اعتلال العين الدرقي <span>(Thyroid Eye Disease)</span></a>
-    <a href="/diabetes-endocrinology/hyperparathyroidism/" class="disease-card">فرط جارات الدرقية <span>(Hyperparathyroidism)</span></a>
-    <a href="/diabetes-endocrinology/hypoparathyroidism/" class="disease-card">قصور جارات الدرقية <span>(Hypoparathyroidism)</span></a>
-
-    <a href="/diabetes-endocrinology/addisons-disease/" class="disease-card">مرض أديسون <span>(Addison's Disease)</span></a>
-    <a href="/diabetes-endocrinology/cushings-syndrome/" class="disease-card">متلازمة كوشينغ <span>(Cushing's Syndrome)</span></a>
-    <a href="/diabetes-endocrinology/cah/" class="disease-card">تضخم الغدة الكظرية الخلقي <span>(CAH)</span></a>
-    <a href="/diabetes-endocrinology/acromegaly/" class="disease-card">ضخامة الأطراف <span>(Acromegaly)</span></a>
-    <a href="/diabetes-endocrinology/diabetes-insipidus/" class="disease-card">السكري الكاذب <span>(Diabetes Insipidus)</span></a>
-    <a href="/diabetes-endocrinology/pituitary-disorders/" class="disease-card">اضطرابات الغدة النخامية <span>(Pituitary Disorders)</span></a>
-    <a href="/diabetes-endocrinology/prolactinoma/" class="disease-card">ورم هرمون الحليب <span>(Prolactinoma)</span></a>
-
-    <a href="/diabetes-endocrinology/acute-pancreatitis/" class="disease-card">التهاب البنكرياس الحاد <span>(Acute Pancreatitis)</span></a>
-    <a href="/diabetes-endocrinology/chronic-pancreatitis/" class="disease-card">التهاب البنكرياس المزمن <span>(Chronic Pancreatitis)</span></a>
-    <a href="/diabetes-endocrinology/menopause/" class="disease-card">سن اليأس (انقطاع الطمث) <span>(Menopause)</span></a>
+<main class="disease-grid" id="diseasesContainer">
+    <div class="loading-state">
+        <i class="fas fa-circle-notch fa-spin fa-2x"></i>
+        <p>جاري جلب قائمة الأمراض...</p>
+    </div>
 </main>
+
+<script>
+    const supabaseUrl = 'https://sbtsfjcbkuvhjylvtezv.supabase.co';
+    const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNidHNmamNia3V2aGp5bHZ0ZXp2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzU0MTkzNDksImV4cCI6MjA5MDk5NTM0OX0.GqsPOGcntVxKtLr56iG9IHfwqlPtdAtNVRGd2ztGkrU';
+    const supabaseClient = supabase.createClient(supabaseUrl, supabaseKey);
+
+    async function loadEndocrinologyDiseases() {
+        try {
+            // جلب مواضيع الغدد الصماء وترتيبها أبجدياً
+            const { data, error } = await supabaseClient
+                .from('topics')
+                .select('slug, title, english_name') 
+                .eq('category_id', 'endocrinology')
+                .order('title', { ascending: true });
+
+            if (error) throw error;
+
+            const container = document.getElementById('diseasesContainer');
+            container.innerHTML = ''; // إزالة علامة التحميل
+
+            if (data.length === 0) {
+                container.innerHTML = '<p style="grid-column: 1/-1; text-align:center;">لم يتم إضافة مواضيع في هذا القسم بعد.</p>';
+                return;
+            }
+
+            data.forEach(disease => {
+                const engSpan = disease.english_name ? `<span>(${disease.english_name})</span>` : '';
+                
+                container.innerHTML += `
+                    <a href="/topic/?id=${disease.slug}" class="disease-card">
+                        ${disease.title}
+                        ${engSpan}
+                    </a>
+                `;
+            });
+
+        } catch (e) {
+            console.error(e);
+            document.getElementById('diseasesContainer').innerHTML = '<p style="grid-column: 1/-1; text-align:center; color: red;">حدث خطأ في جلب البيانات.</p>';
+        }
+    }
+
+    window.onload = loadEndocrinologyDiseases;
+</script>
