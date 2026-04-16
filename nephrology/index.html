@@ -1,12 +1,11 @@
 ---
 layout: default
-title: الكلى والمسالك البولية | كشفيّـة
-permalink: /nephrology/
+title: الكلى والمسالك البولية
 ---
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
 <style>
-    /* --- Specific styling for the Category Page --- */
-    
     /* Page Header */
     .page-header { 
         max-width: 1300px; 
@@ -91,10 +90,18 @@ permalink: /nephrology/
         color: #718096;
         font-weight: 600;
         font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        direction: ltr;
     }
     
     .disease-card:hover span {
         color: #e2e8f0;
+    }
+
+    .loading-state { 
+        grid-column: 1/-1; 
+        text-align: center; 
+        padding: 50px; 
+        color: #005eb8; 
     }
 
     /* Mobile adjustments */
@@ -115,31 +122,53 @@ permalink: /nephrology/
     <h1>الكلى والمسالك البولية</h1>
 </div>
 
-<main class="disease-grid">
-    <a href="/nephrology/bedwetting/" class="disease-card">التبول اللاإرادي (أطفال) <span>(Bedwetting)</span></a>
-    <a href="/nephrology/urinary-incontinence/" class="disease-card">سلس البول <span>(Urinary Incontinence)</span></a>
-    <a href="/nephrology/overactive-bladder/" class="disease-card">المثانة النشطة <span>(Overactive Bladder)</span></a>
-    <a href="/nephrology/interstitial-cystitis/" class="disease-card">المثانة المؤلمة <span>(Painful Bladder)</span></a>
-    <a href="/nephrology/urinary-retention/" class="disease-card">احتباس البول <span>(Urinary Retention)</span></a>
-
-    <a href="/nephrology/uti/" class="disease-card">التهاب المجاري البولية <span>(UTI - General)</span></a>
-    <a href="/nephrology/uti-men/" class="disease-card">التهاب المجاري (رجال) <span>(UTI in Men)</span></a>
-    <a href="/nephrology/uti-pregnancy/" class="disease-card">التهاب المجاري (حوامل) <span>(UTI in Pregnancy)</span></a>
-    <a href="/nephrology/uti-children/" class="disease-card">التهاب المجاري (أطفال) <span>(UTI in Children)</span></a>
-    <a href="/nephrology/kidney-infection/" class="disease-card">التهاب الكلى <span>(Pyelonephritis)</span></a>
-
-    <a href="/nephrology/kidney-stones/" class="disease-card">حصى الكلى <span>(Kidney Stones)</span></a>
-    <a href="/nephrology/blood-in-urine/" class="disease-card">دم بالبول <span>(Blood in Urine)</span></a>
-    <a href="/nephrology/proteinuria/" class="disease-card">زلال البول <span>(Proteinuria)</span></a>
-    <a href="/nephrology/diabetes-insipidus/" class="disease-card">السكري الكاذب <span>(Diabetes Insipidus)</span></a>
-
-    <a href="/nephrology/chronic-kidney-disease/" class="disease-card">عجز الكلى المزمن <span>(CKD)</span></a>
-    <a href="/nephrology/acute-kidney-injury/" class="disease-card">الفشل الكلوي الحاد <span>(Acute Kidney Injury)</span></a>
-    <a href="/nephrology/diabetic-kidney-disease/" class="disease-card">اعتلال الكلى السكري <span>(Diabetic Kidney Disease)</span></a>
-    <a href="/nephrology/polycystic-kidney-disease/" class="disease-card">تكيس الكلى <span>(Polycystic Kidney)</span></a>
-    <a href="/nephrology/glomerulonephritis/" class="disease-card">التهاب كبيبات الكلى <span>(Glomerulonephritis)</span></a>
-    <a href="/nephrology/nephrotic-syndrome/" class="disease-card">المتلازمة الكلوية <span>(Nephrotic Syndrome)</span></a>
-
-    <a href="/nephrology/bladder-cancer/" class="disease-card">سرطان المثانة <span>(Bladder Cancer)</span></a>
-    <a href="/nephrology/wilms-tumour/" class="disease-card">ورم ويلمز (أطفال) <span>(Wilms' Tumour)</span></a>
+<main class="disease-grid" id="diseasesContainer">
+    <div class="loading-state">
+        <i class="fas fa-circle-notch fa-spin fa-2x"></i>
+        <p>جاري جلب قائمة المواضيع...</p>
+    </div>
 </main>
+
+<script>
+    const supabaseUrl = 'https://sbtsfjcbkuvhjylvtezv.supabase.co';
+    const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNidHNmamNia3V2aGp5bHZ0ZXp2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzU0MTkzNDksImV4cCI6MjA5MDk5NTM0OX0.GqsPOGcntVxKtLr56iG9IHfwqlPtdAtNVRGd2ztGkrU';
+    const supabaseClient = supabase.createClient(supabaseUrl, supabaseKey);
+
+    async function loadNephrologyDiseases() {
+        try {
+            // جلب مواضيع الكلى والمسالك البولية وترتيبها أبجدياً
+            const { data, error } = await supabaseClient
+                .from('topics')
+                .select('slug, title, english_name') 
+                .eq('category_id', 'nephrology')
+                .order('title', { ascending: true });
+
+            if (error) throw error;
+
+            const container = document.getElementById('diseasesContainer');
+            container.innerHTML = ''; // إزالة علامة التحميل
+
+            if (data.length === 0) {
+                container.innerHTML = '<p style="grid-column: 1/-1; text-align:center;">لم يتم إضافة مواضيع في هذا القسم بعد.</p>';
+                return;
+            }
+
+            data.forEach(disease => {
+                const engSpan = disease.english_name ? `<span>(${disease.english_name})</span>` : '';
+                
+                container.innerHTML += `
+                    <a href="/topic/?id=${disease.slug}" class="disease-card">
+                        ${disease.title}
+                        ${engSpan}
+                    </a>
+                `;
+            });
+
+        } catch (e) {
+            console.error(e);
+            document.getElementById('diseasesContainer').innerHTML = '<p style="grid-column: 1/-1; text-align:center; color: red;">حدث خطأ في جلب البيانات.</p>';
+        }
+    }
+
+    window.onload = loadNephrologyDiseases;
+</script>
