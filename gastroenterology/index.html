@@ -1,8 +1,9 @@
 ---
 layout: default
 title: أمراض الجهاز الهضمي والكبد | كشفيّـة
-permalink: /gastroenterology/
 ---
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <style>
     /* الخط المخصص لهذه الصفحة */
@@ -18,15 +19,15 @@ permalink: /gastroenterology/
         display: flex; 
         align-items: center; 
         justify-content: flex-end; 
-        gap: 20px;
+        gap: 20px; 
     }
 
     .back-btn { 
         display: inline-flex; 
         align-items: center; 
         gap: 8px; 
-        background-color: var(--nhs-white); 
-        color: var(--nhs-text); 
+        background-color: #ffffff; 
+        color: #212b32; 
         padding: 8px 16px; 
         border-radius: 6px; 
         text-decoration: none; 
@@ -34,19 +35,21 @@ permalink: /gastroenterology/
         font-weight: 700; 
         border: 1px solid #d1d5d8; 
         transition: all 0.2s; 
+        box-shadow: 0 1px 2px rgba(0,0,0,0.05);
     }
 
     .back-btn:hover { 
-        background-color: var(--nhs-blue); 
-        color: var(--nhs-white); 
-        border-color: var(--nhs-blue); 
+        background-color: #005eb8; 
+        color: #ffffff; 
+        border-color: #005eb8; 
     }
 
     .page-header h1 { 
         margin: 0; 
         font-size: 1.6rem; 
-        color: var(--nhs-blue); 
+        color: #005eb8; 
         font-weight: 800; 
+        line-height: 1.2; 
     }
 
     /* --- شبكة الأمراض --- */
@@ -60,12 +63,12 @@ permalink: /gastroenterology/
     }
     
     .disease-card { 
-        background-color: var(--nhs-white); 
+        background-color: #ffffff; 
         border: 1px solid #e2e8f0; 
         border-radius: 8px; 
         padding: 20px 15px; 
         text-align: center; 
-        color: var(--nhs-text); 
+        color: #212b32; 
         text-decoration: none; 
         font-weight: 700; 
         font-size: 1.05rem; 
@@ -76,13 +79,13 @@ permalink: /gastroenterology/
         justify-content: center; 
         min-height: 90px; 
         box-shadow: 0 2px 4px rgba(0,0,0,0.04); 
-        gap: 8px;
+        gap: 8px; 
     }
     
     .disease-card:hover { 
-        background-color: var(--nhs-blue); 
-        color: var(--nhs-white); 
-        border-color: var(--nhs-blue); 
+        background-color: #005eb8; 
+        color: #ffffff; 
+        border-color: #005eb8; 
         transform: translateY(-3px); 
         box-shadow: 0 6px 12px rgba(0,0,0,0.15); 
     }
@@ -91,14 +94,23 @@ permalink: /gastroenterology/
         font-size: 0.8rem;
         color: #718096;
         font-weight: 600;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        direction: ltr;
     }
     
     .disease-card:hover span {
         color: #e2e8f0;
     }
 
+    .loading-state { 
+        grid-column: 1/-1; 
+        text-align: center; 
+        padding: 50px; 
+        color: #005eb8; 
+    }
+
     @media (max-width: 768px) {
-        .page-header { flex-direction: column; align-items: center; }
+        .page-header { flex-direction: column; align-items: center; gap: 12px; }
         .disease-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
         .disease-card { font-size: 0.9rem; min-height: 80px; }
     }
@@ -109,38 +121,53 @@ permalink: /gastroenterology/
     <h1>أمراض الجهاز الهضمي والكبد</h1>
 </div>
 
-<main class="disease-grid">
-    <a href="/gastroenterology/abdominal-pain/" class="disease-card">خريطة أوجاع البطن <span>(Abdominal Pain Map)</span></a>
-    
-    <a href="/gastroenterology/gastritis/" class="disease-card">جرثومة والتهاب المعدة <span>(Gastritis & H. Pylori)</span></a>
-    <a href="/gastroenterology/stomach-ulcer/" class="disease-card">قرحة المعدة والاثني عشر <span>(Peptic Ulcer)</span></a>
-    <a href="/gastroenterology/gallstones/" class="disease-card">حصى المرارة <span>(Gallstones)</span></a>
-    <a href="/gastroenterology/gastroenteritis/" class="disease-card">النزلة المعوية (فيروس المعدة) <span>(Gastroenteritis)</span></a>
-
-    <a href="/gastroenterology/irritable-bowel-syndrome/" class="disease-card">القولون العصبي <span>(IBS)</span></a>
-    <a href="/gastroenterology/constipation/" class="disease-card">الإمساك (القبض) <span>(Constipation)</span></a>
-    <a href="/gastroenterology/diarrhoea/" class="disease-card">الإسهال <span>(Diarrhoea)</span></a>
-    <a href="/gastroenterology/coeliac-disease/" class="disease-card">حساسية الحنطة <span>(Coeliac Disease)</span></a>
-    <a href="/gastroenterology/appendicitis/" class="disease-card">التهاب الزائدة الدودية <span>(Appendicitis)</span></a>
-    <a href="/gastroenterology/diverticulitis/" class="disease-card">الجيوب القولونية <span>(Diverticulitis)</span></a>
-
-    <a href="/gastroenterology/ulcerative-colitis/" class="disease-card">القولون التقرحي <span>(Ulcerative Colitis)</span></a>
-    <a href="/gastroenterology/crohns-disease/" class="disease-card">مرض كرونز <span>(Crohn's Disease)</span></a>
-
-    <a href="/gastroenterology/hemorrhoids/" class="disease-card">البواسير <span>(Hemorrhoids)</span></a>
-    <a href="/gastroenterology/anal-fissure/" class="disease-card">الشق الشرجي (الفطر) <span>(Anal Fissure)</span></a>
-    <a href="/gastroenterology/anal-fistula/" class="disease-card">الناسور الشرجي <span>(Anal Fistula)</span></a>
-    <a href="/gastroenterology/rectal-prolapse/" class="disease-card">هبوط المستقيم <span>(Rectal Prolapse)</span></a>
-
-    <a href="/gastroenterology/fatty-liver/" class="disease-card">الكبد الدهني <span>(Fatty Liver)</span></a>
-    <a href="/gastroenterology/viral-hepatitis/" class="disease-card">التهاب الكبد الفيروسي <span>(Viral Hepatitis)</span></a>
-    <a href="/gastroenterology/liver-cirrhosis/" class="disease-card">تشمع الكبد <span>(Liver Cirrhosis)</span></a>
-
-    <a href="/gastroenterology/bowel-cancer/" class="disease-card">سرطان القولون <span>(Bowel Cancer)</span></a>
-    <a href="/gastroenterology/stomach-cancer/" class="disease-card">سرطان المعدة <span>(Stomach Cancer)</span></a>
-    <a href="/gastroenterology/oesophageal-cancer/" class="disease-card">سرطان المريء <span>(Oesophageal Cancer)</span></a>
-    <a href="/gastroenterology/pancreatic-cancer/" class="disease-card">سرطان البنكرياس <span>(Pancreatic Cancer)</span></a>
-
-    <a href="/gastroenterology/children-abdominal-pain/" class="disease-card">وجع بطن الأطفال <span>(Children's Pain)</span></a>
-    <a href="/gastroenterology/pregnancy-abdominal-pain/" class="disease-card">وجع البطن للحامل <span>(Pregnancy Pain)</span></a>
+<main class="disease-grid" id="diseasesContainer">
+    <div class="loading-state">
+        <i class="fas fa-circle-notch fa-spin fa-2x"></i>
+        <p>جاري جلب قائمة الأمراض...</p>
+    </div>
 </main>
+
+<script>
+    const supabaseUrl = 'https://sbtsfjcbkuvhjylvtezv.supabase.co';
+    const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNidHNmamNia3V2aGp5bHZ0ZXp2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzU0MTkzNDksImV4cCI6MjA5MDk5NTM0OX0.GqsPOGcntVxKtLr56iG9IHfwqlPtdAtNVRGd2ztGkrU';
+    const supabaseClient = supabase.createClient(supabaseUrl, supabaseKey);
+
+    async function loadGastroenterologyDiseases() {
+        try {
+            // جلب مواضيع الجهاز الهضمي والكبد وترتيبها أبجدياً
+            const { data, error } = await supabaseClient
+                .from('topics')
+                .select('slug, title, english_name') 
+                .eq('category_id', 'gastroenterology')
+                .order('title', { ascending: true });
+
+            if (error) throw error;
+
+            const container = document.getElementById('diseasesContainer');
+            container.innerHTML = ''; // إزالة علامة التحميل
+
+            if (data.length === 0) {
+                container.innerHTML = '<p style="grid-column: 1/-1; text-align:center;">لم يتم إضافة مواضيع في هذا القسم بعد.</p>';
+                return;
+            }
+
+            data.forEach(disease => {
+                const engSpan = disease.english_name ? `<span>(${disease.english_name})</span>` : '';
+                
+                container.innerHTML += `
+                    <a href="/topic/?id=${disease.slug}" class="disease-card">
+                        ${disease.title}
+                        ${engSpan}
+                    </a>
+                `;
+            });
+
+        } catch (e) {
+            console.error(e);
+            document.getElementById('diseasesContainer').innerHTML = '<p style="grid-column: 1/-1; text-align:center; color: red;">حدث خطأ في جلب البيانات.</p>';
+        }
+    }
+
+    window.onload = loadGastroenterologyDiseases;
+</script>
