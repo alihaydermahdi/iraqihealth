@@ -63,25 +63,14 @@ title: دليلك الطبي
                 <option value="dermatology">الأمراض الجلدية</option>
                 <option value="ent">الأنف والأذن والحنجرة</option>
                 <option value="laboratory">التحاليل الطبية</option>
-                <option value="allergy_immunology">الحساسية والمناعة</option>
-                <option value="mens-health">الذكورة والعقم</option>
-                <option value="endocrinology">السكري والغدد الصماء</option>
-                <option value="physiotherapy">العلاج الطبيعي</option>
+                <option value="diabetes-endocrinology">السكري والغدد الصماء</option>
                 <option value="gynecology">النسائية والتوليد</option>
                 <option value="pulmonology">أمراض الجهاز التنفسي</option>
                 <option value="gastroenterology">أمراض الجهاز الهضمي والكبد</option>
-                <option value="blood-immune">أمراض الدم والأورام</option>
-                <option value="msk">أمراض العظام والمفاصل</option>
+                <option value="orthopedics_rheumatology">أمراض العظام والمفاصل</option>
                 <option value="cardiology">أمراض القلب والأوعية الدموية</option>
-                <option value="nephrology">أمراض الكلى والمسالك البولية</option>
                 <option value="neurology">أمراض المخ والأعصاب</option>
-                <option value="pediatric_surgery">جراحة الأطفال</option>
-                <option value="plastic_surgery">جراحة التجميل</option>
-                <option value="bariatric_surgery">جراحة السمنة</option>
-                <option value="cardiothoracic_surgery">جراحة القلب والصدر</option>
-                <option value="neurosurgery">جراحة المخ والأعصاب</option>
-                <option value="general_surgery">جراحة عامة وجراحة المناظير</option>
-                <option value="family_medicine">طب الأسرة</option>
+                <option value="general_surgery">جراحة عامة</option>
                 <option value="dentistry">طب الأسنان</option>
                 <option value="pediatrics">طب الأطفال والخدج</option>
                 <option value="eyes">طب وجراحة العيون</option>
@@ -95,23 +84,9 @@ title: دليلك الطبي
                 <option value="all" selected>كل العراق...</option>
                 <option value="baghdad">بغداد</option>
                 <option value="erbil">أربيل</option>
-                <option value="anbar">الأنبار</option>
                 <option value="basra">البصرة</option>
-                <option value="diwaniya">الديوانية</option>
-                <option value="sulaymaniyah">السليمانية</option>
-                <option value="muthanna">المثنى</option>
                 <option value="najaf">النجف</option>
-                <option value="babil">بابل</option>
-                <option value="duhok">دهوك</option>
-                <option value="diyala">ديالى</option>
-                <option value="dhi_qar">ذي قار</option>
-                <option value="salah_al_din">صلاح الدين</option>
-                <option value="karbala">كربلاء</option>
-                <option value="kirkuk">كركوك</option>
-                <option value="maysan">ميسان</option>
-                <option value="nineveh">نينوى</option>
-                <option value="wasit">واسط</option>
-            </select>
+                </select>
         </div>
 
         <button type="submit" class="search-btn">
@@ -229,18 +204,18 @@ title: دليلك الطبي
         'ent': 'ent',
         'resp': 'pulmonology',
         'cardio': 'cardiology',
-        'diabetes': 'endocrinology', 
+        'diabetes': 'diabetes-endocrinology', 
         'gastro': 'gastroenterology',
         'renal': 'nephrology',
         'women': 'gynecology',
         'paeds': 'pediatrics',
         'derm': 'dermatology',
-        'msk': 'msk',
+        'msk': 'orthopedics_rheumatology',
         'cancer': 'blood-immune',
         'eyes': 'eyes',
         'mental': 'mental-health',
         'healthy-living': 'healthy-living',
-        'mens-health': 'mens-health'
+        'mens-health': 'andrology_infertility'
     };
 
     // برمجة القوائم المنسدلة (Mega Dropdown)
@@ -255,15 +230,19 @@ title: دليلك الطبي
         
         const specialtyID = categoryMap[colorClass];
 
-        // 1. رابط الأمراض يأخذنا إلى المجلد مع استثناء خاص لقسم الغدد الصماء
+        // 1. رابط الأمراض يأخذنا إلى المجلد (مثلاً /neurology/)
         if (specialtyID === 'endocrinology') {
             diseaseLink.href = '/endocrinologyindex.html';
         } else {
             diseaseLink.href = '/' + specialtyID + '/';
         }
         
-        // 2. رابط الأطباء يأخذنا إلى صفحة الأطباء مع الفلتر (مثلاً /doctors/index.html?spec=neurology)
-        doctorLink.href = '/doctors/index.html?spec=' + specialtyID;
+        // 2. رابط الأطباء (مع استثناء خاص لنمط الحياة الصحي ليوجه إلى طب الأسرة)
+        if (specialtyID === 'healthy-living') {
+            doctorLink.href = '/doctors/index.html?spec=family_medicine';
+        } else {
+            doctorLink.href = '/doctors/index.html?spec=' + specialtyID;
+        }
         
         const gridRow = tile.closest('.grid-row');
         const tiles = Array.from(gridRow.children).filter(c => c.classList.contains('tile'));
