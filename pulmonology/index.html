@@ -3,6 +3,8 @@ layout: default
 title: أمراض الجهاز التنفسي والصدرية
 ---
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
 <style>
     /* --- Specific styling for the Category Page --- */
     
@@ -90,6 +92,7 @@ title: أمراض الجهاز التنفسي والصدرية
         color: #718096;
         font-weight: 600;
         font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        direction: ltr;
     }
     
     .disease-card:hover span {
@@ -114,23 +117,50 @@ title: أمراض الجهاز التنفسي والصدرية
     <h1>أمراض الجهاز التنفسي والصدرية</h1>
 </div>
 
-<main class="disease-grid">
-    <a href="/pulmonology/asthma/" class="disease-card">الربو وحساسية الصدر <span>(Asthma)</span></a>
-    <a href="/pulmonology/copd/" class="disease-card">الانسداد الرئوي المزمن <span>(COPD)</span></a>
-    <a href="/pulmonology/pneumonia/" class="disease-card">ذات الرئة (التهاب الرئة) <span>(Pneumonia)</span></a>
-    <a href="/pulmonology/bronchitis/" class="disease-card">التهاب القصبات الحاد <span>(Acute Bronchitis)</span></a>
-    
-    <a href="/pulmonology/covid19/" class="disease-card">فيروس كورونا <span>(COVID-19)</span></a>
-    <a href="/pulmonology/tuberculosis/" class="disease-card">السل (التدرن) <span>(Tuberculosis)</span></a>
-    <a href="/ent/sinusitis/" class="disease-card">التهاب الجيوب الأنفية <span>(Sinusitis)</span></a>
-
-    <a href="/pulmonology/pulmonary-embolism/" class="disease-card">الجلطة الرئوية <span>(Pulmonary Embolism)</span></a>
-    <a href="/pulmonology/pulmonary-fibrosis/" class="disease-card">تليف الرئة <span>(Pulmonary Fibrosis)</span></a>
-    <a href="/pulmonology/lung-cancer/" class="disease-card">سرطان الرئة <span>(Lung Cancer)</span></a>
-    <a href="/pulmonology/pleural-effusion/" class="disease-card">انصباب الجنب (مياه الرئة) <span>(Pleural Effusion)</span></a>
-
-    <a href="/pulmonology/bronchiectasis/" class="disease-card">توسع القصبات <span>(Bronchiectasis)</span></a>
-    <a href="/pulmonology/cystic-fibrosis/" class="disease-card">التليف الكيسي <span>(Cystic Fibrosis)</span></a>
-    <a href="/pulmonology/sarcoidosis/" class="disease-card">الساركويد <span>(Sarcoidosis)</span></a>
-    <a href="/pulmonology/pneumothorax/" class="disease-card">الاسترواح الصدري <span>(Pneumothorax)</span></a>
+<main class="disease-grid" id="diseasesContainer">
+    <div style="grid-column: 1/-1; text-align: center; padding: 50px; color: #005eb8;">
+        <p>جاري جلب قائمة المواضيع...</p>
+    </div>
 </main>
+
+<script>
+    const supabaseUrl = 'https://sbtsfjcbkuvhjylvtezv.supabase.co';
+    const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNidHNmamNia3V2aGp5bHZ0ZXp2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzU0MTkzNDksImV4cCI6MjA5MDk5NTM0OX0.GqsPOGcntVxKtLr56iG9IHfwqlPtdAtNVRGd2ztGkrU';
+    const supabaseClient = supabase.createClient(supabaseUrl, supabaseKey);
+
+    async function loadPulmonologyDiseases() {
+        try {
+            const { data, error } = await supabaseClient
+                .from('topics')
+                .select('slug, title, english_name')
+                .eq('category_id', 'pulmonology')
+                .order('title', { ascending: true });
+
+            if (error) throw error;
+
+            const container = document.getElementById('diseasesContainer');
+            container.innerHTML = '';
+
+            if (!data || data.length === 0) {
+                container.innerHTML = '<p style="grid-column: 1/-1; text-align:center;">لم يتم إضافة مواضيع في هذا القسم بعد.</p>';
+                return;
+            }
+
+            data.forEach(disease => {
+                const engSpan = disease.english_name ? `<span>(${disease.english_name})</span>` : '';
+                container.innerHTML += `
+                    <a href="/topic/?id=${disease.slug}" class="disease-card">
+                        ${disease.title}
+                        ${engSpan}
+                    </a>
+                `;
+            });
+
+        } catch (e) {
+            console.error(e);
+            document.getElementById('diseasesContainer').innerHTML = '<p style="grid-column: 1/-1; text-align:center; color: red;">حدث خطأ في جلب البيانات.</p>';
+        }
+    }
+
+    window.onload = loadPulmonologyDiseases;
+</script>
