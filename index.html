@@ -63,11 +63,11 @@ title: دليلك الطبي
                 <option value="dermatology">الأمراض الجلدية</option>
                 <option value="ent">الأنف والأذن والحنجرة</option>
                 <option value="laboratory">التحاليل الطبية</option>
-                <option value="diabetes-endocrinology">السكري والغدد الصماء</option>
+                <option value="endocrinology">السكري والغدد الصماء</option>
                 <option value="gynecology">النسائية والتوليد</option>
                 <option value="pulmonology">أمراض الجهاز التنفسي</option>
                 <option value="gastroenterology">أمراض الجهاز الهضمي والكبد</option>
-                <option value="orthopedics_rheumatology">أمراض العظام والمفاصل</option>
+                <option value="msk">أمراض العظام والمفاصل</option>
                 <option value="cardiology">أمراض القلب والأوعية الدموية</option>
                 <option value="neurology">أمراض المخ والأعصاب</option>
                 <option value="general_surgery">جراحة عامة</option>
@@ -198,24 +198,24 @@ title: دليلك الطبي
         window.location.href = `/doctors/index.html?spec=${spec}&city=${city}`;
     }
 
-    // خريطة التخصصات (لربط الأمراض والأطباء)
+    // خريطة التخصصات المحدثة
     const categoryMap = {
         'neuro': 'neurology',
         'ent': 'ent',
         'resp': 'pulmonology',
         'cardio': 'cardiology',
-        'diabetes': 'diabetes-endocrinology', 
+        'diabetes': 'endocrinology', 
         'gastro': 'gastroenterology',
         'renal': 'nephrology',
         'women': 'gynecology',
         'paeds': 'pediatrics',
         'derm': 'dermatology',
-        'msk': 'orthopedics_rheumatology',
+        'msk': 'msk',
         'cancer': 'blood-immune',
         'eyes': 'eyes',
         'mental': 'mental-health',
         'healthy-living': 'healthy-living',
-        'mens-health': 'andrology_infertility'
+        'mens-health': 'mens-health'
     };
 
     // برمجة القوائم المنسدلة (Mega Dropdown)
@@ -230,10 +230,14 @@ title: دليلك الطبي
         
         const specialtyID = categoryMap[colorClass];
 
-        // 1. رابط الأمراض يأخذنا إلى المجلد (مثلاً /neurology/)
-        diseaseLink.href = '/' + specialtyID + '/';
+        // 1. رابط الأمراض (مع استثناء صفحة الغدد الصماء كما تم الاتفاق عليه)
+        if (specialtyID === 'endocrinology') {
+            diseaseLink.href = '/endocrinologyindex.html';
+        } else {
+            diseaseLink.href = '/' + specialtyID + '/';
+        }
         
-        // 2. رابط الأطباء يأخذنا إلى صفحة الأطباء مع الفلتر (مثلاً /doctors/index.html?spec=neurology)
+        // 2. رابط الأطباء
         doctorLink.href = '/doctors/index.html?spec=' + specialtyID;
         
         const gridRow = tile.closest('.grid-row');
