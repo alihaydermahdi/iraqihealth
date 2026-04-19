@@ -15,33 +15,12 @@ permalink: /topic/index.html
     .article-title { color: #003087; font-size: 2.2rem; font-weight: 900; margin-bottom: 20px; line-height: 1.3; }
     .loading-spinner { text-align: center; padding: 100px; }
 
-    /* =========================================
-       تنسيقات المراجع
-       ========================================= */
     .references-wrapper { margin-top: 40px; background: #f8fafc; border-radius: 12px; border: 1px solid #e2e8f0; overflow: hidden; position: relative; z-index: 10; transition: border-color 0.2s; }
     .references-wrapper:hover { border-color: #005eb8; }
     
-    .references-details summary { 
-        padding: 15px 20px; 
-        font-weight: bold; 
-        color: #003087; 
-        cursor: pointer; 
-        list-style: none; 
-        display: block; 
-        position: relative; 
-        font-size: 1.05rem; 
-        outline: none;
-    }
+    .references-details summary { padding: 15px 20px; font-weight: bold; color: #003087; cursor: pointer; list-style: none; display: block; position: relative; font-size: 1.05rem; outline: none; }
     .references-details summary::-webkit-details-marker { display: none; }
-    
-    .references-details summary i { 
-        position: absolute; 
-        left: 20px; 
-        top: 50%;
-        transform: translateY(-50%);
-        transition: transform 0.3s ease; 
-        color: #005eb8; 
-    }
+    .references-details summary i { position: absolute; left: 20px; top: 50%; transform: translateY(-50%); transition: transform 0.3s ease; color: #005eb8; }
     .references-details[open] summary i { transform: translateY(-50%) rotate(45deg); color: #dc2626; } 
     
     .references-content { padding: 0 20px 20px 20px; font-size: 0.9rem; color: #64748b; line-height: 1.6; border-top: 1px solid #e2e8f0; margin-top: 10px; padding-top: 15px; }
@@ -90,14 +69,13 @@ permalink: /topic/index.html
         <div id="referencesWrapper" class="references-wrapper" style="display: none;">
             <details class="references-details">
                 <summary>المصادر والمراجع الطبية <i class="fas fa-plus"></i></summary>
-                <div id="referencesContent" class="references-content">
-                </div>
+                <div id="referencesContent" class="references-content"></div>
             </details>
         </div>
 
         <div class="cta-box">
             <h3>تحتاج متابعة أو استشارة طبية؟</h3>
-            <p>لا تخلي المرض يأثر على يومك وعملك وحياتك. احجز موعد هسه وي أفضل الأطباء للفحص والتشخيص الصحيح.</p>
+            <p id="ctaContent">لا تخلي المرض يأثر على يومك وعملك وحياتك. احجز موعد هسه وي أفضل الأطباء للفحص والتشخيص الصحيح.</p>
             <a id="ctaBtn" href="/doctors/index.html" class="cta-btn">عرض قائمة الأطباء</a>
         </div>
     </div>
@@ -108,21 +86,33 @@ permalink: /topic/index.html
     const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNidHNmamNia3V2aGp5bHZ0ZXp2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzU0MTkzNDksImV4cCI6MjA5MDk5NTM0OX0.GqsPOGcntVxKtLr56iG9IHfwqlPtdAtNVRGd2ztGkrU';
     const supabaseClient = supabase.createClient(supabaseUrl, supabaseKey);
 
+    // تم تحديث الأقسام بالكامل لتشمل جميع التخصصات
     const categoryMap = {
         'neurology': { name: 'أمراض المخ والأعصاب', url: '/neurology/' },
-        'endocrinology': { name: 'الغدد الصماء والسكري', url: '/endocrinology/' },
-        'cardiology': { name: 'أمراض القلب', url: '/cardiology/' }
+        'ent': { name: 'الأنف والأذن والحنجرة', url: '/ent/' },
+        'cardiology': { name: 'أمراض القلب', url: '/cardiology/' },
+        'pediatrics': { name: 'طب الأطفال والخدج', url: '/pediatrics/' },
+        'pulmonology': { name: 'أمراض الجهاز التنفسي', url: '/pulmonology/' },
+        'msk': { name: 'أمراض العظام والمفاصل', url: '/msk/' },
+        'nephrology': { name: 'الكلى والمسالك البولية', url: '/nephrology/' },
+        'mens-health': { name: 'صحة الرجل', url: '/mens-health/' },
+        'mental-health': { name: 'الصحة النفسية', url: '/mental-health/' },
+        'blood-immune': { name: 'أمراض الدم والمناعة', url: '/blood-immune/' },
+        'endocrinology': { name: 'الغدد الصماء والسكري', url: '/endocrinologyindex.html' }
     };
 
     async function loadArticle() {
         const params = new URLSearchParams(window.location.search);
-        const slug = params.get('id');
+        let rawSlug = params.get('id');
 
-        if (!slug) {
+        if (!rawSlug) {
             document.getElementById('loading').style.display = 'none';
             document.getElementById('errorState').style.display = 'block';
             return;
         }
+
+        // تنظيف الرابط من الحروف الكبيرة والمسافات المخفية تلقائياً
+        const slug = rawSlug.toLowerCase().trim();
 
         try {
             const { data, error } = await supabaseClient.from('topics').select('*').eq('slug', slug).single();
@@ -133,12 +123,18 @@ permalink: /topic/index.html
             document.getElementById('mainTitle').innerText = data.title;
             document.getElementById('mainContent').innerHTML = data.content;
 
-            // جلب المراجع من قاعدة البيانات (إن وجدت)
+            // تفعيل المراجع (إن وجدت)
             if (data.references && data.references.trim() !== "") {
                 document.getElementById('referencesContent').innerHTML = data.references;
                 document.getElementById('referencesWrapper').style.display = 'block';
             }
 
+            // تغيير رسالة الحجز
+            if (data.custom_cta && data.custom_cta.trim() !== "") {
+                document.getElementById('ctaContent').innerHTML = data.custom_cta;
+            }
+
+            // تفعيل الروابط وزر الحجز حسب القسم
             if(data.category_id) {
                 document.getElementById('ctaBtn').href = `/doctors/index.html?spec=${data.category_id}`;
                 const catInfo = categoryMap[data.category_id];
@@ -153,6 +149,7 @@ permalink: /topic/index.html
             document.getElementById('articleState').style.display = 'block';
 
         } catch (e) {
+            console.error("خطأ في جلب البيانات:", e); // سيساعدنا هذا السطر في كشف أي خطأ مستقبلي
             document.getElementById('loading').style.display = 'none';
             document.getElementById('errorState').style.display = 'block';
         }
