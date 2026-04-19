@@ -86,7 +86,6 @@ permalink: /topic/index.html
     const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNidHNmamNia3V2aGp5bHZ0ZXp2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzU0MTkzNDksImV4cCI6MjA5MDk5NTM0OX0.GqsPOGcntVxKtLr56iG9IHfwqlPtdAtNVRGd2ztGkrU';
     const supabaseClient = supabase.createClient(supabaseUrl, supabaseKey);
 
-    // تم تحديث الأقسام بالكامل لتشمل جميع التخصصات
     const categoryMap = {
         'neurology': { name: 'أمراض المخ والأعصاب', url: '/neurology/' },
         'ent': { name: 'الأنف والأذن والحنجرة', url: '/ent/' },
@@ -111,11 +110,17 @@ permalink: /topic/index.html
             return;
         }
 
-        // تنظيف الرابط من الحروف الكبيرة والمسافات المخفية تلقائياً
-        const slug = rawSlug.toLowerCase().trim();
+        // إزالة المسافات المخفية فقط (بدون تحويل حالة الأحرف)
+        const slug = rawSlug.trim();
 
         try {
-            const { data, error } = await supabaseClient.from('topics').select('*').eq('slug', slug).single();
+            // استخدام ilike للبحث بمرونة وتجاهل حالة الأحرف (كبيرة أو صغيرة)
+            const { data, error } = await supabaseClient
+                .from('topics')
+                .select('*')
+                .ilike('slug', slug)
+                .single();
+                
             if (error || !data) throw error;
 
             document.title = data.title + " | كشفيّـة";
@@ -123,18 +128,15 @@ permalink: /topic/index.html
             document.getElementById('mainTitle').innerText = data.title;
             document.getElementById('mainContent').innerHTML = data.content;
 
-            // تفعيل المراجع (إن وجدت)
             if (data.references && data.references.trim() !== "") {
                 document.getElementById('referencesContent').innerHTML = data.references;
                 document.getElementById('referencesWrapper').style.display = 'block';
             }
 
-            // تغيير رسالة الحجز
             if (data.custom_cta && data.custom_cta.trim() !== "") {
                 document.getElementById('ctaContent').innerHTML = data.custom_cta;
             }
 
-            // تفعيل الروابط وزر الحجز حسب القسم
             if(data.category_id) {
                 document.getElementById('ctaBtn').href = `/doctors/index.html?spec=${data.category_id}`;
                 const catInfo = categoryMap[data.category_id];
@@ -149,7 +151,7 @@ permalink: /topic/index.html
             document.getElementById('articleState').style.display = 'block';
 
         } catch (e) {
-            console.error("خطأ في جلب البيانات:", e); // سيساعدنا هذا السطر في كشف أي خطأ مستقبلي
+            console.error("خطأ في جلب البيانات:", e);
             document.getElementById('loading').style.display = 'none';
             document.getElementById('errorState').style.display = 'block';
         }
