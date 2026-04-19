@@ -63,7 +63,7 @@ title: دليلك الطبي
                 <option value="dermatology">الأمراض الجلدية</option>
                 <option value="ent">الأنف والأذن والحنجرة</option>
                 <option value="laboratory">التحاليل الطبية</option>
-                <option value="diabetes-endocrinology">السكري والغدد الصماء</option>
+                <option value="endocrinology">السكري والغدد الصماء</option>
                 <option value="gynecology">النسائية والتوليد</option>
                 <option value="pulmonology">أمراض الجهاز التنفسي</option>
                 <option value="gastroenterology">أمراض الجهاز الهضمي والكبد</option>
@@ -75,6 +75,7 @@ title: دليلك الطبي
                 <option value="pediatrics">طب الأطفال والخدج</option>
                 <option value="eyes">طب وجراحة العيون</option>
                 <option value="mental-health">الطب النفسي والصحة النفسية</option>
+                <option value="mens-health">الذكورة والعقم</option>
             </select>
         </div>
 
@@ -204,7 +205,7 @@ title: دليلك الطبي
         'ent': 'ent',
         'resp': 'pulmonology',
         'cardio': 'cardiology',
-        'diabetes': 'diabetes-endocrinology', 
+        'diabetes': 'endocrinology', 
         'gastro': 'gastroenterology',
         'renal': 'nephrology',
         'women': 'gynecology',
@@ -230,8 +231,12 @@ title: دليلك الطبي
         
         const specialtyID = categoryMap[colorClass];
 
-        // 1. رابط الأمراض يأخذنا إلى المجلد (مثلاً /neurology/)
-        diseaseLink.href = '/' + specialtyID + '/';
+        // 1. رابط الأمراض يأخذنا إلى المجلد مع استثناء خاص لقسم الغدد الصماء
+        if (specialtyID === 'endocrinology') {
+            diseaseLink.href = '/endocrinologyindex.html';
+        } else {
+            diseaseLink.href = '/' + specialtyID + '/';
+        }
         
         // 2. رابط الأطباء يأخذنا إلى صفحة الأطباء مع الفلتر (مثلاً /doctors/index.html?spec=neurology)
         doctorLink.href = '/doctors/index.html?spec=' + specialtyID;
