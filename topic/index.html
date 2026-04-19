@@ -86,18 +86,24 @@ permalink: /topic/index.html
     const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNidHNmamNia3V2aGp5bHZ0ZXp2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzU0MTkzNDksImV4cCI6MjA5MDk5NTM0OX0.GqsPOGcntVxKtLr56iG9IHfwqlPtdAtNVRGd2ztGkrU';
     const supabaseClient = supabase.createClient(supabaseUrl, supabaseKey);
 
+    // الخريطة الشاملة لجميع الأقسام حتى يتعرف عليها شريط التنقل
     const categoryMap = {
         'neurology': { name: 'أمراض المخ والأعصاب', url: '/neurology/' },
         'ent': { name: 'الأنف والأذن والحنجرة', url: '/ent/' },
-        'cardiology': { name: 'أمراض القلب', url: '/cardiology/' },
-        'pediatrics': { name: 'طب الأطفال والخدج', url: '/pediatrics/' },
         'pulmonology': { name: 'أمراض الجهاز التنفسي', url: '/pulmonology/' },
-        'msk': { name: 'أمراض العظام والمفاصل', url: '/msk/' },
-        'nephrology': { name: 'الكلى والمسالك البولية', url: '/nephrology/' },
-        'mens-health': { name: 'صحة الرجل', url: '/mens-health/' },
-        'mental-health': { name: 'الصحة النفسية', url: '/mental-health/' },
+        'cardiology': { name: 'أمراض القلب والأوعية الدموية', url: '/cardiology/' },
+        'endocrinology': { name: 'الغدد الصماء والسكري', url: '/endocrinologyindex.html' },
+        'gastroenterology': { name: 'أمراض الجهاز الهضمي والكبد', url: '/gastroenterology/' },
+        'nephrology': { name: 'أمراض الكلى والمسالك', url: '/nephrology/' },
+        'gynecology': { name: 'النسائية والتوليد', url: '/gynecology/' },
+        'pediatrics': { name: 'طب الأطفال والخدج', url: '/pediatrics/' },
+        'dermatology': { name: 'الأمراض الجلدية', url: '/dermatology/' },
+        'orthopedics_rheumatology': { name: 'أمراض العظام والمفاصل', url: '/msk/' },
         'blood-immune': { name: 'أمراض الدم والمناعة', url: '/blood-immune/' },
-        'endocrinology': { name: 'الغدد الصماء والسكري', url: '/endocrinologyindex.html' }
+        'eyes': { name: 'طب وجراحة العيون', url: '/eyes/' },
+        'mental-health': { name: 'الصحة النفسية', url: '/mental-health/' },
+        'healthy-living': { name: 'نمط الحياة الصحي', url: '/healthy-living/' },
+        'andrology_infertility': { name: 'الذكورة والعقم', url: '/mens-health/' }
     };
 
     async function loadArticle() {
@@ -110,11 +116,9 @@ permalink: /topic/index.html
             return;
         }
 
-        // إزالة المسافات المخفية فقط (بدون تحويل حالة الأحرف)
         const slug = rawSlug.trim();
 
         try {
-            // استخدام ilike للبحث بمرونة وتجاهل حالة الأحرف (كبيرة أو صغيرة)
             const { data, error } = await supabaseClient
                 .from('topics')
                 .select('*')
