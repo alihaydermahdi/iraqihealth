@@ -9,14 +9,36 @@ permalink: /doctors/index.html
 <style>
     .doctors-header { text-align: center; padding: 60px 20px; background: #f0f4f5; border-bottom: 1px solid #d8dde0; }
     .search-filter-section { max-width: 1000px; margin: -40px auto 40px auto; background: white; padding: 30px; border-radius: 12px; box-shadow: 0 15px 35px rgba(0,0,0,0.1); display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; position: relative; z-index: 10; }
+    
     .filter-group label { display: block; margin-bottom: 8px; font-weight: bold; color: #003087; font-size: 0.9rem; }
-    .filter-group select, .near-me-btn { width: 100%; padding: 12px; border: 2px solid #e2e8f0; border-radius: 8px; font-family: inherit; font-size: 1rem; cursor: pointer; }
-    .near-me-btn { background: #005eb8; color: white; border: none; font-weight: 800; display: flex; align-items: center; justify-content: center; gap: 10px; transition: 0.3s; margin-top: 26px; }
+    .filter-group select, .filter-group input, .near-me-btn { width: 100%; padding: 12px; border: 2px solid #e2e8f0; border-radius: 8px; font-family: inherit; font-size: 1rem; outline: none; transition: border-color 0.2s; }
+    .filter-group input:focus, .filter-group select:focus { border-color: #005eb8; }
+    
+    .near-me-btn { background: #005eb8; color: white; border: none; font-weight: 800; display: flex; align-items: center; justify-content: center; gap: 10px; cursor: pointer; margin-top: 26px; }
     .near-me-btn:hover { background: #003087; }
-    .doctors-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 25px; max-width: 1200px; margin: 0 auto 60px auto; padding: 0 20px; }
-    .doc-card { background: white; border-radius: 12px; border: 1px solid #e2e8f0; padding: 25px; text-align: center; transition: 0.3s; }
+    
+    .main-container { max-width: 1200px; margin: 0 auto 60px auto; padding: 0 20px; }
+    
+    /* تنسيق أقسام التخصصات (Accordions) */
+    .spec-section { background: white; border-radius: 12px; border: 1px solid #e2e8f0; margin-bottom: 15px; overflow: hidden; box-shadow: 0 2px 4px rgba(0,0,0,0.02); }
+    .spec-header { background: #f8fafc; padding: 20px 25px; font-size: 1.2rem; font-weight: 800; color: #003087; cursor: pointer; display: flex; justify-content: space-between; align-items: center; transition: background 0.2s; user-select: none; }
+    .spec-header:hover { background: #e2e8f0; }
+    .spec-header i { transition: transform 0.3s ease; color: #64748b; }
+    .spec-section.active .spec-header i { transform: rotate(180deg); color: #005eb8; }
+    
+    .doc-count { background: #e6f2fc; color: #005eb8; padding: 4px 12px; border-radius: 20px; font-size: 0.9rem; margin-right: 15px; border: 1px solid #bae6fd; }
+    
+    .spec-body { padding: 30px; display: none; background: white; border-top: 1px solid #e2e8f0; }
+    .spec-section.active .spec-body { display: block; animation: fadeIn 0.4s ease; }
+    
+    /* شبكة الأطباء داخل القسم */
+    .doctors-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 25px; }
+    .doc-card { background: white; border-radius: 12px; border: 1px solid #e2e8f0; padding: 25px; text-align: center; transition: 0.3s; box-shadow: 0 2px 8px rgba(0,0,0,0.02); }
     .doc-card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.05); border-color: #005eb8; }
-    .loading-msg { grid-column: 1/-1; text-align: center; padding: 50px; color: #005eb8; font-size: 1.2rem; font-weight: bold; }
+    
+    .loading-msg { text-align: center; padding: 50px; color: #005eb8; font-size: 1.2rem; font-weight: bold; width: 100%; }
+
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(-5px); } to { opacity: 1; transform: translateY(0); } }
 </style>
 
 <div class="doctors-header">
@@ -24,41 +46,12 @@ permalink: /doctors/index.html
     <p style="font-size: 1.2rem; color: #4a5568;">ابحث عن أفضل الأطباء والمراكز الطبية في محافظتك</p>
 </div>
 
-<div class="doctors-container">
+<div class="main-container">
     <div class="search-filter-section">
         
         <div class="filter-group">
-            <label>التخصص الطبي</label>
-            <select id="specialtyFilter" onchange="runFilter()">
-                <option value="all" selected>كل التخصصات</option>
-                <option value="radiology">الأشعة</option>
-                <option value="dermatology">الأمراض الجلدية</option>
-                <option value="ent">الأنف والأذن والحنجرة</option>
-                <option value="laboratory">التحاليل الطبية</option>
-                <option value="allergy_immunology">الحساسية والمناعة</option>
-                <option value="andrology_infertility">الذكورة والعقم</option>
-                <option value="diabetes-endocrinology">السكري والغدد الصماء</option>
-                <option value="physiotherapy">العلاج الطبيعي</option>
-                <option value="obstetrics_gynecology">النسائية والتوليد</option>
-                <option value="pulmonology">أمراض الجهاز التنفسي</option>
-                <option value="gastroenterology">أمراض الجهاز الهضمي والكبد</option>
-                <option value="blood-immune">أمراض الدم والأورام</option>
-                <option value="orthopedics_rheumatology">أمراض العظام والمفاصل</option>
-                <option value="cardiology">أمراض القلب والأوعية الدموية</option>
-                <option value="nephrology_urology">أمراض الكلى والمسالك البولية</option>
-                <option value="neurology">أمراض المخ والأعصاب</option>
-                <option value="pediatric_surgery">جراحة الأطفال</option>
-                <option value="plastic_surgery">جراحة التجميل</option>
-                <option value="bariatric_surgery">جراحة السمنة</option>
-                <option value="cardiothoracic_surgery">جراحة القلب والصدر</option>
-                <option value="neurosurgery">جراحة المخ والأعصاب</option>
-                <option value="general_surgery">جراحة عامة وجراحة المناظير</option>
-                <option value="family_medicine">طب الأسرة</option>
-                <option value="dentistry">طب الأسنان</option>
-                <option value="pediatrics">طب الأطفال والخدج</option>
-                <option value="eyes">طب وجراحة العيون</option>
-                <option value="mental-health">الطب النفسي والصحة النفسية</option>
-            </select>
+            <label>البحث بالاسم</label>
+            <input type="text" id="nameFilter" placeholder="اكتب اسم الطبيب..." onkeyup="runFilter()">
         </div>
 
         <div class="filter-group">
@@ -93,39 +86,25 @@ permalink: /doctors/index.html
         </div>
     </div>
 
-    <div class="doctors-grid" id="doctorsGrid">
-        <div class="loading-msg"><i class="fas fa-spinner fa-spin"></i> جاري تحميل بيانات الأطباء...</div>
+    <div id="accordionContainer">
+        <div class="loading-msg"><i class="fas fa-spinner fa-spin"></i> جاري تحميل وتصنيف بيانات الأطباء...</div>
     </div>
 </div>
 
 <script>
-    // 1. إعداد الاتصال بـ Supabase
     const supabaseUrl = 'https://sbtsfjcbkuvhjylvtezv.supabase.co';
     const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNidHNmamNia3V2aGp5bHZ0ZXp2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzU0MTkzNDksImV4cCI6MjA5MDk5NTM0OX0.GqsPOGcntVxKtLr56iG9IHfwqlPtdAtNVRGd2ztGkrU';
     const supabaseClient = supabase.createClient(supabaseUrl, supabaseKey);
 
-    // متغير لتخزين البيانات القادمة من السحابة
     let doctorsData = [];
-    const grid = document.getElementById('doctorsGrid');
+    let initialLoad = true;
+    const accordionContainer = document.getElementById('accordionContainer');
 
-    // 2. دالة جلب البيانات من السحابة
     async function fetchDoctorsFromCloud() {
         try {
-            console.log("⏳ جاري الاتصال بقاعدة بيانات Supabase...");
-            
-            const { data, error } = await supabaseClient
-                .from('doctors')
-                .select('*');
-
+            const { data, error } = await supabaseClient.from('doctors').select('*');
             if (error) throw error;
 
-            console.log("✅ البيانات التي وصلت من السيرفر:", data);
-
-            if (data.length === 0) {
-                console.warn("⚠️ تحذير: السيرفر متصل ولكن الجدول فارغ أو محمي!");
-            }
-
-            // تحويل البيانات لتطابق الخرائط والفلاتر
             doctorsData = data.map(doc => ({
                 id: doc.id,
                 name: doc.name,
@@ -141,62 +120,124 @@ permalink: /doctors/index.html
                 img: doc.image_url || 'https://ui-avatars.com/api/?name=' + doc.name + '&background=005eb8&color=fff'
             }));
 
-            // قراءة الفلاتر من الرابط
+            // قراءة المحافظة من الرابط إن وجدت (القادمة من الصفحة الرئيسية)
             const params = new URLSearchParams(window.location.search);
-            if(params.has('spec')) document.getElementById('specialtyFilter').value = params.get('spec');
-            if(params.has('city')) document.getElementById('provinceFilter').value = params.get('city');
+            if(params.has('city')) {
+                document.getElementById('provinceFilter').value = params.get('city');
+            }
             
-            // عرض البيانات
             runFilter();
 
         } catch (error) {
-            console.error("❌ خطأ قادم من Supabase:", error.message);
-            grid.innerHTML = '<div style="grid-column: 1/-1; text-align:center; padding:50px; color:red;"><h3>حدث خطأ أثناء جلب البيانات. تأكد من إعدادات قاعدة البيانات.</h3></div>';
+            console.error(error);
+            accordionContainer.innerHTML = '<div class="loading-msg" style="color:red;">حدث خطأ أثناء جلب البيانات.</div>';
         }
     }
 
-    // 3. دالة رسم كروت الأطباء
-    function displayDoctors(data) {
-        grid.innerHTML = '';
-        if(data.length === 0) {
-            grid.innerHTML = '<div style="grid-column: 1/-1; text-align:center; padding:50px; color:#718096;"><h3>لم نجد أطباء ضمن هذا الاختيار حالياً.</h3></div>';
+    function renderGroupedDoctors(filteredData) {
+        accordionContainer.innerHTML = '';
+        
+        if(filteredData.length === 0) {
+            accordionContainer.innerHTML = '<div class="loading-msg" style="color:#718096;">لم نجد أطباء ضمن هذا الاختيار حالياً.</div>';
             return;
         }
-        data.forEach(doc => {
-            // تصحيح رابط خرائط جوجل
-            const googleMapsUrl = `https://www.google.com/maps?q=${doc.lat},${doc.lng}`;
-            grid.innerHTML += `
-                <div class="doc-card">
-                    <img src="${doc.img}" style="width:80px; height:80px; border-radius:50%; object-fit:cover; margin-bottom:15px; border: 3px solid #f0f4f5;">
-                    <h3 style="margin:0 0 5px 0; color:#003087;">${doc.name}</h3>
-                    <span style="background:#e6f2fc; color:#005eb8; padding:4px 12px; border-radius:20px; font-size:0.85rem; font-weight:bold;">${doc.specialtyAr}</span>
-                    <div style="margin-top:15px; text-align:right; font-size:0.9rem;">
-                        <p style="margin:5px 0;"><i class="fas fa-city" style="color:#a0aec0; width:20px;"></i> ${doc.provinceAr} - ${doc.address || ''}</p>
-                        <p style="margin:5px 0;"><i class="fas fa-clock" style="color:#a0aec0; width:20px;"></i> ${doc.hours}</p>
+
+        // 1. تجميع الأطباء حسب التخصص
+        const grouped = {};
+        filteredData.forEach(doc => {
+            if(!grouped[doc.specialty]) {
+                grouped[doc.specialty] = { nameAr: doc.specialtyAr, docs: [] };
+            }
+            grouped[doc.specialty].docs.push(doc);
+        });
+
+        // 2. ترتيب التخصصات أبجدياً
+        const sortedSpecs = Object.keys(grouped).sort((a, b) => grouped[a].nameAr.localeCompare(grouped[b].nameAr));
+
+        // 3. بناء واجهة الأقسام
+        sortedSpecs.forEach(specId => {
+            const group = grouped[specId];
+            let docsHtml = '<div class="doctors-grid">';
+            
+            group.docs.forEach(doc => {
+                const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=${doc.lat},${doc.lng}`;
+                docsHtml += `
+                    <div class="doc-card">
+                        <img src="${doc.img}" style="width:80px; height:80px; border-radius:50%; object-fit:cover; margin-bottom:15px; border: 3px solid #f0f4f5;">
+                        <h3 style="margin:0 0 5px 0; color:#003087;">${doc.name}</h3>
+                        <div style="margin-top:15px; text-align:right; font-size:0.9rem;">
+                            <p style="margin:5px 0;"><i class="fas fa-city" style="color:#a0aec0; width:20px;"></i> ${doc.provinceAr} - ${doc.address || ''}</p>
+                            <p style="margin:5px 0;"><i class="fas fa-clock" style="color:#a0aec0; width:20px;"></i> ${doc.hours}</p>
+                        </div>
+                        <a href="${googleMapsUrl}" target="_blank" style="color: #4a5568; text-decoration: none; font-size: 0.85rem; display: flex; align-items: center; justify-content: center; gap: 6px; margin-top: 12px; padding: 10px; background: #f8f9fa; border-radius: 6px; border: 1px dashed #cbd5e0;">
+                            <i class="fas fa-map-marked-alt"></i> عرض الموقع على الخارطة
+                        </a>
+                        <a href="tel:${doc.phone}" style="display:block; background:#005eb8; color:white; text-align:center; padding:12px; border-radius:8px; margin-top:20px; text-decoration:none; font-weight:bold;">
+                            <i class="fas fa-phone-alt"></i> اتصل للحجز
+                        </a>
                     </div>
-                    <a href="${googleMapsUrl}" target="_blank" style="color: #4a5568; text-decoration: none; font-size: 0.85rem; display: flex; align-items: center; justify-content: center; gap: 6px; margin-top: 12px; padding: 10px; background: #f8f9fa; border-radius: 6px; border: 1px dashed #cbd5e0;">
-                        <i class="fas fa-map-marked-alt"></i> عرض الموقع على الخارطة
-                    </a>
-                    <a href="tel:${doc.phone}" style="display:block; background:#005eb8; color:white; text-align:center; padding:12px; border-radius:8px; margin-top:20px; text-decoration:none; font-weight:bold;">
-                        <i class="fas fa-phone-alt"></i> اتصل للحجز
-                    </a>
+                `;
+            });
+            docsHtml += '</div>';
+
+            const sectionId = 'spec-' + specId;
+            const docCountText = group.docs.length > 2 && group.docs.length < 11 ? 'أطباء' : 'طبيب';
+
+            accordionContainer.innerHTML += `
+                <div class="spec-section" id="${sectionId}">
+                    <div class="spec-header" onclick="toggleSection('${sectionId}')">
+                        <div>
+                            ${group.nameAr} <span class="doc-count">${group.docs.length} ${docCountText}</span>
+                        </div>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="spec-body">
+                        ${docsHtml}
+                    </div>
                 </div>
             `;
         });
+
+        // 4. الفتح التلقائي إذا كان الزائر قادماً من الصفحة الرئيسية للبحث عن تخصص معين
+        if(initialLoad) {
+            const params = new URLSearchParams(window.location.search);
+            if(params.has('spec') && params.get('spec') !== 'all') {
+                const targetEl = document.getElementById('spec-' + params.get('spec'));
+                if(targetEl) {
+                    targetEl.classList.add('active');
+                    setTimeout(() => targetEl.scrollIntoView({behavior: 'smooth', block: 'start'}), 300);
+                }
+            }
+            initialLoad = false;
+        }
     }
 
-    // 4. دالة الفلترة التلقائية
+    function toggleSection(id) {
+        const sec = document.getElementById(id);
+        sec.classList.toggle('active');
+    }
+
     function runFilter() {
         const prov = document.getElementById('provinceFilter').value;
-        const spec = document.getElementById('specialtyFilter').value;
-        const filtered = doctorsData.filter(d => (prov === 'all' || d.province === prov) && (spec === 'all' || d.specialty === spec));
-        displayDoctors(filtered);
+        const nameSearch = document.getElementById('nameFilter').value.toLowerCase().trim();
+        
+        const filtered = doctorsData.filter(d => {
+            const matchProv = (prov === 'all' || d.province === prov);
+            const matchName = (nameSearch === '' || d.name.toLowerCase().includes(nameSearch));
+            return matchProv && matchName;
+        });
+        
+        renderGroupedDoctors(filtered);
+
+        // إذا كان هناك بحث بالاسم، نفتح كل الأقسام ليرى المستخدم النتائج مباشرة
+        if(nameSearch !== '') {
+            document.querySelectorAll('.spec-section').forEach(sec => sec.classList.add('active'));
+        }
     }
 
-    // 5. دالة تحديد الأقرب
     function findNearest() {
         if (!navigator.geolocation) { alert("متصفحك لا يدعم تحديد الموقع."); return; }
-        grid.innerHTML = '<div class="loading-msg"><i class="fas fa-spinner fa-spin"></i> جاري البحث عن الأقرب...</div>';
+        accordionContainer.innerHTML = '<div class="loading-msg"><i class="fas fa-spinner fa-spin"></i> جاري البحث وتصنيف الأقرب...</div>';
         
         navigator.geolocation.getCurrentPosition(pos => {
             const sorted = [...doctorsData].sort((a,b) => {
@@ -204,13 +245,14 @@ permalink: /doctors/index.html
                 const dB = Math.sqrt(Math.pow(b.lat-pos.coords.latitude,2)+Math.pow(b.lng-pos.coords.longitude,2));
                 return dA - dB;
             });
-            displayDoctors(sorted);
+            renderGroupedDoctors(sorted);
+            // فتح جميع الأقسام لإظهار الترتيب
+            document.querySelectorAll('.spec-section').forEach(sec => sec.classList.add('active'));
         }, () => {
-            alert("يرجى تفعيل الموقع الجغرافي.");
+            alert("يرجى تفعيل الموقع الجغرافي لتعمل هذه الميزة.");
             runFilter();
         });
     }
 
-    // تشغيل جلب البيانات بمجرد فتح الصفحة
     window.onload = fetchDoctorsFromCloud;
 </script>
