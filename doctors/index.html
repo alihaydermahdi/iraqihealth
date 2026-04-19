@@ -18,38 +18,47 @@ permalink: /doctors/index.html
     .near-me-btn { background: #005eb8; color: white; border: none; font-weight: 800; display: flex; align-items: center; justify-content: center; gap: 10px; margin-top: 26px; }
     .near-me-btn:hover { background: #003087; }
     
-    .main-container { max-width: 1200px; margin: 0 auto 60px auto; padding: 0 20px; }
+    .main-container { max-width: 1300px; margin: 0 auto 60px auto; padding: 0 20px; }
     
-    /* --- تصميم الأقسام (Accordions) --- */
-    .spec-section { background: white; border-radius: 12px; border: 1px solid #e2e8f0; margin-bottom: 15px; overflow: hidden; box-shadow: 0 4px 6px rgba(0,0,0,0.02); transition: all 0.3s ease; border-right: 5px solid transparent; }
-    .spec-section.active { border-right-color: #005eb8; box-shadow: 0 8px 20px rgba(0,0,0,0.06); }
-    .spec-section.medical-centers { border-right-color: #e53e3e; } /* تمييز المراكز الطبية بلون مختلف */
+    /* --- شبكة صناديق التخصصات الأنيقة (Tiles) --- */
+    .specialties-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 15px; margin-bottom: 40px; }
     
-    .spec-header { background: #ffffff; padding: 18px 25px; font-size: 1.2rem; font-weight: 800; color: #003087; cursor: pointer; display: flex; justify-content: space-between; align-items: center; transition: background 0.2s; user-select: none; }
-    .spec-header:hover { background: #f8fafc; }
+    .spec-tile { display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 25px 15px; background-color: white; color: #003087; border: 1px solid #d1d5d8; cursor: pointer; transition: all 0.2s ease; min-height: 120px; border-radius: 10px; box-shadow: 0 2px 4px rgba(0,0,0,0.03); position: relative; }
+    .spec-tile:hover { transform: translateY(-3px); box-shadow: 0 6px 12px rgba(0,0,0,0.1); border-color: #005eb8; }
     
-    .header-content { display: flex; align-items: center; gap: 12px; }
-    .doc-count { background: #e6f2fc; color: #005eb8; padding: 3px 10px; border-radius: 20px; font-size: 0.85rem; font-weight: bold; border: 1px solid #bae6fd; min-width: 70px; text-align: center; }
-    .count-zero { background: #f7fafc; color: #a0aec0; border-color: #e2e8f0; }
+    /* الصندوق النشط */
+    .spec-tile.active-tile { background-color: #005eb8; color: white; border-color: #005eb8; transform: translateY(-3px); box-shadow: 0 8px 16px rgba(0,94,184,0.2); }
     
-    .toggle-icon { width: 28px; height: 28px; display: flex; align-items: center; justify-content: center; background: #f0f4f5; border-radius: 50%; color: #64748b; transition: transform 0.3s ease; }
-    .spec-section.active .toggle-icon { transform: rotate(180deg); background: #005eb8; color: white; }
+    /* أيقونة واسم التخصص */
+    .spec-tile i.main-icon { font-size: 2rem; margin-bottom: 12px; transition: color 0.2s; }
+    .spec-tile span.spec-name { font-weight: 700; font-size: 1.05rem; line-height: 1.3; }
     
-    .spec-body { padding: 25px; display: none; background: #fcfcfd; border-top: 1px solid #f0f4f5; }
-    .spec-section.active .spec-body { display: block; animation: slideDown 0.4s ease; }
+    /* العداد الرقمي أعلى الصندوق */
+    .doc-count-badge { position: absolute; top: -10px; left: -10px; background: #e6f2fc; color: #005eb8; width: 30px; height: 30px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.9rem; font-weight: 900; border: 2px solid white; box-shadow: 0 2px 5px rgba(0,0,0,0.1); transition: all 0.2s; }
+    .spec-tile.active-tile .doc-count-badge { background: white; color: #005eb8; }
+    .count-zero { background: #f0f4f5; color: #a0aec0; }
     
-    /* --- كروت الأطباء --- */
+    /* قسم عرض الأطباء */
+    .doctors-display-section { background: #f8fafc; border-radius: 12px; padding: 30px; border: 1px solid #e2e8f0; display: none; animation: fadeIn 0.4s ease; }
+    .display-header { display: flex; align-items: center; gap: 15px; margin-bottom: 25px; padding-bottom: 15px; border-bottom: 2px solid #e2e8f0; }
+    .display-header h2 { margin: 0; color: #003087; font-size: 1.5rem; font-weight: 800; }
+    
+    /* كروت الأطباء داخل القسم */
     .doctors-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; }
     .doc-card { background: white; border-radius: 12px; border: 1px solid #e2e8f0; padding: 25px; text-align: center; transition: 0.3s; position: relative; }
     .doc-card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.08); border-color: #cbd5e0; }
     
-    .empty-msg { text-align: center; color: #a0aec0; padding: 20px; font-style: italic; font-size: 0.95rem; }
+    .empty-msg { text-align: center; color: #a0aec0; padding: 30px; font-size: 1.1rem; font-weight: 600; width: 100%; background: white; border-radius: 8px; border: 1px dashed #cbd5e0; }
     .loading-msg { text-align: center; padding: 60px 20px; color: #005eb8; font-size: 1.2rem; font-weight: bold; width: 100%; }
 
-    @keyframes slideDown { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
     @media (max-width: 768px) {
-        .spec-header { padding: 15px; font-size: 1.05rem; }
+        .specialties-grid { grid-template-columns: repeat(2, 1fr); }
+        .spec-tile { min-height: 100px; padding: 15px 10px; }
+        .spec-tile i.main-icon { font-size: 1.5rem; }
+        .spec-tile span.spec-name { font-size: 0.9rem; }
+        .doctors-display-section { padding: 15px; }
         .doctors-grid { grid-template-columns: 1fr; }
     }
 </style>
@@ -61,14 +70,13 @@ permalink: /doctors/index.html
 
 <div class="main-container">
     <div class="search-filter-section">
-        
         <div class="filter-group">
             <label>التخصص الطبي</label>
-            <select id="specialtyFilter" onchange="runFilter()">
+            <select id="specialtyFilter" onchange="syncSelectWithTiles()">
                 <option value="all" selected>كل التخصصات والمراكز...</option>
-                <option value="medical-centers">المراكز الطبية</option>
+                <option value="medical-centers">المراكز الطبية والمجمعات</option>
                 <option value="general-practitioner">طبيب ممارس</option>
-                <option value="radiology">الأشعة</option>
+                <option value="radiology">الأشعة والسونار</option>
                 <option value="dermatology">الأمراض الجلدية</option>
                 <option value="ent">الأنف والأذن والحنجرة</option>
                 <option value="laboratory">التحاليل الطبية</option>
@@ -130,9 +138,20 @@ permalink: /doctors/index.html
         </div>
     </div>
 
-    <div id="accordionContainer">
-        <div class="loading-msg"><i class="fas fa-spinner fa-spin"></i> جاري تحميل وتصنيف بيانات الأطباء والمراكز...</div>
+    <div id="loadingState" class="loading-msg"><i class="fas fa-spinner fa-spin"></i> جاري تحميل وتصنيف بيانات الأطباء والمراكز...</div>
+    
+    <div class="specialties-grid" id="specialtiesGrid" style="display: none;">
+        </div>
+
+    <div class="doctors-display-section" id="doctorsDisplaySection">
+        <div class="display-header">
+            <i class="fas fa-user-md" style="font-size: 1.8rem; color: #005eb8;"></i>
+            <h2 id="displaySectionTitle">الأطباء</h2>
+        </div>
+        <div id="doctorsDisplayContainer">
+            </div>
     </div>
+
 </div>
 
 <script>
@@ -141,39 +160,40 @@ permalink: /doctors/index.html
     const supabaseClient = supabase.createClient(supabaseUrl, supabaseKey);
 
     let doctorsData = [];
-    const accordionContainer = document.getElementById('accordionContainer');
+    let currentSelectedSpecialty = 'medical-centers'; // الافتراضي عند فتح الصفحة
+    let groupedDataCache = {};
 
-    // القائمة الكاملة للتخصصات بالترتيب المطلوب (المراكز الطبية أولاً)
+    // القائمة الشاملة والأيقونات
     const masterSpecialties = [
-        { id: 'medical-centers', nameAr: 'المراكز الطبية والمجمعات' },
-        { id: 'general-practitioner', nameAr: 'طبيب ممارس' },
-        { id: 'radiology', nameAr: 'الأشعة والسونار' },
-        { id: 'dermatology', nameAr: 'الأمراض الجلدية' },
-        { id: 'ent', nameAr: 'الأنف والأذن والحنجرة' },
-        { id: 'laboratory', nameAr: 'التحاليل الطبية' },
-        { id: 'allergy_immunology', nameAr: 'الحساسية والمناعة' },
-        { id: 'mens-health', nameAr: 'الذكورة والعقم' },
-        { id: 'endocrinology', nameAr: 'السكري والغدد الصماء' },
-        { id: 'physiotherapy', nameAr: 'العلاج الطبيعي' },
-        { id: 'gynecology', nameAr: 'النسائية والتوليد' },
-        { id: 'pulmonology', nameAr: 'أمراض الجهاز التنفسي' },
-        { id: 'gastroenterology', nameAr: 'أمراض الجهاز الهضمي والكبد' },
-        { id: 'blood-immune', nameAr: 'أمراض الدم والأورام' },
-        { id: 'msk', nameAr: 'أمراض العظام والمفاصل' },
-        { id: 'cardiology', nameAr: 'أمراض القلب والأوعية الدموية' },
-        { id: 'nephrology', nameAr: 'أمراض الكلى والمسالك البولية' },
-        { id: 'neurology', nameAr: 'أمراض المخ والأعصاب' },
-        { id: 'pediatric_surgery', nameAr: 'جراحة الأطفال' },
-        { id: 'plastic_surgery', nameAr: 'جراحة التجميل' },
-        { id: 'bariatric_surgery', nameAr: 'جراحة السمنة' },
-        { id: 'cardiothoracic_surgery', nameAr: 'جراحة القلب والصدر' },
-        { id: 'neurosurgery', nameAr: 'جراحة المخ والأعصاب' },
-        { id: 'general_surgery', nameAr: 'جراحة عامة وجراحة المناظير' },
-        { id: 'family_medicine', nameAr: 'طب الأسرة' },
-        { id: 'dentistry', nameAr: 'طب الأسنان' },
-        { id: 'pediatrics', nameAr: 'طب الأطفال والخدج' },
-        { id: 'eyes', nameAr: 'طب وجراحة العيون' },
-        { id: 'mental-health', nameAr: 'الطب النفسي والصحة النفسية' }
+        { id: 'medical-centers', nameAr: 'المراكز والمجمعات', icon: 'fa-hospital' },
+        { id: 'general-practitioner', nameAr: 'طبيب ممارس', icon: 'fa-user-nurse' },
+        { id: 'radiology', nameAr: 'الأشعة والسونار', icon: 'fa-x-ray' },
+        { id: 'dermatology', nameAr: 'الأمراض الجلدية', icon: 'fa-hand-sparkles' },
+        { id: 'ent', nameAr: 'الأنف والأذن والحنجرة', icon: 'fa-ear-listen' },
+        { id: 'laboratory', nameAr: 'التحاليل الطبية', icon: 'fa-microscope' },
+        { id: 'allergy_immunology', nameAr: 'الحساسية والمناعة', icon: 'fa-shield-virus' },
+        { id: 'mens-health', nameAr: 'الذكورة والعقم', icon: 'fa-mars' },
+        { id: 'endocrinology', nameAr: 'السكري والغدد', icon: 'fa-syringe' },
+        { id: 'physiotherapy', nameAr: 'العلاج الطبيعي', icon: 'fa-person-walking-with-cane' },
+        { id: 'gynecology', nameAr: 'النسائية والتوليد', icon: 'fa-person-pregnant' },
+        { id: 'pulmonology', nameAr: 'أمراض التنفسية', icon: 'fa-lungs' },
+        { id: 'gastroenterology', nameAr: 'الجهاز الهضمي والكبد', icon: 'fa-pills' },
+        { id: 'blood-immune', nameAr: 'أمراض الدم والأورام', icon: 'fa-ribbon' },
+        { id: 'msk', nameAr: 'العظام والمفاصل', icon: 'fa-bone' },
+        { id: 'cardiology', nameAr: 'أمراض القلب', icon: 'fa-heart-pulse' },
+        { id: 'nephrology', nameAr: 'الكلى والمسالك', icon: 'fa-droplet' },
+        { id: 'neurology', nameAr: 'المخ والأعصاب', icon: 'fa-brain' },
+        { id: 'pediatric_surgery', nameAr: 'جراحة الأطفال', icon: 'fa-baby' },
+        { id: 'plastic_surgery', nameAr: 'جراحة التجميل', icon: 'fa-scissors' },
+        { id: 'bariatric_surgery', nameAr: 'جراحة السمنة', icon: 'fa-weight-scale' },
+        { id: 'cardiothoracic_surgery', nameAr: 'جراحة القلب والصدر', icon: 'fa-lungs-virus' },
+        { id: 'neurosurgery', nameAr: 'جراحة المخ والأعصاب', icon: 'fa-head-side-virus' },
+        { id: 'general_surgery', nameAr: 'جراحة عامة', icon: 'fa-scalpel-line-dashed' },
+        { id: 'family_medicine', nameAr: 'طب الأسرة', icon: 'fa-house-medical' },
+        { id: 'dentistry', nameAr: 'طب الأسنان', icon: 'fa-tooth' },
+        { id: 'pediatrics', nameAr: 'طب الأطفال والخدج', icon: 'fa-child-reaching' },
+        { id: 'eyes', nameAr: 'طب وجراحة العيون', icon: 'fa-eye' },
+        { id: 'mental-health', nameAr: 'الصحة النفسية', icon: 'fa-hand-holding-heart' }
     ];
 
     async function fetchDoctorsFromCloud() {
@@ -182,112 +202,149 @@ permalink: /doctors/index.html
             if (error) throw error;
 
             doctorsData = data.map(doc => ({
-                id: doc.id,
-                name: doc.name,
+                ...doc,
                 specialty: doc.specialty_id,
                 province: doc.province_id,
-                provinceAr: doc.province_ar,
-                address: doc.address,
-                lat: doc.lat,
-                lng: doc.lng,
-                phone: doc.phone,
-                hours: doc.hours,
                 img: doc.image_url || 'https://ui-avatars.com/api/?name=' + doc.name + '&background=005eb8&color=fff'
             }));
 
+            // قراءة الرابط
             const params = new URLSearchParams(window.location.search);
-            if(params.has('spec')) document.getElementById('specialtyFilter').value = params.get('spec');
-            if(params.has('city')) document.getElementById('provinceFilter').value = params.get('city');
+            if(params.has('spec') && params.get('spec') !== 'all') {
+                currentSelectedSpecialty = params.get('spec');
+                document.getElementById('specialtyFilter').value = currentSelectedSpecialty;
+            }
+            if(params.has('city')) {
+                document.getElementById('provinceFilter').value = params.get('city');
+            }
+            
+            document.getElementById('loadingState').style.display = 'none';
+            document.getElementById('specialtiesGrid').style.display = 'grid';
             
             runFilter();
 
         } catch (error) {
             console.error(error);
-            accordionContainer.innerHTML = '<div class="loading-msg" style="color:red;">حدث خطأ أثناء جلب البيانات.</div>';
+            document.getElementById('loadingState').innerHTML = '<div style="color:red;">حدث خطأ أثناء جلب البيانات.</div>';
         }
     }
 
-    function renderAccordions(filteredData, selectedSpec) {
-        accordionContainer.innerHTML = '';
+    // بناء شبكة الصناديق (Tiles)
+    function renderTiles(filteredData) {
+        const grid = document.getElementById('specialtiesGrid');
+        grid.innerHTML = '';
         
-        // تجميع البيانات الحالية
-        const grouped = {};
+        groupedDataCache = {};
         filteredData.forEach(doc => {
-            if(!grouped[doc.specialty]) grouped[doc.specialty] = [];
-            grouped[doc.specialty].push(doc);
+            if(!groupedDataCache[doc.specialty]) groupedDataCache[doc.specialty] = [];
+            groupedDataCache[doc.specialty].push(doc);
         });
 
-        // بناء الأقسام بناءً على القائمة الكاملة (Master List)
+        // إذا كان الفلتر العلوي محدد على تخصص واحد، نخفي باقي الصناديق
+        const topFilterSpec = document.getElementById('specialtyFilter').value;
+
         masterSpecialties.forEach(spec => {
-            // إذا كان المستخدم يبحث عن تخصص معين، نخفي التخصصات الأخرى
-            if (selectedSpec !== 'all' && selectedSpec !== spec.id) return;
+            if (topFilterSpec !== 'all' && topFilterSpec !== spec.id) return;
 
-            const docsInGroup = grouped[spec.id] || [];
-            const isActive = (selectedSpec !== 'all' || spec.id === 'medical-centers') ? 'active' : '';
-            const countClass = docsInGroup.length === 0 ? 'count-zero' : '';
-            const countText = docsInGroup.length === 1 ? '1 نتيجة' : `${docsInGroup.length} نتائج`;
+            const count = groupedDataCache[spec.id] ? groupedDataCache[spec.id].length : 0;
+            const countClass = count === 0 ? 'count-zero' : '';
+            const activeClass = (spec.id === currentSelectedSpecialty) ? 'active-tile' : '';
 
-            let bodyContent = '';
-            if (docsInGroup.length > 0) {
-                bodyContent = '<div class="doctors-grid">';
-                docsInGroup.forEach(doc => {
-                    const googleMapsUrl = `https://www.google.com/maps?q=${doc.lat},${doc.lng}`;
-                    bodyContent += `
-                        <div class="doc-card">
-                            <img src="${doc.img}" style="width:80px; height:80px; border-radius:50%; object-fit:cover; margin-bottom:15px; border: 3px solid #f0f4f5;">
-                            <h3 style="margin:0 0 5px 0; color:#003087; font-size: 1.1rem;">${doc.name}</h3>
-                            <div style="margin-top:15px; text-align:right; font-size:0.9rem; color: #4a5568;">
-                                <p style="margin:8px 0;"><i class="fas fa-city" style="color:#a0aec0; width:20px;"></i> ${doc.provinceAr} - ${doc.address || ''}</p>
-                                <p style="margin:8px 0;"><i class="fas fa-clock" style="color:#a0aec0; width:20px;"></i> ${doc.hours}</p>
-                            </div>
-                            <a href="${googleMapsUrl}" target="_blank" style="color: #4a5568; text-decoration: none; font-size: 0.85rem; display: flex; align-items: center; justify-content: center; gap: 6px; margin-top: 15px; padding: 10px; background: #f8f9fa; border-radius: 6px; border: 1px solid #e2e8f0;">
-                                <i class="fas fa-map-marked-alt" style="color: #005eb8;"></i> الموقع على الخارطة
-                            </a>
-                            <a href="tel:${doc.phone}" style="display:block; background:#005eb8; color:white; text-align:center; padding:12px; border-radius:8px; margin-top:10px; text-decoration:none; font-weight:bold;">
-                                <i class="fas fa-phone-alt"></i> اتصل للحجز
-                            </a>
-                        </div>
-                    `;
-                });
-                bodyContent += '</div>';
-            } else {
-                bodyContent = '<div class="empty-msg">لا يوجد أطباء مسجلين في هذا القسم حالياً ضمن المحافظة المختارة.</div>';
-            }
-
-            const specialClass = spec.id === 'medical-centers' ? 'medical-centers' : '';
-
-            accordionContainer.innerHTML += `
-                <div class="spec-section ${isActive} ${specialClass}" id="sec-${spec.id}">
-                    <div class="spec-header" onclick="toggleSection('sec-${spec.id}')">
-                        <div class="header-content">
-                            <span>${spec.nameAr}</span>
-                            <span class="doc-count ${countClass}">${countText}</span>
-                        </div>
-                        <div class="toggle-icon"><i class="fas fa-chevron-down"></i></div>
-                    </div>
-                    <div class="spec-body">
-                        ${bodyContent}
-                    </div>
+            grid.innerHTML += `
+                <div class="spec-tile ${activeClass}" onclick="selectTile('${spec.id}', '${spec.nameAr}')" id="tile-${spec.id}">
+                    <div class="doc-count-badge ${countClass}">${count}</div>
+                    <i class="fas ${spec.icon} main-icon"></i>
+                    <span class="spec-name">${spec.nameAr}</span>
                 </div>
             `;
         });
+
+        // عرض الأطباء للقسم المختار حالياً
+        const selectedSpecObj = masterSpecialties.find(s => s.id === currentSelectedSpecialty);
+        if(selectedSpecObj) {
+            renderDoctorsForSpecialty(currentSelectedSpecialty, selectedSpecObj.nameAr);
+        } else if (topFilterSpec !== 'all') {
+            // إذا اختار من القائمة العلوية تخصصاً، نفعله
+             const newSpecObj = masterSpecialties.find(s => s.id === topFilterSpec);
+             selectTile(topFilterSpec, newSpecObj.nameAr);
+        }
     }
 
-    function toggleSection(id) {
-        document.getElementById(id).classList.toggle('active');
+    // تفاعل الضغط على الصندوق
+    function selectTile(specId, specNameAr) {
+        currentSelectedSpecialty = specId;
+        
+        // تحديث القائمة المنسدلة العلوية لتتطابق مع الصندوق
+        document.getElementById('specialtyFilter').value = specId;
+        
+        // تحديث التصميم
+        document.querySelectorAll('.spec-tile').forEach(t => t.classList.remove('active-tile'));
+        const activeTile = document.getElementById('tile-' + specId);
+        if(activeTile) activeTile.classList.add('active-tile');
+        
+        renderDoctorsForSpecialty(specId, specNameAr);
+        
+        // النزول بالصفحة بهدوء إلى منطقة عرض الأطباء
+        const displaySec = document.getElementById('doctorsDisplaySection');
+        displaySec.style.display = 'block';
+        setTimeout(() => displaySec.scrollIntoView({behavior: 'smooth', block: 'start'}), 100);
+    }
+
+    // تفاعل القائمة المنسدلة العلوية
+    function syncSelectWithTiles() {
+        const spec = document.getElementById('specialtyFilter').value;
+        if(spec === 'all') {
+            currentSelectedSpecialty = 'medical-centers'; // إعادة للافتراضي
+        } else {
+            currentSelectedSpecialty = spec;
+        }
+        runFilter();
+    }
+
+    // عرض الأطباء في المنطقة السفلية
+    function renderDoctorsForSpecialty(specId, specNameAr) {
+        const displaySec = document.getElementById('doctorsDisplaySection');
+        const title = document.getElementById('displaySectionTitle');
+        const container = document.getElementById('doctorsDisplayContainer');
+        
+        displaySec.style.display = 'block';
+        title.innerText = `أطباء ومراكز: ${specNameAr}`;
+        
+        const docs = groupedDataCache[specId] || [];
+        
+        if (docs.length === 0) {
+            container.innerHTML = `<div class="empty-msg"><i class="fas fa-info-circle"></i> لا توجد بيانات مسجلة في قسم <strong>${specNameAr}</strong> ضمن المحافظة المختارة حالياً. سيتم إضافة الأطباء قريباً.</div>`;
+            return;
+        }
+
+        let html = '<div class="doctors-grid">';
+        docs.forEach(doc => {
+            const googleMapsUrl = `https://www.google.com/maps?q=${doc.lat},${doc.lng}`;
+            html += `
+                <div class="doc-card">
+                    <img src="${doc.img}" style="width:80px; height:80px; border-radius:50%; object-fit:cover; margin-bottom:15px; border: 3px solid #f0f4f5;">
+                    <h3 style="margin:0 0 5px 0; color:#003087; font-size: 1.1rem;">${doc.name}</h3>
+                    <div style="margin-top:15px; text-align:right; font-size:0.9rem; color: #4a5568;">
+                        <p style="margin:8px 0;"><i class="fas fa-city" style="color:#a0aec0; width:20px;"></i> ${doc.province_ar} - ${doc.address || ''}</p>
+                        <p style="margin:8px 0;"><i class="fas fa-clock" style="color:#a0aec0; width:20px;"></i> ${doc.hours}</p>
+                    </div>
+                    <a href="${googleMapsUrl}" target="_blank" style="color: #4a5568; text-decoration: none; font-size: 0.85rem; display: flex; align-items: center; justify-content: center; gap: 6px; margin-top: 15px; padding: 10px; background: #f8f9fa; border-radius: 6px; border: 1px solid #e2e8f0;">
+                        <i class="fas fa-map-marked-alt" style="color: #005eb8;"></i> عرض الموقع
+                    </a>
+                    <a href="tel:${doc.phone}" style="display:block; background:#005eb8; color:white; text-align:center; padding:12px; border-radius:8px; margin-top:10px; text-decoration:none; font-weight:bold;">
+                        <i class="fas fa-phone-alt"></i> اتصل للحجز
+                    </a>
+                </div>
+            `;
+        });
+        html += '</div>';
+        container.innerHTML = html;
     }
 
     function runFilter() {
         const prov = document.getElementById('provinceFilter').value;
-        const spec = document.getElementById('specialtyFilter').value;
-        
-        const filtered = doctorsData.filter(d => {
-            const matchProv = (prov === 'all' || d.province === prov);
-            const matchSpec = (spec === 'all' || d.specialty === spec);
-            return matchProv && matchSpec;
-        });
-        
-        renderAccordions(filtered, spec);
+        const filtered = doctorsData.filter(d => (prov === 'all' || d.province === prov));
+        renderTiles(filtered);
     }
 
     function findNearest() {
@@ -298,8 +355,8 @@ permalink: /doctors/index.html
                 const dB = Math.sqrt(Math.pow(b.lat-pos.coords.latitude,2)+Math.pow(b.lng-pos.coords.longitude,2));
                 return dA - dB;
             });
-            renderAccordions(sorted, 'all');
-            document.querySelectorAll('.spec-section').forEach(s => s.classList.add('active'));
+            document.getElementById('provinceFilter').value = 'all';
+            renderTiles(sorted);
         }, () => alert("يرجى تفعيل الموقع الجغرافي."));
     }
 
