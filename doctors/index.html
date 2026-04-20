@@ -12,8 +12,8 @@ permalink: /doctors/index.html
     .doctors-header h1 { margin: 0 0 10px 0; color: #003087; font-size: 2.5rem; font-weight: 900; }
     .doctors-header p { margin: 0; font-size: 1.2rem; color: #4a5568; }
     
-    /* --- شريط البحث والفلترة الأنيق (الجديد) --- */
-    .search-filter-wrapper { max-width: 1100px; margin: -40px auto 40px auto; padding: 0 20px; position: relative; z-index: 10; }
+    /* --- شريط البحث والفلترة الأنيق والمطابق لعرض الصفحة --- */
+    .search-filter-wrapper { max-width: 1300px; margin: -40px auto 40px auto; padding: 0 20px; position: relative; z-index: 10; }
     .search-filter-container { background: white; padding: 12px; border-radius: 16px; box-shadow: 0 10px 30px rgba(0,0,0,0.06); border: 1px solid #e2e8f0; display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
     
     .filter-input-group { flex: 1; min-width: 250px; display: flex; align-items: center; background: #f8fafc; border: 2px solid transparent; border-radius: 12px; padding: 0 15px; transition: all 0.3s ease; }
@@ -30,10 +30,9 @@ permalink: /doctors/index.html
     
     .near-me-btn { flex: 0 1 auto; background: #005eb8; color: white; border: none; font-weight: 800; font-size: 1.05rem; padding: 0 35px; height: 56px; border-radius: 12px; display: flex; align-items: center; justify-content: center; gap: 10px; cursor: pointer; transition: all 0.3s; box-shadow: 0 4px 10px rgba(0, 94, 184, 0.2); }
     .near-me-btn:hover { background: #003087; transform: translateY(-2px); box-shadow: 0 6px 15px rgba(0, 94, 184, 0.3); }
-
+    
     /* --- شبكة التخصصات الأنيقة --- */
-    .main-container { max-width: 1300px; margin: 0 auto 60px auto; padding: 0 20px; }
-    .clinical-grid { width: 100%; display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; position: relative; }
+    .clinical-grid { max-width: 1300px; margin: 0 auto 50px auto; padding: 0 20px; width: 100%; display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; position: relative; }
     
     .tile { display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 25px 10px; background-color: #ffffff; color: #005eb8; border: 1px solid #d1d5d8; cursor: pointer; transition: all 0.2s ease; min-height: 110px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.05); position: relative; }
     .tile:hover, .tile.active-tile { background-color: #005eb8; color: #ffffff; border-color: #005eb8; transform: translateY(-2px); box-shadow: 0 6px 12px rgba(0,0,0,0.15); }
@@ -61,21 +60,21 @@ permalink: /doctors/index.html
 
     @keyframes fadeInDown { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
 
-    /* الموبايل */
     @media (max-width: 1024px) {
         .clinical-grid { grid-template-columns: repeat(3, 1fr); }
     }
     @media (max-width: 768px) {
-        .doctors-header { padding: 40px 20px 50px 20px; }
-        .search-filter-wrapper { margin-top: -20px; padding: 0 15px; }
-        .search-filter-container { padding: 15px; flex-direction: column; background: transparent; box-shadow: none; border: none; }
-        .filter-input-group { width: 100%; background: white; border: 1px solid #e2e8f0; }
-        .near-me-btn { width: 100%; height: 50px; }
-        
+        .doctors-header { padding: 40px 20px 60px 20px; }
         .clinical-grid { grid-template-columns: repeat(2, 1fr); }
         .tile { min-height: 90px; padding: 15px 5px; }
         .tile i.main-icon { font-size: 1.5rem; }
         .tile span.spec-name { font-size: 0.95rem; }
+        
+        .search-filter-wrapper { margin-top: -30px; padding: 0 15px; }
+        .search-filter-container { padding: 15px; flex-direction: column; background: transparent; box-shadow: none; border: none; gap: 10px; }
+        .filter-input-group { width: 100%; background: white; border: 1px solid #e2e8f0; }
+        .near-me-btn { width: 100%; height: 50px; }
+        
         .doctors-display-section { padding: 15px; }
         .doctors-grid { grid-template-columns: 1fr; }
     }
@@ -93,7 +92,7 @@ permalink: /doctors/index.html
             <i class="fas fa-stethoscope icon-main"></i>
             <div class="select-wrapper">
                 <select id="specialtyFilter" onchange="runTopFilter()">
-                    <option value="all" selected>كل التخصصات الطبية والمراكز...</option>
+                    <option value="all" selected>اختر التخصص لرؤية الأطباء...</option>
                     <option value="medical-centers">المراكز الطبية والمجمعات</option>
                     <option value="general-practitioner">طبيب ممارس</option>
                     <option value="radiology">الأشعة والسونار</option>
@@ -161,23 +160,20 @@ permalink: /doctors/index.html
     </div>
 </div>
 
-<div class="main-container">
-    
-    <div id="displaySecStash" style="display:none;">
-        <div class="doctors-display-section" id="doctorsDisplaySection">
-            <div class="display-header">
-                <i class="fas fa-user-md" style="font-size: 1.8rem; color: #005eb8;"></i>
-                <h2 id="displaySectionTitle">الأطباء</h2>
-            </div>
-            <div class="doctors-grid" id="doctorsDisplayContainer"></div>
+<div id="displaySecStash" style="display:none;">
+    <div class="doctors-display-section" id="doctorsDisplaySection">
+        <div class="display-header">
+            <i class="fas fa-user-md" style="font-size: 1.8rem; color: #005eb8;"></i>
+            <h2 id="displaySectionTitle">الأطباء</h2>
         </div>
+        <div class="doctors-grid" id="doctorsDisplayContainer"></div>
     </div>
-
-    <main class="clinical-grid" id="specialtiesGrid">
-        <div class="loading-msg" id="gridLoading"><i class="fas fa-spinner fa-spin"></i> جاري التحميل...</div>
-    </main>
-
 </div>
+
+<main class="clinical-grid" id="specialtiesGrid">
+    <div class="loading-msg" id="gridLoading"><i class="fas fa-spinner fa-spin"></i> جاري التحميل...</div>
+</main>
+
 
 <script>
     const supabaseUrl = 'https://sbtsfjcbkuvhjylvtezv.supabase.co';
@@ -188,7 +184,7 @@ permalink: /doctors/index.html
     let groupedDataCache = {};
     let activeSpecialty = null;
 
-    // القائمة الشاملة والأيقونات 
+    // القائمة الشاملة والأيقونات الدقيقة
     const masterSpecialties = [
         { id: 'medical-centers', nameAr: 'المراكز والمجمعات', icon: 'fa-hospital' },
         { id: 'general-practitioner', nameAr: 'طبيب ممارس', icon: 'fa-user-nurse' },
@@ -250,6 +246,7 @@ permalink: /doctors/index.html
         }
     }
 
+    // دالة لتصفية البيانات وبناء الصناديق (Tiles)
     function applyFiltersAndRender(isInitialLoad = false) {
         const prov = document.getElementById('provinceFilter').value;
         const filteredDocs = allDoctors.filter(d => prov === 'all' || d.province === prov);
@@ -263,7 +260,7 @@ permalink: /doctors/index.html
         const grid = document.getElementById('specialtiesGrid');
         const displaySec = document.getElementById('doctorsDisplaySection');
         
-        // إرجاع قسم العرض للمخزن قبل مسح الشبكة
+        // الحفاظ على صندوق العرض داخل الـ Stash قبل مسح الشبكة
         document.getElementById('displaySecStash').appendChild(displaySec);
         grid.querySelectorAll('.spec-tile').forEach(e => e.remove());
 
@@ -273,7 +270,7 @@ permalink: /doctors/index.html
             const countClass = count === 0 ? 'count-zero' : '';
 
             tilesHtml += `
-                <div class="tile spec-tile" id="tile-${spec.id}" onclick="handleTileClick(this, '${spec.id}', '${spec.nameAr}')">
+                <div class="tile spec-tile" id="tile-${spec.id}" onclick="handleTileClick(this, '${spec.id}', '${spec.nameAr}', false)">
                     <div class="doc-count-badge ${countClass}">${count}</div>
                     <i class="fas ${spec.icon} main-icon"></i>
                     <span class="spec-name">${spec.nameAr}</span>
@@ -283,6 +280,7 @@ permalink: /doctors/index.html
         
         grid.insertAdjacentHTML('afterbegin', tilesHtml);
 
+        // الفتح التلقائي إذا كان الفلتر محدداً
         const topSpec = document.getElementById('specialtyFilter').value;
         if(topSpec !== 'all') {
             const targetTile = document.getElementById('tile-' + topSpec);
@@ -300,7 +298,7 @@ permalink: /doctors/index.html
         applyFiltersAndRender(false);
     }
 
-    // تفاعل الضغط على الصندوق
+    // التفاعل عند الضغط على الصندوق
     function handleTileClick(clickedTile, specId, specNameAr, isInitialLoad = false) {
         const grid = document.getElementById('specialtiesGrid');
         const displaySec = document.getElementById('doctorsDisplaySection');
@@ -335,10 +333,9 @@ permalink: /doctors/index.html
             insertAfter = tiles[i];
         }
 
-        // نقل صندوق عرض الأطباء ليكون تحت السطر مباشرة
         insertAfter.insertAdjacentElement('afterend', displaySec);
 
-        // جلب الأطباء ورسمهم فوراً
+        // جلب الأطباء ورسمهم
         renderDoctorsList(specId, specNameAr);
         
         // إظهار القسم وعمل حركة انتقال ناعمة
@@ -359,7 +356,7 @@ permalink: /doctors/index.html
         
         if (docs.length === 0) {
             container.innerHTML = `<div class="empty-msg"><i class="fas fa-info-circle"></i> لا توجد بيانات مسجلة في قسم <strong>${specNameAr}</strong> ضمن المحافظة المختارة حالياً. سيتم إضافتها قريباً.</div>`;
-            container.style.display = 'block'; 
+            container.style.display = 'block'; // Reset to block for message
             return;
         }
 
@@ -384,7 +381,7 @@ permalink: /doctors/index.html
             `;
         });
         
-        container.style.display = 'grid';
+        container.style.display = 'grid'; // Apply grid for cards
         container.innerHTML = html;
     }
 
@@ -398,9 +395,11 @@ permalink: /doctors/index.html
             });
             document.getElementById('provinceFilter').value = 'all';
             
+            // تحديث مخزن البيانات ليعتمد الترتيب الجغرافي
             allDoctors = sorted;
             applyFiltersAndRender(false);
             
+            // إذا كان هناك تخصص مفتوح، نعيد عرض الأطباء بالترتيب الجديد
             if (activeSpecialty) {
                 const specObj = masterSpecialties.find(s => s.id === activeSpecialty);
                 renderDoctorsList(activeSpecialty, specObj.nameAr);
