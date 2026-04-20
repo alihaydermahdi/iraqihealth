@@ -8,6 +8,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -508,6 +509,11 @@
             letter-spacing: 0.5px; 
         }
 
+        @media (max-width: 1024px) {
+            .footer-content { gap: 25px; }
+        }
+
+        /* --- تعديلات الموبايل وحل مشكلة الضغط (Squished Look) --- */
         @media (max-width: 768px) {
             .header-content { flex-direction: column; text-align: center; gap: 8px; }
             .header-moto { font-size: 1rem; }
@@ -521,8 +527,27 @@
             .site-logo { max-height: 45px; }
             footer { padding: 30px 20px 15px 20px; }
             .footer-content { gap: 20px; margin-bottom: 20px; }
-            .article-card { padding: 20px; } 
-            .article-title { font-size: 1.8rem; }
+            
+            /* التعديلات لضمان مساحة قراءة مريحة */
+            .main-body-wrapper { padding: 10px !important; }
+            .article-wrapper { padding: 0 !important; margin-top: 15px; }
+            
+            .article-card { 
+                padding: 25px 15px; 
+                border-radius: 12px; 
+            } 
+            
+            .article-title { font-size: 1.6rem; }
+            
+            .article-content p, .article-content ul li { 
+                font-size: 1.05rem; 
+                line-height: 1.8; 
+            }
+            
+            .medical-disclaimer {
+                padding: 15px;
+                font-size: 0.9rem;
+            }
         }
     </style>
 </head>
