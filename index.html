@@ -4,30 +4,28 @@ title: دليلك الطبي
 ---
 
 <style>
-    /* --- تنسيق القائمة العلوية (Navbar) وشريط البحث الجديد --- */
+    /* --- 1. تنسيق القائمة العلوية وشريط بحث الأمراض الذكي --- */
     .nhs-nav { background-color: #005eb8; color: white; display: flex; justify-content: space-between; align-items: center; padding: 10px 20px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); position: relative; z-index: 100; }
     .main-links { display: flex; gap: 15px; }
     .main-links a { color: white; text-decoration: none; font-weight: 700; font-size: 0.95rem; display: flex; align-items: center; gap: 8px; }
     
-    /* شريط بحث الأمراض (مكان زر التواصل) */
     .nav-search-wrapper { position: relative; width: 280px; margin-right: auto; }
     .nav-search-input { width: 100%; padding: 8px 15px 8px 35px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.3); background: rgba(255,255,255,0.1); color: white; outline: none; font-family: "Cairo", sans-serif; font-size: 0.9rem; transition: all 0.3s; }
     .nav-search-input::placeholder { color: rgba(255,255,255,0.8); }
-    .nav-search-input:focus { background: white; color: #212b32; box-shadow: 0 0 0 3px rgba(255,255,255,0.2); border-color: white; }
+    .nav-search-input:focus { background: white; color: #1e293b; box-shadow: 0 0 0 3px rgba(255,255,255,0.2); border-color: white; }
     .nav-search-icon { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: rgba(255,255,255,0.8); transition: color 0.3s; pointer-events: none; }
     .nav-search-input:focus + .nav-search-icon { color: #005eb8; }
     
-    /* القائمة المنسدلة الذكية للمقترحات */
     .autocomplete-dropdown { position: absolute; top: 100%; right: 0; width: 100%; background: white; border-radius: 12px; box-shadow: 0 10px 25px rgba(0,0,0,0.15); margin-top: 8px; max-height: 280px; overflow-y: auto; display: none; z-index: 1000; border: 1px solid #e2e8f0; }
-    .autocomplete-item { padding: 12px 15px; color: #212b32; text-decoration: none; display: block; font-weight: 600; font-size: 0.9rem; border-bottom: 1px solid #f0f4f5; transition: background 0.2s; text-align: right; cursor: pointer; }
+    .autocomplete-item { padding: 12px 15px; color: #1e293b; text-decoration: none; display: block; font-weight: 600; font-size: 0.9rem; border-bottom: 1px solid #f0f4f5; transition: background 0.2s; text-align: right; cursor: pointer; }
     .autocomplete-item:hover { background: #f8fafc; color: #005eb8; padding-right: 20px; }
     .autocomplete-item i { margin-left: 8px; color: #a0aec0; }
 
-    /* --- Homepage Specific CSS --- */
-    .hero-section { background-color: #005eb8; background-image: linear-gradient(135deg, #005eb8 0%, #003087 100%); padding: 40px 20px 60px 20px; text-align: center; color: white; margin-bottom: 30px; width: 100%; }
-    .hero-section h1 { font-family: "Cairo", sans-serif; font-size: 2rem; margin-top: 0; margin-bottom: 30px; font-weight: 800; letter-spacing: -0.3px; line-height: 1.4; }
+    /* --- 2. تنسيق الصفحة الرئيسية (القديم المطابق لطلبك) --- */
+    .hero-section { background-color: #005eb8; background-image: linear-gradient(135deg, #005eb8 0%, #003087 100%); padding: 50px 20px; text-align: center; color: white; margin-bottom: 40px; width: 100%; }
+    .hero-section h1 { font-family: "Cairo", sans-serif; font-size: 1.8rem; margin-top: 0; margin-bottom: 15px; font-weight: 800; letter-spacing: -0.3px; line-height: 1.4; }
     
-    /* --- شريط بحث الأطباء الأنيق (Pill Shape) --- */
+    /* --- 3. تصميم شريط بحث الأطباء الكبسولي (الأنيق الجديد) --- */
     .search-filter-wrapper { max-width: 1000px; margin: 0 auto; padding: 0; position: relative; z-index: 10; }
     .search-filter-container { background: white; padding: 8px; border-radius: 50px; box-shadow: 0 10px 25px rgba(0,0,0,0.15); display: flex; flex-wrap: wrap; gap: 5px; align-items: center; }
     
@@ -38,40 +36,44 @@ title: دليلك الطبي
     .select-wrapper { flex: 1; position: relative; display: flex; align-items: center; }
     .select-wrapper::after { content: '\f107'; font-family: 'Font Awesome 6 Free'; font-weight: 900; position: absolute; left: 5px; color: #a0aec0; pointer-events: none; font-size: 1rem; }
     
-    .filter-input-group select { width: 100%; padding: 12px 0; border: none; background: transparent; font-family: "Cairo", sans-serif; font-size: 0.95rem; font-weight: 700; color: #212b32; outline: none; cursor: pointer; appearance: none; -webkit-appearance: none; }
+    .filter-input-group select { width: 100%; padding: 12px 0; border: none; background: transparent; font-family: "Cairo", sans-serif; font-size: 0.95rem; font-weight: 700; color: #1e293b; outline: none; cursor: pointer; appearance: none; -webkit-appearance: none; }
     
     .search-btn { flex: 0 1 auto; background: #003087; color: white; border: none; font-weight: 800; font-size: 1rem; padding: 0 30px; height: 44px; border-radius: 40px; display: flex; align-items: center; justify-content: center; gap: 8px; cursor: pointer; transition: all 0.3s; font-family: "Cairo", sans-serif; }
     .search-btn:hover { background: #00225e; transform: translateY(-1px); box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); }
 
-    /* --- شبكة التخصصات --- */
+    /* --- 4. التنسيق القديم لشبكة الصناديق والمربعات --- */
     .clinical-grid { max-width: 1300px; margin: 0 auto 50px auto; padding: 0 20px; width: 100%; }
-    .grid-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-bottom: 8px; position: relative; }
-    .tile { display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 20px 5px; color: #005eb8; background: white; border: 1px solid #d1d5d8; cursor: pointer; transition: all 0.2s ease; min-height: 100px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
-    .tile:hover { background-color: #005eb8; color: white; border-color: #005eb8; transform: translateY(-3px); box-shadow: 0 6px 12px rgba(0,0,0,0.15); }
-    .tile i { font-size: 1.8rem; margin-bottom: 10px; transition: color 0.2s; }
-    .tile span { font-weight: 700; font-size: 1.05rem; line-height: 1.3; }
+    .grid-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; margin-bottom: 6px; position: relative; }
+    .tile { display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 15px 5px; color: white; cursor: pointer; transition: all 0.2s ease; min-height: 90px; border-radius: 6px; box-shadow: 0 2px 4px rgba(0,0,0,0.08); }
+    .tile:hover { opacity: 0.95; transform: translateY(-2px); box-shadow: 0 4px 8px rgba(0,0,0,0.15); }
+    .tile i { font-size: 1.6rem; margin-bottom: 8px; }
+    .tile span { font-weight: 700; font-size: 1.15rem; line-height: 1.3; }
     
-    .mega-dropdown { display: none; grid-template-columns: 1fr 1fr; width: 100%; margin-bottom: 8px; margin-top: 5px; animation: fadeIn 0.2s ease; grid-column: 1 / -1; border-radius: 8px; background-color: #005eb8; box-shadow: inset 0 0 10px rgba(0,0,0,0.1); }
+    .mega-dropdown { display: none; grid-template-columns: 1fr 1fr; width: 100%; margin-bottom: 6px; animation: fadeIn 0.2s ease; grid-column: 1 / -1; border-radius: 6px; }
     @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
     .drop-section { padding: 15px; text-align: center; color: white; font-weight: 700; font-size: 1.1rem; border: 1px solid rgba(255,255,255,0.15); transition: 0.3s; }
     .drop-section a { color: white; text-decoration: none; display: block; width: 100%; height: 100%; font-family: "Cairo", sans-serif; }
-    .drop-section:hover { background: rgba(0,0,0,0.1); }
+    .drop-section:hover { background: rgba(0,0,0,0.2); }
+
+    /* الألوان القديمة (Tile Colors) */
+    .neuro { background-color: #7cb342; } .eyes { background-color: #d32f2f; } .ent { background-color: #d32f2f; } .resp { background-color: #1976d2; } .cardio { background-color: #afb42b; } .diabetes { background-color: #0288d1; } .gastro { background-color: #388e3c; } .renal { background-color: #1565c0; } .mens-health { background-color: #1565c0; } .women { background-color: #8e24aa; } .paeds { background-color: #4a148c; } .derm { background-color: #1b5e20; } .msk { background-color: #1b5e20; } .cancer { background-color: #b71c1c; } .mental { background-color: #7cb342; } .healthy-living { background-color: #f57c00; }
 
     @media (max-width: 1024px) {
         .grid-row { grid-template-columns: repeat(3, 1fr); }
     }
     @media (max-width: 768px) {
+        .hero-section h1 { font-size: 1.4rem; }
+        .grid-row { grid-template-columns: repeat(2, 1fr); } 
+        .mega-dropdown { grid-template-columns: 1fr; }
+        .tile { min-height: 85px; padding: 12px 5px; }
+        .tile i { font-size: 1.4rem; margin-bottom: 5px; }
+        .tile span { font-size: 0.95rem; } 
+        /* تعديلات الموبايل للبحث */
         .nhs-nav { flex-direction: column; gap: 15px; }
         .nav-search-wrapper { width: 100%; }
-        .hero-section h1 { font-size: 1.5rem; }
         .search-filter-container { flex-direction: column; border-radius: 16px; padding: 12px; background: transparent; box-shadow: none; border: none; }
         .filter-input-group { width: 100%; background: white; border: 1px solid #e2e8f0; border-radius: 12px; }
         .search-btn { width: 100%; height: 50px; border-radius: 12px; }
-        .grid-row { grid-template-columns: repeat(2, 1fr); } 
-        .mega-dropdown { grid-template-columns: 1fr; }
-        .tile { min-height: 90px; padding: 15px 5px; }
-        .tile i { font-size: 1.5rem; margin-bottom: 8px; }
-        .tile span { font-size: 0.95rem; } 
     }
 </style>
 
@@ -136,17 +138,31 @@ title: دليلك الطبي
                 <i class="fas fa-map-marker-alt icon-main"></i>
                 <div class="select-wrapper">
                     <select id="search-city">
-                        <option value="all" selected>كل العراق...</option>
+                        <option value="all">كل العراق...</option>
                         <option value="baghdad">بغداد</option>
                         <option value="erbil">أربيل</option>
+                        <option value="anbar">الأنبار</option>
                         <option value="basra">البصرة</option>
+                        <option value="diwaniya">الديوانية</option>
+                        <option value="sulaymaniyah">السليمانية</option>
+                        <option value="muthanna">المثنى</option>
                         <option value="najaf">النجف</option>
+                        <option value="babil">بابل</option>
+                        <option value="duhok">دهوك</option>
+                        <option value="diyala">ديالى</option>
+                        <option value="dhi_qar">ذي قار</option>
+                        <option value="salah_al_din">صلاح الدين</option>
+                        <option value="karbala">كربلاء</option>
+                        <option value="kirkuk">كركوك</option>
+                        <option value="maysan">ميسان</option>
+                        <option value="nineveh">نينوى</option>
+                        <option value="wasit">واسط</option>
                     </select>
                 </div>
             </div>
 
             <button type="submit" class="search-btn">
-                <i class="fas fa-search"></i> بحث
+                <i class="fas fa-search"></i> ابحث الآن
             </button>
         </div>
     </form>
@@ -247,7 +263,7 @@ title: دليلك الطبي
 </main>
 
 <script>
-    // 1. برمجة شريط بحث الأطباء
+    // 1. برمجة بحث الأطباء (الكبسولي)
     function handleHeroSearch(event) {
         event.preventDefault(); 
         const spec = document.getElementById('search-specialty').value;
@@ -255,7 +271,80 @@ title: دليلك الطبي
         window.location.href = `/doctors/index.html?spec=${spec}&city=${city}`;
     }
 
-    // 2. برمجة شريط بحث الأمراض الذكي (Autocomplete)
+    // 2. برمجة القائمة القديمة للمربعات
+    const categoryMap = {
+        'neuro': 'neurology',
+        'ent': 'ent',
+        'resp': 'pulmonology',
+        'cardio': 'cardiology',
+        'diabetes': 'endocrinology', 
+        'gastro': 'gastroenterology',
+        'renal': 'nephrology',
+        'women': 'gynecology',
+        'paeds': 'pediatrics',
+        'derm': 'dermatology',
+        'msk': 'msk',
+        'cancer': 'blood-immune',
+        'eyes': 'eyes',
+        'mental': 'mental-health',
+        'healthy-living': 'healthy-living',
+        'mens-health': 'mens-health'
+    };
+
+    function toggleDrop(dropId, colorClass) {
+        const drop = document.getElementById(dropId);
+        const tile = document.querySelector('.' + colorClass);
+        const bgColor = window.getComputedStyle(tile).backgroundColor;
+        
+        const diseaseLink = drop.querySelector('.disease-link');
+        const doctorLink = drop.querySelector('.doctor-link');
+        
+        const specialtyID = categoryMap[colorClass];
+
+        if (specialtyID === 'endocrinology') {
+            diseaseLink.href = '/endocrinologyindex.html';
+        } else {
+            diseaseLink.href = '/' + specialtyID + '/';
+        }
+        
+        if (specialtyID === 'healthy-living') {
+            doctorLink.href = '/doctors/index.html?spec=family_medicine';
+        } else {
+            doctorLink.href = '/doctors/index.html?spec=' + specialtyID;
+        }
+        
+        const gridRow = tile.closest('.grid-row');
+        const tiles = Array.from(gridRow.children).filter(c => c.classList.contains('tile'));
+        const index = tiles.indexOf(tile);
+        
+        let columns = 4;
+        if (window.innerWidth <= 768) {
+            columns = 2; 
+        } else if (window.innerWidth <= 1024) {
+            columns = 3; 
+        }
+        
+        const rowIndex = Math.floor(index / columns);
+        const lastIndexInRow = Math.min((rowIndex + 1) * columns - 1, tiles.length - 1);
+        const insertAfterNode = tiles[lastIndexInRow];
+        
+        insertAfterNode.insertAdjacentElement('afterend', drop);
+
+        document.querySelectorAll('.mega-dropdown').forEach(d => {
+            if (d.id !== dropId) d.style.display = 'none';
+        });
+
+        if (drop.style.display === 'grid' && drop.dataset.active === colorClass) {
+            drop.style.display = 'none';
+            drop.dataset.active = "";
+        } else {
+            drop.style.display = 'grid';
+            drop.style.background = bgColor;
+            drop.dataset.active = colorClass;
+        }
+    }
+
+    // 3. برمجة شريط بحث الأمراض الذكي العلوي (Autocomplete)
     const commonIllnesses = [
         { title: 'أبو صفار (اليرقان)', slug: 'neonatal-jaundice' },
         { title: 'ارتجاع المريء (زواع)', slug: 'reflux' },
@@ -304,14 +393,14 @@ title: دليلك الطبي
         { title: 'ماء أبيض (ساد)', slug: 'cataracts' }
     ];
 
-    const searchInput = document.getElementById('smartIllnessSearch');
+    const illnessSearchInput = document.getElementById('smartIllnessSearch');
     const dropdown = document.getElementById('autocompleteDropdown');
 
     function normalizeArabic(text) {
         return text.replace(/[أإآ]/g, 'ا').replace(/ة/g, 'ه').replace(/ى/g, 'ي').toLowerCase();
     }
 
-    searchInput.addEventListener('input', function() {
+    illnessSearchInput.addEventListener('input', function() {
         const query = normalizeArabic(this.value.trim());
         dropdown.innerHTML = '';
         
@@ -327,7 +416,6 @@ title: دليلك الطبي
                     dropdown.appendChild(a);
                 });
                 
-                // زر للذهاب لصفحة الدليل الشامل في حال أراد نتائج أكثر
                 const seeAll = document.createElement('a');
                 seeAll.href = `/conditions/index.html?search=${encodeURIComponent(this.value.trim())}`;
                 seeAll.className = 'autocomplete-item';
@@ -339,7 +427,14 @@ title: دليلك الطبي
                 
                 dropdown.style.display = 'block';
             } else {
-                dropdown.innerHTML = `<div class="autocomplete-item" style="color:#e53e3e; text-align:center;">لم نجد مرضاً بهذا الاسم</div>`;
+                dropdown.innerHTML = `<div class="autocomplete-item" style="color:#e53e3e; text-align:center;">لم نجد مرضاً بهذا الاسم، اضغط للبحث الشامل</div>`;
+                const searchLink = document.createElement('a');
+                searchLink.href = `/conditions/index.html?search=${encodeURIComponent(this.value.trim())}`;
+                searchLink.className = 'autocomplete-item';
+                searchLink.style.textAlign = 'center';
+                searchLink.style.fontWeight = 'bold';
+                searchLink.innerHTML = `ابحث في الدليل الكامل`;
+                dropdown.appendChild(searchLink);
                 dropdown.style.display = 'block';
             }
         } else {
@@ -347,79 +442,17 @@ title: دليلك الطبي
         }
     });
 
-    // إغلاق القائمة المنسدلة عند الضغط في أي مكان آخر
     document.addEventListener('click', function(e) {
         if (!document.getElementById('navSearchWrapper').contains(e.target)) {
             dropdown.style.display = 'none';
         }
     });
 
-    // 3. خريطة التخصصات السفلية
-    const categoryMap = {
-        'neuro': 'neurology',
-        'ent': 'ent',
-        'resp': 'pulmonology',
-        'cardio': 'cardiology',
-        'diabetes': 'endocrinology', 
-        'gastro': 'gastroenterology',
-        'renal': 'nephrology',
-        'women': 'gynecology',
-        'paeds': 'pediatrics',
-        'derm': 'dermatology',
-        'msk': 'msk',
-        'cancer': 'blood-immune',
-        'eyes': 'eyes',
-        'mental': 'mental-health',
-        'healthy-living': 'healthy-living',
-        'mens-health': 'mens-health'
-    };
-
-    function toggleDrop(dropId, colorClass) {
-        const drop = document.getElementById(dropId);
-        const tile = document.querySelector('.' + colorClass);
-        const diseaseLink = drop.querySelector('.disease-link');
-        const doctorLink = drop.querySelector('.doctor-link');
-        const specialtyID = categoryMap[colorClass];
-
-        if (specialtyID === 'endocrinology') {
-            diseaseLink.href = '/endocrinologyindex.html';
-        } else {
-            diseaseLink.href = '/' + specialtyID + '/';
+    document.getElementById('navSearchWrapper').addEventListener('keydown', function(e) {
+        if(e.key === 'Enter') {
+            e.preventDefault();
+            const q = illnessSearchInput.value.trim();
+            if(q) window.location.href = `/conditions/index.html?search=${encodeURIComponent(q)}`;
         }
-        
-        if (specialtyID === 'healthy-living') {
-            doctorLink.href = '/doctors/index.html?spec=family_medicine';
-        } else {
-            doctorLink.href = '/doctors/index.html?spec=' + specialtyID;
-        }
-        
-        const gridRow = tile.closest('.grid-row');
-        const tiles = Array.from(gridRow.children).filter(c => c.classList.contains('tile'));
-        const index = tiles.indexOf(tile);
-        
-        let columns = 4;
-        if (window.innerWidth <= 768) {
-            columns = 2; 
-        } else if (window.innerWidth <= 1024) {
-            columns = 3; 
-        }
-        
-        const rowIndex = Math.floor(index / columns);
-        const lastIndexInRow = Math.min((rowIndex + 1) * columns - 1, tiles.length - 1);
-        const insertAfterNode = tiles[lastIndexInRow];
-        
-        insertAfterNode.insertAdjacentElement('afterend', drop);
-
-        document.querySelectorAll('.mega-dropdown').forEach(d => {
-            if (d.id !== dropId) d.style.display = 'none';
-        });
-
-        if (drop.style.display === 'grid' && drop.dataset.active === colorClass) {
-            drop.style.display = 'none';
-            drop.dataset.active = "";
-        } else {
-            drop.style.display = 'grid';
-            drop.dataset.active = colorClass;
-        }
-    }
+    });
 </script>
