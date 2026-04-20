@@ -10,74 +10,503 @@
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    
     <style>
-        /* Global Styles & Header/Footer Only */
-        *, *::before, *::after { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-        html, body { width: 100%; overflow-x: hidden; margin: 0; padding: 0; }
-        :root { --nhs-blue: #005eb8; --nhs-dark-blue: #003087; --nhs-light-grey: #f0f4f5; --nhs-text: #212b32; --nhs-white: #ffffff; }
-        body { font-family: "Cairo", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; background-color: var(--nhs-light-grey); color: var(--nhs-text); line-height: 1.6; -webkit-font-smoothing: antialiased; display: flex; flex-direction: column; min-height: 100vh;}
+        /* --- Global Reset --- */
+        *, *::before, *::after { 
+            box-sizing: border-box; 
+            -webkit-tap-highlight-color: transparent; 
+        }
+
+        html, body { 
+            width: 100%; 
+            overflow-x: hidden; 
+            margin: 0; 
+            padding: 0; 
+        }
+
+        :root { 
+            --nhs-blue: #005eb8; 
+            --nhs-dark-blue: #003087; 
+            --nhs-light-grey: #f0f4f5; 
+            --nhs-text: #212b32; 
+            --nhs-white: #ffffff; 
+        }
+
+        body { 
+            font-family: "Cairo", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; 
+            background-color: var(--nhs-light-grey); 
+            color: var(--nhs-text); 
+            line-height: 1.6; 
+            -webkit-font-smoothing: antialiased; 
+            display: flex; 
+            flex-direction: column; 
+            min-height: 100vh;
+        }
         
         /* Header */
-        .nhs-header { background-color: var(--nhs-white); border-bottom: 8px solid var(--nhs-blue); padding: 12px 0; width: 100%; }
-        .header-content { max-width: 1300px; margin: 0 auto; padding: 0 20px; display: flex; justify-content: space-between; align-items: center; }
-        .logo-link { display: inline-flex; align-items: center; text-decoration: none; gap: 15px; }
-        .site-logo { max-height: 55px; width: auto; object-fit: contain; }
-        .header-moto { font-weight: 700; color: var(--nhs-blue); font-size: 1.1rem; }
+        .nhs-header { 
+            background-color: var(--nhs-white); 
+            border-bottom: 8px solid var(--nhs-blue); 
+            padding: 12px 0; 
+            width: 100%; 
+        }
+
+        .header-content { 
+            max-width: 1300px; 
+            margin: 0 auto; 
+            padding: 0 20px; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+        }
+
+        .logo-link { 
+            display: inline-flex; 
+            align-items: center; 
+            text-decoration: none; 
+            gap: 15px; 
+        }
+
+        .site-logo { 
+            max-height: 55px; 
+            width: auto; 
+            object-fit: contain; 
+        }
+
+        .header-moto { 
+            font-weight: 700; 
+            color: var(--nhs-blue); 
+            font-size: 1.1rem; 
+        }
         
         /* Navigation */
-        .nhs-nav { background-color: var(--nhs-blue); color: white; position: sticky; top: 0; z-index: 1000; box-shadow: 0 4px 6px rgba(0,0,0,0.1); margin-bottom: 0; width: 100%; }
-        .nav-content { max-width: 1300px; margin: 0 auto; padding: 0 20px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; }
-        .main-links { display: flex; }
-        .main-links a { color: white; text-decoration: none; padding: 15px 20px; font-weight: 700; font-size: 0.95rem; transition: all 0.2s; display: flex; align-items: center; gap: 8px; border-bottom: 3px solid transparent; }
-        .main-links a:hover, .main-links a.active { background-color: var(--nhs-dark-blue); border-bottom-color: var(--nhs-white); }
-        
-        /* --- شريط بحث الأمراض الذكي (بديل زر تواصل ويانا) --- */
-        .nav-search-wrapper { position: relative; width: 280px; margin-right: auto; margin-left: 20px; display: flex; align-items: center;}
-        .nav-search-input { width: 100%; padding: 8px 15px 8px 35px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.3); background: rgba(255,255,255,0.1); color: white; outline: none; font-family: "Cairo", sans-serif; font-size: 0.9rem; transition: all 0.3s; }
-        .nav-search-input::placeholder { color: rgba(255,255,255,0.8); }
-        .nav-search-input:focus { background: white; color: #212b32; box-shadow: 0 0 0 3px rgba(255,255,255,0.2); border-color: white; }
-        .nav-search-icon { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: rgba(255,255,255,0.8); transition: color 0.3s; pointer-events: none; }
-        .nav-search-input:focus + .nav-search-icon { color: var(--nhs-blue); }
-        
-        .autocomplete-dropdown { position: absolute; top: 100%; right: 0; width: 100%; background: white; border-radius: 12px; box-shadow: 0 10px 25px rgba(0,0,0,0.15); margin-top: 8px; max-height: 280px; overflow-y: auto; display: none; z-index: 1000; border: 1px solid #e2e8f0; }
-        .autocomplete-item { padding: 12px 15px; color: #212b32; text-decoration: none; display: block; font-weight: 600; font-size: 0.9rem; border-bottom: 1px solid #f0f4f5; transition: background 0.2s; text-align: right; cursor: pointer; }
-        .autocomplete-item:hover { background: #f8fafc; color: var(--nhs-blue); padding-right: 20px; }
-        .autocomplete-item i { margin-left: 8px; color: #a0aec0; }
+        .nhs-nav { 
+            background-color: var(--nhs-blue); 
+            color: white; 
+            position: sticky; 
+            top: 0; 
+            z-index: 1000; 
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1); 
+            margin-bottom: 0; 
+            width: 100%; 
+        }
 
-        /* Article specific styling (for your disease pages) */
-        .article-wrapper { max-width: 900px; margin: 40px auto 50px auto; padding: 0 20px; flex: 1; }
-        .breadcrumb { font-size: 0.9rem; color: #718096; margin-bottom: 20px; display: flex; align-items: center; gap: 8px; }
-        .breadcrumb a { color: var(--nhs-blue); text-decoration: none; font-weight: 600; }
-        .article-card { background: var(--nhs-white); border-radius: 8px; padding: 40px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
-        .article-title { color: var(--nhs-dark-blue); font-size: 2.2rem; font-weight: 800; margin-top: 0; margin-bottom: 10px; line-height: 1.3; }
-        .article-meta { display: flex; align-items: center; gap: 20px; font-size: 0.9rem; color: #718096; margin-bottom: 30px; padding-bottom: 20px; border-bottom: 1px solid #e2e8f0; }
-        .medical-disclaimer { background-color: #fff3cd; border-right: 4px solid #f6ad55; padding: 15px 20px; border-radius: 4px; font-weight: 600; color: #9c4221; margin-bottom: 30px; font-size: 0.95rem; display: flex; gap: 15px; align-items: flex-start; }
-        .medical-disclaimer i { font-size: 1.4rem; margin-top: 2px; }
-        .article-content h2 { color: var(--nhs-blue); font-size: 1.6rem; font-weight: 800; margin-top: 40px; margin-bottom: 15px; padding-bottom: 8px; border-bottom: 2px solid #e2e8f0; }
-        .article-content p { font-size: 1.1rem; color: #2d3748; margin-bottom: 20px; }
-        .article-content ul { padding-right: 25px; margin-bottom: 25px; list-style-type: disc; }
-        .article-content ul li { font-size: 1.1rem; color: #2d3748; margin-bottom: 8px; }
-        .emergency-box { background-color: #fff5f5; border: 1px solid #fed7d7; border-right: 5px solid #e53e3e; border-radius: 8px; padding: 30px; margin-top: 40px; margin-bottom: 20px; }
-        .emergency-box h2 { color: #c53030 !important; border-bottom: 2px solid #feb2b2 !important; margin-top: 0 !important; padding-bottom: 10px; font-size: 1.5rem; }
-        .emergency-box p { color: #742a2a; margin-bottom: 15px; font-weight: 600; }
-        .emergency-box ul { margin-bottom: 0; color: #742a2a; }
-        .emergency-box ul li { color: #742a2a; margin-bottom: 8px; font-weight: 600; }
-        .cta-box { background-color: var(--nhs-light-grey); border: 1px solid #cbd5e0; border-radius: 8px; padding: 30px; text-align: center; margin-top: 50px; }
-        .cta-box h3 { color: var(--nhs-dark-blue); margin-top: 0; margin-bottom: 15px; font-size: 1.3rem; font-weight: 800; }
-        .cta-box p { color: #4a5568; margin-bottom: 20px; font-size: 1rem; }
-        .cta-btn { display: inline-block; background-color: var(--nhs-blue); color: white; padding: 12px 30px; border-radius: 25px; font-weight: 700; text-decoration: none; transition: background 0.2s; }
+        .nav-content { 
+            max-width: 1300px; 
+            margin: 0 auto; 
+            padding: 0 20px; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            flex-wrap: wrap; 
+        }
+
+        .main-links { 
+            display: flex; 
+        }
+
+        .main-links a { 
+            color: white; 
+            text-decoration: none; 
+            padding: 15px 20px; 
+            font-weight: 700; 
+            font-size: 0.95rem; 
+            transition: all 0.2s; 
+            display: flex; 
+            align-items: center; 
+            gap: 8px; 
+            border-bottom: 3px solid transparent; 
+        }
+
+        .main-links a:hover, .main-links a.active { 
+            background-color: var(--nhs-dark-blue); 
+            border-bottom-color: var(--nhs-white); 
+        }
+
+        /* --- شريط بحث الأمراض الذكي --- */
+        .nav-search-wrapper { 
+            position: relative; 
+            width: 280px; 
+            margin-right: auto; 
+            margin-left: 20px; 
+            display: flex; 
+            align-items: center;
+        }
+
+        .nav-search-input { 
+            width: 100%; 
+            padding: 8px 15px 8px 35px; 
+            border-radius: 20px; 
+            border: 1px solid rgba(255,255,255,0.3); 
+            background: rgba(255,255,255,0.1); 
+            color: white; 
+            outline: none; 
+            font-family: "Cairo", sans-serif; 
+            font-size: 0.9rem; 
+            transition: all 0.3s; 
+        }
+
+        .nav-search-input::placeholder { 
+            color: rgba(255,255,255,0.8); 
+        }
+
+        .nav-search-input:focus { 
+            background: white; 
+            color: #212b32; 
+            box-shadow: 0 0 0 3px rgba(255,255,255,0.2); 
+            border-color: white; 
+        }
+
+        .nav-search-icon { 
+            position: absolute; 
+            left: 12px; 
+            top: 50%; 
+            transform: translateY(-50%); 
+            color: rgba(255,255,255,0.8); 
+            transition: color 0.3s; 
+            pointer-events: none; 
+        }
+
+        .nav-search-input:focus + .nav-search-icon { 
+            color: var(--nhs-blue); 
+        }
+        
+        .autocomplete-dropdown { 
+            position: absolute; 
+            top: 100%; 
+            right: 0; 
+            width: 100%; 
+            background: white; 
+            border-radius: 12px; 
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15); 
+            margin-top: 8px; 
+            max-height: 280px; 
+            overflow-y: auto; 
+            display: none; 
+            z-index: 1000; 
+            border: 1px solid #e2e8f0; 
+        }
+
+        .autocomplete-item { 
+            padding: 12px 15px; 
+            color: #212b32; 
+            text-decoration: none; 
+            display: block; 
+            font-weight: 600; 
+            font-size: 0.9rem; 
+            border-bottom: 1px solid #f0f4f5; 
+            transition: background 0.2s; 
+            text-align: right; 
+            cursor: pointer; 
+        }
+
+        .autocomplete-item:hover { 
+            background: #f8fafc; 
+            color: var(--nhs-blue); 
+            padding-right: 20px; 
+        }
+
+        .autocomplete-item i { 
+            margin-left: 8px; 
+            color: #a0aec0; 
+        }
+
+        /* --- User Profile UI --- */
+        .user-profile-info { 
+            display: none; 
+            align-items: center; 
+            gap: 10px; 
+            color: white; 
+            font-weight: bold; 
+        }
+
+        .user-profile-info i { 
+            font-size: 1.2rem; 
+            color: var(--nhs-white); 
+        }
+
+        .logout-btn { 
+            background-color: #d32f2f; 
+            color: white !important; 
+            padding: 6px 15px; 
+            border-radius: 20px; 
+            font-size: 0.85rem; 
+            cursor: pointer; 
+            text-decoration: none; 
+            border: none; 
+            font-weight: bold; 
+            transition: background-color 0.2s; 
+            font-family: "Cairo", sans-serif; 
+        }
+
+        .logout-btn:hover { 
+            background-color: #b71c1c; 
+        }
+
+        /* --- 🌟 الحاوية المركزية لصفحات الأمراض 🌟 --- */
+        .main-body-wrapper {
+            width: 100%;
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 20px;
+            min-height: 60vh;
+        }
+
+        /* استثناء الصفحة الرئيسية لتبقى بعرض كامل */
+        .home-layout {
+            max-width: 100% !important;
+            padding: 0 !important;
+        }
+
+        /* --- Article specific styling --- */
+        .article-wrapper { 
+            max-width: 900px; 
+            margin: 40px auto 50px auto; 
+            padding: 0 20px; 
+            flex: 1; 
+        }
+
+        .breadcrumb { 
+            font-size: 0.9rem; 
+            color: #718096; 
+            margin-bottom: 20px; 
+            display: flex; 
+            align-items: center; 
+            gap: 8px; 
+        }
+
+        .breadcrumb a { 
+            color: var(--nhs-blue); 
+            text-decoration: none; 
+            font-weight: 600; 
+        }
+
+        .article-card { 
+            background: var(--nhs-white); 
+            border-radius: 8px; 
+            padding: 40px; 
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05); 
+        }
+
+        .article-title { 
+            color: var(--nhs-dark-blue); 
+            font-size: 2.2rem; 
+            font-weight: 800; 
+            margin-top: 0; 
+            margin-bottom: 10px; 
+            line-height: 1.3; 
+        }
+
+        .article-meta { 
+            display: flex; 
+            align-items: center; 
+            gap: 20px; 
+            font-size: 0.9rem; 
+            color: #718096; 
+            margin-bottom: 30px; 
+            padding-bottom: 20px; 
+            border-bottom: 1px solid #e2e8f0; 
+        }
+
+        .medical-disclaimer { 
+            background-color: #fff3cd; 
+            border-right: 4px solid #f6ad55; 
+            padding: 15px 20px; 
+            border-radius: 4px; 
+            font-weight: 600; 
+            color: #9c4221; 
+            margin-bottom: 30px; 
+            font-size: 0.95rem; 
+            display: flex; 
+            gap: 15px; 
+            align-items: flex-start; 
+        }
+
+        .medical-disclaimer i { 
+            font-size: 1.4rem; 
+            margin-top: 2px; 
+        }
+
+        .article-content h2 { 
+            color: var(--nhs-blue); 
+            font-size: 1.6rem; 
+            font-weight: 800; 
+            margin-top: 40px; 
+            margin-bottom: 15px; 
+            padding-bottom: 8px; 
+            border-bottom: 2px solid #e2e8f0; 
+        }
+
+        .article-content p { 
+            font-size: 1.1rem; 
+            color: #2d3748; 
+            margin-bottom: 20px; 
+        }
+
+        .article-content ul { 
+            padding-right: 25px; 
+            margin-bottom: 25px; 
+            list-style-type: disc; 
+        }
+
+        .article-content ul li { 
+            font-size: 1.1rem; 
+            color: #2d3748; 
+            margin-bottom: 8px; 
+        }
+
+        .emergency-box { 
+            background-color: #fff5f5; 
+            border: 1px solid #fed7d7; 
+            border-right: 5px solid #e53e3e; 
+            border-radius: 8px; 
+            padding: 30px; 
+            margin-top: 40px; 
+            margin-bottom: 20px; 
+        }
+
+        .emergency-box h2 { 
+            color: #c53030 !important; 
+            border-bottom: 2px solid #feb2b2 !important; 
+            margin-top: 0 !important; 
+            padding-bottom: 10px; 
+            font-size: 1.5rem; 
+        }
+
+        .emergency-box p { 
+            color: #742a2a; 
+            margin-bottom: 15px; 
+            font-weight: 600; 
+        }
+
+        .emergency-box ul { 
+            margin-bottom: 0; 
+            color: #742a2a; 
+        }
+
+        .emergency-box ul li { 
+            color: #742a2a; 
+            margin-bottom: 8px; 
+            font-weight: 600; 
+        }
+
+        .cta-box { 
+            background-color: var(--nhs-light-grey); 
+            border: 1px solid #cbd5e0; 
+            border-radius: 8px; 
+            padding: 30px; 
+            text-align: center; 
+            margin-top: 50px; 
+        }
+
+        .cta-box h3 { 
+            color: var(--nhs-dark-blue); 
+            margin-top: 0; 
+            margin-bottom: 15px; 
+            font-size: 1.3rem; 
+            font-weight: 800; 
+        }
+
+        .cta-box p { 
+            color: #4a5568; 
+            margin-bottom: 20px; 
+            font-size: 1rem; 
+        }
+
+        .cta-btn { 
+            display: inline-block; 
+            background-color: var(--nhs-blue); 
+            color: white; 
+            padding: 12px 30px; 
+            border-radius: 25px; 
+            font-weight: 700; 
+            text-decoration: none; 
+            transition: background 0.2s; 
+        }
         
         /* Footer */
-        footer { background-color: #e8edee; border-top: 8px solid var(--nhs-blue); padding: 40px 20px 20px 20px; margin-top: auto; width: 100%; }
-        .footer-content { max-width: 1300px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; margin-bottom: 25px; }
-        .footer-section h4 { color: var(--nhs-dark-blue); font-size: 1.15rem; font-weight: 800; margin-top: 0; margin-bottom: 15px; position: relative; padding-bottom: 10px; }
-        .footer-section h4::after { content: ''; position: absolute; bottom: 0; right: 0; width: 40px; height: 3px; background-color: var(--nhs-blue); border-radius: 2px; }
-        .footer-section ul { list-style: none; padding: 0; margin: 0; }
-        .footer-section ul li { margin-bottom: 10px; font-size: 0.9rem; color: #4a5568; display: flex; align-items: center; font-weight: 600; }
-        .footer-section ul li a { color: #4a5568; text-decoration: none; transition: all 0.3s ease; }
-        .footer-section ul li a:hover { color: var(--nhs-blue); padding-right: 6px; }
-        .footer-section i { color: var(--nhs-blue); width: 20px; font-size: 0.95rem; margin-left: 8px; }
-        .copyright-bar { text-align: center; border-top: 1px solid #d1d5d8; padding-top: 15px; font-size: 0.85rem; font-weight: 700; color: #718096; letter-spacing: 0.5px; }
+        footer { 
+            background-color: #e8edee; 
+            border-top: 8px solid var(--nhs-blue); 
+            padding: 40px 20px 20px 20px; 
+            margin-top: auto; 
+            width: 100%; 
+        }
+
+        .footer-content { 
+            max-width: 1300px; 
+            margin: 0 auto; 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); 
+            gap: 30px; 
+            margin-bottom: 25px; 
+        }
+
+        .footer-section h4 { 
+            color: var(--nhs-dark-blue); 
+            font-size: 1.15rem; 
+            font-weight: 800; 
+            margin-top: 0; 
+            margin-bottom: 15px; 
+            position: relative; 
+            padding-bottom: 10px; 
+        }
+
+        .footer-section h4::after { 
+            content: ''; 
+            position: absolute; 
+            bottom: 0; 
+            right: 0; 
+            width: 40px; 
+            height: 3px; 
+            background-color: var(--nhs-blue); 
+            border-radius: 2px; 
+        }
+
+        .footer-section ul { 
+            list-style: none; 
+            padding: 0; 
+            margin: 0; 
+        }
+
+        .footer-section ul li { 
+            margin-bottom: 10px; 
+            font-size: 0.9rem; 
+            color: #4a5568; 
+            display: flex; 
+            align-items: center; 
+            font-weight: 600; 
+        }
+
+        .footer-section ul li a { 
+            color: #4a5568; 
+            text-decoration: none; 
+            transition: all 0.3s ease; 
+        }
+
+        .footer-section ul li a:hover { 
+            color: var(--nhs-blue); 
+            padding-right: 6px; 
+        }
+
+        .footer-section i { 
+            color: var(--nhs-blue); 
+            width: 20px; 
+            font-size: 0.95rem; 
+            margin-left: 8px; 
+        }
+
+        .copyright-bar { 
+            text-align: center; 
+            border-top: 1px solid #d1d5d8; 
+            padding-top: 15px; 
+            font-size: 0.85rem; 
+            font-weight: 700; 
+            color: #718096; 
+            letter-spacing: 0.5px; 
+        }
 
         @media (max-width: 768px) {
             .header-content { flex-direction: column; text-align: center; gap: 8px; }
@@ -87,6 +516,7 @@
             .main-links a { padding: 12px 10px; font-size: 0.9rem; border-bottom: none; }
             
             .nav-search-wrapper { width: 90%; margin: 10px auto; }
+            .user-profile-info { width: 100%; justify-content: center; padding: 10px; background-color: var(--nhs-dark-blue); flex-wrap: wrap; margin-top: 10px; }
             
             .site-logo { max-height: 45px; }
             footer { padding: 30px 20px 15px 20px; }
@@ -96,12 +526,12 @@
         }
     </style>
 </head>
-<body>
+<body class="{% if page.url == '/' %}is-home{% endif %}">
 
     <header class="nhs-header">
         <div class="header-content">
-            <a href="/index.html" class="logo-link">
-                <img src="/logo.png" alt="شعار كشفيّة" class="site-logo">
+            <a href="/" class="logo-link">
+                <img src="/logo.png" alt="شعار كشفيّة" class="site-logo" onerror="this.src='https://via.placeholder.com/150x50?text=Logo'">
                 <div class="header-moto">كلشي عن صحتك… بلهجتنا العراقية</div>
             </a>
         </div>
@@ -110,9 +540,9 @@
     <nav class="nhs-nav">
         <div class="nav-content">
             <div class="main-links">
-                <a href="/index.html"><i class="fas fa-home"></i> الرئيسية</a>
-                <a href="/conditions/index.html"><i class="fas fa-stethoscope"></i> دليل الأمراض ( أ - ي )</a>
-                <a href="/doctors/index.html"><i class="fas fa-user-doctor"></i> الأطباء والمراكز</a>
+                <a href="/"><i class="fas fa-home"></i> الرئيسية</a>
+                <a href="/conditions/"><i class="fas fa-stethoscope"></i> دليل الأمراض</a>
+                <a href="/doctors/"><i class="fas fa-user-doctor"></i> الأطباء والمراكز</a>
             </div>
             
             <div class="nav-search-wrapper" id="navSearchWrapper">
@@ -120,30 +550,38 @@
                 <i class="fas fa-search nav-search-icon"></i>
                 <div class="autocomplete-dropdown" id="autocompleteDropdown"></div>
             </div>
+
+            <div class="user-profile-info" id="user-info">
+                <i class="fas fa-user-circle"></i>
+                <span>أهلاً، <span id="user-display-name">...</span></span>
+                <button onclick="handleLogout()" class="logout-btn"><i class="fas fa-sign-out-alt"></i> خروج</button>
+            </div>
         </div>
     </nav>
 
-    {{ content }}
+    <main class="main-body-wrapper {% if page.url == '/' %}home-layout{% endif %}">
+        {{ content }}
+    </main>
 
     <footer>
         <div class="footer-content">
             <div class="footer-section">
                 <h4>عن منصة كشفيّة</h4>
                 <ul>
-                    <li><a href="/about/index.html"><i class="fas fa-angle-left"></i> من نحن</a></li>
-                    <li><a href="/about/index.html#vision"><i class="fas fa-angle-left"></i> رؤيتنا ورسالتنا</a></li>
-                    <li><a href="/about/index.html#privacy"><i class="fas fa-angle-left"></i> سياسة الخصوصية</a></li>
-                    <li><a href="/about/index.html#terms"><i class="fas fa-angle-left"></i> الشروط والأحكام</a></li>
+                    <li><a href="/about/"><i class="fas fa-angle-left"></i> من نحن</a></li>
+                    <li><a href="/about/#vision"><i class="fas fa-angle-left"></i> رؤيتنا ورسالتنا</a></li>
+                    <li><a href="/about/#privacy"><i class="fas fa-angle-left"></i> سياسة الخصوصية</a></li>
+                    <li><a href="/about/#terms"><i class="fas fa-angle-left"></i> الشروط والأحكام</a></li>
                 </ul>
             </div>
             
             <div class="footer-section">
                 <h4>خدمات المرضى</h4>
                 <ul>
-                    <li><a href="/index.html"><i class="fas fa-angle-left"></i> الرئيسية</a></li>
-                    <li><a href="/conditions/index.html"><i class="fas fa-angle-left"></i> دليل الأمراض الشائعة</a></li>
-                    <li><a href="/doctors/index.html"><i class="fas fa-angle-left"></i> قائمة الأطباء والمراكز</a></li>
-                    <li><a href="/faq/index.html"><i class="fas fa-angle-left"></i> الأسئلة الشائعة</a></li>
+                    <li><a href="/"><i class="fas fa-angle-left"></i> الرئيسية</a></li>
+                    <li><a href="/conditions/"><i class="fas fa-angle-left"></i> دليل الأمراض الشائعة</a></li>
+                    <li><a href="/doctors/"><i class="fas fa-angle-left"></i> قائمة الأطباء والمراكز</a></li>
+                    <li><a href="/faq/"><i class="fas fa-angle-left"></i> الأسئلة الشائعة</a></li>
                 </ul>
             </div>
             
@@ -164,7 +602,39 @@
     </footer>
 
     <script>
-        // 1. برمجة شريط بحث الأمراض الذكي العلوي (Autocomplete)
+        // 1. Initialize Supabase
+        const supabaseUrl = 'https://anptpomhhuxsxaeonhca.supabase.co';
+        const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFucHRwb21oaHV4c3hhZW9uaGNhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzIxMzU4OTYsImV4cCI6MjA4NzcxMTg5Nn0.7KGLqjcLRA2xzfOXdiDzINCVNhaOLBlj3sjJLBmYDiU';
+        
+        let supabaseClient;
+        if(window.supabase) {
+            supabaseClient = window.supabase.createClient(supabaseUrl, supabaseKey);
+        }
+
+        // 2. Check User Status
+        async function checkUserStatus() {
+            if(!supabaseClient) return;
+            try {
+                const { data: { user } } = await supabaseClient.auth.getUser();
+                if (user) {
+                    document.getElementById('user-info').style.display = 'flex';
+                    const name = user.user_metadata.full_name || "مريضنا العزيز";
+                    document.getElementById('user-display-name').innerText = name;
+                }
+            } catch (error) { 
+                console.error("Error checking auth status:", error); 
+            }
+        }
+
+        async function handleLogout() {
+            if(!supabaseClient) return;
+            await supabaseClient.auth.signOut();
+            window.location.reload(); 
+        }
+
+        document.addEventListener('DOMContentLoaded', checkUserStatus);
+
+        // 3. برمجة شريط بحث الأمراض الذكي العلوي (Autocomplete)
         const commonIllnesses = [
             { title: 'أبو صفار (اليرقان)', slug: 'neonatal-jaundice' },
             { title: 'ارتجاع (زواع)', slug: 'reflux' },
@@ -536,7 +1006,7 @@
                         });
                         
                         const seeAll = document.createElement('a');
-                        seeAll.href = `/conditions/index.html?search=${encodeURIComponent(this.value.trim())}`;
+                        seeAll.href = `/conditions/?search=${encodeURIComponent(this.value.trim())}`;
                         seeAll.className = 'autocomplete-item';
                         seeAll.style.textAlign = 'center';
                         seeAll.style.color = '#005eb8';
@@ -548,7 +1018,7 @@
                     } else {
                         dropdown.innerHTML = `<div class="autocomplete-item" style="color:#e53e3e; text-align:center;">لم نجد مرضاً بهذا الاسم، اضغط للبحث الشامل</div>`;
                         const searchLink = document.createElement('a');
-                        searchLink.href = `/conditions/index.html?search=${encodeURIComponent(this.value.trim())}`;
+                        searchLink.href = `/conditions/?search=${encodeURIComponent(this.value.trim())}`;
                         searchLink.className = 'autocomplete-item';
                         searchLink.style.textAlign = 'center';
                         searchLink.style.fontWeight = 'bold';
@@ -571,7 +1041,7 @@
                 if(e.key === 'Enter') {
                     e.preventDefault();
                     const q = illnessSearchInput.value.trim();
-                    if(q) window.location.href = `/conditions/index.html?search=${encodeURIComponent(q)}`;
+                    if(q) window.location.href = `/conditions/?search=${encodeURIComponent(q)}`;
                 }
             });
         }
